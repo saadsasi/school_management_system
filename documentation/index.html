@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+
+	<title>ProSchool - ProSchool Management System in PHP (Laravel) - Online ProSchool Management System</title>
+	  <link href="assets/images/favicon.png" rel="icon" type="image/jpg" />
+	<link rel="stylesheet" href="assets/css/documenter_style.css" media="all">
+	<link rel="stylesheet" href="assets/js/google-code-prettify/prettify.css" media="screen">
+	<script src="assets/js/google-code-prettify/prettify.js"></script>
+
+	<script src="assets/js/jquery.js"></script>
+
+	<script src="assets/js/jquery.easing.js"></script>
+
+	<script>document.createElement('section'); var duration = '500', easing = 'swing';</script>
+	<script src="assets/js/script.js"></script>
+
+	<style>
+		html {
+			background-color: #EFEFEF;
+			color: #1C140D;
+		}
+
+		::-moz-selection {
+			background: #e83e8c;
+			color: #1C140D;
+		}
+
+		::selection {
+			background: #e83e8c;
+			color: #1C140D;
+		}
+
+		#documenter_sidebar #documenter_logo {
+			background-image: url();
+		}
+
+		a {
+			color: #889C48;
+		}
+
+		.btn {
+			border-radius: 3px;
+		}
+
+		.btn-primary {
+			background-image: -moz-linear-gradient(top, #e83e8c, #889C48);
+			background-image: -ms-linear-gradient(top, #e83e8c, #889C48);
+			background-image: -webkit-gradient(linear, 0 0, 0 e83e8c%, from(#F2E9E1), to(#889C48));
+			background-image: -webkit-linear-gradient(top, #e83e8c, #889C48);
+			background-image: -o-linear-gradient(top, #e83e8c, #889C48);
+			background-image: linear-gradient(top, #e83e8c, #889C48);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e83e8c', endColorstr='#889C48', GradientType=0);
+			border-color: #889C48 #889C48 #bfbfbf;
+			color: #FFFFFF;
+		}
+
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+			border-color: #e83e8c #e83e8c #bfbfbf;
+			background-color: #889C48;
+		}
+
+		hr {
+			border-top: 1px solid #CCCCCC;
+			border-bottom: 1px solid #FFFFFF;
+		}
+
+		#documenter_sidebar,
+		#documenter_sidebar ul a {
+			background-color: #F2E9E1;
+			color: #1C140D;
+		}
+
+		#documenter_sidebar ul a {
+			-webkit-text-shadow: 1px 1px 0px #FFF6ED;
+			-moz-text-shadow: 1px 1px 0px #FFF6ED;
+			text-shadow: 1px 1px 0px #FFF6ED;
+		}
+
+		#documenter_sidebar ul {
+			border-top: 1px solid #D1C9C2;
+		}
+
+		#documenter_sidebar ul a {
+			border-top: 1px solid #FFF6ED;
+			border-bottom: 1px solid #D1C9C2;
+			color: #1C140D;
+		}
+
+		#documenter_sidebar ul a:hover {
+			background: #e83e8c;
+			color: #1C140D;
+			border-top: 1px solid #e83e8c;
+		}
+
+		#documenter_sidebar ul a.current {
+			background: #e83e8c;
+			color: #1C140D;
+			border-top: 1px solid #e83e8c;
+		}
+
+		#documenter_copyright {
+			display: block !important;
+			visibility: visible !important;
+		}
+
+		.pp1 {
+			padding: 3px 8px;
+			background-color: rgb(255, 236, 236);
+			display: inline;
+			font-weight: bold;
+		}
+	</style>
+
+</head>
+<body class="documenter-project-carland">
+	<div id="documenter_sidebar">
+		<a href="index.html" id="documenter_logo">
+			<img src="assets/images/logo.png" alt="">
+		</a>
+		<ul id="documenter_nav">
+			<li><a class="current" href="#Welcome">Welcome</a></li>
+			<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+			<li><a href="#Features" title="Features">Features</a></li>
+			<li><a href="#Requirements" title="Requirements">Requirements</a></li>
+			<li><a href="#Installation" title="Installation">Installation</a></li>
+			<li><a href="#AdminLogin" title="AdminLogin">Admin Login</a></li>
+			<li><a href="#TeacherLogin" title="TeacherLogin">Teacher Login</a></li>
+			<li><a href="#StudentLogin" title="StudentLogin">Student Login</a></li>
+			<li><a href="#ParentLogin" title="ParentLogin">Parent Login</a></li>
+			<li><a href="#EmailSetting" title="Email Setting">Email Setting</a></li>
+			<li><a href="#PaymentSetting" title="Payment Setting">Payment Setting</a></li>
+			<li><a href="#Logo" title="Logo">Logo</a></li>
+			<li><a href="#Support" title="Support">Support</a></li>
+		</ul>
+	</div>
+	<div id="documenter_content">
+
+
+		<section id="Welcome">
+			<h1>ProSchool</h1>
+			<h2>ProSchool Management System in PHP (Laravel) - Online ProSchool Management System</h2>
+			<hr>
+			<ul>
+				<li>Author: vipuldayani</li>
+				<li>Author Portfolio: <a href="https://codecanyon.net/user/vipuldayani" target="_blank">https://codecanyon.net/user/vipuldayani</a></li>
+			</ul>
+			<p></p>
+		</section>
+
+		<section id="Introduction">
+			<div class="page-header">
+				<h3>Introduction</h3>
+				<p>
+					ProSchool is a script built with laravel php framework. You can manage a complete event or conference using this php script. 	A ProSchool management system is an information management system for educational institutions to manage Admin, Teacher, Student and Parent data.
+				</p>
+			
+				<p>
+					This CMS can easily be modified by most of the developers due to clean and easy coding system. It is strong against web vulnerabilities; and your website will be safe. Also in all pages, admin level security and invalid page url submission checking were done.
+				</p>
+		</section>
+
+		<section id="Features">
+			<div class="page-header">
+				<h3>Features</h3>
+				<p>
+					This CMS script has the following features:
+				</p>
+				<ul>
+					<li>Easy and simple interface to use</li>
+					<li>Fully responsive for any kind of device</li>
+					<li>Modern Design with Bootstrap 4</li>
+					<li>Clean and understandable coding</li>
+					<li>Secured coding against web vulnerabilities</li>
+					<li>Direct access or invalid URL press stopped for each pages</li>
+					<li>RTL Layout supports</li>
+					<li>Payment setting</li>
+					<li>PayPal and Stripe Integration</li>
+					<li>Dynamic of data in dashboard</li>
+					<li>Sending emails to subscribers from back end</li>
+					<li>Unlimited photo upload and management</li>
+					<li>Admin panel login photo manage</li>
+					<li>Admin panel forget password option</li>
+					<li>Title and Meta Description setup for SEO of each pages</li>
+					<li>SEO friendly URL structure</li>
+				</ul>
+		</section>
+
+		<section id="Requirements">
+			<div class="page-header">
+				<h3>Requirements</h3>
+				<p>
+					Following modules must be activated on your server:
+				</p>
+				<ol>
+					<li>PHP version: 8.0 or higher</li>
+					<li>PDO Extension</li>
+					<li>GD Library</li>
+					<li>cURL</li>
+					<li>allow_url_fopen</li>
+					<li>Mbstring</li>
+				</ol>
+		</section>
+
+		<section id="Installation">
+			<div class="page-header">
+				<h3>Installation</h3>
+				<p>
+					In order to install the CMS, please follow these steps:
+				</p>
+				<div class="gap-0"></div>
+				<ol>
+					<li>
+						Download the main zip file from Codecanyon and extract it. You will get total 3 folders in there: <b>database, documentation and cms</b>.
+					</li>
+					<li>
+						Compress the <b>'cms'</b> folder and give name something like <b>cms.zip</b>. Then upload this file into your server using FTP or Cpanel. Extract this and use. You can use our php script into root domain or subdomain.
+					</li>
+					<li>
+						Create mysql database using cpanel or your hosting provider's system. Then import the <b>proschool.sql</b> file (you will get it in <b>database</b> folder) into your created database.
+					</li>
+					
+					<li>
+						Now you will have to edit the configuration file. Location of the configuration file is here: <b>root > .env </b>.
+						<p>
+							<img src="assets/images/env.png" alt="" style="width: auto;max-width: 90%;">
+						</p>
+					</li>
+					<li>
+						Open up the <b>.env</b> file with any text editor (for example: Notepad++) and change the text in there as following:
+						<p>
+							<img src="assets/images/env1.png" alt="" style="width: auto;max-width: 90%;">
+						</p>
+					</li>
+					<li>
+						Now you will have to edit the configuration file. Location of the configuration file is here: <b>root > config > database.php</b>.
+						<p>
+							<img src="assets/images/database.png" alt="" style="width: auto;max-width: 90%;">
+						</p>
+					</li>
+					<li>
+						Open up the <b>database.php</b> file with any text editor (for example: Notepad++) and change the text in there as following:
+						<p>
+							<img src="assets/images/database1.png" alt="" style="width: auto;max-width: 90%;">
+						</p>
+						<ul>
+							<li><b>host_name:</b> This is your database host name</li>
+							<li><b>database_name:</b> Create a database name in your host (localhost or webhost) and put name here</li>
+							<li><b>username:</b> Username of the database you created </li>
+							<li><b>password:</b> Password of the database you created</li>
+						</ul>
+					</li>
+				</ol>
+			</div>
+		</section>
+
+		<section id="AdminLogin">
+			<div class="page-header">
+				<h3>Admin Panel Login</h3>
+<p>
+	In order to login to the admin panel, go to the url below:
+</p>
+<p>
+	<b>http://www.yourwebsite.com/</b>
+</p>
+<p>
+	Here "yourwebsite" is your main domain name. Just after your main url, you have to put "admin" and that's it.
+</p>
+<p>
+	Default Admin Login Credentials are:
+</p>
+<p>
+	<b>Email: admin@gmail.com</b><br>
+	<b>Password: 123456</b>
+</p>
+
+<p>
+	You will get all the sidebar menu details in this section:
+</p>
+<h4><b>Admin Sidebar</b></h4>
+<pre>
+	<b>Dashboard</b>
+	<b>Admin</b>
+	<b>Teacher</b>
+	<b>Student</b>
+	<b>Parent</b>
+	<b>Academics:</b>
+		- Class
+		- Subject
+		- Assign Subject
+		- Class Timetable
+		- Assign Class Teacher
+	<b>Fees Collection</b>
+		- Collect Fees
+		- Collect Fees Report
+
+	<b>Examinations:</b>
+		- Exam
+		- Exam Schedule
+		- Marks Register
+		- Marks Grade
+	<b>Attendance:</b>
+		- Student Attendance
+		- Attendance Report
+	<b>Communicate:</b>
+		- Notice Board
+		- Send Email
+	<b>Homework:</b>
+		- Homework
+		- Homework Report
+	<b>My Account</b>
+	<b>Setting</b>
+	<b>Change Password</b>
+	<b>Logout</b>
+
+</pre>
+			</div>
+		</section>
+
+		<section id="TeacherLogin">
+			<div class="page-header">
+				<h3>Teacher Panel Login</h3>
+<p>
+	In order to login to the teacher panel, go to the url below:
+</p>
+<p>
+	<b>http://www.yourwebsite.com/</b>
+</p>
+<p>
+	Here "yourwebsite" is your main domain name. Just after your main url, you have to put "teacher" and that's it.
+</p>
+<p>
+	Default Teacher Login Credentials are:
+</p>
+<p>
+	<b>Email: teacher@gmail.com</b><br>
+	<b>Password: 123456</b>
+</p>
+
+<p>
+	You will get all the sidebar menu details in this section:
+</p>
+<h4><b>Teacher Sidebar</b></h4>
+<pre>
+	<b>Dashboard</b>
+	<b>My Student</b>
+	<b>My Class & Subject</b>
+	<b>My Exam Timetable</b>
+	<b>My Calendar</b>
+	<b>Marks Register</b>
+	<b>Attendance</b>
+		- Student Attendance
+		- Attendance Report
+	<b>Homework</b>
+	<b>My Notice Board</b>
+	<b>My Account</b>
+	<b>Change Password</b>
+	<b>Logout</b>
+</pre>
+			</div>
+		</section>
+
+		<section id="StudentLogin">
+			<div class="page-header">
+				<h3>Student Panel Login</h3>
+<p>
+	In order to login to the teacher panel, go to the url below:
+</p>
+<p>
+	<b>http://www.yourwebsite.com/</b>
+</p>
+<p>
+	Here "yourwebsite" is your main domain name. Just after your main url, you have to put "student" and that's it.
+</p>
+<p>
+	Default Student Login Credentials are:
+</p>
+<p>
+	<b>Email: student@gmail.com</b><br>
+	<b>Password: 123456</b>
+</p>
+
+<p>
+	You will get all the sidebar menu details in this section:
+</p>
+<h4><b>Student Sidebar</b></h4>
+<pre>
+	<b>Dashboard</b>
+	<b>Fees Collection</b>
+	<b>My Calendar</b>
+	<b>My Subject</b>
+	<b>My Timetable</b>
+	<b>My Exam Timetable</b>
+	<b>My Exam Result</b>
+	<b>My Attendance</b>
+	<b>My Notice Board</b>
+	<b>My Homework</b>
+	<b>Submitted Homework</b>
+	<b>My Account</b>
+	<b>Change Password</b>
+	<b>Logout</b>
+</pre>
+			</div>
+		</section>
+
+		<section id="ParentLogin">
+			<div class="page-header">
+				<h3>Parent Panel Login</h3>
+	<p>
+	In order to login to the teacher panel, go to the url below:
+	</p>
+	<p>
+	<b>http://www.yourwebsite.com/</b>
+	</p>
+	<p>
+	Here "yourwebsite" is your main domain name. Just after your main url, you have to put "parent" and that's it.
+	</p>
+	<p>
+	Default Parent Login Credentials are:
+	</p>
+	<p>
+	<b>Email: parent@gmail.com</b><br>
+	<b>Password: 123456</b>
+	</p>
+
+	<p>
+	You will get all the sidebar menu details in this section:
+	</p>
+	<h4><b>Parent Sidebar</b></h4>
+	<pre>
+	<b>Dashboard</b>
+	<b>My Student</b>
+	<b>My Subject Notice Board</b>
+	<b>My Notice Board</b>
+	<b>My Account</b>
+	<b>Change Password</b>
+	<b>Logout</b>
+	</pre>
+
+			</div>
+		</section>
+
+
+		<section id="EmailSetting">
+			<div class="page-header">
+				<h3>Email Setting</h3>
+				<p>
+					In order to run the script without problem, you have to set up the email (with SMTP) properly. So, from the admin panel, go to <b>.env</b>. Change the information given there according to your requirements.
+				</p>
+				<p>
+					<img src="assets/images/envemail.png" alt="" style="width: auto;max-width: 100%;">
+				</p>
+
+				<p>
+				Open up the <b>.env</b> file with any text editor (for example: Notepad++) and change the text in there as following:
+				</p>
+				<p>
+					<img src="assets/images/email.png" alt="" style="width: auto;max-width: 100%;">
+				</p>
+			</div>
+		</section>
+
+		<section id="PaymentSetting">
+			<div class="page-header">
+				<h3>Payment Setting</h3>
+				<p>
+					You must have to setup the payment setting to receive payment without problem from customers. To do this task, go to <b>Settings </b>. Give the Paypal Business Email,  Stripe Public Key and Stripe Secret Key there.
+				</p>
+				<p>
+					<img src="assets/images/payment.png" alt="" style="width: auto;max-width: 100%;">
+				</p>
+				</div>
+		</section>
+
+		<section id="Logo">
+			<div class="page-header">
+				<h3>ProSchool Logo</h3>
+				<p>
+					You must have to setup the Logo and Fevicon setting. To do this task, go to <b>Settings </b>. Give the Logo and Fevicon Icon  there.
+				</p>
+				<p>
+					<img src="assets/images/1logo.png" alt="" style="width: auto;max-width: 100%;">
+				</p>
+			</div>	
+		</section>
+
+
+		
+		<section id="Support">
+			<div class="page-header">
+				<h3>Support</h3>
+				<p>
+					Please visit this website and create ticket for support: <a href="https://errorsolutioncode.com/contact-us" target="_blank">https://errorsolutioncode.com/contact-us</a>
+				</p>
+			</div>
+		</section>
+
+
+
+	</div>
+</body>
+</html>

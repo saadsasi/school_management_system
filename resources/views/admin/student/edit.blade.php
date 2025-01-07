@@ -69,7 +69,6 @@
                           <option value="">Select Gender</option>
                           <option {{ (old('gender', $getRecord->gender) == 'Male') ? 'selected' : '' }} value="Male">Male</option>
                           <option {{ (old('gender', $getRecord->gender) == 'Female') ? 'selected' : '' }} value="Female">Female</option>
-                          <option {{ (old('gender', $getRecord->gender) == 'Other') ? 'selected' : '' }} value="Other">Other</option>
                       </select>
                       <div style="color:red">{{ $errors->first('gender') }}</div>
                     </div>  

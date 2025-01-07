@@ -70,7 +70,6 @@
                           <option value="">Select Gender</option>
                           <option {{ (Request::get('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
                           <option {{ (Request::get('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
-                          <option {{ (Request::get('gender') == 'Other') ? 'selected' : '' }} value="Other">Other</option>
                       </select>                    
                   </div>
 

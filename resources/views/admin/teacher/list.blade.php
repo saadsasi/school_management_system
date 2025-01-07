@@ -35,54 +35,10 @@
                       <label>{{ __('messages.last_name') }}</label>
                       <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name" placeholder="{{ __('messages.last_name') }}">
                     </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.email') }}</label>
-                      <input type="text" class="form-control" name="email" value="{{ Request::get('email') }}" placeholder="{{ __('messages.email') }}">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.gender') }}</label>
-                      <select class="form-control" name="gender">
-                          <option value="">{{ __('messages.select_gender') }}</option>
-                          <option {{ (Request::get('gender') == 'Male') ? 'selected' : '' }} value="Male">{{ __('messages.male') }}</option>
-                          <option {{ (Request::get('gender') == 'Female') ? 'selected' : '' }} value="Female">{{ __('messages.female') }}</option>
-                          <option {{ (Request::get('gender') == 'Other') ? 'selected' : '' }} value="Other">{{ __('messages.other') }}</option>
-                      </select>
-                    </div>
-
+                    
                     <div class="form-group col-md-2">
                       <label>{{ __('messages.mobile_number') }}</label>
                       <input type="text" class="form-control" name="mobile_number" value="{{ Request::get('mobile_number') }}" placeholder="{{ __('messages.mobile_number') }}">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.marital_status') }}</label>
-                      <input type="text" class="form-control" name="marital_status" value="{{ Request::get('marital_status') }}" placeholder="{{ __('messages.marital_status') }}">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.current_address') }}</label>
-                      <input type="text" class="form-control" name="address" value="{{ Request::get('address') }}" placeholder="{{ __('messages.current_address') }}">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.status') }}</label>
-                      <select class="form-control" name="status">
-                          <option value="">{{ __('messages.select_status') }}</option>
-                          <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">{{ __('messages.active') }}</option>
-                          <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">{{ __('messages.inactive') }}</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.date_of_joining') }}</label>
-                      <input type="date" class="form-control" name="admission_date" value="{{ Request::get('admission_date') }}">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.created_date') }}</label>
-                      <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}">
                     </div>
 
                     <div class="form-group col-md-3">

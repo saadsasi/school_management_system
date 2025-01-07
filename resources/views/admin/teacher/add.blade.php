@@ -27,8 +27,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label>First Name <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="First Name">
+                      <label>Full Name <span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="First& Second Name">
                       <div style="color:red">{{ $errors->first('name') }}</div>
                     </div>  
 
@@ -47,7 +47,6 @@
                           <option value="">Select Gender</option>
                           <option {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
                           <option {{ (old('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
-                          <option {{ (old('gender') == 'Other') ? 'selected' : '' }} value="Other">Other</option>
                       </select>
                       <div style="color:red">{{ $errors->first('gender') }}</div>
                     </div>  
@@ -71,12 +70,20 @@
                       <div style="color:red">{{ $errors->first('mobile_number') }}</div>
                     </div> 
 
-                    <div class="form-group col-md-6">
+                    {{-- <div class="form-group col-md-6">
                       <label>Marital Status  <span style="color: red;"></span></label>
                       <input type="text" class="form-control" value="{{ old('marital_status') }}" name="marital_status"  placeholder="Marital Status">
                       <div style="color:red">{{ $errors->first('marital_status') }}</div>
-                    </div> 
-
+                    </div>  --}}
+                    <div class="form-group col-md-6">
+                      <label>{{ __('messages.marital_status') }} <span style="color: red;"></span></label>
+                      <select class="form-control" name="marital_status">
+                          <option value="">{{ __('messages.select_marital_status') }}</option>
+                          <option {{ (old('marital_status') == 'Single') ? 'selected' : '' }} value="Single">{{ __('messages.single') }}</option>
+                          <option {{ (old('marital_status') == 'Married') ? 'selected' : '' }} value="Married">{{ __('messages.married') }}</option>
+                      </select>
+                      <div style="color:red">{{ $errors->first('marital_status') }}</div>
+                  </div>
                     
 
                  

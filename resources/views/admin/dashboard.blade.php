@@ -93,46 +93,6 @@
               <a href="{{ url('admin/admin/list') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>{{ $TotalExam }}</h3>
-                <p>{{ __('messages.total_exam') }}</p>
-              </div>
-              <div class="icon">
-                <i class="nav-icon fas fa-table"></i>
-              </div>
-              <a href="{{ url('admin/examinations/exam/list') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-
-           <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{ $TotalClass }}</h3>
-                <p>{{ __('messages.total_class') }}</p>
-              </div>
-              <div class="icon">
-                <i class="nav-icon fas fa-table"></i>
-              </div>
-              <a href="{{ url('admin/class/list') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-
-           <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>{{ $TotalSubject }}</h3>
-                <p>{{ __('messages.total_subject') }}</p>
-              </div>
-              <div class="icon">
-                <i class="nav-icon fas fa-table"></i>
-              </div>
-              <a href="{{ url('admin/subject/list') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-         
         </div>
       </div>
     </section>

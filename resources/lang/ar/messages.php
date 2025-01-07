@@ -74,7 +74,7 @@ return [
     'created_date' => 'تاريخ الإنشاء',
     'action' => 'الإجراءات',
     'edit' => 'تعديل',
-    'delete' => 'حذف',
+    'delete' => 'أرشفة',
     'send_message' => 'إرسال رسالة',
 
     // Edit Admin Page
@@ -86,7 +86,6 @@ return [
     'update' => 'تحديث',
 
     // Add Admin Page
-    'add_new_admin' => 'اضافة مشرف جديد',
     'submit' => 'إرسال',
  
     // Teacher List Page
@@ -107,9 +106,6 @@ return [
     'active' => 'نشط',
     'inactive' => 'غير نشط',
     'date_of_joining' => 'تاريخ الالتحاق',
-    'created_date' => 'تاريخ الإنشاء',
-    'search' => 'بحث',
-    'reset' => 'إعادة تعيين',
     'export_excel' => 'تصدير إلى Excel',
     'teacher_name' => 'اسم المعلم',
     'date_of_birth' => 'تاريخ الميلاد',
@@ -117,9 +113,6 @@ return [
     'qualification' => 'المؤهل العلمي',
     'work_experience' => 'الخبرة العملية',
     'note' => 'ملاحظات',
-    'edit' => 'تعديل',
-    'delete' => 'حذف',
-    'send_message' => 'إرسال رسالة',
 
 
     //  User : teacher

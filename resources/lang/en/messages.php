@@ -72,21 +72,17 @@ return [
     'created_date' => 'Created Date',
     'action' => 'Action',
     'edit' => 'Edit',
-    'delete' => 'Delete',
+    'delete' => 'Deactivate',
     'send_message' => 'Send Message',
     
     // Edit Admin Page
     'edit_admin' => 'Edit Admin',
-    'name' => 'Name',
-    'email' => 'Email',
     'password' => 'Password',
     'change_password_note' => 'Due you want to change password so Please add new password',
-    'profile_pic' => 'Profile Pic',
     'no_file_chosen' => 'No file chosen',
     'choose_file' => 'Choose File',
     'update' => 'Update',     
     // Add Admin Page
-    'add_new_admin' => 'Add New Admin',
     'submit' => 'Submit',
 
     // Teacher List Page
@@ -107,9 +103,6 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'date_of_joining' => 'Date of Joining',
-    'created_date' => 'Created Date',
-    'search' => 'Search',
-    'reset' => 'Reset',
     'export_excel' => 'Export Excel',
     'teacher_name' => 'Teacher Name',
     'date_of_birth' => 'Date of Birth',
@@ -117,10 +110,6 @@ return [
     'qualification' => 'Qualification',
     'work_experience' => 'Work Experience',
     'note' => 'Note',
-    'edit' => 'Edit',
-    'delete' => 'Delete',
-    'send_message' => 'Send Message',
-    'action' => 'Action',
 
     //  User : teacher
 

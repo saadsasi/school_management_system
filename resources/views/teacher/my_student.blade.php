@@ -58,8 +58,6 @@
                       <th>Class</th>
                       <th>Gender</th>
                       <th>Date of Birth </th>
-                      <th>Caste </th>
-                      <th>Religion</th>
                       <th>Mobile Number</th>
                       <th>Admission Date</th>
                       <th>Blood Group</th>
@@ -89,8 +87,6 @@
                                 {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
                               @endif
                           </td>
-                          <td>{{ $value->caste }}</td>
-                          <td>{{ $value->religion }}</td>
                           <td>{{ $value->mobile_number }}</td>
                           <td>
                             @if(!empty($value->admission_date))

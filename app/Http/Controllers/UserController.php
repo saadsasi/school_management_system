@@ -150,8 +150,6 @@ class UserController extends Controller
             'weight' => 'max:10',
             'blood_group' => 'max:10',
             'mobile_number' => 'max:15|min:8',            
-            'caste' => 'max:50',
-            'religion' => 'max:50',
             'height' => 'max:10'            
         ]);
 
@@ -182,8 +180,6 @@ class UserController extends Controller
             $student->profile_pic = $filename;            
         }
 
-        $student->caste = trim($request->caste);
-        $student->religion = trim($request->religion);
         $student->mobile_number = trim($request->mobile_number);
         $student->blood_group = trim($request->blood_group);
         $student->height = trim($request->height);

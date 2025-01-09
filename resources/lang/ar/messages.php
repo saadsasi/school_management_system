@@ -102,6 +102,8 @@ return [
     'select_marital_status' => 'اختر الحالة الاجتماعية',
     'single' => 'أعزب',
     'married' => 'متزوج',
+    'divorced' => 'مطلق',
+    'widower' => 'ارمل',
     'current_address' => 'العنوان الحالي',
     'status' => 'الحالة',
     'select_status' => 'اختر الحالة',

@@ -49,23 +49,6 @@
     </div>
 </li>
 
-    <!-- Language Switcher -->
-   <!-- <li class="nav-item dropdown">
-      <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="fas fa-language"></i>
-        {{ app()->getLocale() == 'ar' ? 'عربي' : 'English' }}
-      </a>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a href="{{ url('locale/ar') }}" class="dropdown-item">
-          العربية
-        </a>
-        <a href="{{ url('locale/en') }}" class="dropdown-item">
-          English
-        </a>
-      </div>
-    </li>  -->
-
-
   </ul>
 </nav>
 <!-- /.navbar -->
@@ -317,34 +300,6 @@
         </li>
 
 
-         <li class="nav-item  @if(Request::segment(2) == 'homework') menu-is-opening menu-open @endif">
-            <a href="#" class="nav-link  @if(Request::segment(2) == 'homework') active @endif">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                  {{ __('messages.homework') }}
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item">
-                <a href="{{ url('admin/homework/homework') }}" class="nav-link @if(Request::segment(3) == 'homework') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>   {{ __('messages.homework') }}</p>
-                </a>
-              </li>
-
-               <li class="nav-item">
-                <a href="{{ url('admin/homework/homework_report') }}" class="nav-link @if(Request::segment(3) == 'homework_report') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>  {{ __('messages.homework_report') }} </p>
-                </a>
-              </li>
-
-            </ul>
-        </li>
-        </li>
-
         
         <li class="nav-item  @if(Request::segment(2) == 'leave') menu-is-opening menu-open @endif">
     <a href="{{ url('admin/leave/requests') }}" class="nav-link  @if(Request::segment(2) == 'leave') active @endif">
@@ -476,25 +431,6 @@
             </ul>
         </li>
 
-
-         <li class="nav-item  @if(Request::segment(2) == 'homework') menu-is-opening menu-open @endif">
-            <a href="#" class="nav-link  @if(Request::segment(2) == 'homework') active @endif">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Homework
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-
-              <li class="nav-item">
-                <a href="{{ url('teacher/homework/homework') }}" class="nav-link @if(Request::segment(3) == 'homework') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Homework</p>
-                </a>
-              </li>
-            </ul>
-        </li>
 
 
           <li class="nav-item">
@@ -643,24 +579,6 @@
               <i class="nav-icon far fa-user"></i>
               <p>
                 My Notice Board
-              </p>
-            </a>
-          </li>
-
-           <li class="nav-item">
-            <a href="{{ url('student/my_homework') }}" class="nav-link @if(Request::segment(2) == 'my_homework') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                My Homework
-              </p>
-            </a>
-          </li>
-
-           <li class="nav-item">
-            <a href="{{ url('student/my_submitted_homework') }}" class="nav-link @if(Request::segment(2) == 'my_submitted_homework') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                Submitted Homework
               </p>
             </a>
           </li>

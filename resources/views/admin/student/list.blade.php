@@ -45,99 +45,16 @@
                   <div class="row">
                     
                   
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
                   </div>
 
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label>Last Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Last Name">
                   </div>
 
-                  <div class="form-group col-md-2">
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email" value="{{ Request::get('email') }}"  placeholder="Email">
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label>Admission Number</label>
-                    <input type="text" class="form-control" name="admission_number" value="{{ Request::get('admission_number') }}"  placeholder="Admission Number">
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label>Roll Number</label>
-                    <input type="text" class="form-control" name="roll_number" value="{{ Request::get('roll_number') }}"  placeholder="Roll Number">
-                  </div>
-
-
-
-                  <div class="form-group col-md-2">
-                    <label>Class</label>
-                    <input type="text" class="form-control" name="class" value="{{ Request::get('class') }}"  placeholder="Class">
-                  </div>
-
-
-                  <div class="form-group col-md-2">
-                    <label>Gender</label>
-                      <select class="form-control" name="gender">
-                          <option value="">Select Gender</option>
-                          <option {{ (Request::get('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                          <option {{ (Request::get('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
-                      </select>                    
-                  </div>
-
-
-                  <div class="form-group col-md-2">
-                    <label>Caste</label>
-                    <input type="text" class="form-control" name="caste" value="{{ Request::get('caste') }}"  placeholder="Caste">
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label>Religion</label>
-                    <input type="text" class="form-control" name="religion" value="{{ Request::get('religion') }}"  placeholder="Religion">
-                  </div>
-
-                    <div class="form-group col-md-2">
-                    <label>Mobile Number</label>
-                    <input type="text" class="form-control" name="mobile_number" value="{{ Request::get('mobile_number') }}"  placeholder="Mobile Number">
-                  </div>
-
-
-                    <div class="form-group col-md-2">
-                    <label>Blood Group</label>
-                    <input type="text" class="form-control" name="blood_group" value="{{ Request::get('blood_group') }}"  placeholder="Blood Group">
-                  </div>
-
-
-                    <div class="form-group col-md-2">
-                    <label>Status</label>
-                      <select class="form-control" name="status">
-                          <option value="">Select Status</option>
-                          <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">Active</option>
-                          <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">Inactive</option>
-                          
-                      </select>                    
-                  </div>
-
-
-                  
-
-                    
-                    <div class="form-group col-md-2">
-                    <label>Admission Date</label>
-                    <input type="date" class="form-control" name="admission_date" value="{{ Request::get('admission_date') }}" >
-                  </div>
-                  
-
-                  
-
-                  
-
-                  <div class="form-group col-md-2">
-                    <label>Created Date</label>
-                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}"  placeholder="">
-                  </div>
 
                   <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
@@ -170,8 +87,6 @@
                     <input type="hidden" name="roll_number" value="{{ Request::get('roll_number') }}">
                     <input type="hidden" name="gender" value="{{ Request::get('gender') }}">
                     <input type="hidden" name="class" value="{{ Request::get('class') }}">
-                    <input type="hidden" name="caste" value="{{ Request::get('caste') }}">
-                    <input type="hidden" name="religion" value="{{ Request::get('religion') }}">
                     <input type="hidden" name="mobile_number" value="{{ Request::get('mobile_number') }}">
                     <input type="hidden" name="blood_group" value="{{ Request::get('blood_group') }}">
                     <input type="hidden" name="status" value="{{ Request::get('status') }}">
@@ -195,8 +110,6 @@
                       <th>Class</th>
                       <th>Gender</th>
                       <th>Date of Birth </th>
-                      <th>Caste </th>
-                      <th>Religion</th>
                       <th>Mobile Number</th>
                       <th>Admission Date</th>
                       <th>Blood Group</th>
@@ -229,8 +142,6 @@
                               {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
                               @endif
                             </td>
-                          <td>{{ $value->caste }}</td>
-                          <td>{{ $value->religion }}</td>
                           <td>{{ $value->mobile_number }}</td>
                           <td>
                             @if(!empty($value->admission_date))

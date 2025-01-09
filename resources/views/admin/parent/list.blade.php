@@ -46,74 +46,16 @@
                   <div class="row">
                     
                   
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
                   </div>
 
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label>Last Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Last Name">
                   </div>
 
-                  <div class="form-group col-md-2">
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email" value="{{ Request::get('email') }}"  placeholder="Email">
-                  </div>
-
-               
-
-
-                  <div class="form-group col-md-2">
-                    <label>Gender</label>
-                      <select class="form-control" name="gender">
-                          <option value="">Select Gender</option>
-                          <option {{ (Request::get('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                          <option {{ (Request::get('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
-                      </select>                    
-                  </div>
-
-
-                  <div class="form-group col-md-2">
-                    <label>Occupation</label>
-                    <input type="text" class="form-control" name="occupation" value="{{ Request::get('occupation') }}"  placeholder="Occupation">
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label>Address</label>
-                    <input type="text" class="form-control" name="address" value="{{ Request::get('address') }}"  placeholder="Address">
-                  </div>
-
-                    <div class="form-group col-md-2">
-                    <label>Mobile Number</label>
-                    <input type="text" class="form-control" name="mobile_number" value="{{ Request::get('mobile_number') }}"  placeholder="Mobile Number">
-                  </div>
-
-
-
-                    <div class="form-group col-md-2">
-                    <label>Status</label>
-                      <select class="form-control" name="status">
-                          <option value="">Select Status</option>
-                          <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">Active</option>
-                          <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">Inactive</option>
-                          
-                      </select>                    
-                  </div>
-
-
-                  
-
-     
-
-                  
-
-                  
-
-                  <div class="form-group col-md-2">
-                    <label>Created Date</label>
-                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}"  placeholder="">
-                  </div>
 
                   <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>

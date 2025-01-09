@@ -12,8 +12,6 @@ use App\Models\StudentAddFeesModel;
 use App\Models\NoticeBoardModel;
 use App\Models\AssignClassTeacherModel;
 use App\Models\ClassSubjectModel;
-use App\Models\HomeworkModel;
-use App\Models\HomeworkSubmitModel;
 use App\Models\StudentAttendanceModel;
 
 
@@ -54,9 +52,6 @@ class DashboardController extends Controller
             $data['TotalPaidAmount'] = StudentAddFeesModel::TotalPaidAmountStudent(Auth::user()->id);
             $data['TotalSubject'] = ClassSubjectModel::MySubjectTotal(Auth::user()->class_id);       
             $data['TotalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::user()->user_type);
-            $data['TotalHomework'] = HomeworkModel::getRecordStudentCount(Auth::user()->class_id, Auth::user()->id);
-
-            $data['TotalSubmittedHomework'] = HomeworkSubmitModel::getRecordStudentCount(Auth::user()->id);
             
             $data['TotalAttendance'] = StudentAttendanceModel::getRecordStudentCount(Auth::user()->id);
         
@@ -73,13 +68,11 @@ class DashboardController extends Controller
                 $data['TotalPaidAmount'] = StudentAddFeesModel::TotalPaidAmountStudentParent($student_ids);
                 $data['TotalAttendance'] = StudentAttendanceModel::getRecordStudentParentCount($student_ids);
 
-                $data['TotalSubmittedHomework'] = HomeworkSubmitModel::getRecordStudentParentCount($student_ids);
             }
             else
             {
                 $data['TotalPaidAmount'] = 0;
                 $data['TotalAttendance'] = 0;
-                $data['TotalSubmittedHomework'] = 0;
             }
             
 

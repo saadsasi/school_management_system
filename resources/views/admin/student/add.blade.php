@@ -28,7 +28,7 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label>First Name <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="First Name">
+                      <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="Full Name">
                       <div style="color:red">{{ $errors->first('name') }}</div>
                     </div>  
 
@@ -80,18 +80,6 @@
                       <div style="color:red">{{ $errors->first('date_of_birth') }}</div>
                     </div>  
 
-
-                     <div class="form-group col-md-6">
-                      <label>Caste <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" value="{{ old('caste') }}" name="caste"  placeholder="Caste">
-                      <div style="color:red">{{ $errors->first('caste') }}</div>
-                    </div>  
-
-                    <div class="form-group col-md-6">
-                      <label>Religion <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" value="{{ old('religion') }}" name="religion"  placeholder="Religion">
-                      <div style="color:red">{{ $errors->first('religion') }}</div>
-                    </div> 
 
                     <div class="form-group col-md-6">
                       <label>Mobile Number <span style="color: red;"></span></label>

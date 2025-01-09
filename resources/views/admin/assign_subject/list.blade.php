@@ -46,21 +46,16 @@
                   <div class="row">
                     
                   
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>Class Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name"  placeholder="Class Name">
                   </div>
 
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>Subject Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('subject_name') }}" name="subject_name"  placeholder="Subject Name">
                   </div>
                  
-                 
-                  <div class="form-group col-md-3">
-                    <label>Date</label>
-                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}"  placeholder="Email">
-                  </div>
 
                   <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>

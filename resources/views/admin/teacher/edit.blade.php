@@ -71,10 +71,16 @@
                     </div> 
 
                     <div class="form-group col-md-6">
-                      <label>Marital Status  <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" value="{{ old('marital_status', $getRecord->marital_status) }}" name="marital_status"  placeholder="Marital Status">
+                      <label>{{ __('messages.marital_status') }} <span style="color: red;"></span></label>
+                      <select class="form-control" name="marital_status">
+                          <option value="">{{ __('messages.select_marital_status') }}</option>
+                          <option {{ (old('marital_status') == 'Single') ? 'selected' : '' }} value="Single">{{ __('messages.single') }}</option>
+                          <option {{ (old('marital_status') == 'Married') ? 'selected' : '' }} value="Married">{{ __('messages.married') }}</option>
+                          <option {{ (old('marital_status') == 'divorced') ? 'selected' : '' }} value="divorced">{{ __('messages.divorced') }}</option>
+                          <option {{ (old('marital_status') == 'widower') ? 'selected' : '' }} value="widower">{{ __('messages.widower') }}</option>
+                      </select>
                       <div style="color:red">{{ $errors->first('marital_status') }}</div>
-                    </div> 
+                  </div>
 
                     
 

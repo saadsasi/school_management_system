@@ -257,15 +257,6 @@ class User extends Authenticatable
                             $return = $return->where('users.gender','=', Request::get('gender'));
                         }
 
-                        if(!empty(Request::get('caste')))
-                        {
-                            $return = $return->where('users.caste','like', '%'.Request::get('caste').'%');
-                        }
-
-                        if(!empty(Request::get('religion')))
-                        {
-                            $return = $return->where('users.religion','like', '%'.Request::get('religion').'%');
-                        }
 
                         if(!empty(Request::get('mobile_number')))
                         {

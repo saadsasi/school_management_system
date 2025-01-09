@@ -27,8 +27,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label>First Name <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="First Name">
+                      <label>Full Name <span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="Full Name">
                       <div style="color:red">{{ $errors->first('name') }}</div>
                     </div>  
 

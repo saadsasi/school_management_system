@@ -75,19 +75,6 @@
             </div>
           </div>
 
-       
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-primary">
-              <div class="inner">
-                <h3>{{ $TotalSubmittedHomework }}</h3>
-                <p>   {{ __('messages.parent_total_submitted_homework') }} </p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{{ url('parent/my_student') }}" class="small-box-footer">{{ __('messages.parent_more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
 
 
           

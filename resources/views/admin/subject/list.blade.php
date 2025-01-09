@@ -46,13 +46,13 @@
                   <div class="row">
                     
                   
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
                   </div>
 
 
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                      <label>Subject Type</label>
                      <select class="form-control" name="type">
                         <option value="">Select Type</option>
@@ -63,10 +63,6 @@
 
                   
                  
-                  <div class="form-group col-md-3">
-                    <label>Date</label>
-                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}"  placeholder="Email">
-                  </div>
 
                   <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>

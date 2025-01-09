@@ -28,19 +28,6 @@
               <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-
-           <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>${{ number_format($getTotalTodayFees, 2) }}</h3>
-                <p>{{ __('messages.today_received_payment') }}</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="{{ url('admin/fees_collection/collect_fees_report?start_created_date='.date('Y-m-d').'&end_created_date='.date('Y-m-d').'') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
    
           <div class="col-lg-3 col-6">
             <div class="small-box bg-success">

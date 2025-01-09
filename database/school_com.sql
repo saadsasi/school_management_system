@@ -318,31 +318,9 @@ CREATE TABLE `failed_jobs` (
 -- Table structure for table `homework`
 --
 
-CREATE TABLE `homework` (
-  `id` int(11) NOT NULL,
-  `class_id` int(11) DEFAULT NULL,
-  `subject_id` int(11) DEFAULT NULL,
-  `homework_date` date DEFAULT NULL,
-  `submission_date` date DEFAULT NULL,
-  `document_file` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `is_delete` tinyint(4) NOT NULL DEFAULT 0,
-  `created_by` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Dumping data for table `homework`
 --
-
-INSERT INTO `homework` (`id`, `class_id`, `subject_id`, `homework_date`, `submission_date`, `document_file`, `description`, `is_delete`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 3, 5, '2023-06-12', '2023-06-22', '20230605044813yrc91gr875diohromzzn.pdf', '<p>Hi</p><p>I need to understand how to work home work<br></p>', 1, 1, '2023-06-05 04:48:13', '2023-06-07 03:59:36'),
-(2, 1, 2, '2023-06-06', '2023-06-07', '20230606035119wdtqafgonuyzv1wowrlf.pdf', '<p>Hi i just testing<br></p>', 0, 1, '2023-06-06 03:51:00', '2023-06-06 03:51:19'),
-(3, 3, 2, '2023-06-07', '2023-06-07', '202306070353506icz1pmi5xi1vrajafyh.pdf', '<p>hello<br></p>', 0, 21, '2023-06-07 03:53:50', '2023-06-07 04:02:26'),
-(4, 4, 6, '2023-06-07', '2023-06-07', NULL, '<p>dsffsdf fsdfdsf<br></p>', 0, 21, '2023-06-07 03:57:47', '2023-06-07 04:03:50'),
-(5, 3, 5, '2023-06-09', '2023-06-10', '20230608032534xfsb8vps29vv36rg9fqk.jpg', '<p>Hi</p><p>please complete the assignment<br></p>', 0, 1, '2023-06-08 03:25:07', '2023-06-08 03:25:34'),
-(6, 3, 5, '2023-06-12', '2023-06-13', '2023061204512843qxgri6l6ehbyz45bbp.jpg', '<p>Pls check document<br></p>', 0, 1, '2023-06-12 04:51:28', '2023-06-12 04:51:28');
 
 -- --------------------------------------------------------
 
@@ -350,24 +328,9 @@ INSERT INTO `homework` (`id`, `class_id`, `subject_id`, `homework_date`, `submis
 -- Table structure for table `homework_submit`
 --
 
-CREATE TABLE `homework_submit` (
-  `id` int(11) NOT NULL,
-  `homework_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `document_file` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Dumping data for table `homework_submit`
 --
-
-INSERT INTO `homework_submit` (`id`, `homework_id`, `student_id`, `description`, `document_file`, `created_at`, `updated_at`) VALUES
-(1, 5, 14, '<p>I have attached my home work<br></p>', '20230610041631envwnzvaoduofiywpzzn.jpg', '2023-06-10 04:16:31', '2023-06-10 04:16:31'),
-(2, 3, 14, '<p>I have attached </p><p>Thank you :)<br></p>', '202306100416584fpbqjyl29s6om9p6voe.jpg', '2023-06-10 04:16:58', '2023-06-10 04:16:58'),
-(3, 2, 13, '<p>I have attached my homework<br></p>', '20230613031035mrgcvqi20fjq6fue858h.jpg', '2023-06-13 03:10:35', '2023-06-13 03:10:35');
 
 -- --------------------------------------------------------
 
@@ -705,8 +668,6 @@ CREATE TABLE `users` (
   `class_id` int(11) DEFAULT NULL,
   `gender` varchar(50) DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  `caste` varchar(50) DEFAULT NULL,
-  `religion` varchar(50) DEFAULT NULL,
   `mobile_number` varchar(15) DEFAULT NULL,
   `admission_date` date DEFAULT NULL,
   `profile_pic` varchar(100) DEFAULT NULL,
@@ -731,7 +692,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_pic`, `blood_group`, `height`, `weight`, `occupation`, `marital_status`, `address`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `mobile_number`, `admission_date`, `profile_pic`, `blood_group`, `height`, `weight`, `occupation`, `marital_status`, `address`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$NVyTxYXIPnXeYi4GckzmPeHwipDph/OQArrAF.HbeVnmosG0m1yV.', '9imJ6J9ihTdP9XsJaZYX0mPwJsKSF1hFZJLf7g5UE75NkPSS31sjN0IES82D', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '20230707030514ogeefhmwghlna3rown0n.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2023-03-23 02:46:09', '2024-05-15 01:53:29'),
 (3, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$hbU2a9ziRFjQyomwypBbKuSlGoQYKWihaZikcOy838wDPJvMo6iim', NULL, NULL, NULL, NULL, 'Male', '2011-01-01', NULL, NULL, '1234567891', '2020-01-01', NULL, NULL, NULL, NULL, NULL, 'test', 'test', 'test', 'test', 'test', 'test', 2, 0, 0, '2023-03-23 02:46:09', '2024-05-15 01:53:53'),
 (4, NULL, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XBPChms8IYS8RenF9.CpH.Si2uJ9hfrt0suyFfA4hgYdEliDHml1e', 'xMbcDWfKkG0oL9SBrWzkzk8c1YXzMYSBLtAU7pSj0KkV0SEEdMt6rGCmx7Bs', NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2023-03-23 02:46:09', '2024-05-15 02:00:02'),

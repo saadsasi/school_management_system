@@ -39,26 +39,19 @@
                 <div class="card-body">
                   <div class="row">
                     
-                  <div class="form-group col-md-2">
-                    <label>Student ID</label>
-                    <input type="text" class="form-control" value="{{ Request::get('id') }}" name="id"  placeholder="Student ID">
-                  </div>
 
 
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
                   </div>
 
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-md-4">
                     <label>Last Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Last Name">
                   </div>
 
-                  <div class="form-group col-md-2">
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email" value="{{ Request::get('email') }}"  placeholder="Email">
-                  </div>
+
 
               
 

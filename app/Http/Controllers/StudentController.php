@@ -43,8 +43,6 @@ class StudentController extends Controller
             'mobile_number' => 'max:15|min:8',            
             'admission_number' => 'max:50',
             'roll_number' => 'max:50',
-            'caste' => 'max:50',
-            'religion' => 'max:50',
             'height' => 'max:10'            
         ]);
 
@@ -73,8 +71,6 @@ class StudentController extends Controller
             $student->profile_pic = $filename;            
         }
 
-        $student->caste = trim($request->caste);
-        $student->religion = trim($request->religion);
         $student->mobile_number = trim($request->mobile_number);
 
         if(!empty($request->admission_date))
@@ -121,8 +117,6 @@ class StudentController extends Controller
             'mobile_number' => 'max:15|min:8',            
             'admission_number' => 'max:50',
             'roll_number' => 'max:50',
-            'caste' => 'max:50',
-            'religion' => 'max:50',
             'height' => 'max:10'            
         ]);
 
@@ -155,8 +149,6 @@ class StudentController extends Controller
             $student->profile_pic = $filename;            
         }
 
-        $student->caste = trim($request->caste);
-        $student->religion = trim($request->religion);
         $student->mobile_number = trim($request->mobile_number);
 
         if(!empty($request->admission_date))

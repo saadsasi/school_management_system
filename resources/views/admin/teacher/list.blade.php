@@ -26,19 +26,14 @@
               <form method="get" action="">
                 <div class="card-body">
                   <div class="row">
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                       <label>{{ __('messages.name') }}</label>
                       <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name" placeholder="{{ __('messages.name') }}">
                     </div>
 
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-4">
                       <label>{{ __('messages.last_name') }}</label>
                       <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name" placeholder="{{ __('messages.last_name') }}">
-                    </div>
-                    
-                    <div class="form-group col-md-2">
-                      <label>{{ __('messages.mobile_number') }}</label>
-                      <input type="text" class="form-control" name="mobile_number" value="{{ Request::get('mobile_number') }}" placeholder="{{ __('messages.mobile_number') }}">
                     </div>
 
                     <div class="form-group col-md-3">

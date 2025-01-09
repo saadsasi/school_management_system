@@ -99,6 +99,8 @@ return [
     'select_marital_status' => 'Select Marital Status',
     'single' => 'Single',
     'married' => 'Married',
+    'divorced' => 'Divorced',
+    'widower' => 'Widower',
     'current_address' => 'Current Address',
     'status' => 'Status',
     'select_status' => 'Select Status',

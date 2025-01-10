@@ -30,7 +30,7 @@ class TeacherMiddleware
                      return $next($request);
                  }
      
-                
+                 return redirect('/');
              }
          }
      

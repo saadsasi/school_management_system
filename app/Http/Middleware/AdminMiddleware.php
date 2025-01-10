@@ -17,7 +17,9 @@ class AdminMiddleware
     {
         if(!empty(Auth::check()))
         {
-            if(Auth::user()->user_type == 1)
+            $user = Auth::user();
+            // السماح للمشرف أو المعلم المشرف
+            if($user->user_type == 1 || ($user->user_type == 2 && $user->is_supervisor == 1))
             {
                 return $next($request);    
             }
@@ -32,6 +34,5 @@ class AdminMiddleware
             Auth::logout();
             return redirect(url(''));
         }
-        
     }
 }

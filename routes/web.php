@@ -101,7 +101,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/teacher/edit/{id}', [TeacherController::class, 'update']);
     Route::get('admin/teacher/delete/{id}', [TeacherController::class, 'delete']);
     Route::post('admin/teacher/export_excel', [TeacherController::class, 'export_excel']);
-        
+    Route::post('admin/teacher/toggle-supervisor/{id}', [TeacherController::class, 'toggleSupervisor']);
 
          // student 
 

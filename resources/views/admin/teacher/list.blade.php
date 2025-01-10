@@ -124,6 +124,14 @@
                           <a href="{{ url('admin/teacher/edit/'.$value->id) }}" class="btn btn-primary btn-sm">{{ __('messages.edit') }}</a>
                           <a href="{{ url('admin/teacher/delete/'.$value->id) }}" class="btn btn-danger btn-sm">{{ __('messages.delete') }}</a>
                           <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">{{ __('messages.send_message') }}</a>
+
+                          <form action="{{ url('admin/teacher/toggle-supervisor/'.$value->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn {{ $value->is_supervisor ? 'btn-danger' : 'btn-success' }}">
+                                {{ $value->is_supervisor ? 'إلغاء صلاحيات المشرف' : 'تعيين كمشرف' }}
+                            </button>
+                        </form>
+
                         </td>
                       </tr>
                     @endforeach

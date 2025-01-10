@@ -168,6 +168,12 @@ class TeacherController extends Controller
             abort(404);
         }
     }
-
-
+    public function toggleSupervisor($id)
+{
+    $teacher = User::findOrFail($id);
+    $teacher->is_supervisor = !$teacher->is_supervisor;
+    $teacher->save();
+    
+    return redirect()->back()->with('success', "Teacher Successfully Updated");
+}
 }

@@ -340,39 +340,47 @@
             </a>
           </li>
 
-
+         
           @elseif(Auth::user()->user_type == 2)
+          <li class="nav-item">
+            <a href="{{ url('teacher/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                {{ __('messages.dashboard') }}
+              </p>
+            </a>
+          </li>
 
-             <li class="nav-item">
-              <a href="{{ url('teacher/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Dashboard
-                </p>
-              </a>
-            </li>
-
-
-              <li class="nav-item">
-              <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
-                <i class="nav-icon far fa-user"></i>
-                <p>
-                  My Student
-                </p>
-              </a>
-            </li>
+          <li class="nav-item">
+            <a href="{{ url('teacher/my_class_subject') }}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
+              <i class="nav-icon fas fa-graduation-cap"></i>
+              <p>
+                My Class Subject
+              </p>
+            </a>
+          </li>
 
 
-            <li class="nav-item">
-              <a href="{{ url('teacher/my_class_subject') }}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
-                <i class="nav-icon far fa-user"></i>
-                <p>
-                  My Class & Subject
-                </p>
-              </a>
-            </li>
+          <li class="nav-item">
+            <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                My Student
+              </p>
+            </a>
+          </li>
 
 
+          <li class="nav-item">
+            <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p>
+                My Calendar
+              </p>
+            </a>
+          </li>
+        
+          
           <li class="nav-item">
             <a href="{{ url('teacher/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
               <i class="nav-icon far fa-user"></i>
@@ -382,17 +390,7 @@
             </a>
           </li>
 
-
           
-          <li class="nav-item">
-            <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                My Calendar
-              </p>
-            </a>
-          </li>
-
           <li class="nav-item">
             <a href="{{ url('teacher/marks_register') }}" class="nav-link @if(Request::segment(2) == 'marks_register') active @endif">
               <i class="nav-icon far fa-user"></i>
@@ -489,8 +487,71 @@
             </a>
           </li>
 
+          <!--صلاحيات المشرف-->
 
-        @elseif(Auth::user()->user_type == 3)
+
+          @if(Auth::user()->is_supervisor == 1)
+          <li class="nav-header">صلاحيات المشرف</li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(1) == 'admin' && Request::segment(2) == 'dashboard') active @endif">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>لوحة تحكم المشرف</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
+              <i class="nav-icon fas fa-user-graduate"></i>
+              <p>إدارة الطلاب</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
+              <i class="nav-icon fas fa-user-friends"></i>
+              <p>إدارة أولياء الأمور</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/teacher/list') }}" class="nav-link @if(Request::segment(2) == 'teacher') active @endif">
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+              <p>إدارة المعلمين</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
+              <i class="nav-icon fas fa-school"></i>
+              <p>إدارة الفصول</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
+              <i class="nav-icon fas fa-book"></i>
+              <p>إدارة المواد</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/attendance/student') }}" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
+              <i class="nav-icon fas fa-user-check"></i>
+              <p>الحضور والغياب</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/leave/requests') }}" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>طلبات المغادرة</p>
+            </a>
+          </li>
+          @endif
+
+
+          @elseif(Auth::user()->user_type == 3)
 
           <li class="nav-item">
               <a href="{{ url('student/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
@@ -582,7 +643,7 @@
               </p>
             </a>
           </li>
-  
+          <!--قائمة-->
           
 
           <!-- قائمة المغادرة -->

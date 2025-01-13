@@ -191,5 +191,50 @@ class ParentController extends Controller
         return view('parent.my_student',$data);
     }
     
+    // دوال طلبات المغادرة
+    public function addLeave()
+    {
+        $data['header_title'] = "تقديم طلب مغادرة";
+        $data['getStudent'] = User::where('parent_id', Auth::user()->id)
+                                ->where('user_type', 3)
+                                ->where('status', 0)
+                                ->get();
+        return view('parent.leave.add', $data);
+    }
 
+    public function storeLeave(Request $request)
+    {
+        $request->validate([
+            'student_id' => 'required',
+            'type' => 'required',
+            'date' => 'required|date',
+            'time' => 'required',
+            'reason' => 'required'
+        ]);
+
+        $leave = new \App\Models\LeaveRequest;
+        $leave->user_id = $request->student_id;
+        $leave->user_type = 3; // نوع المستخدم طالب
+        $leave->type = $request->type;
+        $leave->date = $request->date;
+        $leave->time = $request->time;
+        $leave->reason = $request->reason;
+        $leave->status = 0; // قيد الانتظار
+        $leave->created_by = Auth::user()->id;
+        $leave->save();
+
+        return redirect('parent/leave/history')->with('success', 'تم تقديم طلب المغادرة بنجاح');
+    }
+
+    public function leaveHistory()
+    {
+        $data['header_title'] = "سجل طلبات المغادرة";
+        $student_ids = User::where('parent_id', Auth::user()->id)
+                          ->where('user_type', 3)
+                          ->where('status', 0)
+                          ->pluck('id');
+                          $data['getRecord'] = \App\Models\LeaveRequest::whereIn('user_id', $student_ids)                            ->orderBy('id', 'desc')
+                            ->get();
+        return view('parent.leave.history', $data);
+    }
 }

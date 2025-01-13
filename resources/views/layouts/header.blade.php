@@ -308,7 +308,12 @@
             </ul>
         </li>
 
-
+        <li class="nav-item @if(Request::segment(2) == 'activities') menu-is-opening menu-open @endif">
+    <a href="{{ url('admin/activities/requests') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
+        <i class="nav-icon fas fa-running"></i>
+        <p> الأنشطة </p>
+    </a>
+</li>
         
         <li class="nav-item  @if(Request::segment(2) == 'leave') menu-is-opening menu-open @endif">
     <a href="{{ url('admin/leave/requests') }}" class="nav-link  @if(Request::segment(2) == 'leave') active @endif">
@@ -450,30 +455,6 @@
           </li>
 
 
-<!-- قائمة المغادرة -->
-<li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
-    <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
-        <i class="nav-icon fas fa-sign-out-alt"></i>
-        <p>
-            طلبات المغادرة
-            <i class="fas fa-angle-left right"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="{{ url('teacher/leave/add') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'add') active @endif">
-                <i class="far fa-circle nav-icon"></i>
-                <p>طلب مغادرة</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ url('teacher/leave/history') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'history') active @endif">
-                <i class="far fa-circle nav-icon"></i>
-                <p>سجل المغادرات</p>
-            </a>
-        </li>
-    </ul>
-</li>
 
 
 
@@ -662,31 +643,7 @@
           <!--قائمة-->
           
 
-          <!-- قائمة المغادرة -->
-          <li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
-            <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                طلبات المغادرة
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('student/leave/add') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'add') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>طلب جديد</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('student/leave/history') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'history') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>سجل الطلبات</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
+         
             
            <li class="nav-item">
             <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
@@ -748,6 +705,32 @@
               </p>
             </a>
           </li>
+
+  <!-- قائمة المغادرة -->
+<li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
+    <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
+        <i class="nav-icon fas fa-sign-out-alt"></i>
+        <p>
+            طلبات المغادرة للأبناء
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ url('parent/leave/add') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'add') active @endif">
+                <i class="far fa-circle nav-icon"></i>
+                <p>تقديم طلب مغادرة</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('parent/leave/history') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'history') active @endif">
+                <i class="far fa-circle nav-icon"></i>
+                <p>سجل طلبات المغادرة</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
 
          <li class="nav-item">
             <a href="{{ url('parent/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">

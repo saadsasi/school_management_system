@@ -102,7 +102,7 @@ class UserController extends Controller
         $id = Auth::user()->id;
         
         request()->validate([
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:usersp,email,'.$id,
             'mobile_number' => 'max:15|min:8',       
             'marital_status' => 'max:50',                                       
         ]);

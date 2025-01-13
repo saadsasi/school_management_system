@@ -18,6 +18,17 @@
   <link rel="stylesheet" href="{{ url('dist/css/adminlte.min.css') }}">
 </head>
 <body class="hold-transition login-page">
+    
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
@@ -69,6 +80,9 @@
 
       <p class="mb-1">
         <a href="{{ url('forgot-password') }}">I forgot my password</a>
+      </p>
+      <p class="mb-1">
+        <a href="{{ url('register') }}">Register a new account</a>
       </p>
     
     </div>

@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        
     ];
 
     /**
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
         'teacher' => \App\Http\Middleware\TeacherMiddleware::class,
         'parent' => \App\Http\Middleware\ParentMiddleware::class,
         'common' => \App\Http\Middleware\CommonMiddleware::class,
+        'userActive' => \App\Http\Middleware\UserActiveMiddleware::class,
         
 
 

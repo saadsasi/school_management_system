@@ -56,7 +56,9 @@ Route::get('forgot-password', [AuthController::class, 'forgotpassword']);
 Route::post('forgot-password', [AuthController::class, 'PostForgotPassword']);
 Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
-
+// Registration Routes
+Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [AuthController::class, 'register']);
 
 
 
@@ -266,13 +268,18 @@ Route::group(['middleware' => 'admin'], function () {
     
     Route::post('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'collect_fees_insert']);
 
+    Route::get('admin/registrations/list', [AdminController::class, 'registrations'])->name('admin.registrations');
+    Route::get('admin/registration/approve/{id}', [AdminController::class, 'approveRegistration'])->name('admin.registration.approve');
+    Route::get('admin/registration/reject/{id}', [AdminController::class, 'rejectRegistration'])->name('admin.registration.reject');
+    
+  
     
 
 
 });
 
 
-Route::group(['middleware' => 'teacher'], function () {
+Route::group(['middleware' => ['teacher','userActive']], function () {
 
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -322,7 +329,7 @@ Route::group(['middleware' => 'teacher'], function () {
 });
 
 
-Route::group(['middleware' => 'student'], function () {
+Route::group(['middleware' => ['student','userActive']], function () {
 
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
     
@@ -376,7 +383,7 @@ Route::group(['middleware' => 'student'], function () {
 });
 
 
-Route::group(['middleware' => 'parent'], function () {
+Route::group(['middleware' => ['parent','userActive']], function () {
 
     Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
 

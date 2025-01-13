@@ -84,6 +84,16 @@ return [
     'update' => 'Update',     
     // Add Admin Page
     'submit' => 'Submit',
+    //register
+    'registration' => 'Registration',
+    'register_title' => 'Register',
+    'register_name' => 'Name',
+    'register_email' => 'Email',
+    'register_password' => 'Password',
+    'register_password_placeholder' => 'Password',
+    'register_password_confirmation' => 'Password Confirmation',
+    'register_password_confirmation_placeholder' => 'Password Confirmation',
+    'register_submit' => 'Register',
 
     // Teacher List Page
     'teacher_list' => 'Teacher List',

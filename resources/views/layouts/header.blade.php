@@ -122,6 +122,15 @@
               </p>
             </a>
           </li>
+        
+          <li class="nav-item">
+            <a href="{{ url('admin/registrations/list') }}" class="nav-link @if(Request::segment(2) == 'registration') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                 {{ __('messages.registration') }}
+              </p>
+            </a>
+          </li>
 
          <li class="nav-item  @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher' || Request::segment(2) == 'class_timetable') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link  @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher' || Request::segment(2) == 'class_timetable') active @endif">
@@ -532,6 +541,13 @@
             <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
               <i class="nav-icon fas fa-book"></i>
               <p>إدارة المواد</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('admin/registrations') }}" class="nav-link @if(Request::segment(2) == 'registrations') active @endif">
+              <i class="nav-icon fas fa-user-check"></i>
+              <p>إدارة التسجيلات</p>
             </a>
           </li>
 

@@ -81,18 +81,22 @@ return [
     'edit_admin' => 'تحرير المشرف',
     'password' => 'كلمة المرور',
     'change_password_note' => 'إذا كنت تريد تغيير كلمة المرور، يرجى إدخال كلمة المرور الجديدة',
-    'no_file_chosen' => 'لم يتم اختيار ملف',
-    'choose_file' => 'اختيار الملف',
-    'update' => 'تحديث',
+    'no_file_chosen' => 'No File Chosen',
+    'choose_file' => 'Choose File',
+    'update' => 'Update',
 
     // Add Admin Page
-    'submit' => 'إرسال',
- 
+    'submit' => 'Submit',
+    //register
+    'register' => 'التسجيل',
+    'first_name' => 'الاسم الاول',
+    'last_name' => 'الاسم الاخير',
+    'register_now' => 'تسجيل',
+    'registration' => 'التسجيل',
     // Teacher List Page
     'teacher_list' => 'قائمة المعلمين',
     'add_new_teacher' => 'إضافة معلم جديد',
     'search_teacher' => 'بحث عن معلم',
-    'last_name' => 'اسم العائلة',
     'gender' => 'الجنس',
     'select_gender' => 'اختر الجنس',
     'male' => 'ذكر',

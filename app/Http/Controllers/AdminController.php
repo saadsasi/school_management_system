@@ -113,5 +113,32 @@ class AdminController extends Controller
     }
     
 
+    public function registrations()
+    {
+        $data['header_title'] = "New Registration Requests";
+        $data['registrations'] = User::where('status', 1) // 1 for inactive
+                                ->whereIn('user_type', [2, 3, 4]) // teacher, student, parent
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        return view('admin.registrations.list', $data);
+    }
+
+    public function approveRegistration($id)
+    {
+        $user = User::findOrFail($id);
+        $user->status = 0; // 0 for active
+        $user->save();
+
+        return redirect()->back()->with('success', 'User registration approved successfully');
+    }
+
+    public function rejectRegistration($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User registration rejected successfully');
+    }
+
     
 }

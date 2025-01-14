@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Account</h1>
+            <h1>{{__('messages.my_account') }}</h1>
           </div>
     
         </div>
@@ -30,14 +30,14 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <label>First Name <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" value="{{ old('name', $getRecord->name) }}" name="name" required placeholder="First Name">
+                      <label>{{__('messages.full_name') }} <span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" value="{{ old('name', $getRecord->name) }}" name="name" required placeholder="{{__('messages.full_name') }}">
                       <div style="color:red">{{ $errors->first('name') }}</div>
                     </div>  
 
                     <div class="form-group col-md-6">
-                      <label>Last Name <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" value="{{ old('last_name', $getRecord->last_name) }}" name="last_name" required placeholder="Last Name">
+                      <label>{{__('messages.last_name') }} <span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" value="{{ old('last_name', $getRecord->last_name) }}" name="last_name" required placeholder="{{__('messages.last_name') }}">
                       <div style="color:red">{{ $errors->first('last_name') }}</div>
                     </div>  
 
@@ -45,18 +45,18 @@
                
 
                     <div class="form-group col-md-6">
-                      <label>Gender <span style="color: red;">*</span></label>
+                      <label>{{__('messages.gender') }} <span style="color: red;">*</span></label>
                       <select class="form-control" required name="gender">
-                          <option value="">Select Gender</option>
-                          <option {{ (old('gender', $getRecord->gender) == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                          <option {{ (old('gender', $getRecord->gender) == 'Female') ? 'selected' : '' }} value="Female">Female</option>
+                          <option value="">{{__('messages.select_gender') }}</option>
+                          <option {{ (old('gender', $getRecord->gender) == 'Male') ? 'selected' : '' }} value="Male">{{__('messages.male') }}</option>
+                          <option {{ (old('gender', $getRecord->gender) == 'Female') ? 'selected' : '' }} value="Female">{{__('messages.female') }}</option>
                       </select>
                       <div style="color:red">{{ $errors->first('gender') }}</div>
                     </div>  
 
 
                      <div class="form-group col-md-6">
-                      <label>Date of Birth <span style="color: red;">*</span></label>
+                      <label>{{__('messages.date_of_birth') }} <span style="color: red;">*</span></label>
                       <input type="date" class="form-control" required value="{{ old('date_of_birth', $getRecord->date_of_birth) }}" name="date_of_birth" >
                       <div style="color:red">{{ $errors->first('date_of_birth') }}</div>
                     </div>  
@@ -64,14 +64,14 @@
                  
 
                     <div class="form-group col-md-6">
-                      <label>Mobile Number <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" value="{{ old('mobile_number', $getRecord->mobile_number) }}" name="mobile_number"  placeholder="Mobile Number">
+                      <label>{{__('messages.mobile_number') }} <span style="color: red;"></span></label>
+                      <input type="text" class="form-control" value="{{ old('mobile_number', $getRecord->mobile_number) }}" name="mobile_number"  placeholder="{{__('messages.mobile_number') }}">
                       <div style="color:red">{{ $errors->first('mobile_number') }}</div>
                     </div> 
 
                     <div class="form-group col-md-6">
-                      <label>Marital Status  <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" value="{{ old('marital_status', $getRecord->marital_status) }}" name="marital_status"  placeholder="Marital Status">
+                      <label>{{__('messages.marital_status') }}  <span style="color: red;"></span></label>
+                      <input type="text" class="form-control" value="{{ old('marital_status', $getRecord->marital_status) }}" name="marital_status"  placeholder="{{__('messages.marital_status') }}">
                       <div style="color:red">{{ $errors->first('marital_status') }}</div>
                     </div> 
 
@@ -80,7 +80,7 @@
                  
 
                     <div class="form-group col-md-6">
-                      <label>Profile Pic <span style="color: red;"></span></label>
+                      <label>{{__('messages.profile_pic') }} <span style="color: red;"></span></label>
                       <input type="file" class="form-control" name="profile_pic" >
                       <div style="color:red">{{ $errors->first('profile_pic') }}</div>
                         @if(!empty($getRecord->getProfile()))
@@ -89,26 +89,26 @@
                     </div> 
 
                      <div class="form-group col-md-6">
-                      <label>Current Address  <span style="color: red;">*</span></label>
+                      <label>{{__('messages.current_address') }}  <span style="color: red;">*</span></label>
                       <textarea class="form-control" name="address" required>{{ old('address', $getRecord->address) }}</textarea>
                       <div style="color:red">{{ $errors->first('address') }}</div>
                     </div> 
 
                     <div class="form-group col-md-6">
-                      <label>Permanent Address  <span style="color: red;"></span></label>
+                      <label>{{__('messages.permanent_address') }}  <span style="color: red;"></span></label>
                       <textarea class="form-control" name="permanent_address" >{{ old('permanent_address', $getRecord->permanent_address) }}</textarea>
                       <div style="color:red">{{ $errors->first('permanent_address') }}</div>
                     </div> 
 
 
                     <div class="form-group col-md-6">
-                      <label>Qualification  <span style="color: red;"></span></label>
+                      <label>{{__('messages.qualification') }}  <span style="color: red;"></span></label>
                       <textarea class="form-control" name="qualification" >{{ old('qualification', $getRecord->qualification) }}</textarea>
                       <div style="color:red">{{ $errors->first('qualification') }}</div>
                     </div> 
 
                     <div class="form-group col-md-6">
-                      <label>Work Experience  <span style="color: red;"></span></label>
+                      <label>{{__('messages.work_experience') }}  <span style="color: red;"></span></label>
                       <textarea class="form-control" name="work_experience" >{{ old('work_experience', $getRecord->work_experience) }}</textarea>
                       <div style="color:red">{{ $errors->first('work_experience') }}</div>
                     </div> 
@@ -122,8 +122,8 @@
 
                   
                   <div class="form-group">
-                    <label>Email <span style="color: red;">*</span></label>
-                    <input type="email" class="form-control" name="email" value="{{ old('email', $getRecord->email) }}" required placeholder="Email">
+                    <label>{{__('messages.email') }} <span style="color: red;">*</span></label>
+                    <input type="email" class="form-control" name="email" value="{{ old('email', $getRecord->email) }}" required placeholder="{{__('messages.email') }}">
                     <div style="color:red">{{ $errors->first('email') }}</div>
                   </div>
                 
@@ -132,7 +132,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
                 </div>
               </form>
             </div>

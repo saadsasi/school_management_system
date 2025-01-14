@@ -10,7 +10,7 @@
 
                 @if(!empty($value->getFile()))
                 <div>
-                    <a href="{{ $value->getFile() }}" download="" target="_blank">Attachment</a>
+                    <a href="{{ $value->getFile() }}" download="" target="_blank">{{ __('messages.attachment') }}</a>
                 </div>
                 @endif
 
@@ -28,7 +28,7 @@
                 
                 @if(!empty($value->getFile()))
                 <div>
-                    <a href="{{ $value->getFile() }}" download="" target="_blank">Attachment</a>
+                    <a href="{{ $value->getFile() }}" download="" target="_blank">{{ __('messages.attachment') }}</a>
                 </div>
                 @endif
             </div>

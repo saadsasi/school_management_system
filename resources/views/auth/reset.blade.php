@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reset Password</title>
+  <title>{{ __('messages.reset_password') }}</title>
    @php
     $getHeaderSetting = App\Models\SettingModel::getSingle();
   @endphp
@@ -23,7 +23,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>Reset Password</b></a>
+      <a href="" class="h1"><b>{{ __('messages.reset_password') }}</b></a>
     </div>
     <div class="card-body">
      
@@ -32,7 +32,7 @@
       <form action="" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="password" class="form-control" required  name="password" placeholder="Password">
+          <input type="password" class="form-control" required  name="password" placeholder="{{ __('messages.password') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -41,7 +41,7 @@
         </div>
 
          <div class="input-group mb-3">
-          <input type="password" class="form-control" required  name="cpassword" placeholder="Confrim Password">
+          <input type="password" class="form-control" required  name="cpassword" placeholder="{{ __('messages.confrim_password') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -52,7 +52,7 @@
         <div class="row">
           
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Reset</button>
+            <button type="submit" class="btn btn-primary btn-block">{{ __('messages.reset') }}</button>
           </div>
           
         </div>
@@ -63,7 +63,7 @@
 
       <p class="mb-1">
         <br />
-        <a href="{{ url('') }}">Login</a>
+        <a href="{{ url('') }}">{{ __('messages.login') }}</a>
       </p>
     
     </div>

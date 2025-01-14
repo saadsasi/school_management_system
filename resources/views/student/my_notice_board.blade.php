@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>My Notice Board</h1>
+            <h1>{{ __('messages.my_notice_board') }}</h1>
           </div>         
         </div>
       </div>
@@ -21,7 +21,7 @@
 
            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Notice Board</h3>
+                <h3 class="card-title">{{ __('messages.search_notice_board') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -29,22 +29,22 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>Title</label>
-                    <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="Title">
+                    <label>{{ __('messages.title') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="{{ __('messages.title') }}">
                   </div>
                   <div class="form-group col-md-3">
-                    <label>Notice Date From</label>
+                    <label>{{ __('messages.notice_date_from') }}</label>
                     <input type="date" class="form-control" name="notice_date_from" value="{{ Request::get('notice_date_from') }}"  >
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>Notice Date To</label>
+                    <label>{{ __('messages.notice_date_to') }}</label>
                     <input type="date" class="form-control" name="notice_date_to" value="{{ Request::get('notice_date_to') }}"  >
                   </div>
                   <div class="form-group col-md-3">
 
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('student/my_notice_board') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('student/my_notice_board') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 

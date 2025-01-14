@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Notice Board</h1>
+            <h1>{{ __('messages.edit_notice_board') }}</h1>
           </div>
     
         </div>
@@ -24,18 +24,18 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Title</label>
+                    <label>{{ __('messages.title') }}</label>
                     <input type="text" class="form-control" name="title" value="{{ $getRecord->title }}" required placeholder="Title">
                   </div>
 
 
                   <div class="form-group">
-                    <label>Notice Date</label>
+                    <label>{{ __('messages.notice_date') }}</label>
                     <input type="date" class="form-control" value="{{ $getRecord->notice_date }}" name="notice_date" required>
                   </div>
 
                   <div class="form-group">
-                    <label>Publish Date</label>
+                    <label>{{ __('messages.publish_date') }}</label>
                     <input type="date" class="form-control" value="{{ $getRecord->publish_date }}" name="publish_date" required>
                   </div>
 
@@ -47,21 +47,21 @@
                   @endphp
 
                   <div class="form-group">
-                    <label style="display: block;">Message To </label>
+                    <label style="display: block;">{{ __('messages.message_to') }} </label>
                     <label style="margin-right: 50px;">
-                        <input {{ !empty($message_to_student) ? 'checked' : '' }} type="checkbox" value="3" name="message_to[]"> Student
+                        <input {{ !empty($message_to_student) ? 'checked' : '' }} type="checkbox" value="3" name="message_to[]"> {{ __('messages.student') }}
                     </label>
                     <label style="margin-right: 50px;">
-                      <input {{ !empty($message_to_parent) ? 'checked' : '' }} type="checkbox" value="4" name="message_to[]"> Parent
+                      <input {{ !empty($message_to_parent) ? 'checked' : '' }} type="checkbox" value="4" name="message_to[]"> {{ __('messages.parent') }}
                     </label>
                     <label>
-                      <input {{ !empty($message_to_teacher) ? 'checked' : '' }} type="checkbox" value="2" name="message_to[]"> Teacher
+                      <input {{ !empty($message_to_teacher) ? 'checked' : '' }} type="checkbox" value="2" name="message_to[]"> {{ __('messages.teacher') }}
                     </label>
                   </div>
 
 
                   <div class="form-group">
-                    <label>Message</label>
+                    <label>{{ __('messages.message') }}</label>
                     <textarea id="compose-textarea" name="message" class="form-control" style="height: 300px">{{ $getRecord->message }}</textarea>
                   </div>
 
@@ -70,7 +70,7 @@
                 
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
                 </div>
               </form>
             </div>

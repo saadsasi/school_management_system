@@ -10,10 +10,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Assign Class Teacher ({{ $getRecord->total() }})</h1>
+            <h1>{{ __('messages.assign_class_teacher') }} ({{ $getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/assign_class_teacher/add') }}" class="btn btn-primary">Add New Assign Class Teacher</a>
+              <a href="{{ url('admin/assign_class_teacher/add') }}" class="btn btn-primary">{{ __('messages.add_new_assign_class_teacher') }}</a>
           </div>
 
          
@@ -38,7 +38,7 @@
 
              <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Assign Class Teacher</h3>
+                <h3 class="card-title">{{ __('messages.search_assign_class_teacher') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -46,34 +46,34 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>Class Name</label>
+                    <label>{{ __('messages.class_name') }}</label>
                     <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name"  placeholder="Class Name">
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>Teacher Name</label>
+                    <label>{{ __('messages.teacher_name') }}</label>
                     <input type="text" class="form-control" value="{{ Request::get('teacher_name') }}" name="teacher_name"  placeholder="Teacher Name">
                   </div>
 
 
                   <div class="form-group col-md-2">
-                    <label>Status</label>
+                    <label>{{ __('messages.status') }}</label>
                     <select class="form-control" name="status">
                         <option value="">Select</option>
-                        <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">Active</option>
-                        <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">Inactive</option>
+                        <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">{{ __('messages.active') }}</option>
+                        <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">{{ __('messages.inactive') }}</option>
                     </select>
                   </div>
                  
                  
                   <div class="form-group col-md-2">
-                    <label>Date</label>
+                    <label>{{ __('messages.date') }}</label>
                     <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}" >
                   </div>
 
                   <div class="form-group col-md-2">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/assign_class_teacher/list') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/assign_class_teacher/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -90,7 +90,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Assign Class Teacher List</h3>
+                <h3 class="card-title">{{ __('messages.assign_class_teacher_list') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -98,12 +98,12 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Class Name</th>
-                      <th>Teacher Name</th>
-                      <th>Status</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.class_name') }}</th>
+                      <th>{{ __('messages.teacher_name') }}</th>
+                      <th>{{ __('messages.status') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -114,19 +114,19 @@
                           <td>{{ $value->teacher_name }} {{ $value->teacher_last_name }}</td>
                           <td>
                             @if($value->status == 0)
-                              Active
+                              {{ __('messages.active') }}
                             @else
-                              Inactive
+                              {{ __('messages.inactive') }}
                             @endif
                           </td>
                           <td>{{ $value->created_by_name }}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
-                               <a href="{{ url('admin/assign_class_teacher/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
+                               <a href="{{ url('admin/assign_class_teacher/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
 
-                               <a href="{{ url('admin/assign_class_teacher/edit_single/'.$value->id) }}" class="btn btn-primary">Edit Single</a>
+                               <a href="{{ url('admin/assign_class_teacher/edit_single/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit_single') }}</a>
 
-                                <a href="{{ url('admin/assign_class_teacher/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('admin/assign_class_teacher/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
 
                           </td>
                         </tr>

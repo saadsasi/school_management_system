@@ -10,10 +10,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Assign Subject List</h1>
+            <h1>{{ __('messages.assign_subject_list') }}</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/assign_subject/add') }}" class="btn btn-primary">Add New Assign Subject</a>
+              <a href="{{ url('admin/assign_subject/add') }}" class="btn btn-primary">{{ __('messages.add_new_assign_subject') }}</a>
           </div>
 
          
@@ -39,7 +39,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Assign Subject</h3>
+                <h3 class="card-title">{{ __('messages.search_assign_subject') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -47,19 +47,19 @@
                     
                   
                   <div class="form-group col-md-4">
-                    <label>Class Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name"  placeholder="Class Name">
+                    <label>{{ __('messages.class_name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name"  placeholder="{{ __('messages.class_name') }}">
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label>Subject Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('subject_name') }}" name="subject_name"  placeholder="Subject Name">
+                    <label>{{ __('messages.subject_name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('subject_name') }}" name="subject_name"  placeholder="{{ __('messages.subject_name') }}">
                   </div>
                  
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/assign_subject/list') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/assign_subject/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -76,7 +76,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Assign Subject List</h3>
+                <h3 class="card-title">{{ __('messages.assign_subject_list') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -84,12 +84,12 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Class Name</th>
-                      <th>Subject Name</th>
-                      <th>Status</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.class_name') }}</th>
+                      <th>{{ __('messages.subject_name') }}</th>
+                      <th>{{ __('messages.status') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -100,17 +100,17 @@
                           <td>{{ $value->subject_name }}</td>
                           <td>
                             @if($value->status == 0)
-                              Active
+                            {{ __('messages.active') }}
                             @else
-                              Inactive
+                            {{ __('messages.inactive') }}
                             @endif
                           </td>
                           <td>{{ $value->created_by_name }}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
-                             <a href="{{ url('admin/assign_subject/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
-                             <a href="{{ url('admin/assign_subject/edit_single/'.$value->id) }}" class="btn btn-primary">Edit Single</a>
-                            <a href="{{ url('admin/assign_subject/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                             <a href="{{ url('admin/assign_subject/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
+                             <a href="{{ url('admin/assign_subject/edit_single/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit_single') }}</a>
+                            <a href="{{ url('admin/assign_subject/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
 
                           </td>
                         </tr>

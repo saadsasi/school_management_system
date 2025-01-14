@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Student List</h1>
+            <h1>{{__('messages.my_student_list')}}</h1>
           </div>
           
         </div>
@@ -42,7 +42,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">My Student List</h3>
+                <h3 class="card-title">{{__('messages.my_student_list')}}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0" style="overflow: auto;">
@@ -50,20 +50,20 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Profile Pic</th>
-                      <th>Student Name</th>
-                      <th>Email</th>
-                      <th>Admission Number</th>
-                      <th>Roll Number</th>
-                      <th>Class</th>
-                      <th>Gender</th>
-                      <th>Date of Birth </th>
-                      <th>Mobile Number</th>
-                      <th>Admission Date</th>
-                      <th>Blood Group</th>
-                      <th>Height</th>
-                      <th>Weight</th>
-                      <th>Created Date</th>
+                      <th>{{__('messages.profile_pic')}}</th>
+                      <th>{{__('messages.name')}}</th>
+                      <th>{{__('messages.email')}}</th>
+                      <th>{{__('messages.admission_number')}}</th>
+                      <th>{{__('messages.roll_number')}}</th>
+                      <th>{{__('messages.class')}}</th>
+                      <th>{{__('messages.gender')}}</th>
+                      <th>{{__('messages.dob')}}</th>
+                      <th>{{__('messages.mobile_number')}}</th>
+                      <th>{{__('messages.admission_date')}}</th>
+                      <th>{{__('messages.blood_group')}}</th>
+                      <th>{{__('messages.height')}}</th>
+                      <th>{{__('messages.weight')}}</th>
+                      <th>{{__('messages.created_date')}}</th>
                     </tr>
                   </thead>
                   <tbody>

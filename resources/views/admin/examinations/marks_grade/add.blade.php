@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Marks Grade</h1>
+            <h1>{{ __('messages.add_marks_grade') }}</h1>
           </div>
     
         </div>
@@ -26,20 +26,20 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Grade Name</label>
-                    <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="Grade Name">
+                    <label>{{ __('messages.grade_name') }}</label>
+                    <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="{{ __('messages.grade_name') }}">
                   </div>
                   
 
                   <div class="form-group">
-                    <label>Percent From</label>
-                    <input type="number" class="form-control" value="{{ old('percent_from') }}" name="percent_from" required placeholder="">
+                    <label>{{ __('messages.percent_from') }}</label>
+                    <input type="number" class="form-control" value="{{ old('percent_from') }}" name="percent_from" required placeholder="{{ __('messages.percent_from') }}">
                   </div>
 
 
                   <div class="form-group">
-                    <label>Percent To</label>
-                    <input type="number" class="form-control" value="{{ old('percent_to') }}" name="percent_to" required placeholder="">
+                    <label>{{ __('messages.percent_to') }}</label>
+                    <input type="number" class="form-control" value="{{ old('percent_to') }}" name="percent_to" required placeholder="{{ __('messages.percent_to') }}">
                   </div>
                  
                
@@ -48,7 +48,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.submit') }}</button>
                 </div>
               </form>
             </div>

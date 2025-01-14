@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Forgot Password</title>
+  <title>{{ __('messages.forgot_password') }}</title>
    @php
     $getHeaderSetting = App\Models\SettingModel::getSingle();
   @endphp
@@ -23,7 +23,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="" class="h1"><b>Forgot Password</b></a>
+      <a href="" class="h1"><b>{{ __('messages.forgot_password') }}</b></a>
     </div>
     <div class="card-body">
      
@@ -32,7 +32,7 @@
       <form action="" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="email" class="form-control" required  name="email" placeholder="Email">
+          <input type="email" class="form-control" required  name="email" placeholder="{{ __('messages.email') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -43,7 +43,7 @@
         <div class="row">
           
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Forgot</button>
+            <button type="submit" class="btn btn-primary btn-block">{{ __('messages.forgot') }}</button>
           </div>
           
         </div>
@@ -54,7 +54,7 @@
 
       <p class="mb-1">
         <br />
-        <a href="{{ url('') }}">Login</a>
+        <a href="{{ url('') }}">{{ __('messages.login') }}</a>
       </p>
     
     </div>

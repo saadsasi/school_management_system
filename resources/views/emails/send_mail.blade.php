@@ -1,8 +1,8 @@
 @component('mail::message')
-Hello {{$user->name}},
+{{__('messages.hello')}} {{$user->name}},
 
 {!! $user->send_message !!}
 
-Thanks,<br>
+{{__('messages.thanks')}},<br>
 {{ config('app.name') }}
 @endcomponent

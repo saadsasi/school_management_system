@@ -10,10 +10,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Exam List (Total : {{ $getRecord->total() }})</h1>
+            <h1>{{ __('messages.exam_list') }} (Total : {{ $getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/examinations/exam/add') }}" class="btn btn-primary">Add New Exam</a>
+              <a href="{{ url('admin/examinations/exam/add') }}" class="btn btn-primary">{{ __('messages.add_new_exam') }}</a>
           </div>
 
          
@@ -39,7 +39,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Exam</h3>
+                <h3 class="card-title">{{ __('messages.search_exam') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -47,18 +47,18 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>Exam Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Exam Name">
+                    <label>{{ __('messages.exam_name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="{{ __('messages.exam_name') }}">
                   </div>
           
                     <div class="form-group col-md-3">
-                    <label>Date</label>
-                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}"  placeholder="Date">
+                    <label>{{ __('messages.date') }}</label>
+                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}"  placeholder="{{ __('messages.date') }}">
                   </div>
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/examinations/exam/list') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/examinations/exam/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -75,7 +75,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Exam List</h3>
+                <h3 class="card-title">{{ __('messages.exam_list') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -83,11 +83,11 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Exam Name</th>
-                      <th>Note</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.exam_name') }}</th>
+                      <th>{{ __('messages.note') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -99,8 +99,8 @@
                           <td>{{ $value->created_name }}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
-                            <a href="{{ url('admin/examinations/exam/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
-                            <a href="{{ url('admin/examinations/exam/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                            <a href="{{ url('admin/examinations/exam/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
+                            <a href="{{ url('admin/examinations/exam/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
                           </td>
                         </tr>
                       @endforeach

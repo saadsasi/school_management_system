@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Exam</h1>
+            <h1>{{ __('messages.add_new_exam') }}</h1>
           </div>
     
         </div>
@@ -26,12 +26,12 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Exam Name</label>
-                    <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="Exam Name">
+                    <label>{{ __('messages.exam_name') }}</label>
+                    <input type="text" class="form-control" value="{{ old('name') }}" name="name" required placeholder="{{ __('messages.exam_name') }}">
                   </div>
                   <div class="form-group">
-                    <label>Note</label>
-                    <textarea class="form-control" name="note" placeholder="Note"></textarea>
+                    <label>{{ __('messages.note') }}</label>
+                    <textarea class="form-control" name="note" placeholder="{{ __('messages.note') }}"></textarea>
                   </div>
                  
                
@@ -40,7 +40,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.submit') }}</button>
                 </div>
               </form>
             </div>

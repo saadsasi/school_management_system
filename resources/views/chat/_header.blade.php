@@ -7,9 +7,9 @@
             <h6 style="margin-bottom: 0px;" class="m-b-0">{{ $getReceiver->name }} {{ $getReceiver->last_name }}</h6>
             <small>
                 @if(!empty($getReceiver->OnlineUer()))
-                    <span style="color: green;">Online</span>
+                    <span style="color: green;">{{__('messages.online')}}</span>
                 @else
-                    Last seen: {{ Carbon\Carbon::parse($getReceiver->updated_at)->diffForHumans() }}
+                    {{__('messages.last_seen')}}: {{ Carbon\Carbon::parse($getReceiver->updated_at)->diffForHumans() }}
                 @endif
                 
      

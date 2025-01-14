@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Subject</h1>
+            <h1>{{ __('messages.add_subject') }}</h1>
           </div>
     
         </div>
@@ -26,26 +26,26 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Subject Name</label>
-                    <input type="text" class="form-control" name="name" required placeholder="Subject Name">
+                    <label>{{ __('messages.subject_name') }}</label>
+                    <input type="text" class="form-control" name="name" required placeholder="{{ __('messages.subject_name') }}">
                   </div>
 
 
                  <div class="form-group">
-                    <label>Subject Type</label>
+                    <label>{{ __('messages.subject_type') }}</label>
                     <select class="form-control" name="type" required>
-                    	<option value="">Select Type</option>
-                      	 <option value="Theory">Theory</option>
-                        <option value="Practical">Practical</option>
+                    	<option value="">{{ __('messages.select_type') }}</option>
+                      	 <option value="Theory">{{ __('messages.theory') }}</option>
+                        <option value="Practical">{{ __('messages.practical') }}</option>
                     </select>
                     
                   </div>
 
                   <div class="form-group">
-                    <label>Status</label>
+                    <label>{{ __('messages.status') }}</label>
                     <select class="form-control" name="status">
-                        <option value="0">Active</option>
-                        <option value="1">Inactive</option>
+                        <option value="0">{{ __('messages.active') }}</option>
+                        <option value="1">{{ __('messages.inactive') }}</option>
                     </select>
                     
                   </div>
@@ -55,7 +55,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.submit') }}</button>
                 </div>
               </form>
             </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Stripe Checkout</title>
+	<title>{{__('messages.stripe_checkout')}}</title>
 </head>
 <body>
 <script src="https://js.stripe.com/v3"></script>

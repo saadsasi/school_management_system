@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Class Timetable ({{ $getClass->name }} - {{ $getSubject->name }}) <span style="color:blue">( {{ $getStudent->name }}  {{ $getStudent->last_name }} )</span></h1>
+            <h1>{{ __('messages.my_timetable') }} ({{ $getClass->name }} - {{ $getSubject->name }}) <span style="color:blue">( {{ $getStudent->name }}  {{ $getStudent->last_name }} )</span></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -34,10 +34,10 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Week</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
-                      <th>Room Number</th>
+                      <th>{{ __('messages.week') }}</th>
+                      <th>{{ __('messages.start_time') }}</th>
+                      <th>{{ __('messages.end_time') }}</th>
+                      <th>{{ __('messages.room_number') }}</th>
                     </tr>
                   </thead>
                   <tbody>

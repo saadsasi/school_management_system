@@ -21,7 +21,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">سجل طلبات المغادرة</h3>
+                            <h3 class="card-title">{{ __('messages.leave_history') }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -29,12 +29,12 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>النوع</th>
-                                        <th>التاريخ</th>
-                                        <th>الوقت</th>
-                                        <th>السبب</th>
-                                        <th>الحالة</th>
-                                        <th>تاريخ الإنشاء</th>
+                                        <th>{{ __('messages.type') }}</th>
+                                        <th>{{ __('messages.date') }}</th>
+                                        <th>{{ __('messages.time') }}</th>
+                                        <th>{{ __('messages.reason') }}</th>
+                                        <th>{{ __('messages.status') }}</th>
+                                        <th>{{ __('messages.created_date') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,11 +44,11 @@
                                                 <td>{{ $value->id }}</td>
                                                 <td>
                                                     @if($value->type == 'early_leave')
-                                                        مغادرة مبكرة
+                                                        {{ __('messages.early_leave') }}
                                                     @elseif($value->type == 'end_day_leave')
-                                                        نهاية الدوام
+                                                        {{ __('messages.end_day_leave') }}
                                                     @elseif($value->type == 'full_day_leave')
-                                                        يوم كامل
+                                                        {{ __('messages.full_day_leave') }}
                                                     @endif
                                                 </td>
                                                 <td>{{ date('d-m-Y', strtotime($value->date)) }}</td>
@@ -56,11 +56,11 @@
                                                 <td>{{ $value->reason }}</td>
                                                 <td>
                                                     @if($value->status == 0)
-                                                        <span class="badge badge-warning">قيد الانتظار</span>
+                                                        <span class="badge badge-warning">{{ __('messages.pending') }}</span>
                                                     @elseif($value->status == 1)
-                                                        <span class="badge badge-success">تمت الموافقة</span>
+                                                        <span class="badge badge-success">{{ __('messages.approved') }}</span>
                                                     @elseif($value->status == 2)
-                                                        <span class="badge badge-danger">مرفوض</span>
+                                                        <span class="badge badge-danger">{{ __('messages.rejected') }}</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>

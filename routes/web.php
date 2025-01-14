@@ -400,12 +400,11 @@ Route::group(['middleware' => ['parent','userActive']], function () {
 
     
     // مسارات طلبات المغادرة لولي الأمر
-    Route::get('parent/leave/add/{student_id}', [LeaveController::class, 'addParent']);
-    Route::post('parent/leave/add/{student_id}', [LeaveController::class, 'insertParent']);
-    Route::get('parent/leave/history/{student_id}', [LeaveController::class, 'historyParent']);
-
-    Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'MyCalendarParent']);
-
+  
+    // Parent Leave Routes
+    Route::get('parent/leave/add', [ParentController::class, 'addLeave']);
+    Route::post('parent/leave/add', [ParentController::class, 'storeLeave']);
+    Route::get('parent/leave/history', [ParentController::class, 'leaveHistory']);
 
 
 

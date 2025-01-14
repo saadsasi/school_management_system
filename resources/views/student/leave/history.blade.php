@@ -19,18 +19,18 @@
                     @include('_message')
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">سجل طلبات المغادرة</h3>
+                            <h3 class="card-title">{{ __('messages.leave_history') }}</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>التاريخ</th>
-                                        <th>الوقت</th>
-                                        <th>النوع</th>
-                                        <th>السبب</th>
-                                        <th>الحالة</th>
-                                        <th>تاريخ الطلب</th>
+                                        <th>{{ __('messages.date') }}</th>
+                                        <th>{{ __('messages.time') }}</th>
+                                        <th>{{ __('messages.type') }}</th>
+                                        <th>{{ __('messages.reason') }}</th>
+                                        <th>{{ __('messages.status') }}</th>
+                                        <th>{{ __('messages.request_date') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,26 +40,26 @@
                                             <td>{{ date('h:i A', strtotime($value->time)) }}</td>
                                             <td>
     @if($value->type == \App\Http\Controllers\LeaveController::LEAVE_TYPE_EARLY)
-        <span class="badge badge-info">مغادرة مبكرة</span>
+        <span class="badge badge-info">{{ __('messages.early_leave') }}</span>
     @elseif($value->type == \App\Http\Controllers\LeaveController::LEAVE_TYPE_END_DAY)
-        <span class="badge badge-warning">نهاية الدوام</span>
+        <span class="badge badge-warning">{{ __('messages.end_day') }}</span>
     @endif
 </td>
                                             <td>{{ $value->reason }}</td>
                                             <td>
                                                 @if($value->status == 0)
-                                                    <span class="badge badge-warning">قيد الانتظار</span>
+                                                    <span class="badge badge-warning">{{ __('messages.pending') }}</span>
                                                 @elseif($value->status == 1)
-                                                    <span class="badge badge-success">تمت الموافقة</span>
+                                                    <span class="badge badge-success">{{ __('messages.approved') }}</span>
                                                 @else
-                                                    <span class="badge badge-danger">مرفوض</span>
+                                                    <span class="badge badge-danger">{{ __('messages.rejected') }}</span>
                                                 @endif
                                             </td>
                                             <td>{{ date('d/m/Y h:i A', strtotime($value->created_at)) }}</td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">لا توجد طلبات مغادرة</td>
+                                            <td colspan="6" class="text-center">{{ __('messages.no_record_found') }}</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

@@ -9,10 +9,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Collect Fees <span style="color: blue;">({{ $getStudent->name }} {{ $getStudent->last_name }})</span></h1>
+            <h1>{{ __('messages.Collect_Fees') }} <span style="color: blue;">({{ $getStudent->name }} {{ $getStudent->last_name }})</span></h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-            <button type="button" class="btn btn-primary" id="AddFees">Add Fees</button>
+            <button type="button" class="btn btn-primary" id="AddFees">{{ __('messages.add_fees') }}</button>
           </div>              
         </div>
       </div>
@@ -25,21 +25,21 @@
              @include('_message')          
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Payment Detail</h3>
+                <h3 class="card-title">{{ __('messages.payment_detail') }}</h3>
               </div>
               
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Class Name</th>
-                      <th>Total Amount</th>
-                      <th>Paid Amount</th>
-                      <th>Remaning Amount</th>
-                      <th>Payment Type</th>
-                      <th>Remark</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
+                      <th>{{ __('messages.class_name') }}</th>
+                      <th>{{ __('messages.total_amount') }}</th>
+                      <th>{{ __('messages.paid_amount') }}</th>
+                      <th>{{ __('messages.remaning_amount') }}</th>
+                      <th>{{ __('messages.payment_type') }}</th>
+                      <th>{{ __('messages.remark') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -56,7 +56,7 @@
                       </tr>
                      @empty
                       <tr>
-                        <td colspan="100%">Record not found.</td>
+                        <td colspan="100%">{{ __('messages.record_not_found') }}</td>
                       </tr>
                      @endforelse
                   </tbody>
@@ -81,7 +81,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Fees</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ __('messages.add_fees') }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -91,49 +91,49 @@
       <div class="modal-body">
 
           <div class="form-group">
-            <label class="col-form-label">Class Name : {{ $getStudent->class_name }}</label>
+            <label class="col-form-label">{{ __('messages.class_name') }} : {{ $getStudent->class_name }}</label>
           </div>
 
 
 
           <div class="form-group">
-            <label class="col-form-label">Total Amount : ${{ number_format($getStudent->amount, 2) }}</label>            
+            <label class="col-form-label">{{ __('messages.total_amount') }} : ${{ number_format($getStudent->amount, 2) }}</label>            
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">Paid Amount : ${{ number_format($paid_amount, 2) }}</label>            
+            <label class="col-form-label">{{ __('messages.paid_amount') }} : ${{ number_format($paid_amount, 2) }}</label>            
           </div>
 
           <div class="form-group">
             @php
               $RemaningAmount = $getStudent->amount - $paid_amount;
             @endphp
-            <label class="col-form-label">Remaning Amount : ${{ number_format($RemaningAmount, 2) }}</label>            
+            <label class="col-form-label">{{ __('messages.remaning_amount') }} : ${{ number_format($RemaningAmount, 2) }}</label>            
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">Amount <span style="color:red;">*</span></label>
+            <label class="col-form-label">{{ __('messages.amount') }} <span style="color:red;">*</span></label>
             <input type="number" class="form-control" name="amount">
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">Payment Type <span style="color:red;">*</span></label>
+            <label class="col-form-label">{{ __('messages.payment_type') }} <span style="color:red;">*</span></label>
             <select class="form-control" name="payment_type" required>
-                  <option value="">Select</option>
-                  <option value="Cash">Cash</option>
-                  <option value="Cheque">Cheque</option>
+                  <option value="">{{ __('messages.select') }}</option>
+                  <option value="Cash">{{ __('messages.cash') }}</option>
+                  <option value="Cheque">{{ __('messages.cheque') }}</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">Remark </label>
+            <label class="col-form-label">{{ __('messages.remark') }} </label>
             <textarea class="form-control" name="remark" ></textarea>
           </div>
        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.close') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.submit') }}</button>
       </div>
        </form>
     </div>

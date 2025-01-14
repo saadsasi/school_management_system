@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Exam</h1>
+            <h1>{{ __('messages.edit_exam') }}</h1>
           </div>
     
         </div>
@@ -26,12 +26,12 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Exam Name</label>
-                    <input type="text" class="form-control" value="{{ $getRecord->name }}" name="name" required placeholder="Exam Name">
+                    <label>{{ __('messages.exam_name') }}</label>
+                    <input type="text" class="form-control" value="{{ $getRecord->name }}" name="name" required placeholder="{{ __('messages.exam_name') }}">
                   </div>
                   <div class="form-group">
-                    <label>Note</label>
-                    <textarea class="form-control" name="note" placeholder="Note">{{ $getRecord->note }}</textarea>
+                    <label>{{ __('messages.note') }}</label>
+                    <textarea class="form-control" name="note" placeholder="{{ __('messages.note') }}">{{ $getRecord->note }}</textarea>
                   </div>
                  
                
@@ -40,7 +40,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
                 </div>
               </form>
             </div>

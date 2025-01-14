@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">{{ __('messages.dashboard') }}</h1>
           </div>
         </div>
       </div>
@@ -26,12 +26,12 @@
               <div class="inner">
                 <h3>{{ $TotalStudent }}</h3>
 
-                <p>Total Student</p>
+                <p>{{ __('messages.total_student') }}</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="{{ url('teacher/my_student') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('teacher/my_student') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -42,12 +42,12 @@
               <div class="inner">
                 <h3>{{ $TotalClass }}</h3>
 
-                <p>Total Class</p>
+                <p>{{ __('messages.total_class') }}</p>
               </div>
               <div class="icon">
                 <i class="nav-icon fas fa-table"></i>
               </div>
-              <a href="{{ url('teacher/my_class_subject') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('teacher/my_class_subject') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -57,12 +57,12 @@
               <div class="inner">
                 <h3>{{ $TotalSubject }}</h3>
 
-                <p>Total Subject</p>
+                <p>{{ __('messages.total_subject') }}</p>
               </div>
               <div class="icon">
                 <i class="nav-icon fas fa-table"></i>
               </div>
-              <a href="{{ url('teacher/my_class_subject') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('teacher/my_class_subject') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -73,12 +73,12 @@
               <div class="inner">
                 <h3>{{ $TotalNoticeBoard }}</h3>
 
-                <p>Total Notice Board</p>
+                <p>{{ __('messages.total_notice_board') }}</p>
               </div>
               <div class="icon">
                 <i class="nav-icon fas fa-table"></i>
               </div>
-              <a href="{{ url('teacher/my_notice_board') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('teacher/my_notice_board') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
          

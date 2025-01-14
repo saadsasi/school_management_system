@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Subject</h1>
+            <h1>{{__('messages.my_subject')}}</h1>
           </div>
        
 
@@ -45,15 +45,15 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">My Subject</h3>
+                <h3 class="card-title">{{__('messages.my_subject')}}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Subject Name</th>
-                      <th>Subject Type</th>
+                      <th>{{__('messages.subject_name')}}</th>
+                      <th>{{__('messages.subject_type')}}</th>
                     </tr>
                   </thead>
                   <tbody>

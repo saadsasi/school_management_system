@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Setting</h1>
+            <h1>{{ __('messages.setting') }}</h1>
           </div>
     
         </div>
@@ -29,26 +29,26 @@
                 <div class="card-body">
                   
                   <div class="form-group">
-                    <label>Paypal Business Email</label>
-                    <input type="email" class="form-control" name="paypal_email" value="{{ $getRecord->paypal_email }}" required placeholder="Paypal Business Email">
+                    <label>{{ __('messages.paypal_business_email') }}</label>
+                    <input type="email" class="form-control" name="paypal_email" value="{{ $getRecord->paypal_email }}" required placeholder="{{ __('messages.paypal_business_email') }}">
                                          
                   </div>
 
 
 
                   <div class="form-group">
-                    <label>Stripe Public Key</label>
+                    <label>{{ __('messages.stripe_public_key') }}</label>
                     <input type="text" class="form-control" name="stripe_key" value="{{ $getRecord->stripe_key }}" >                                         
                   </div>
 
 
                   <div class="form-group">
-                    <label>Stripe Secret Key</label>
+                    <label>{{ __('messages.stripe_secret_key') }}</label>
                     <input type="text" class="form-control" name="stripe_secret" value="{{ $getRecord->stripe_secret }}" >                                         
                   </div>
 
                    <div class="form-group">
-                      <label>Logo <span style="color: red;"></span></label>
+                      <label>{{ __('messages.logo') }} <span style="color: red;"></span></label>
                       <input type="file" class="form-control" name="logo">
                        @if(!empty($getRecord->getLogo()))
                         <img src="{{  $getRecord->getLogo() }}" style="width: auto;height: 50px;"> 
@@ -57,7 +57,7 @@
 
 
                    <div class="form-group">
-                      <label>Fevicon Icon <span style="color: red;"></span></label>
+                      <label>{{ __('messages.fevicon_icon') }} <span style="color: red;"></span></label>
                       <input type="file" class="form-control" name="fevicon_icon" >
                        @if(!empty($getRecord->getFevicon()))
                         <img src="{{  $getRecord->getFevicon() }}" style="width: auto;height: 50px;"> 
@@ -66,13 +66,13 @@
 
 
                   <div class="form-group">
-                    <label>School Name</label>
+                    <label>{{ __('messages.school_name') }}</label>
                     <input type="text" class="form-control" name="school_name" value="{{ $getRecord->school_name }}" >                                         
                   </div>
 
 
                   <div class="form-group">
-                    <label>Exam Description</label>
+                    <label>{{ __('messages.exam_description') }}</label>
                     <textarea class="form-control" name="exam_description">{{ $getRecord->exam_description }}</textarea>
                   </div>
 
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.save') }}</button>
                 </div>
               </form>
             </div>

@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Collect Fees Report </h1>
+            <h1>{{ __('messages.Collect_Fees_Report') }}</h1>
           </div>
                   
         </div>
@@ -24,34 +24,34 @@
 
                  <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Collect Fees Report</h3>
+                <h3 class="card-title">{{ __('messages.Search_Collect_Fees_Report') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
                   <div class="row">
 
                   <div class="form-group col-md-2">
-                    <label>Student ID</label>
-                    <input type="text" class="form-control" placeholder="Student ID" value="{{ Request::get('student_id') }}" name="student_id">
+                    <label>{{ __('messages.Student_ID') }}</label>
+                    <input type="text" class="form-control" placeholder="{{ __('messages.Student_ID') }}" value="{{ Request::get('student_id') }}" name="student_id">
                   </div>
 
 
                    <div class="form-group col-md-2">
-                    <label>Student Name</label>
-                    <input type="text" class="form-control" placeholder="Student Name" value="{{ Request::get('student_name') }}" name="student_name">
+                    <label>{{ __('messages.Student_Name') }}</label>
+                    <input type="text" class="form-control" placeholder="{{ __('messages.Student_Name') }}" value="{{ Request::get('student_name') }}" name="student_name">
                   </div>
 
                   <div class="form-group col-md-2">
-                    <label>Student Last Name</label>
-                    <input type="text" class="form-control" placeholder="Student Last Name" value="{{ Request::get('student_last_name') }}" name="student_last_name">
+                    <label>{{ __('messages.Student_Last_Name') }}</label>
+                    <input type="text" class="form-control" placeholder="{{ __('messages.Student_Last_Name') }}" value="{{ Request::get('student_last_name') }}" name="student_last_name">
                   </div>
 
 
 
                   <div class="form-group col-md-2">
-                    <label>Class</label>
+                    <label>{{ __('messages.Class') }}</label>
                     <select class="form-control" name="class_id" >
-                        <option value="">Select</option>                                              
+                        <option value="">{{ __('messages.select') }}</option>                                              
                         @foreach($getClass as $class)                                         
                           <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
@@ -59,31 +59,31 @@
                   </div>
 
                    <div class="form-group col-md-2">
-                    <label>Start Created Date</label>
+                    <label>{{ __('messages.Start_Created_Date') }}</label>
                     <input type="date" class="form-control"  value="{{ Request::get('start_created_date') }}" name="start_created_date">
                   </div>
 
                    <div class="form-group col-md-2">
-                    <label>End Created Date</label>
+                    <label>{{ __('messages.End_Created_Date') }}</label>
                     <input type="date" class="form-control"  value="{{ Request::get('end_created_date') }}" name="end_created_date">
                   </div>
 
 
                   <div class="form-group col-md-2">
-                    <label>Payment Type</label>
+                    <label>{{ __('messages.Payment_Type') }}</label>
                     <select class="form-control" name="payment_type">
-                        <option value="">Select</option>
-                        <option {{ (Request::get('payment_type') == 'Cash') ? 'selected' : '' }} value="Cash">Cash</option>
-                        <option {{ (Request::get('payment_type') == 'Cheque') ? 'selected' : '' }} value="Cheque">Cheque</option>
-                        <option {{ (Request::get('payment_type') == 'Paypal') ? 'selected' : '' }} value="Paypal">Paypal</option>
-                        <option {{ (Request::get('payment_type') == 'Stripe') ? 'selected' : '' }} value="Stripe">Stripe</option>
+                        <option value="">{{ __('messages.select') }}</option>
+                        <option {{ (Request::get('payment_type') == 'Cash') ? 'selected' : '' }} value="Cash">{{ __('messages.Cash') }}</option>
+                        <option {{ (Request::get('payment_type') == 'Cheque') ? 'selected' : '' }} value="Cheque">{{ __('messages.Cheque') }}</option>
+                        <option {{ (Request::get('payment_type') == 'Paypal') ? 'selected' : '' }} value="Paypal">{{ __('messages.Paypal') }}</option>
+                        <option {{ (Request::get('payment_type') == 'Stripe') ? 'selected' : '' }} value="Stripe">{{ __('messages.Stripe') }}</option>
                     </select>
                   </div>
 
 
                   <div class="form-group col-md-2">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -99,7 +99,7 @@
              @include('_message')          
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Collect Fees Report</h3>
+                <h3 class="card-title">{{ __('messages.Collect_Fees_Report') }}</h3>
                 <form style="float: right;" method="post" action="{{ url('admin/fees_collection/export_collect_fees_report') }}">
                    {{ csrf_field() }}
                   <input type="hidden" value="{{ Request::get('student_id') }}" name="student_id">
@@ -109,7 +109,7 @@
                   <input type="hidden" value="{{ Request::get('start_created_date') }}" name="start_created_date">
                   <input type="hidden" value="{{ Request::get('end_created_date') }}" name="end_created_date">
                   <input type="hidden" value="{{ Request::get('payment_type') }}" name="payment_type">
-                  <button type="submit" class="btn btn-primary">Export Excel</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.export_excel') }}</button>
                 </form>
               </div>
               
@@ -118,16 +118,16 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Student ID</th>
-                      <th>Student Name</th>
-                      <th>Class Name</th>
-                      <th>Total Amount</th>
-                      <th>Paid Amount</th>
-                      <th>Remaning Amount</th>
-                      <th>Payment Type</th>
-                      <th>Remark</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
+                      <th>{{ __('messages.student_id') }}</th>
+                      <th>{{ __('messages.student_name') }}</th>
+                      <th>{{ __('messages.class_name') }}</th>
+                      <th>{{ __('messages.total_amount') }}</th>
+                      <th>{{ __('messages.paid_amount') }}</th>
+                      <th>{{ __('messages.remaning_amount') }}</th>
+                      <th>{{ __('messages.payment_type') }}</th>
+                      <th>{{ __('messages.remark') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -147,7 +147,7 @@
                         </tr>
                       @empty
                         <tr>
-                          <td colspan="100%">Record not found</td>
+                          <td colspan="100%">{{ __('messages.record_not_found') }}</td>
                         </tr>
                       @endforelse
                   </tbody>

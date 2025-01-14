@@ -17,7 +17,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Calendar</h1>
+            <h1>{{ __('messages.my_calendar') }}</h1>
           </div>
     
         </div>

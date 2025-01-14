@@ -308,12 +308,17 @@
             </ul>
         </li>
 
-
+        <li class="nav-item @if(Request::segment(2) == 'activities') menu-is-opening menu-open @endif">
+    <a href="{{ url('admin/activities/requests') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
+        <i class="nav-icon fas fa-running"></i>
+        <p> {{__('messages.activities')}} </p>
+    </a>
+</li>
         
         <li class="nav-item  @if(Request::segment(2) == 'leave') menu-is-opening menu-open @endif">
     <a href="{{ url('admin/leave/requests') }}" class="nav-link  @if(Request::segment(2) == 'leave') active @endif">
         <i class="nav-icon fas fa-sign-out-alt"></i>
-        <p> طلبات المغادرة </p>
+        <p> {{__('messages.leave_requests')}} </p>
     </a>  
 </li>
 
@@ -364,7 +369,7 @@
             <a href="{{ url('teacher/my_class_subject') }}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
               <i class="nav-icon fas fa-graduation-cap"></i>
               <p>
-                My Class Subject
+                {{ __('messages.my_class_subject') }}
               </p>
             </a>
           </li>
@@ -374,7 +379,7 @@
             <a href="{{ url('teacher/my_student') }}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Student
+                {{ __('messages.my_student') }}
               </p>
             </a>
           </li>
@@ -384,7 +389,7 @@
             <a href="{{ url('teacher/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                My Calendar
+                {{ __('messages.my_calendar') }}
               </p>
             </a>
           </li>
@@ -394,7 +399,7 @@
             <a href="{{ url('teacher/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Exam Timetable
+                {{ __('messages.my_exam_timetable') }}
               </p>
             </a>
           </li>
@@ -404,7 +409,7 @@
             <a href="{{ url('teacher/marks_register') }}" class="nav-link @if(Request::segment(2) == 'marks_register') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Marks Register
+                {{ __('messages.marks_register') }}
               </p>
             </a>
           </li>
@@ -415,7 +420,7 @@
             <a href="#" class="nav-link  @if(Request::segment(2) == 'attendance') active @endif">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Attendance
+                {{ __('messages.attendance') }}
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -424,14 +429,14 @@
               <li class="nav-item">
                 <a href="{{ url('teacher/attendance/student') }}" class="nav-link @if(Request::segment(3) == 'student') active @endif">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Student Attendance</p>
+                  <p>{{ __('messages.student_attendance') }}</p>
                 </a>
               </li>
 
                <li class="nav-item">
                 <a href="{{ url('teacher/attendance/report') }}" class="nav-link @if(Request::segment(3) == 'report') active @endif">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Attendance Report</p>
+                  <p>{{ __('messages.attendance_report') }}</p>
                 </a>
               </li>
              
@@ -444,36 +449,12 @@
             <a href="{{ url('teacher/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Notice Board
+                {{ __('messages.my_notice_board') }}
               </p>
             </a>
           </li>
 
 
-<!-- قائمة المغادرة -->
-<li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
-    <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
-        <i class="nav-icon fas fa-sign-out-alt"></i>
-        <p>
-            طلبات المغادرة
-            <i class="fas fa-angle-left right"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="{{ url('teacher/leave/add') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'add') active @endif">
-                <i class="far fa-circle nav-icon"></i>
-                <p>طلب مغادرة</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ url('teacher/leave/history') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'history') active @endif">
-                <i class="far fa-circle nav-icon"></i>
-                <p>سجل المغادرات</p>
-            </a>
-        </li>
-    </ul>
-</li>
 
 
 
@@ -481,7 +462,7 @@
             <a href="{{ url('teacher/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Account
+                {{ __('messages.my_account') }}
               </p>
             </a>
           </li>
@@ -491,7 +472,7 @@
             <a href="{{ url('teacher/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Change Password
+                {{ __('messages.change_password') }}
               </p>
             </a>
           </li>
@@ -500,68 +481,68 @@
 
 
           @if(Auth::user()->is_supervisor == 1)
-          <li class="nav-header">صلاحيات المشرف</li>
+          <li class="nav-header">{{ __('messages.supervisor_privileges') }}</li>
 
           <li class="nav-item">
             <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(1) == 'admin' && Request::segment(2) == 'dashboard') active @endif">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>لوحة تحكم المشرف</p>
+              <p>{{ __('messages.supervisor_dashboard') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
               <i class="nav-icon fas fa-user-graduate"></i>
-              <p>إدارة الطلاب</p>
+              <p>{{ __('messages.student_management') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
               <i class="nav-icon fas fa-user-friends"></i>
-              <p>إدارة أولياء الأمور</p>
+              <p>{{ __('messages.parent_management') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/teacher/list') }}" class="nav-link @if(Request::segment(2) == 'teacher') active @endif">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
-              <p>إدارة المعلمين</p>
+              <p>{{ __('messages.teacher_management') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
               <i class="nav-icon fas fa-school"></i>
-              <p>إدارة الفصول</p>
+              <p>{{ __('messages.class_management') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
               <i class="nav-icon fas fa-book"></i>
-              <p>إدارة المواد</p>
+              <p>{{ __('messages.subject_management') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/registrations') }}" class="nav-link @if(Request::segment(2) == 'registrations') active @endif">
               <i class="nav-icon fas fa-user-check"></i>
-              <p>إدارة التسجيلات</p>
+              <p>{{ __('messages.registration_management') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/attendance/student') }}" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
               <i class="nav-icon fas fa-user-check"></i>
-              <p>الحضور والغياب</p>
+              <p>{{ __('messages.attendance') }}</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="{{ url('admin/leave/requests') }}" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
               <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>طلبات المغادرة</p>
+              <p>{{ __('messages.leave_requests') }}</p>
             </a>
           </li>
           @endif
@@ -573,7 +554,7 @@
               <a href="{{ url('student/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                  Dashboard
+                  {{ __('messages.dashboard') }}
                 </p>
               </a>
             </li>
@@ -582,7 +563,7 @@
             <a href="{{ url('student/fees_collection') }}" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Fees Collection
+                {{ __('messages.fees_collection') }}
               </p>
             </a>
           </li>
@@ -594,7 +575,7 @@
             <a href="{{ url('student/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Calendar
+                {{ __('messages.my_calendar') }}
               </p>
             </a>
           </li>
@@ -605,7 +586,7 @@
             <a href="{{ url('student/my_subject') }}" class="nav-link @if(Request::segment(2) == 'my_subject') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Subject
+                {{ __('messages.my_subject') }}
               </p>
             </a>
           </li>
@@ -615,7 +596,7 @@
             <a href="{{ url('student/my_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_timetable') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Timetable
+                {{ __('messages.my_timetable') }}
               </p>
             </a>
           </li>
@@ -626,7 +607,7 @@
             <a href="{{ url('student/my_exam_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_exam_timetable') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Exam Timetable
+                {{ __('messages.my_exam_timetable') }}
               </p>
             </a>
           </li>
@@ -636,7 +617,7 @@
             <a href="{{ url('student/my_exam_result') }}" class="nav-link @if(Request::segment(2) == 'my_exam_result') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Exam Result
+                {{ __('messages.my_exam_result') }}
               </p>
             </a>
           </li>
@@ -646,7 +627,7 @@
             <a href="{{ url('student/my_attendance') }}" class="nav-link @if(Request::segment(2) == 'my_attendance') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Attendance
+                {{ __('messages.my_attendance') }}
               </p>
             </a>
           </li>
@@ -655,44 +636,20 @@
             <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Notice Board
+                {{ __('messages.my_notice_board') }}
               </p>
             </a>
           </li>
           <!--قائمة-->
           
 
-          <!-- قائمة المغادرة -->
-          <li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
-            <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                طلبات المغادرة
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ url('student/leave/add') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'add') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>طلب جديد</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('student/leave/history') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'history') active @endif">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>سجل الطلبات</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
+         
             
            <li class="nav-item">
             <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                My Account
+                {{ __('messages.my_account') }}
               </p>
             </a>
           </li>
@@ -702,7 +659,7 @@
             <a href="{{ url('student/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Change Password
+                {{ __('messages.change_password') }}
               </p>
             </a>
           </li>
@@ -748,6 +705,32 @@
               </p>
             </a>
           </li>
+
+  <!-- قائمة المغادرة -->
+<li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
+    <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">
+        <i class="nav-icon fas fa-sign-out-alt"></i>
+        <p>
+            {{ __('messages.parent_leave') }}
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ url('parent/leave/add') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'add') active @endif">
+                <i class="far fa-circle nav-icon"></i>
+                <p>{{ __('messages.parent_leave_request') }}</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('parent/leave/history') }}" class="nav-link @if(Request::segment(2) == 'leave' && Request::segment(3) == 'history') active @endif">
+                <i class="far fa-circle nav-icon"></i>
+                <p>{{ __('messages.parent_leave_history') }}</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
 
          <li class="nav-item">
             <a href="{{ url('parent/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">

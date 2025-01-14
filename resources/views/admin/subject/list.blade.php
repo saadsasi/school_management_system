@@ -10,10 +10,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Subject List</h1>
+            <h1>{{ __('messages.subject_list') }}</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/subject/add') }}" class="btn btn-primary">Add New Subject</a>
+              <a href="{{ url('admin/subject/add') }}" class="btn btn-primary">{{ __('messages.add_new_subject') }}</a>
           </div>
 
          
@@ -39,7 +39,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Subject</h3>
+                <h3 class="card-title">{{ __('messages.search_subject') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -47,17 +47,17 @@
                     
                   
                   <div class="form-group col-md-4">
-                    <label>Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
+                    <label>{{ __('messages.name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="{{ __('messages.name') }}">
                   </div>
 
 
                   <div class="form-group col-md-4">
-                     <label>Subject Type</label>
+                     <label>{{ __('messages.subject_type') }}</label>
                      <select class="form-control" name="type">
-                        <option value="">Select Type</option>
-                        <option {{ (Request::get('type') == 'Theory') ? 'selected' : '' }} value="Theory">Theory</option>
-                        <option {{ (Request::get('type') == 'Practical') ? 'selected' : '' }} value="Practical">Practical</option>
+                        <option value="">{{ __('messages.select_type') }}</option>
+                        <option {{ (Request::get('type') == 'Theory') ? 'selected' : '' }} value="Theory">{{ __('messages.theory') }}</option>
+                        <option {{ (Request::get('type') == 'Practical') ? 'selected' : '' }} value="Practical">{{ __('messages.practical') }}</option>
                     </select>
                   </div>
 
@@ -65,8 +65,8 @@
                  
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/subject/list') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/subject/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -83,7 +83,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Subject List</h3>
+                <h3 class="card-title">{{ __('messages.subject_list') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -91,12 +91,12 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Subject Name</th>
-                      <th>Subject Type</th>
-                      <th>Status</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.subject_name') }}</th>
+                      <th>{{ __('messages.subject_type') }}</th>
+                      <th>{{ __('messages.status') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -107,16 +107,16 @@
                           <td>{{ $value->type }}</td>
                           <td>
                             @if($value->status == 0)
-                              Active
+                              {{ __('messages.active') }}
                             @else
-                              Inactive
+                              {{ __('messages.inactive') }}
                             @endif
                           </td>
                           <td>{{ $value->created_by_name }}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
-                             <a href="{{ url('admin/subject/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
-                            <a href="{{ url('admin/subject/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                             <a href="{{ url('admin/subject/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
+                            <a href="{{ url('admin/subject/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
 
                           </td>
                         </tr>

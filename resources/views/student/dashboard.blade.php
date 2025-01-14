@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">{{ __('messages.dashboard') }}</h1>
           </div>
         </div>
       </div>
@@ -26,12 +26,12 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalSubject }}</h3>
-                <p>Total Subject</p>
+                <p>{{ __('messages.total_subject') }}</p>
               </div>
               <div class="icon">
                 <i class="nav-icon fas fa-table"></i>
               </div>
-              <a href="{{ url('student/my_subject') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('student/my_subject') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div> 
 
@@ -41,12 +41,12 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3>{{ $TotalNoticeBoard }}</h3>
-                <p>Notice Board</p>
+                <p>{{ __('messages.notice_board') }}</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="{{ url('student/my_notice_board') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('student/my_notice_board') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
@@ -58,12 +58,12 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalAttendance  }}</h3>
-                <p>Total Attendance</p>
+                <p>{{ __('messages.total_attendance') }}</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="{{ url('student/my_attendance') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('student/my_attendance') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 

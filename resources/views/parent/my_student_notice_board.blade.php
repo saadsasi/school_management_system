@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1> {{ __('messages.parent_notice_search_title') }}</h1>
+            <h1> {{ __('messages.my_notice_search_title') }}</h1>
           </div>         
         </div>
       </div>
@@ -21,7 +21,7 @@
 
            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">{{ __('messages.parent_notice_search_title') }}</h3>
+                <h3 class="card-title">{{ __('messages.my_notice_search_title') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -29,22 +29,22 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>  {{ __('messages.parent_notice_title') }} </label>
-                    <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="Title">
+                    <label>  {{ __('messages.my_notice_title') }} </label>
+                    <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="  {{ __('messages.my_notice_title') }}">
                   </div>
                   <div class="form-group col-md-3">
-                    <label>  {{ __('messages.parent_notice_date_from') }} </label>
+                    <label>  {{ __('messages.my_notice_date_from') }} </label>
                     <input type="date" class="form-control" name="notice_date_from" value="{{ Request::get('notice_date_from') }}"  >
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>  {{ __('messages.parent_notice_date_to') }} </label>
+                    <label>  {{ __('messages.my_notice_date_to') }} </label>
                     <input type="date" class="form-control" name="notice_date_to" value="{{ Request::get('notice_date_to') }}"  >
                   </div>
                   <div class="form-group col-md-3">
 
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">   {{ __('messages.parent_notice_search') }} </button>
-                    <a href="{{ url('parent/my_student_notice_board') }}" class="btn btn-success" style="margin-top: 30px;">   {{ __('messages.parent_notice_reset') }} </a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">   {{ __('messages.search') }} </button>
+                    <a href="{{ url('parent/my_student_notice_board') }}" class="btn btn-success" style="margin-top: 30px;">   {{ __('messages.reset') }} </a>
 
                   </div>
 

@@ -95,19 +95,19 @@
                           
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 300px;">
-                            <a  style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">Subject</a>
-                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">Exam Timetable</a>
+                            <a  style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">{{ __('messages.subject') }}</a>
+                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">{{ __('messages.exam_timetable') }}</a>
 
-                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">Exam Result</a>
+                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">{{ __('messages.exam_result') }}</a>
 
-                            <a style="margin-bottom: 10px;" class="btn btn-warning btn-sm" href="{{ url('parent/my_student/calendar/'.$value->id) }}">Calendar</a>
+                            <a style="margin-bottom: 10px;" class="btn btn-warning btn-sm" href="{{ url('parent/my_student/calendar/'.$value->id) }}">{{ __('messages.calendar') }}</a>
 
-                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/attendance/'.$value->id) }}">Attendance</a>
+                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/attendance/'.$value->id) }}">{{ __('messages.attendance') }}</a>
 
-                            <a style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/fees_collection/'.$value->id) }}">Fees Collection</a>
+                            <a style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/fees_collection/'.$value->id) }}">{{ __('messages.fees_collection') }}</a>
 
 
-                            <a style="margin-bottom: 10px;" href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">Send Message</a>
+                            <a style="margin-bottom: 10px;" href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">{{ __('messages.send_message') }}</a>
 
                           </td>
                          

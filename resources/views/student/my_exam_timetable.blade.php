@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Exam Timetable</h1>
+            <h1>{{ __('messages.my_exam_timetable') }}</h1>
           </div>
       
         </div>
@@ -37,14 +37,14 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Subject Name</th>
-                      <th>Day</th>
-                      <th>Exam Date</th>
-                      <th>Start Time </th>
-                      <th>End Time </th>
-                      <th>Room Number</th>
-                      <th>Full Marks </th>                      
-                      <th>Passing Marks </th>
+                      <th>{{ __('messages.subject_name') }}</th>
+                      <th>{{ __('messages.day') }}</th>
+                      <th>{{ __('messages.exam_date') }}</th>
+                      <th>{{ __('messages.start_time') }} </th>
+                      <th>{{ __('messages.end_time') }} </th>
+                      <th>{{ __('messages.room_number') }}</th>
+                      <th>{{ __('messages.full_marks') }} </th>                      
+                      <th>{{ __('messages.passing_marks') }}</th>
                     </tr>
                   </thead>
                   <tbody>

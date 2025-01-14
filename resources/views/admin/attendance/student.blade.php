@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Student Attendance</h1>
+            <h1>{{ __('messages.student_attendance') }}</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -21,15 +21,15 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Student Attendance</h3>
+                <h3 class="card-title">{{ __('messages.search_student_attendance') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
                   <div class="row">
                   <div class="form-group col-md-3">
-                    <label>Class</label>
+                    <label>{{ __('messages.class') }}</label>
                     <select class="form-control" name="class_id" id="getClass" required required>
-                        <option value="">Select</option>                                              
+                        <option value="">{{ __('messages.select') }}</option>                                              
                         @foreach($getClass as $class)                                         
                           <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
@@ -37,14 +37,14 @@
                   </div>
 
                    <div class="form-group col-md-3">
-                    <label>Attendance Date</label>
+                    <label>{{ __('messages.attendance_date') }}</label>
                     <input type="date" class="form-control" id="getAttendanceDate" value="{{ Request::get('attendance_date') }}" required name="attendance_date">
                   </div>
 
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/attendance/student') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/attendance/student') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -57,16 +57,16 @@
             
                  <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Student List</h3>
+                      <h3 class="card-title">{{ __('messages.student_list') }}</h3>
                     </div>
                     
                     <div class="card-body p-0" style="overflow: auto;">
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th>Student ID</th>
-                            <th>Student Name</th>
-                            <th>Attendance</th>
+                            <th>{{ __('messages.student_id') }}</th>
+                            <th>{{ __('messages.student_name') }}</th>
+                            <th>{{ __('messages.attendance') }}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -87,16 +87,16 @@
                                  <td>{{ $value->name }} {{ $value->last_name }}</td>
                                  <td>
                                   <label style="margin-right: 10px;">
-                                    <input value="1" type="radio" {{ ($attendance_type == '1') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> Present
+                                    <input value="1" type="radio" {{ ($attendance_type == '1') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> {{ __('messages.present') }}
                                   </label>
                                   <label style="margin-right: 10px;">
-                                    <input value="2" type="radio" {{ ($attendance_type == '2') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> Late
+                                    <input value="2" type="radio" {{ ($attendance_type == '2') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> {{ __('messages.late') }}
                                   </label>
                                   <label style="margin-right: 10px;">
-                                    <input value="3" type="radio" {{ ($attendance_type == '3') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> Absent
+                                    <input value="3" type="radio" {{ ($attendance_type == '3') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> {{ __('messages.absent') }}
                                   </label>
                                   <label>
-                                    <input value="4" type="radio" {{ ($attendance_type == '4') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance"  name="attendance{{ $value->id }}"> Half Day
+                                    <input value="4" type="radio" {{ ($attendance_type == '4') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance"  name="attendance{{ $value->id }}"> {{ __('messages.half_day') }}
                                   </label>
 
                                  </td>

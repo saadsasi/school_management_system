@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Exam Result <span style="color: blue;">({{ $getStudent->name }} {{ $getStudent->last_name }})</span></h1>
+            <h1>{{ __('messages.my_exam_result') }} <span style="color: blue;">({{ $getStudent->name }} {{ $getStudent->last_name }})</span></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -22,21 +22,21 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">{{ $value['exam_name'] }}</h3>
-                <a class="btn btn-primary btn-sm" style="float: right;" target="_blank" href="{{ url('parent/my_exam_result/print?exam_id='.$value['exam_id'].'&student_id='.$getStudent->id) }}">Print</a>
+                <a class="btn btn-primary btn-sm" style="float: right;" target="_blank" href="{{ url('parent/my_exam_result/print?exam_id='.$value['exam_id'].'&student_id='.$getStudent->id) }}">{{ __('messages.print') }}</a>
               </div>
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Subject</th>
-                      <th>Class Work</th>
-                      <th>Test Work</th>
-                      <th>Home Work</th>
-                      <th>Exam</th>
-                      <th>Total Score</th>
-                      <th>Passing Marks</th>
-                      <th>Full Marks</th>
-                      <th>Result</th>
+                      <th>{{ __('messages.subject') }}</th>
+                      <th>{{ __('messages.class_work') }}</th>
+                      <th>{{ __('messages.test_work') }}</th>
+                      <th>{{ __('messages.home_work') }}</th>
+                      <th>{{ __('messages.exam') }}</th>
+                      <th>{{ __('messages.total_score') }}</th>
+                      <th>{{ __('messages.passing_marks') }}</th>
+                      <th>{{ __('messages.full_marks') }}</th>
+                      <th>{{ __('messages.result') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -61,12 +61,12 @@
                       <td>{{ $exam['full_marks'] }}</td>
                       <td>
                           @if($exam['total_score'] >= $exam['passing_mark'])
-                            <span style="color: green; font-weight: bold;">Pass</span>
+                            <span style="color: green; font-weight: bold;">{{ __('messages.pass') }}</span>
                           @else
                             @php
-                              $result_validation = 1
+                              $result_validation = 1;
                             @endphp
-                            <span style="color: red; font-weight: bold;">Fail</span>
+                            <span style="color: red; font-weight: bold;">{{ __('messages.fail') }}</span>
                           @endif
 
                       </td>
@@ -75,7 +75,7 @@
 
                     <tr>
                       <td colspan="2">
-                        <b>Grand Total: {{ $total_score }}/{{ $full_marks }}</b>
+                        <b>{{ __('messages.grand_total') }}: {{ $total_score }}/{{ $full_marks }}</b>
                       </td>
                       <td colspan="2">
                          @php
@@ -83,18 +83,18 @@
                           $getGrade = App\Models\MarksGradeModel::getGrade($percentage);
                         @endphp
 
-                        <b>Percentage: {{ round($percentage, 2) }}%</b>
+                        <b>{{ __('messages.percentage') }}: {{ round($percentage, 2) }}%</b>
                       </td>
 
                       <td colspan="2">
-                        <b>Grade: {{ $getGrade }}</b>
+                        <b>{{ __('messages.grade') }}: {{ $getGrade }}</b>
                       </td>
 
                       <td colspan="3">
-                        <b>Result:  @if($result_validation == 0) 
-                                      <span style="color: green;">Pass</span>  
+                        <b>{{ __('messages.result') }}:  @if($result_validation == 0) 
+                                      <span style="color: green;">{{ __('messages.pass') }}</span>  
                                     @else  
-                                      <span style="color: red;">Fail</span>
+                                      <span style="color: red;">{{ __('messages.fail') }}</span>
                                     @endif
                                   </b>
                       </td>

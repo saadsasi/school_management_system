@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ !empty($header_title) ? $header_title : '' }} - School</title>
+  <title>{{ !empty($header_title) ? $header_title : '' }} - {{__('messages.school')}}</title>
   @php
     $getHeaderSetting = App\Models\SettingModel::getSingle();
   @endphp

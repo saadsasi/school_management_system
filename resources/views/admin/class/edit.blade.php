@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Class</h1>
+            <h1>{{ __('messages.edit_class') }}</h1>
           </div>
     
         </div>
@@ -26,20 +26,20 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Class Name</label>
-                    <input type="text" class="form-control" value="{{ $getRecord->name }}" name="name" required placeholder="Class Name">
+                    <label>{{ __('messages.class_name') }}</label>
+                    <input type="text" class="form-control" value="{{ $getRecord->name }}" name="name" required placeholder="{{ __('messages.class_name') }}">
                   </div>
 
                   <div class="form-group">
-                    <label>Amount ($)</label>
-                    <input type="number" class="form-control" name="amount" value="{{ $getRecord->amount }}" required placeholder="Amount">
+                    <label>{{ __('messages.amount') }} ($)</label>
+                    <input type="number" class="form-control" name="amount" value="{{ $getRecord->amount }}" required placeholder="{{ __('messages.amount') }}">
                   </div>
 
                   <div class="form-group">
-                    <label>Status</label>
+                    <label>{{ __('messages.status') }}</label>
                     <select class="form-control" name="status">
-                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Active</option>
-                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inactive</option>
+                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">{{ __('messages.active') }}</option>
+                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">{{ __('messages.inactive') }}</option>
                     </select>
                     
                   </div>
@@ -49,7 +49,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
                 </div>
               </form>
             </div>

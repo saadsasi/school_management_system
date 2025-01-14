@@ -26,27 +26,27 @@
                             {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>نوع المغادرة <span style="color: red;">*</span></label>
+                                    <label>{{ __('messages.leave_type') }} <span style="color: red;">*</span></label>
                                     <select class="form-control" required name="type">
-                                        <option value="">اختر النوع</option>
-                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_EARLY }}">مغادرة مبكرة</option>
-                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_END_DAY }}">نهاية الدوام</option>
-                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_FULL_DAY }}">يوم كامل</option>
+                                        <option value="">{{ __('messages.select') }}</option>
+                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_EARLY }}">{{ __('messages.early_leave') }}</option>
+                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_END_DAY }}">{{ __('messages.end_day_leave') }}</option>
+                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_FULL_DAY }}">{{ __('messages.full_day_leave') }}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>التاريخ <span style="color: red;">*</span></label>
+                                    <label>{{ __('messages.date') }} <span style="color: red;">*</span></label>
                                     <input type="date" class="form-control" required name="date" value="{{ old('date') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>الوقت <span style="color: red;">*</span></label>
+                                    <label>{{ __('messages.time') }} <span style="color: red;">*</span></label>
                                     <input type="time" class="form-control" required name="time" value="{{ old('time') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>السبب <span style="color: red;">*</span></label>
+                                    <label>{{ __('messages.reason') }} <span style="color: red;">*</span></label>
                                     <textarea class="form-control" required name="reason" rows="4">{{ old('reason') }}</textarea>
                                 </div>
 
@@ -55,7 +55,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">إرسال</button>
+                                <button type="submit" class="btn btn-primary">{{ __('messages.send') }}</button>
                             </div>
                         </form>
                     </div>

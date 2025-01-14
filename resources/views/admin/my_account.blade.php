@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>My Account</h1>
+            <h1>{{ __('messages.my_account') }}</h1>
           </div>
     
         </div>
@@ -28,18 +28,18 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ old('name', $getRecord->name) }}" required placeholder="Name">
+                    <label>{{ __('messages.name') }}</label>
+                    <input type="text" class="form-control" name="name" value="{{ old('name', $getRecord->name) }}" required placeholder="{{ __('messages.name') }}">
                   </div>
                   <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control" name="email" value="{{ old('email', $getRecord->email) }}" required placeholder="Email">
+                    <label>{{ __('messages.email') }}</label>
+                    <input type="email" class="form-control" name="email" value="{{ old('email', $getRecord->email) }}" required placeholder="{{ __('messages.email') }}">
                     <div style="color:red">{{ $errors->first('email') }}</div>                     
                   </div>
                 </div>
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
                 </div>
               </form>
             </div>

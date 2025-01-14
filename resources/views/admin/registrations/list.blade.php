@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>طلبات التسجيل الجديدة</h1>
+                    <h1> {{__('messages.new_registrations')}} </h1>
                 </div>
             </div>
         </div>
@@ -19,19 +19,19 @@
                     @include('_message')
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">قائمة طلبات التسجيل</h3>
+                            <h3 class="card-title"> {{__('messages.registration_list')}} </h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>الاسم</th>
-                                        <th>البريد الإلكتروني</th>
-                                        <th>نوع المستخدم</th>
-                                        <th>رقم الجوال</th>
-                                        <th>تاريخ التسجيل</th>
-                                        <th>الإجراءات</th>
+                                        <th> {{__('messages.name')}} </th>
+                                        <th> {{__('messages.email')}} </th>
+                                        <th> {{__('messages.user_type')}} </th>
+                                        <th> {{__('messages.mobile')}} </th>
+                                        <th> {{__('messages.registered_date')}} </th>
+                                        <th> {{__('messages.action')}} </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,23 +42,23 @@
                                             <td>{{ $user->email }}</td>
                                             <td>
                                                 @if($user->user_type == 2)
-                                                    معلم
+                                                    {{__('messages.teacher')}}
                                                 @elseif($user->user_type == 3)
-                                                    طالب
+                                                    {{__('messages.student')}}
                                                 @elseif($user->user_type == 4)
-                                                    ولي أمر
+                                                    {{__('messages.parent')}}
                                                 @endif
                                             </td>
                                             <td>{{ $user->mobile_number }}</td>
                                             <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                                             <td>
-                                                <a href="{{ url('admin/registration/approve/'.$user->id) }}" class="btn btn-success btn-sm">قبول</a>
-                                                <a href="{{ url('admin/registration/reject/'.$user->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من رفض هذا التسجيل؟')">رفض</a>
+                                                <a href="{{ url('admin/registration/approve/'.$user->id) }}" class="btn btn-success btn-sm"> {{__('messages.approve')}} </a>
+                                                <a href="{{ url('admin/registration/reject/'.$user->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('{{__('messages.are_you_sure_to_reject')}}')"> {{__('messages.reject')}} </a>
                                                 
                                                 @if($user->user_type == 3)
                                                     <!-- معلومات إضافية للطلاب -->
                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#studentInfo{{ $user->id }}">
-                                                        عرض التفاصيل
+                                                        {{__('messages.details')}} 
                                                     </button>
                                                     
                                                     <!-- نافذة معلومات الطالب -->
@@ -66,14 +66,14 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">تفاصيل الطالب</h4>
+                                                                    <h4 class="modal-title"> {{__('messages.student_details')}} </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p><strong>رقم القبول:</strong> {{ $user->admission_number }}</p>
-                                                                    <p><strong>الصف:</strong> {{ $user->class_id }}</p>
-                                                                    <p><strong>رقم التسجيل:</strong> {{ $user->roll_number }}</p>
-                                                                    <p><strong>تاريخ الميلاد:</strong> {{ $user->date_of_birth }}</p>
+                                                                    <p><strong> {{__('messages.admission_number')}}:</strong> {{ $user->admission_number }}</p>
+                                                                    <p><strong> {{__('messages.class')}}:</strong> {{ $user->class_id }}</p>
+                                                                    <p><strong> {{__('messages.roll_number')}}:</strong> {{ $user->roll_number }}</p>
+                                                                    <p><strong> {{__('messages.date_of_birth')}}:</strong> {{ $user->date_of_birth }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -81,7 +81,7 @@
                                                 @elseif($user->user_type == 2)
                                                     <!-- معلومات إضافية للمعلمين -->
                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#teacherInfo{{ $user->id }}">
-                                                        عرض التفاصيل
+                                                        {{__('messages.details')}} 
                                                     </button>
                                                     
                                                     <!-- نافذة معلومات المعلم -->
@@ -89,12 +89,12 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">تفاصيل المعلم</h4>
+                                                                    <h4 class="modal-title"> {{__('messages.teacher_details')}} </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p><strong>المؤهل:</strong> {{ $user->qualification }}</p>
-                                                                    <p><strong>الخبرة:</strong> {{ $user->work_experience }}</p>
+                                                                    <p><strong> {{__('messages.qualification')}}:</strong> {{ $user->qualification }}</p>
+                                                                    <p><strong> {{__('messages.work_experience')}}:</strong> {{ $user->work_experience }}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -102,7 +102,7 @@
                                                 @elseif($user->user_type == 4)
                                                     <!-- معلومات إضافية لولي الامر -->
                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#parentInfo{{ $user->id }}">
-                                                        عرض التفاصيل
+                                                        {{__('messages.details')}} 
                                                     </button>
                                                     
                                                     <!-- نافذة معلومات ولي الامر -->
@@ -110,12 +110,12 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title">تفاصيل ولي الامر</h4>
+                                                                    <h4 class="modal-title"> {{__('messages.parent_details')}} </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p><strong>الاسم:</strong> {{ $user->name }}</p>
-                                                                    <p><strong>الهاتف:</strong> {{ $user->mobile_number}}</p>
+                                                                    <p><strong> {{__('messages.name')}}:</strong> {{ $user->name }}</p>
+                                                                    <p><strong> {{__('messages.mobile_number')}}:</strong> {{ $user->mobile_number}}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -127,7 +127,7 @@
 
                                     @if(count($registrations) == 0)
                                         <tr>
-                                            <td colspan="7" class="text-center">لا توجد طلبات تسجيل جديدة</td>
+                                            <td colspan="7" class="text-center">{{__('messages.no_registrations_found')}}</td>
                                         </tr>
                                     @endif
                                 </tbody>

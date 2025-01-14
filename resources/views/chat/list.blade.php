@@ -291,7 +291,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>My Chat</h1>
+          <h1>{{ __('messages.my_chat') }}</h1>
         </div>    
       </div>
     </div>
@@ -307,7 +307,7 @@
                               <div class="input-group-prepend">
                                   <span class="input-group-text" id="getSearchUser"><i class="fa fa-search"></i></span>
                               </div>
-                              <input type="text" id="getSearch" class="form-control" placeholder="Search...">
+                              <input type="text" id="getSearch" class="form-control" placeholder="{{ __('messages.search') }}...">
                               <input type="hidden" id="getReceiverIDDynamic" value="{{ $receiver_id }}">
                               
                           </div>

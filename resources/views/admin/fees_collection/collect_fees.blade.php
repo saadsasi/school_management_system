@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>Collect Fees</h1>
+            <h1>{{ __('messages.collect_fees') }}</h1>
           </div>
 
          
@@ -36,7 +36,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Collect Fees Student</h3>
+                <h3 class="card-title">{{ __('messages.search_collect_fees_student') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -44,9 +44,9 @@
                     
                   
                   <div class="form-group col-md-2">
-                    <label>Class</label>
+                    <label>{{ __('messages.class') }}</label>
                     <select class="form-control" name="class_id">
-                        <option value="">Select Class</option>
+                        <option value="">{{ __('messages.Select_Class') }}</option>
                         @foreach($getClass as $class)
                         <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
@@ -55,26 +55,26 @@
 
 
                    <div class="form-group col-md-2">
-                    <label>Student ID</label>
-                    <input type="text" class="form-control" value="{{ Request::get('student_id') }}" name="student_id"  placeholder="Student ID">
+                    <label>{{ __('messages.student_id') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('student_id') }}" name="student_id"  placeholder="{{ __('messages.student_id') }}">
                   </div>
 
 
                   <div class="form-group col-md-3">
-                    <label>Student First Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('first_name') }}" name="first_name"  placeholder="Student First Name">
+                    <label>{{ __('messages.student_first_name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('first_name') }}" name="first_name"  placeholder="{{ __('messages.student_first_name') }}">
                   </div>
 
 
                   <div class="form-group col-md-3">
-                    <label>Student Last Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Student Last Name">
+                    <label>{{ __('messages.student_last_name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="{{ __('messages.student_last_name') }}">
                   </div>
                 
 
                   <div class="form-group col-md-2">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/fees_collection/collect_fees') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/fees_collection/collect_fees') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -91,21 +91,21 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student List</h3>
+                <h3 class="card-title">{{ __('messages.student_list') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Student ID</th>
-                      <th>Student Name</th>
-                      <th>Class Name</th>
-                      <th>Total Amount</th>
-                      <th>Paid Amount</th>
-                      <th>Remaning Amount</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.student_id') }}</th>
+                      <th>{{ __('messages.student_name') }}</th>
+                      <th>{{ __('messages.class_name') }}</th>
+                      <th>{{ __('messages.total_amount') }}</th>
+                      <th>{{ __('messages.paid_amount') }}</th>
+                      <th>{{ __('messages.remaning_amount') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -125,17 +125,17 @@
                               <td>${{ number_format($RemaningAmount, 2) }}</td>
                               <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                               <td>
-                                  <a href="{{ url('admin/fees_collection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-success">Collect Fees</a>
+                                  <a href="{{ url('admin/fees_collection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-success">{{ __('messages.collect_fees') }}</a>
                               </td>
                             </tr>
                           @empty
                             <tr>
-                              <td colspan="100%">Record not found</td>
+                              <td colspan="100%">{{ __('messages.record_not_found') }}</td>
                             </tr>
                           @endforelse
                       @else
                         <tr>
-                          <td colspan="100%">Record not found</td>
+                          <td colspan="100%">{{ __('messages.record_not_found') }}</td>
                         </tr>
                       @endif
                   </tbody>

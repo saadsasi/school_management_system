@@ -16,7 +16,7 @@
                 <span id="getFileName"></span>     
             </div>
             <div class="col-md-6" style="text-align: right;">
-              <button style="margin-top: 10px;" class="btn btn-primary" type="submit">Send</button>
+              <button style="margin-top: 10px;" class="btn btn-primary" type="submit">{{ __('messages.send') }}</button>
             </div>
         </div>      
     </form>

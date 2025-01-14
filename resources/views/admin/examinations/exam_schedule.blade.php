@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Exam Schedule</h1>
+            <h1>{{ __('messages.exam_schedule') }}</h1>
           </div>
           
 
@@ -37,7 +37,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Exam Schedule</h3>
+                <h3 class="card-title">{{ __('messages.search_exam_schedule') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -45,9 +45,9 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>Exam</label>
+                    <label>{{ __('messages.exam') }}</label>
                     <select class="form-control" name="exam_id" required>
-                        <option value="">Select</option>     
+                        <option value="">{{ __('messages.select') }}</option>     
                         @foreach($getExam as $exam)                                         
                           <option {{ (Request::get('exam_id') == $exam->id) ? 'selected' : '' }} value="{{ $exam->id }}">{{ $exam->name }}</option>
                         @endforeach
@@ -55,9 +55,9 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>Class</label>
+                    <label>{{ __('messages.class') }}</label>
                     <select class="form-control" name="class_id" required>
-                        <option value="">Select</option>                                              
+                        <option value="">{{ __('messages.select') }}</option>                                              
                         @foreach($getClass as $class)                                         
                           <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
@@ -66,8 +66,8 @@
           
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/examinations/exam_schedule') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/examinations/exam_schedule') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -91,20 +91,20 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Exam Schedule</h3>
+                <h3 class="card-title">{{ __('messages.exam_schedule') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Subject Name</th>
-                      <th>Exam Date</th>
-                      <th>Start Time </th>
-                      <th>End Time </th>
-                      <th>Room Number</th>
-                      <th>Full Marks </th>                      
-                      <th>Passing Marks </th>                      
+                      <th>{{ __('messages.subject_name') }}</th>
+                      <th>{{ __('messages.exam_date') }}</th>
+                      <th>{{ __('messages.start_time') }} </th>
+                      <th>{{ __('messages.end_time') }} </th>
+                      <th>{{ __('messages.room_number') }}</th>
+                      <th>{{ __('messages.full_marks') }} </th>                      
+                      <th>{{ __('messages.passing_marks') }} </th>                      
                     </tr>
                   </thead>
                   <tbody>
@@ -145,7 +145,7 @@
                 
 
                 <div style="text-align: center; padding: 20px;">
-                   <button class="btn btn-primary">Submit</button>
+                   <button class="btn btn-primary">{{ __('messages.submit') }}</button>
                 </div>
 
               </div>

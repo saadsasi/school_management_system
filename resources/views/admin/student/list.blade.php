@@ -10,10 +10,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Student List (Total : {{ $getRecord->total() }})</h1>
+            <h1>{{ __('messages.student_list') }} (Total : {{ $getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/student/add') }}" class="btn btn-primary">Add New Student</a>
+              <a href="{{ url('admin/student/add') }}" class="btn btn-primary">{{ __('messages.add_new_student') }}</a>
           </div>
 
          
@@ -38,7 +38,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Student </h3>
+                <h3 class="card-title">{{ __('messages.search_student') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -46,19 +46,19 @@
                     
                   
                   <div class="form-group col-md-4">
-                    <label>Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
+                    <label>{{ __('messages.name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="{{ __('messages.name') }}">
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Last Name">
+                    <label>{{ __('messages.last_name') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="{{ __('messages.last_name') }}">
                   </div>
 
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/student/list') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/student/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -77,7 +77,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student List</h3>
+                <h3 class="card-title">{{ __('messages.student_list') }}</h3>
                 <form action="{{ url('admin/student/export_excel') }}" method="post" style="float: right;">
                     {{ csrf_field() }}
                     <input type="hidden" name="name" value="{{ Request::get('name') }}">
@@ -92,7 +92,7 @@
                     <input type="hidden" name="status" value="{{ Request::get('status') }}">
                     <input type="hidden" name="admission_date" value="{{ Request::get('admission_date') }}">
                     <input type="hidden" name="date" value="{{ Request::get('date') }}">
-                    <button class="btn btn-primary">Export Excel</button>
+                    <button class="btn btn-primary">{{ __('messages.export_excel') }}</button>
                 </form>
               </div>
               <!-- /.card-header -->
@@ -101,23 +101,23 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Profile Pic</th>
-                      <th>Student Name</th>
-                      <th>Parent Name</th>
-                      <th>Email</th>
-                      <th>Admission Number</th>
-                      <th>Roll Number</th>
-                      <th>Class</th>
-                      <th>Gender</th>
-                      <th>Date of Birth </th>
-                      <th>Mobile Number</th>
-                      <th>Admission Date</th>
-                      <th>Blood Group</th>
-                      <th>Height</th>
-                      <th>Weight</th>
-                      <th>Status</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.profile_pic') }}</th>
+                      <th>{{ __('messages.student_name') }}</th>
+                      <th>{{ __('messages.parent_name') }}</th>
+                      <th>{{ __('messages.email') }}</th>
+                      <th>{{ __('messages.admission_number') }}</th>
+                      <th>{{ __('messages.roll_number') }}</th>
+                      <th>{{ __('messages.class') }}</th>
+                      <th>{{ __('messages.gender') }}</th>
+                      <th>{{ __('messages.date_of_birth') }} </th>
+                      <th>{{ __('messages.mobile_number') }}</th>
+                      <th>{{ __('messages.admission_date') }}</th>
+                      <th>{{ __('messages.blood_group') }}</th>
+                      <th>{{ __('messages.height') }}</th>
+                      <th>{{ __('messages.weight') }}</th>
+                      <th>{{ __('messages.status') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -156,9 +156,9 @@
 
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 270px;">
-                            <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger btn-sm">Delete</a>
-                            <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">Send Message</a>
+                            <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary btn-sm">{{ __('messages.edit') }}</a>
+                            <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger btn-sm">{{ __('messages.delete') }}</a>
+                            <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">{{ __('messages.send_message') }}</a>
                           </td>
                         </tr>
                       @endforeach

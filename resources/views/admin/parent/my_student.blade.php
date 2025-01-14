@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Parent Student List ({{ $getParent->name }} {{ $getParent->last_name }})</h1>
+            <h1> {{__('messages.my_student_list')}} ({{ $getParent->name }} {{ $getParent->last_name }})</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -33,7 +33,7 @@
           
            <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Student </h3>
+                <h3 class="card-title"> {{__('messages.search_student')}} </h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -42,13 +42,13 @@
 
 
                   <div class="form-group col-md-4">
-                    <label>Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
+                    <label> {{__('messages.name')}} </label>
+                    <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder=" {{__('messages.name')}} ">
                   </div>
 
                   <div class="form-group col-md-4">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Last Name">
+                    <label> {{__('messages.last_name')}} </label>
+                    <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder=" {{__('messages.last_name')}} ">
                   </div>
 
 
@@ -56,8 +56,8 @@
               
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/parent/my-student/'.$parent_id) }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/parent/my-student/'.$parent_id) }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -74,7 +74,7 @@
 @if(!empty($getSearchStudent))
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student List</h3>
+                <h3 class="card-title"> {{__('messages.student_list')}} </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -82,12 +82,12 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Profile Pic</th>
-                      <th>Student Name</th>
-                      <th>Email</th>
-                      <th>Parent Name</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th> {{__('messages.profile_pic')}} </th>
+                      <th> {{__('messages.student_name')}} </th>
+                      <th> {{__('messages.email')}} </th>
+                      <th> {{__('messages.parent_name')}} </th>
+                      <th> {{__('messages.created_date')}} </th>
+                      <th> {{__('messages.action')}} </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -106,7 +106,7 @@
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 150px;">
 
-                            <a href="{{ url('admin/parent/assign_student_parent/'.$value->id.'/'.$parent_id) }}" class="btn btn-primary btn-sm">Add Student to Parent</a>
+                            <a href="{{ url('admin/parent/assign_student_parent/'.$value->id.'/'.$parent_id) }}" class="btn btn-primary btn-sm"> {{__('messages.add_student_to_parent')}} </a>
                         
                           </td>
                         </tr>
@@ -127,7 +127,7 @@
 
              <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Parent Student List</h3>
+                <h3 class="card-title"> {{__('messages.parent_student_list')}} </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -135,12 +135,12 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Profile Pic</th>
-                      <th>Student Name</th>
-                      <th>Email</th>
-                      <th>Parent Name</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th> {{__('messages.profile_pic')}} </th>
+                      <th> {{__('messages.student_name')}} </th>
+                      <th> {{__('messages.email')}} </th>
+                      <th> {{__('messages.parent_name')}} </th>
+                      <th> {{__('messages.created_date')}} </th>
+                      <th> {{__('messages.action')}} </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -159,7 +159,7 @@
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 150px;">
 
-                            <a href="{{ url('admin/parent/assign_student_parent_delete/'.$value->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ url('admin/parent/assign_student_parent_delete/'.$value->id) }}" class="btn btn-danger btn-sm"> {{__('messages.delete')}} </a>
                         
                           </td>
                         </tr>

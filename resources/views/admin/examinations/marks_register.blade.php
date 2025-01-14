@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Marks Register</h1>
+            <h1>{{ __('messages.marks_register') }}</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -21,7 +21,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Marks Register</h3>
+                <h3 class="card-title">{{ __('messages.search_marks_register') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -29,9 +29,9 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>Exam</label>
+                    <label>{{ __('messages.exam') }}</label>
                     <select class="form-control" name="exam_id" required>
-                        <option value="">Select</option>     
+                        <option value="">{{ __('messages.select') }}</option>     
                         @foreach($getExam as $exam)                                         
                           <option {{ (Request::get('exam_id') == $exam->id) ? 'selected' : '' }} value="{{ $exam->id }}">{{ $exam->name }}</option>
                         @endforeach
@@ -39,9 +39,9 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>Class</label>
+                    <label>{{ __('messages.class') }}</label>
                     <select class="form-control" name="class_id" required>
-                        <option value="">Select</option>                                              
+                        <option value="">{{ __('messages.select') }}</option>                                              
                         @foreach($getClass as $class)                                         
                           <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
@@ -50,8 +50,8 @@
           
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -68,21 +68,21 @@
           @if(!empty($getSubject) && !empty($getSubject->count()))
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Marks Register</h3>
+                <h3 class="card-title">{{ __('messages.marks_register') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0" style="overflow: auto;">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>STUDENT NAME</th>
+                      <th>{{ __('messages.student_name') }}</th>
                       @foreach($getSubject as $subject)
                       <th>
                         {{ $subject->subject_name }}  <br />
                         ({{ $subject->subject_type }} : {{ $subject->passing_mark }} / {{ $subject->full_marks }})
                       </th>
                       @endforeach
-                      <th>ACTION</th>                      
+                      <th>{{ __('messages.action') }}</th>                      
                     </tr>
                   </thead>
                   <tbody>
@@ -124,46 +124,45 @@
                                 <td>
                                   <div style="margin-bottom: 10px;">
                                       Class Work
-
                                       <input type="hidden" name="mark[{{ $i }}][full_marks]" value="{{ $subject->full_marks }}">
                                       <input type="hidden" name="mark[{{ $i }}][passing_mark]" value="{{ $subject->passing_mark }}">
                                       <input type="hidden" name="mark[{{ $i }}][id]" value="{{ $subject->id }}">
                                       <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
-                                      <input type="text" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" style="width:200px;" placeholder="Enter Marks" value="{{ !empty($getMark->class_work) ? $getMark->class_work : ''  }}" class="form-control">
+                                      <input type="text" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][class_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : ''  }}" class="form-control">
                                   </div>
                                   <div style="margin-bottom: 10px;">
-                                      Home Work
-                                      <input type="text" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][home_work]" style="width:200px;" placeholder="Enter Marks" value="{{ !empty($getMark->home_work) ? $getMark->home_work : ''  }}" class="form-control">
-                                  </div>
-
-                                  <div style="margin-bottom: 10px;">
-                                      Test Work
-                                      <input type="text" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][test_work]" style="width:200px;" placeholder="Enter Marks" value="{{ !empty($getMark->test_work) ? $getMark->test_work : ''  }}" class="form-control">
+                                    {{ __('messages.home_work') }}
+                                      <input type="text" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][home_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->home_work) ? $getMark->home_work : ''  }}" class="form-control">
                                   </div>
 
                                   <div style="margin-bottom: 10px;">
-                                      Exam
-                                      <input type="text" id="exam_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][exam]" style="width:200px;" placeholder="Enter Marks" class="form-control" value="{{ !empty($getMark->exam) ? $getMark->exam : ''  }}">
+                                      {{ __('messages.test_work') }}
+                                      <input type="text" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][test_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->test_work) ? $getMark->test_work : ''  }}" class="form-control">
                                   </div>
 
                                   <div style="margin-bottom: 10px;">
-                                    <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-schedule="{{ $subject->id }}" data-class="{{ Request::get('class_id') }}">Save</button>
+                                      {{ __('messages.exam') }}
+                                      <input type="text" id="exam_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][exam]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->exam) ? $getMark->exam : ''  }}" class="form-control">
+                                  </div>
+
+                                  <div style="margin-bottom: 10px;">
+                                    <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-schedule="{{ $subject->id }}" data-class="{{ Request::get('class_id') }}">{{ __('messages.save') }}</button>
                                   </div>
 
                                   @if(!empty($getMark))
                                     <div style="margin-bottom: 10px;">
-                                      <b>Total Mark :</b> {{ $totalMark }} <br />
-                                      <b>Passing Mark :</b> {{ $subject->passing_mark }} <br >
+                                      <b>{{ __('messages.total_mark') }} :</b> {{ $totalMark }} <br />
+                                      <b>{{ __('messages.passing_mark') }} :</b> {{ $subject->passing_mark }} <br >
                                       @php
                                           $getLoopGrade = App\Models\MarksGradeModel::getGrade($totalMark);
                                       @endphp
                                       @if(!empty($getLoopGrade))
-                                         <b>Grade :</b> {{ $getLoopGrade }} <br >
+                                         <b>{{ __('messages.grade') }} :</b> {{ $getLoopGrade }} <br >
                                       @endif
                                       @if($totalMark >= $subject->passing_mark)
-                                        Result : <span style="color:green; font-weight: bold;">Pass</span>
+                                      {{ __('messages.result') }} : <span style="color:green; font-weight: bold;">{{ __('messages.pass') }}</span>
                                       @else
-                                        Result : <span style="color:red; font-weight: bold;">Fail</span>
+                                      {{ __('messages.result') }} : <span style="color:red; font-weight: bold;">{{ __('messages.fail') }}</span>
                                         @php
                                           $pass_fail_vali = 1;
                                         @endphp
@@ -178,33 +177,33 @@
                               @endphp
                               @endforeach
                               <td style="min-width: 250px;">
-                                <button type="submit" class="btn btn-success">Save</button>
-                                <a class="btn btn-primary" target="_blank" href="{{ url('admin/my_exam_result/print?exam_id='.Request::get('exam_id').'&student_id='.$student->id) }}">Print</a>
+                                <button type="submit" class="btn btn-success">{{ __('messages.save') }}</button>
+                                <a class="btn btn-primary" target="_blank" href="{{ url('admin/my_exam_result/print?exam_id='.Request::get('exam_id').'&student_id='.$student->id) }}">{{ __('messages.print') }}</a>
 
                                 @if(!empty($totalStudentMark))
                                     <br >
                                     <br >
-                                    <b>Total Subject Mark :</b> {{ $totalFullMarks }} 
+                                    <b>{{ __('messages.total_subject_mark') }} :</b> {{ $totalFullMarks }} 
                                     <br >
-                                    <b>Total Passing Mark :</b> {{ $totalPassingMark }} 
+                                    <b>{{ __('messages.total_passing_mark') }} :</b> {{ $totalPassingMark }}
                                     <br />
-                                    <b>Total Student Mark :</b> {{ $totalStudentMark }} 
+                                    <b>{{ __('messages.total_student_mark') }} :</b> {{ $totalStudentMark }} 
                                     <br />
                                     @php
                                       $percentage = ($totalStudentMark * 100) / $totalFullMarks;
                                       $getGrade = App\Models\MarksGradeModel::getGrade($percentage);
                                     @endphp
                                     <br>
-                                    <b>Percentage :</b> {{ round($percentage,2) }}%
+                                    <b>{{ __('messages.percentage') }} :</b> {{ round($percentage,2) }}%
                                     <br>
                                     @if(!empty($getGrade))
-                                    <b>Grade :</b> {{ $getGrade }}
+                                    <b>{{ __('messages.grade') }} :</b> {{ $getGrade }}
                                     <br>
                                     @endif
                                     @if($pass_fail_vali == 0)
-                                      Result : <span style="color:green; font-weight: bold;">Pass</span>
+                                      {{ __('messages.result') }} : <span style="color:green; font-weight: bold;">{{ __('messages.pass') }}</span>
                                     @else
-                                      Result : <span style="color:red; font-weight: bold;">Fail</span>
+                                      {{ __('messages.result') }} : <span style="color:red; font-weight: bold;">{{ __('messages.fail') }}</span>
                                     @endif
                                 @endif
                               </td>

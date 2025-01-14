@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Subject</h1>
+            <h1>{{ __('messages.edit_subject') }}</h1>
           </div>
     
         </div>
@@ -26,26 +26,26 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Subject Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="Subject Name">
+                    <label>{{ __('messages.subject_name') }}</label>
+                    <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="{{ __('messages.subject_name') }}">
                   </div>
 
 
                  <div class="form-group">
-                    <label>Subject Type</label>
+                    <label>{{ __('messages.subject_type') }}</label>
                     <select class="form-control" name="type" required>
-                    	  <option value="">Select Type</option>
-                      	<option {{ ($getRecord->type == 'Theory') ? 'selected' : '' }} value="Theory">Theory</option>
-                        <option {{ ($getRecord->type == 'Practical') ? 'selected' : '' }} value="Practical">Practical</option>
+                    	  <option value="">{{ __('messages.select_type') }}</option>
+                      	<option {{ ($getRecord->type == 'Theory') ? 'selected' : '' }} value="Theory">{{ __('messages.theory') }}</option>
+                        <option {{ ($getRecord->type == 'Practical') ? 'selected' : '' }} value="Practical">{{ __('messages.practical') }}</option>
                     </select>
                     
                   </div>
 
                   <div class="form-group">
-                    <label>Status</label>
+                    <label>{{ __('messages.status') }}</label>
                     <select class="form-control" name="status">
-                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Active</option>
-                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inactive</option>
+                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">{{ __('messages.active') }}</option>
+                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">{{ __('messages.inactive') }}</option>
                     </select>
                     
                   </div>
@@ -55,7 +55,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.update') }}</button>
                 </div>
               </form>
             </div>

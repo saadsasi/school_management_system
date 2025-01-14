@@ -5,10 +5,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Notice Board</h1>
+            <h1>{{ __('messages.notice_board') }}</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/communicate/notice_board/add') }}" class="btn btn-primary">Add New Notice Board</a>
+              <a href="{{ url('admin/communicate/notice_board/add') }}" class="btn btn-primary">{{ __('messages.add_new_notice_board') }}</a>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Notice Board</h3>
+                <h3 class="card-title">{{ __('messages.search_notice_board') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -29,8 +29,8 @@
                     
                   
                   <div class="form-group col-md-2">
-                    <label>Title</label>
-                    <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="Title">
+                    <label>{{ __('messages.title') }}</label>
+                    <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="{{ __('messages.title') }}">
                   </div>
 
                  
@@ -39,35 +39,26 @@
 
 
                   <div class="form-group col-md-2">
-                    <label>Notice Date From</label>
+                    <label>{{ __('messages.notice_date') }}</label>
                     <input type="date" class="form-control" name="notice_date_from" value="{{ Request::get('notice_date_from') }}"  >
                   </div>
 
-                  <div class="form-group col-md-2">
-                    <label>Notice Date To</label>
-                    <input type="date" class="form-control" name="notice_date_to" value="{{ Request::get('notice_date_to') }}"  >
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label>Publish Date From</label>
-                    <input type="date" class="form-control" name="publish_date_from" value="{{ Request::get('publish_date_from') }}"  >
-                  </div>
 
 
                    <div class="form-group col-md-2">
-                    <label>Publish Date To</label>
+                    <label>{{ __('messages.publish_date') }}</label>
                     <input type="date" class="form-control" name="publish_date_to" value="{{ Request::get('publish_date_to') }}"  >
                   </div>
 
 
 
                   <div class="form-group col-md-2">
-                    <label>Message To</label>
+                    <label>{{ __('messages.message_to') }}</label>
                     <select class="form-control" name="message_to">
-                        <option value="">Select</option>
-                        <option {{ (Request::get('message_to') == 3) ? 'selected' : '' }} value="3">Student</option>
-                        <option {{ (Request::get('message_to') == 4) ? 'selected' : '' }} value="4">Parent</option>
-                        <option {{ (Request::get('message_to') == 2) ? 'selected' : '' }} value="2">Teacher</option>
+                        <option value="">{{ __('messages.select') }}</option>
+                        <option {{ (Request::get('message_to') == 3) ? 'selected' : '' }} value="3">{{ __('messages.student') }}</option>
+                        <option {{ (Request::get('message_to') == 4) ? 'selected' : '' }} value="4">{{ __('messages.parent') }}</option>
+                        <option {{ (Request::get('message_to') == 2) ? 'selected' : '' }} value="2">{{ __('messages.teacher') }}</option>
                     </select>
                   </div>
 
@@ -75,8 +66,8 @@
 
 
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 10px;">Search</button>
-                    <a href="{{ url('admin/communicate/notice_board') }}" class="btn btn-success" style="margin-top: 10px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 10px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/communicate/notice_board') }}" class="btn btn-success" style="margin-top: 10px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -89,20 +80,20 @@
             @include('_message')
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Notice Board List</h3>
+                <h3 class="card-title">{{ __('messages.notice_board_list') }}</h3>
               </div>
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Title</th>
-                      <th>Notice Date</th>
-                      <th>Publish Date</th>
-                      <th>Message To</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
-                      <th>Action</th>
+                      <th>{{ __('messages.title') }}</th>
+                      <th>{{ __('messages.notice_date') }}</th>
+                      <th>{{ __('messages.publish_date') }}</th>
+                      <th>{{ __('messages.message_to') }}</th>
+                      <th>{{ __('messages.created_by') }}</th>
+                      <th>{{ __('messages.created_date') }}</th>
+                      <th>{{ __('messages.action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -115,11 +106,11 @@
                           <td>
                             @foreach($value->getMessage as $message)
                                 @if($message->message_to == 2)
-                                  <div>Teacher</div>
+                                  <div>{{ __('messages.teacher') }}</div>
                                 @elseif($message->message_to == 3)
-                                  <div>Student</div>
+                                  <div>{{ __('messages.student') }}</div>
                                 @elseif($message->message_to == 4)
-                                  <div>Parent</div>
+                                  <div>{{ __('messages.parent') }}</div>
                                 @endif
                             @endforeach
                           </td>
@@ -127,16 +118,16 @@
                           <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                           <td>
 
-                            <a href="{{ url('admin/communicate/notice_board/edit/'.$value->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ url('admin/communicate/notice_board/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
 
-                            <a href="{{ url('admin/communicate/notice_board/delete/'.$value->id) }}" class="btn btn-danger">Delete</a>
+                            <a href="{{ url('admin/communicate/notice_board/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
 
 
                           </td>
                         </tr>
                     @empty
                       <tr>
-                        <td colspan="100%">Record not found.</td>
+                        <td colspan="100%">{{ __('messages.record_not_found') }}</td>
                       </tr>
                     @endforelse
                   </tbody>

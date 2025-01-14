@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Send Email</h1>
+            <h1>{{ __('messages.send_email') }}</h1>
           </div>
     
         </div>
@@ -34,34 +34,34 @@
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label>Subject</label>
-                    <input type="text" class="form-control" name="subject" required placeholder="Subject">
+                    <label>{{ __('messages.subject') }}</label>
+                    <input type="text" class="form-control" name="subject" required placeholder=" {{ __('messages.subject') }}">
                   </div>
 
 
                   <div class="form-group">
                     <label>User (Student / Parent / Teacher)</label>
                     <select name="user_id" class="form-control select2" style="width: 100%;">
-                      <option value="">Select</option>
+                      <option value="">{{ __('messages.select') }}</option>
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label style="display: block;">Message To </label>
-                    <label style="margin-right: 50px;"><input type="checkbox" value="3" name="message_to[]"> Student</label>
-                    <label style="margin-right: 50px;"><input type="checkbox" value="4" name="message_to[]"> Parent</label>
-                    <label><input type="checkbox" value="2" name="message_to[]"> Teacher</label>
+                    <label style="display: block;">{{ __('messages.send_to') }} </label>
+                    <label style="margin-right: 50px;"><input type="checkbox" value="3" name="message_to[]"> {{ __('messages.student') }}</label>
+                    <label style="margin-right: 50px;"><input type="checkbox" value="4" name="message_to[]"> {{ __('messages.parent') }}</label>
+                    <label><input type="checkbox" value="2" name="message_to[]"> {{ __('messages.teacher') }}</label>
                   </div>
 
 
                   <div class="form-group">
-                    <label>Message</label>
+                    <label>{{ __('messages.message') }}</label>
                     <textarea id="compose-textarea" name="message" class="form-control" style="height: 300px"></textarea>
                   </div>
                 
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Send Email</button>
+                  <button type="submit" class="btn btn-primary">{{ __('messages.send') }} {{ __('messages.email') }}</button>
                 </div>
               </form>
             </div>

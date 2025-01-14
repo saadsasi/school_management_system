@@ -6,7 +6,7 @@
       <div class="container-fluid">
          <div class="row mb-2">
             <div class="col-sm-6">
-               <h1>Student Subject <span style="color: blue;">({{ $getUser->name }} {{ $getUser->last_name }})</span></h1>
+               <h1>{{ __('messages.student_subject') }} <span style="color: blue;">({{ $getUser->name }} {{ $getUser->last_name }})</span></h1>
             </div>
          </div>
       </div>
@@ -22,16 +22,16 @@
                <!-- /.card -->
                <div class="card">
                   <div class="card-header">
-                     <h3 class="card-title">Student Subject</h3>
+                     <h3 class="card-title">{{ __('messages.student_subject') }}</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
                      <table class="table table-striped">
                         <thead>
                            <tr>
-                              <th>Subject Name</th>
-                              <th>Subject Type</th>
-                              <th>Action</th>
+                              <th>{{ __('messages.subject_name') }}</th>
+                              <th>{{ __('messages.subject_type') }}</th>
+                              <th>{{ __('messages.action') }}</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,7 @@
                                 <td>{{ $value->subject_type }}</td>
 
                                  <td>
-                                  <a href="{{ url('parent/my_student/subject/class_timetable/'.$value->class_id.'/'.$value->subject_id.'/'.$getUser->id) }}" class="btn btn-primary">My Class Timetable</a>
+                                  <a href="{{ url('parent/my_student/subject/class_timetable/'.$value->class_id.'/'.$value->subject_id.'/'.$getUser->id) }}" class="btn btn-primary">{{ __('messages.my_class_timetable') }}</a>
                                 </td>  
 
 

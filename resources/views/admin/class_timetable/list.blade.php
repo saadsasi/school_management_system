@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Class Timetable</h1>
+            <h1>{{ __('messages.class_timetable') }}</h1>
           </div>
       
 
@@ -37,7 +37,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Class Timetable</h3>
+                <h3 class="card-title">{{ __('messages.search_class_timetable') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -45,9 +45,9 @@
                     
                   
                   <div class="form-group col-md-3">
-                    <label>Class Name</label>
+                    <label>{{ __('messages.class_name') }}</label>
                     <select class="form-control getClass" name="class_id" required>
-                        <option value="">Select</option>
+                        <option value="">{{ __('messages.select') }}</option>
                         @foreach($getClass as $class)
                           <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                         @endforeach
@@ -56,9 +56,9 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>Subject Name</label>
+                    <label>{{ __('messages.subject_name') }}</label>
                     <select class="form-control getSubject" name="subject_id" required>
-                        <option value="">Select</option>
+                        <option value="">{{ __('messages.select') }}</option>
                         @if(!empty($getSubject))
                            @foreach($getSubject as $subject)
                             <option {{ (Request::get('subject_id') == $subject->subject_id) ? 'selected' : '' }} value="{{ $subject->subject_id }}">{{ $subject->subject_name }}</option>
@@ -69,8 +69,8 @@
                  
               
                   <div class="form-group col-md-3">
-                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
-                    <a href="{{ url('admin/class_timetable/list') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>
+                    <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
+                    <a href="{{ url('admin/class_timetable/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
 
                   </div>
 
@@ -87,17 +87,17 @@
                 <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
               <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Class Timetable</h3>
+                <h3 class="card-title">{{ __('messages.class_timetable') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Week</th>
-                      <th>Start Time</th>
-                      <th>End Time</th>
-                      <th>Room Number</th>
+                      <th>{{ __('messages.week') }}</th>
+                      <th>{{ __('messages.start_time') }}</th>
+                      <th>{{ __('messages.end_time') }}</th>
+                      <th>{{ __('messages.room_number') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -128,7 +128,7 @@
                 </table>
 
                 <div style="text-align: center; padding: 20px;">
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary">{{ __('messages.submit') }}</button>
                 </div>
                 
 

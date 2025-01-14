@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ __('messages.attendance_report') }} <span style="color:blue">(Total : {{ $getRecord->total() }})</span> </h1>
+            <h1>{{ __('messages.attendance_report') }} <span style="color:blue">({{__('messages.total')}} : {{ $getRecord->total() }})</span> </h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->

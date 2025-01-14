@@ -530,7 +530,8 @@ return [
         'roll_number' => 'Roll Number',
         'i_already_have_an_account' => 'I already have an account',
         'password_note' => 'do you need to change your password? if so please add new password',
-
+        'profile_picture' => 'Profile Picture',
+        'confirm_password' => 'Confirm Password',
         // Stripe Charge Page
      'stripe_checkout' => 'Stripe Checkout',
      

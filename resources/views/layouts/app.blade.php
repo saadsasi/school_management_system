@@ -32,7 +32,105 @@
   <link rel="stylesheet" href="{{ url('plugins/summernote/summernote-bs4.min.css') }}">
 
   @yield('style')
-</head>
+    <!-- Dark Mode Styles -->
+    <style>
+  /* Default (Light) mode styles */
+body {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    transition: all 0.3s ease;
+}
+
+/* Navbar Light Mode Styles */
+.main-header {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #333333 !important;
+    font-weight: 500 !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #007bff !important;
+    background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+    color: #007bff !important;
+    background-color: rgba(0, 123, 255, 0.1) !important;
+}
+
+/* Sidebar Light Mode */
+.main-sidebar {
+    background-color: #343a40 !important;
+}
+
+.main-sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+.main-sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #e4e6eb !important;
+}
+
+body.dark-mode .main-header {
+    background-color: #242526 !important;
+    border-bottom: 1px solid #393a3b !important;
+}
+
+body.dark-mode .navbar-nav .nav-link {
+    color: #e4e6eb !important;
+}
+
+body.dark-mode .navbar-nav .nav-link:hover {
+    background-color: #3a3b3c !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .main-sidebar {
+    background-color: #242526 !important;
+}
+
+body.dark-mode .nav-link {
+    color: #e4e6eb !important;
+}
+
+body.dark-mode .nav-link:hover {
+    background-color: #3a3b3c !important;
+    color: #ffffff !important;
+}
+
+/* Rest of your dark mode styles... */
+body.dark-mode .card,
+body.dark-mode .info-box {
+    background-color: #242526 !important;
+    color: #e4e6eb !important;
+    border: 1px solid #393a3b !important;
+}
+
+body.dark-mode .table {
+    color: #e4e6eb !important;
+    background-color: #242526 !important;
+}
+
+/* Smooth transitions */
+.main-header,
+.main-sidebar,
+.nav-link,
+.navbar {
+    transition: all 0.3s ease !important;
+}
+    </style>
+ </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
@@ -80,6 +178,19 @@
 <script src="{{ url('dist/js/pages/dashboard.js') }}"></script>
 
 @yield('script')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const darkModeIcon = document.getElementById('darkModeIcon');
+      const darkModeText = document.getElementById('darkModeText');
+      
+      // Check if user preference exists
+      const isDarkMode = localStorage.getItem('darkMode') === 'true';
+      
+      // Set initial state
+      setDarkMode(isDarkMode);
+          });
 
+</script>
 </body>
 </html>

@@ -769,65 +769,33 @@
     </div>    <!-- /.sidebar -->
   </aside>
 
-  <!-- Dark Mode Styles -->
-  <style>
-    body.dark-mode {
-      background-color: #1a1a1a !important;
-      color: #ffffff !important;
-    }
-    
-    body.dark-mode .main-sidebar {
-      background-color: #2d2d2d !important;
-    }
-    
-    body.dark-mode .main-header {
-      background-color: #2d2d2d !important;
-      color: #ffffff !important;
-    }
-    
-    body.dark-mode .nav-link {
-      color: #ffffff !important;
-    }
-    
-    body.dark-mode .card {
-      background-color: #2d2d2d !important;
-      color: #ffffff !important;
-    }
-  </style>
+
+
 
   <!-- Dark Mode Script -->
- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const darkModeIcon = document.getElementById('darkModeIcon');
-      const darkModeText = document.getElementById('darkModeText');
-      
-      // Check for saved dark mode preference
-      const isDarkMode = localStorage.getItem('darkMode') === 'true';
-      if (isDarkMode) {
-          document.body.classList.add('dark-mode');
-          darkModeIcon.classList.remove('fa-moon');
-          darkModeIcon.classList.add('fa-sun');
-         // darkModeText.textContent = '{{ __('messages.light_mode') }}';
-      }
-      
+  <script>
+  
+      // Toggle dark mode
       darkModeToggle.addEventListener('click', function(e) {
           e.preventDefault();
-          document.body.classList.toggle('dark-mode');
-          
-       //   const isDark = document.body.classList.contains('dark-mode');
+          const isDark = !document.body.classList.contains('dark-mode');
+          setDarkMode(isDark);
           localStorage.setItem('darkMode', isDark);
-          
+      });
+      
+      function setDarkMode(isDark) {
           if (isDark) {
+              document.body.classList.add('dark-mode');
               darkModeIcon.classList.remove('fa-moon');
               darkModeIcon.classList.add('fa-sun');
-          //    darkModeText.textContent = '{{ __('messages.light_mode') }}';
+              darkModeText.textContent = 'Light Mode';
           } else {
-              darkModeIcon.classList.remove('fa-sun');
+              document.body.classList.remove('dark-mode');
               darkModeIcon.classList.add('fa-moon');
-           //   darkModeText.textContent = '{{ __('messages.dark_mode') }}';
+              darkModeIcon.classList.remove('fa-sun');
+              darkModeText.textContent = 'Dark Mode';
           }
-      });
-  });
-  </script>  
+      }
+ 
+</script>  
   

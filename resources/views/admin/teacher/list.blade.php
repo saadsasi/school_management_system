@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ __('messages.teacher_list') }} (total : {{ $getRecord->total() }})</h1>
+            <h1>{{ __('messages.teacher_list') }} ({{__('messages.total')}} : {{ $getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
               <a href="{{ url('admin/teacher/add') }}" class="btn btn-primary">{{ __('messages.add_new_teacher') }}</a>

@@ -59,7 +59,7 @@
                   <div class="form-group col-md-2">
                     <label>{{ __('messages.status') }}</label>
                     <select class="form-control" name="status">
-                        <option value="">Select</option>
+                        <option value="">{{__('messages.select')}}</option>
                         <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">{{ __('messages.active') }}</option>
                         <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">{{ __('messages.inactive') }}</option>
                     </select>

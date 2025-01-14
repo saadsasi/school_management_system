@@ -19,10 +19,9 @@ public function handle(Request $request, Closure $next)
         else
         {
             Auth::logout();
-            return redirect(url('/'))->withErrors(
-                'Your account is inactive'
-            );
-        }            
+            return redirect(url('/'))->withError('Your account is inactive');
+        } 
+           
     }
     else
     {

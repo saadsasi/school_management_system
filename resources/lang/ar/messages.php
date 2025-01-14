@@ -524,7 +524,8 @@ return [
         'roll_number' => 'رقم اللفة',
         'i_already_have_an_account' => 'لدي حساب بالفعل',
         'password_note' => 'هل تحتاج إلى تغيير كلمة المرور الخاصة بك؟ إذا كان الأمر كذلك، يرجى إضافة كلمة مرور جديدة',
-    
+        'profile_picture' => 'صورة الملف الشخصي',
+        'confirm_password' => 'تأكيد كلمة المرور',
         // صفحة الدفع عبر Stripe
         'stripe_checkout' => 'الدفع عبر Stripe',    
 ];

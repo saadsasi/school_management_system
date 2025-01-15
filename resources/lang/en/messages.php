@@ -26,6 +26,7 @@ return [
     'student_details' => 'Student Details',
     'search_student' => 'Search Student',
     'parent' => 'Parent',
+    'add_student_to_parent' => 'Add Student To Parent',
     'edit_parent' => 'Edit Parent',
     'add_new_parent' => 'Add New Parent',
     'add_parent' => 'Add New Parent',
@@ -205,6 +206,7 @@ return [
     'profile_pic' => 'Profile Pic',
     'edit' => 'Edit',
     'delete' => 'Deactivate',
+    'delete_student' => 'Remove',
     'send_message' => 'Send Message',
     
     // Edit Admin Page

@@ -204,6 +204,7 @@ return [
     'profile_pic' => 'صورة الملف الشخصي',
     'edit' => 'تعديل',
     'delete' => 'إلغاء التفعيل',
+    'delete_student' => 'إزالة',
     'send_message' => 'إرسال رسالة',
 
     // Edit Admin Page
@@ -412,6 +413,7 @@ return [
         'parent_blood_group' => 'فصيلة الدم',
         'parent_height' => 'الطول',
         'parent_weight' => 'الوزن',
+        'add_student_to_parent' => 'اضافة طالب لولي الأمر',
         'parent_created_date' => 'تاريخ الإنشاء',
         'parent_action' => 'الإجراء',
         'parent_subject' => 'الموضوع',

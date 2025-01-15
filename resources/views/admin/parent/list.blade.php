@@ -130,7 +130,7 @@
                           <td>
                             <a href="{{ url('admin/parent/edit/'.$value->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
                             <a href="{{ url('admin/parent/delete/'.$value->id) }}" class="btn btn-danger"> {{__('messages.delete')}} </a>
-                            <a href="{{ url('admin/parent/my-student/'.$value->id) }}" class="btn btn-primary"> {{__('messages.my_student')}} </a>
+                            <a href="{{ url('admin/parent/my-student/'.$value->id) }}" class="btn btn-secondary"> {{__('messages.my_student')}} </a>
                             <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success"> {{__('messages.send_message')}} </a>
                           </td>
                         </tr>

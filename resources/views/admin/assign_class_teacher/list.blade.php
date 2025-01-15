@@ -45,32 +45,17 @@
                   <div class="row">
                     
                   
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>{{ __('messages.class_name') }}</label>
-                    <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name"  placeholder="Class Name">
+                    <input type="text" class="form-control" value="{{ Request::get('class_name') }}" name="class_name"  placeholder="{{ __('messages.class_name') }}">
                   </div>
 
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>{{ __('messages.teacher_name') }}</label>
-                    <input type="text" class="form-control" value="{{ Request::get('teacher_name') }}" name="teacher_name"  placeholder="Teacher Name">
+                    <input type="text" class="form-control" value="{{ Request::get('teacher_name') }}" name="teacher_name"  placeholder="{{ __('messages.teacher_name') }}">
                   </div>
 
-
-                  <div class="form-group col-md-2">
-                    <label>{{ __('messages.status') }}</label>
-                    <select class="form-control" name="status">
-                        <option value="">{{__('messages.select')}}</option>
-                        <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">{{ __('messages.active') }}</option>
-                        <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">{{ __('messages.inactive') }}</option>
-                    </select>
-                  </div>
-                 
-                 
-                  <div class="form-group col-md-2">
-                    <label>{{ __('messages.date') }}</label>
-                    <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}" >
-                  </div>
-
+                
                   <div class="form-group col-md-2">
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
                     <a href="{{ url('admin/assign_class_teacher/list') }}" class="btn btn-success" style="margin-top: 30px;">{{ __('messages.reset') }}</a>
@@ -123,8 +108,6 @@
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
                                <a href="{{ url('admin/assign_class_teacher/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
-
-                               <a href="{{ url('admin/assign_class_teacher/edit_single/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit_single') }}</a>
 
                                 <a href="{{ url('admin/assign_class_teacher/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
 

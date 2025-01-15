@@ -109,7 +109,7 @@
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
                              <a href="{{ url('admin/assign_subject/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
-                             <a href="{{ url('admin/assign_subject/edit_single/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit_single') }}</a>
+                             {{-- <a href="{{ url('admin/assign_subject/edit_single/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit_single') }}</a> --}}
                             <a href="{{ url('admin/assign_subject/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
 
                           </td>

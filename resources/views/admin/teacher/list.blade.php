@@ -128,7 +128,7 @@
                           <form action="{{ url('admin/teacher/toggle-supervisor/'.$value->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn {{ $value->is_supervisor ? 'btn-danger' : 'btn-success' }}">
-                                {{ $value->is_supervisor ? 'remove supervisor' : 'make supervisor' }}
+                                {{ $value->is_supervisor ? __('messages.remove_supervisor') : __('messages.make_supervisor') }}
                             </button>
                         </form>
 

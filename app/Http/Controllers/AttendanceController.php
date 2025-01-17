@@ -29,28 +29,31 @@ class AttendanceController extends Controller
 
     public function AttendanceStudentSubmit(Request $request)
     {
+        $attendance_data = $request->attendance_data;
+        $success_count = 0;
 
-        $check_attendance = StudentAttendanceModel::CheckAlreadyAttendance($request->student_id, $request->class_id, $request->attendance_date);
+        foreach ($attendance_data as $data) {
+            $check_attendance = StudentAttendanceModel::CheckAlreadyAttendance($data['student_id'], $request->class_id, $request->attendance_date);
 
-        if(!empty($check_attendance))
-        {
-            $attendance = $check_attendance;
+            if(!empty($check_attendance)) {
+                $attendance = $check_attendance;
+            } else {
+                $attendance = new StudentAttendanceModel;
+                $attendance->student_id = $data['student_id'];
+                $attendance->class_id = $request->class_id;
+                $attendance->attendance_date = $request->attendance_date;
+                $attendance->created_by = Auth::user()->id;
+            }
+
+            $attendance->attendance_type = $data['attendance_type'];
+            $attendance->notes = $data['notes'] ?? null;
+            $attendance->save();
+            
+            $success_count++;
         }
-        else
-        {
-            $attendance = new StudentAttendanceModel;
-            $attendance->student_id = $request->student_id;
-            $attendance->class_id = $request->class_id;
-            $attendance->attendance_date = $request->attendance_date;
-            $attendance->created_by = Auth::user()->id;
-        }
 
-        $attendance->attendance_type = $request->attendance_type;
-        $attendance->save();
-
-        $json['message'] = "Attendance Successfully Saved";
-
-        echo json_encode($json);
+        $json['message'] = $success_count . " Student Attendance Records Successfully Saved";
+        return response()->json($json);
     }
 
 

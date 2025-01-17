@@ -53,11 +53,28 @@
                     </div>  
 
                     <div class="form-group col-md-6">
-                      <label>{{__('messages.class')}} <span style="color: red;">*</span></label>
-                      <select class="form-control" required name="class_id">
+                      <label>{{__('messages.grade_level')}} <span style="color: red;">*</span></label>
+                      <select class="form-control" required name="grade_level" id="grade_level">
+                          <option value="">{{__('messages.select_grade_level')}}</option>
+                          <option value="first_primary">الصف الأول الابتدائي</option>
+                          <option value="second_primary">الصف الثاني الابتدائي</option>
+                          <option value="third_primary">الصف الثالث الابتدائي</option>
+                          <option value="fourth_primary">الصف الرابع الابتدائي</option>
+                          <option value="fifth_primary">الصف الخامس الابتدائي</option>
+                          <option value="sixth_primary">الصف السادس الابتدائي</option>
+                          <option value="first_preparatory">الصف الأول الإعدادي</option>
+                          <option value="second_preparatory">الصف الثاني الإعدادي</option>
+                          <option value="third_preparatory">الصف الثالث الإعدادي</option>
+                      </select>
+                      <div style="color:red">{{ $errors->first('grade_level') }}</div>
+                    </div>  
+
+                    <div class="form-group col-md-6">
+                      <label>{{__('messages.class_name')}} </label>
+                      <select class="form-control"  name="class_id" id="class_id">
                           <option value="">{{__('messages.select_class')}}</option>
                           @foreach($getClass as $value)
-                            <option {{ (old('class_id') == $value->id) ? 'selected' : '' }} value="{{ $value->id }}">{{ $value->name }}</option>
+                            <option {{ (old('class_id') == $value->id) ? 'selected' : '' }} value="{{ $value->id }}" data-grade="{{ $value->grade_level }}">{{ $value->name }}</option>
                           @endforeach
                       </select>
                       <div style="color:red">{{ $errors->first('class_id') }}</div>
@@ -146,8 +163,6 @@
                     <label>{{__('messages.password')}} <span style="color: red;">*</span></label>
                     <input type="password" class="form-control" name="password" required placeholder="{{__('messages.password')}}">
                   </div>
-               
-                
                 </div>
                 <!-- /.card-body -->
 
@@ -156,18 +171,37 @@
                 </div>
               </form>
             </div>
-         
-
           </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-       
-          <!--/.col (right) -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content -->
   </div>
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+$(document).ready(function() {
+    // Hide all class options initially except the placeholder
+    $("#class_id option:not(:first)").hide();
+    
+    // When grade level changes
+    $("#grade_level").change(function() {
+        var selectedGrade = $(this).val();
+        
+        // Reset class selection
+        $("#class_id").val("");
+        
+        // Hide all options first
+        $("#class_id option:not(:first)").hide();
+        
+        // Show only classes matching the selected grade
+        $("#class_id option").each(function() {
+            if ($(this).data('grade') === selectedGrade) {
+                $(this).show();
+            }
+        });
+    });
+});
+</script>
 @endsection

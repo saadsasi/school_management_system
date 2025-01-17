@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SubjectModel;
 use App\Models\ClassSubjectModel;
 use App\Models\User;
+use App\Models\ClassModel;
 
 use Auth;
 
@@ -29,12 +30,31 @@ class SubjectController extends Controller
     {
         $save = new SubjectModel;
         $save->name = trim($request->name);
+        $save->grade_level = $request->grade_level;
         $save->type = trim($request->type);
         $save->status = trim($request->status);
         $save->created_by = Auth::user()->id;
         $save->save();
 
-        return redirect('admin/subject/list')->with('success', "Subject Sucessfully Created");
+        // Get all classes with the same grade level
+        $classes = ClassModel::getClassesByGradeLevel($request->grade_level);
+        
+        // Assign the subject to all matching classes
+        foreach ($classes as $class) {
+            // Check if the subject is not already assigned to this class
+            $check = ClassSubjectModel::getAlreadyFirst($class->id, $save->id);
+            
+            if (empty($check)) {
+                $assign = new ClassSubjectModel;
+                $assign->class_id = $class->id;
+                $assign->subject_id = $save->id;
+                $assign->status = 0; // Active
+                $assign->created_by = Auth::user()->id;
+                $assign->save();
+            }
+        }
+
+        return redirect('admin/subject/list')->with('success', "Subject Successfully Created and Assigned to Classes");
     }
 
     public function edit($id)
@@ -54,12 +74,46 @@ class SubjectController extends Controller
     public function update($id, Request $request)
     {
         $save = SubjectModel::getSingle($id);
+        $oldGradeLevel = $save->grade_level;
+        
         $save->name = trim($request->name);
+        $save->grade_level = $request->grade_level;
         $save->type = trim($request->type);
         $save->status = trim($request->status);
         $save->save();
 
-        return redirect('admin/subject/list')->with('success', "Subject Sucessfully Updated");
+        // If grade level has changed
+        if ($oldGradeLevel !== $request->grade_level) {
+            // Remove subject from classes of old grade level
+            $oldClasses = ClassModel::getClassesByGradeLevel($oldGradeLevel);
+            foreach ($oldClasses as $class) {
+                $assignment = ClassSubjectModel::getAlreadyFirst($class->id, $id);
+                if ($assignment) {
+                    $assignment->is_delete = 1;
+                    $assignment->save();
+                }
+            }
+
+            // Assign to classes of new grade level
+            $newClasses = ClassModel::getClassesByGradeLevel($request->grade_level);
+            foreach ($newClasses as $class) {
+                $check = ClassSubjectModel::getAlreadyFirst($class->id, $id);
+                
+                if (empty($check)) {
+                    $assign = new ClassSubjectModel;
+                    $assign->class_id = $class->id;
+                    $assign->subject_id = $id;
+                    $assign->status = 0;
+                    $assign->created_by = Auth::user()->id;
+                    $assign->save();
+                } elseif ($check->is_delete == 1) {
+                    $check->is_delete = 0;
+                    $check->save();
+                }
+            }
+        }
+
+        return redirect('admin/subject/list')->with('success', "Subject Successfully Updated");
     }
 
     public function delete($id)

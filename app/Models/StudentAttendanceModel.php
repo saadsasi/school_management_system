@@ -12,6 +12,14 @@ class StudentAttendanceModel extends Model
 
     protected $table = 'student_attendance';
 
+    protected $fillable = [
+        'student_id',
+        'class_id',
+        'attendance_date',
+        'attendance_type',
+        'notes',
+        'created_by'
+    ];
 
     static public function CheckAlreadyAttendance($student_id, $class_id, $attendance_date)
     {
@@ -44,6 +52,11 @@ class StudentAttendanceModel extends Model
                     if(!empty(Request::get('class_id')))
                     {
                         $return = $return->where('student_attendance.class_id', '=', Request::get('class_id'));
+                    }
+
+                    if(!empty(Request::get('grade_level')))
+                    {
+                        $return = $return->where('class.grade_level', '=', Request::get('grade_level'));
                     }
 
                     if(!empty(Request::get('start_attendance_date')))

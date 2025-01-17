@@ -66,12 +66,18 @@
               <input type="text" class="form-control" name="admission_number" value="{{ old('admission_number') }}">
             </div>
             <div class="form-group col-md-6">
-              <label>{{__('messages.class')}} <span style="color: red;">*</span></label>
-              <select class="form-control" name="class_id">
-                <option value="">Select Class</option>
-                @foreach($getClass ?? [] as $class)
-                  <option value="{{ $class->id }}">{{ $class->name }}</option>
-                @endforeach
+              <label>{{__('messages.grade_level')}} <span style="color: red;">*</span></label>
+              <select class="form-control" name="grade_level">
+                  <option value="">{{__('messages.select_grade_level')}}</option>
+                  <option value="first_primary">{{__('messages.first_primary')}}</option>
+                  <option value="second_primary">{{__('messages.second_primary')}}</option>
+                  <option value="third_primary">{{__('messages.third_primary')}}</option>
+                  <option value="fourth_primary">{{__('messages.fourth_primary')}}</option>
+                  <option value="fifth_primary">{{__('messages.fifth_primary')}}</option>
+                  <option value="sixth_primary">{{__('messages.sixth_primary')}}</option>
+                  <option value="first_preparatory">{{__('messages.first_preparatory')}}</option>
+                  <option value="second_preparatory">{{__('messages.second_preparatory')}}</option>
+                  <option value="third_preparatory">{{__('messages.third_preparatory')}}</option>
               </select>
             </div>
             <div class="form-group col-md-6">

@@ -67,6 +67,7 @@
                             <th>{{ __('messages.student_id') }}</th>
                             <th>{{ __('messages.student_name') }}</th>
                             <th>{{ __('messages.attendance') }}</th>
+                            <th>{{ __('messages.notes') }}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -87,24 +88,30 @@
                                  <td>{{ $value->name }} {{ $value->last_name }}</td>
                                  <td>
                                   <label style="margin-right: 10px;">
-                                    <input value="1" type="radio" {{ ($attendance_type == '1') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> {{ __('messages.present') }}
+                                    <input value="1" type="radio" {{ ($attendance_type == '1') ? 'checked' : '' }} id="{{ $value->id }}" class="attendance-radio" name="attendance{{ $value->id }}"> {{ __('messages.present') }}
                                   </label>
                                   <label style="margin-right: 10px;">
-                                    <input value="2" type="radio" {{ ($attendance_type == '2') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> {{ __('messages.late') }}
+                                    <input value="2" type="radio" {{ ($attendance_type == '2') ? 'checked' : '' }} id="{{ $value->id }}" class="attendance-radio" name="attendance{{ $value->id }}"> {{ __('messages.late') }}
                                   </label>
                                   <label style="margin-right: 10px;">
-                                    <input value="3" type="radio" {{ ($attendance_type == '3') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance" name="attendance{{ $value->id }}"> {{ __('messages.absent') }}
+                                    <input value="3" type="radio" {{ ($attendance_type == '3') ? 'checked' : '' }} id="{{ $value->id }}" class="attendance-radio" name="attendance{{ $value->id }}"> {{ __('messages.absent') }}
                                   </label>
                                   <label>
-                                    <input value="4" type="radio" {{ ($attendance_type == '4') ? 'checked' : '' }} id="{{ $value->id }}" class="SaveAttendance"  name="attendance{{ $value->id }}"> {{ __('messages.half_day') }}
+                                    <input value="4" type="radio" {{ ($attendance_type == '4') ? 'checked' : '' }} id="{{ $value->id }}" class="attendance-radio" name="attendance{{ $value->id }}"> {{ __('messages.half_day') }}
                                   </label>
 
+                                 </td>
+                                 <td>
+                                    <textarea name="notes{{ $value->id }}" class="form-control attendance-notes" rows="1" placeholder="{{ __('messages.enter_notes') }}">{{ !empty($getAttendance->notes) ? $getAttendance->notes : '' }}</textarea>
                                  </td>
                                </tr>
                              @endforeach
                           @endif
                         </tbody>
                       </table>
+                    </div>
+                    <div class="card-footer">
+                      <button type="button" class="btn btn-primary" id="saveAllAttendance">{{ __('messages.save_all_attendance') }}</button>
                     </div>
                   </div>
             @endif
@@ -118,33 +125,46 @@
 
 @endsection
 
-@section('script').
+@section('script')
 
 <script type="text/javascript">
-  $('.SaveAttendance').change(function(e) {
+  $('#saveAllAttendance').click(function(e) {
+    var attendanceData = [];
+    
+    // Collect all attendance data
+    $('.attendance-radio:checked').each(function() {
+      var student_id = $(this).attr('id');
+      var attendance_type = $(this).val();
+      var notes = $('textarea[name="notes'+student_id+'"]').val();
+      
+      attendanceData.push({
+        student_id: student_id,
+        attendance_type: attendance_type,
+        notes: notes
+      });
+    });
 
-    var student_id = $(this).attr('id');
-    var attendance_type = $(this).val();
     var class_id = $('#getClass').val();
     var attendance_date = $('#getAttendanceDate').val();
    
-    
+    // Send all attendance data at once
     $.ajax({
           type: "POST",
           url: "{{ url('admin/attendance/student/save') }}",
           data : {
              "_token": "{{ csrf_token() }}",
-            student_id : student_id,
-            attendance_type : attendance_type,
+            attendance_data: attendanceData,
             class_id : class_id,
             attendance_date : attendance_date,           
           },
           dataType : "json",
           success: function(data) {
               alert(data.message);
+          },
+          error: function(xhr, status, error) {
+              alert('Error saving attendance. Please try again.');
           }
-      });
-
+    });
   });
 </script>
 

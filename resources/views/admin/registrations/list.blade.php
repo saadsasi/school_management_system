@@ -71,7 +71,7 @@
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <p><strong> {{__('messages.admission_number')}}:</strong> {{ $user->admission_number }}</p>
-                                                                    <p><strong> {{__('messages.class')}}:</strong> {{ $user->class_id }}</p>
+                                                                    <p><strong> {{__('messages.grade_level')}}:</strong> {{ $user->grade_level }}</p>
                                                                     <p><strong> {{__('messages.roll_number')}}:</strong> {{ $user->roll_number }}</p>
                                                                     <p><strong> {{__('messages.date_of_birth')}}:</strong> {{ $user->date_of_birth }}</p>
                                                                 </div>

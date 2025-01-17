@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ClassSubjectController;
+use App\Http\Controllers\TeacherSubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
@@ -130,9 +131,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/parent/export_excel', [ParentController::class, 'export_excel']);
     
 
-    
-
-
+    // Teacher Subject Routes
+    Route::get('admin/teacher_subject/list', [TeacherSubjectController::class, 'index']);
+    Route::get('admin/teacher_subject/add/{teacher_id}', [TeacherSubjectController::class, 'add']);
+    Route::post('admin/teacher_subject/add', [TeacherSubjectController::class, 'store']);
+    Route::get('admin/teacher_subject/view/{teacher_id}', [TeacherSubjectController::class, 'view']);
+    Route::get('admin/teacher_subject/edit/{teacher_id}', [TeacherSubjectController::class, 'editSubjects']);
+    Route::get('admin/teacher_subject/delete/{id}', [TeacherSubjectController::class, 'delete']);
+    Route::post('admin/teacher_subject/update/{teacher_id}', [TeacherSubjectController::class, 'update']);
+    Route::get('admin/teacher_subject/get-classes-subjects', [TeacherSubjectController::class, 'getClassesAndSubjects']);
 
     // class url
 

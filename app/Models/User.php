@@ -23,6 +23,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'grade_level',
         'user_type',
         'gender',
         'mobile_number',
@@ -95,6 +96,11 @@ class User extends Authenticatable
 
         return $return;
 
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(TeacherSubject::class, 'teacher_id');
     }
 
     static public function getAdmin()
@@ -231,7 +237,7 @@ class User extends Authenticatable
 
     static public function getStudent($remove_pagination = 0)
     {
-        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+        $return = self::select('users.*', 'class.name as class_name', 'class.grade_level', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
                         ->join('users as parent','parent.id', '=', 'users.parent_id', 'left')
                         ->join('class', 'class.id', '=', 'users.class_id', 'left')
                         ->where('users.user_type','=',3)
@@ -264,6 +270,11 @@ class User extends Authenticatable
                         if(!empty(Request::get('class')))
                         {
                             $return = $return->where('class.name','like', '%'.Request::get('class').'%');
+                        }
+
+                        if(!empty(Request::get('grade_level')))
+                        {
+                            $return = $return->where('class.grade_level','=', Request::get('grade_level'));
                         }
 
                         if(!empty(Request::get('gender')))

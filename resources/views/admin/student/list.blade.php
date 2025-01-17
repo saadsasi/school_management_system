@@ -87,6 +87,7 @@
                     <input type="hidden" name="roll_number" value="{{ Request::get('roll_number') }}">
                     <input type="hidden" name="gender" value="{{ Request::get('gender') }}">
                     <input type="hidden" name="class" value="{{ Request::get('class') }}">
+                    <input type="hidden" name="grade_level" value="{{ Request::get('grade_level') }}">
                     <input type="hidden" name="mobile_number" value="{{ Request::get('mobile_number') }}">
                     <input type="hidden" name="blood_group" value="{{ Request::get('blood_group') }}">
                     <input type="hidden" name="status" value="{{ Request::get('status') }}">
@@ -108,6 +109,7 @@
                       <th>{{ __('messages.admission_number') }}</th>
                       <th>{{ __('messages.roll_number') }}</th>
                       <th>{{ __('messages.class') }}</th>
+                      <th>{{ __('messages.grade_level') }}</th>
                       <th>{{ __('messages.gender') }}</th>
                       <th>{{ __('messages.date_of_birth') }} </th>
                       <th>{{ __('messages.mobile_number') }}</th>
@@ -136,7 +138,8 @@
                           <td>{{ $value->admission_number }}</td>
                           <td>{{ $value->roll_number }}</td>
                           <td>{{ $value->class_name }}</td>
-                          <td>{{ $value->gender }}</td>
+                          <td>{{ __('messages.'.$value->grade_level) }}</td>
+                          <td>{{ __('messages.'.$value->gender) }}</td>
                           <td>
                               @if(!empty($value->date_of_birth))
                               {{ date('d-m-Y', strtotime($value->date_of_birth)) }}

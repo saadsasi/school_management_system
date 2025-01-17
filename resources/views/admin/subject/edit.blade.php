@@ -30,6 +30,20 @@
                     <input type="text" class="form-control" name="name" value="{{ $getRecord->name }}" required placeholder="{{ __('messages.subject_name') }}">
                   </div>
 
+                  <div class="form-group">
+                    <label>{{ __('messages.grade_level') }}</label>
+                    <select class="form-control" name="grade_level" required>
+                        <option value="first_primary" {{ ($getRecord->grade_level == 'first_primary') ? 'selected' : '' }}>الصف الأول الابتدائي</option>
+                        <option value="second_primary" {{ ($getRecord->grade_level == 'second_primary') ? 'selected' : '' }}>الصف الثاني الابتدائي</option>
+                        <option value="third_primary" {{ ($getRecord->grade_level == 'third_primary') ? 'selected' : '' }}>الصف الثالث الابتدائي</option>
+                        <option value="fourth_primary" {{ ($getRecord->grade_level == 'fourth_primary') ? 'selected' : '' }}>الصف الرابع الابتدائي</option>
+                        <option value="fifth_primary" {{ ($getRecord->grade_level == 'fifth_primary') ? 'selected' : '' }}>الصف الخامس الابتدائي</option>
+                        <option value="sixth_primary" {{ ($getRecord->grade_level == 'sixth_primary') ? 'selected' : '' }}>الصف السادس الابتدائي</option>
+                        <option value="first_preparatory" {{ ($getRecord->grade_level == 'first_preparatory') ? 'selected' : '' }}>الصف الأول الإعدادي</option>
+                        <option value="second_preparatory" {{ ($getRecord->grade_level == 'second_preparatory') ? 'selected' : '' }}>الصف الثاني الإعدادي</option>
+                        <option value="third_preparatory" {{ ($getRecord->grade_level == 'third_preparatory') ? 'selected' : '' }}>الصف الثالث الإعدادي</option>
+                    </select>
+                </div>
 
                  <div class="form-group">
                     <label>{{ __('messages.subject_type') }}</label>

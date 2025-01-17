@@ -92,6 +92,7 @@
                     <tr>
                       <th>#</th>
                       <th>{{ __('messages.subject_name') }}</th>
+                      <th>{{ __('messages.grade_level') }}</th>
                       <th>{{ __('messages.subject_type') }}</th>
                       <th>{{ __('messages.status') }}</th>
                       <th>{{ __('messages.created_by') }}</th>
@@ -104,6 +105,37 @@
                         <tr>
                           <td>{{ $value->id }}</td>
                           <td>{{ $value->name }}</td>
+                          <td>
+                            @switch($value->grade_level)
+                                @case('first_primary')
+                                    الصف الأول الابتدائي
+                                    @break
+                                @case('second_primary')
+                                    الصف الثاني الابتدائي
+                                    @break
+                                @case('third_primary')
+                                    الصف الثالث الابتدائي
+                                    @break
+                                @case('fourth_primary')
+                                    الصف الرابع الابتدائي
+                                    @break
+                                @case('fifth_primary')
+                                    الصف الخامس الابتدائي
+                                    @break
+                                @case('sixth_primary')
+                                    الصف السادس الابتدائي
+                                    @break
+                                @case('first_preparatory')
+                                    الصف الأول الإعدادي
+                                    @break
+                                @case('second_preparatory')
+                                    الصف الثاني الإعدادي
+                                    @break
+                                @case('third_preparatory')
+                                    الصف الثالث الإعدادي
+                                    @break
+                            @endswitch
+                        </td>
                           <td>{{ $value->type }}</td>
                           <td>
                             @if($value->status == 0)

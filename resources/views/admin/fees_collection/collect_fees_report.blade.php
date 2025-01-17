@@ -30,10 +30,10 @@
                 <div class="card-body">
                   <div class="row">
 
-                  <div class="form-group col-md-2">
+                <!--  <div class="form-group col-md-2">
                     <label>Student ID</label>
                     <input type="text" class="form-control" placeholder="Student ID" value="{{ Request::get('student_id') }}" name="student_id">
-                  </div>
+                  </div>  -->
 
 
                    <div class="form-group col-md-2">
@@ -74,9 +74,9 @@
                     <select class="form-control" name="payment_type">
                         <option value="">Select</option>
                         <option {{ (Request::get('payment_type') == 'Cash') ? 'selected' : '' }} value="Cash">Cash</option>
-                        <option {{ (Request::get('payment_type') == 'Cheque') ? 'selected' : '' }} value="Cheque">Cheque</option>
+                   <!--     <option {{ (Request::get('payment_type') == 'Cheque') ? 'selected' : '' }} value="Cheque">Cheque</option>
                         <option {{ (Request::get('payment_type') == 'Paypal') ? 'selected' : '' }} value="Paypal">Paypal</option>
-                        <option {{ (Request::get('payment_type') == 'Stripe') ? 'selected' : '' }} value="Stripe">Stripe</option>
+                        <option {{ (Request::get('payment_type') == 'Stripe') ? 'selected' : '' }} value="Stripe">Stripe</option>-->
                     </select>
                   </div>
 

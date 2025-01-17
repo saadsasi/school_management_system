@@ -87,7 +87,53 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registration'])) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registration'])) active @endif">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                Users
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Admin </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/teacher/list') }}" class="nav-link @if(Request::segment(2) == 'teacher') active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>  Teacher </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Student </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Parent  </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/registrations/list') }}" class="nav-link @if(Request::segment(2) == 'registration') active @endif">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p> Registration  </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+
+
+        <!--  <li class="nav-item">
             <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
@@ -130,7 +176,7 @@
                  {{ __('messages.registration') }}
               </p>
             </a>
-          </li>
+          </li> -->
 
          <li class="nav-item  @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher' || Request::segment(2) == 'class_timetable') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link  @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher' || Request::segment(2) == 'class_timetable') active @endif">
@@ -307,14 +353,29 @@
 
             </ul>
         </li>
-
-        <li class="nav-item @if(Request::segment(2) == 'activities') menu-is-opening menu-open @endif">
-    <a href="{{ url('admin/activities/requests') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
-        <i class="nav-icon fas fa-running"></i>
-        <p> الأنشطة </p>
-    </a>
-</li>
-        
+        <li class="nav-item @if(Request::segment(2) == 'activity') menu-is-opening menu-open @endif">
+                <a href="#" class="nav-link @if(Request::segment(2) == 'activity') active @endif">
+                    <i class="nav-icon fas fa-running"></i>
+                    <p>
+                        الأنشطة
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('admin/activities') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>قائمة الأنشطة</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/activity/registrations') }}" class="nav-link @if(Request::segment(3) == 'registrations') active @endif">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>طلبات التسجيل</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         <li class="nav-item  @if(Request::segment(2) == 'leave') menu-is-opening menu-open @endif">
     <a href="{{ url('admin/leave/requests') }}" class="nav-link  @if(Request::segment(2) == 'leave') active @endif">
         <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -706,6 +767,29 @@
             </a>
           </li>
 
+          <li class="nav-item @if(Request::segment(2) == 'activities') menu-is-opening menu-open @endif">
+        <a href="{{ url('parent/activities') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
+            <i class="nav-icon fas fa-running"></i>
+            <p>
+                الأنشطة
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ url('parent/activities') }}" class="nav-link @if(Request::segment(2) == 'activities' && !Request::segment(3)) active @endif">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>الأنشطة المتاحة</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('parent/activity/my-registrations') }}" class="nav-link @if(Request::segment(3) == 'my-registrations') active @endif">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>تسجيلاتي</p>
+                </a>
+            </li>
+        </ul>
+    </li>
   <!-- قائمة المغادرة -->
 <li class="nav-item @if(Request::segment(2) == 'leave') menu-open @endif">
     <a href="#" class="nav-link @if(Request::segment(2) == 'leave') active @endif">

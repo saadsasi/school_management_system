@@ -30,36 +30,31 @@
                                         <option value="">اختر النوع</option>
                                         <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_EARLY }}">مغادرة مبكرة</option>
                                         <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_END_DAY }}">نهاية الدوام</option>
-                                        <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_FULL_DAY }}">يوم كامل</option>
-                                    </select>
+                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>اختر الطالب <span style="color: red;">*</span></label>
-                                    <select class="form-control" required name="student_id">
-                                        <option value="">اختر الطالب</option>
+                                    <label>اختر الطلاب <span style="color: red;">*</span></label>
+                                    <div class="student-checkboxes">
                                         @foreach($getStudent as $student)
-                                            <option value="{{ $student->id }}">{{ $student->name }}</option>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" 
+                                                    id="student_{{ $student->id }}" 
+                                                    name="student_ids[]" 
+                                                    value="{{ $student->id }}">
+                                                <label class="custom-control-label" for="student_{{ $student->id }}">
+                                                    {{ $student->name }}
+                                                </label>
+                                            </div>
                                         @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>التاريخ <span style="color: red;">*</span></label>
-                                    <input type="date" class="form-control" required name="date" value="{{ old('date') }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>الوقت <span style="color: red;">*</span></label>
-                                    <input type="time" class="form-control" required name="time" value="{{ old('time') }}">
+                                    </div>
+                                    <small class="form-text text-muted">يمكنك اختيار أكثر من طالب</small>
                                 </div>
 
                                 <div class="form-group">
                                     <label>السبب <span style="color: red;">*</span></label>
                                     <textarea class="form-control" required name="reason" rows="4">{{ old('reason') }}</textarea>
                                 </div>
-
-                                <input type="hidden" name="user_type" value="parent">
                             </div>
 
                             <div class="card-footer">
@@ -72,4 +67,65 @@
         </div>
     </section>
 </div>
+
+@push('styles')
+<style>
+.student-checkboxes {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+}
+.custom-control.custom-checkbox {
+    padding-right: 2.5rem;
+    margin-bottom: 10px;
+    position: relative;
+}
+.custom-control-label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+    cursor: pointer;
+}
+.custom-control-label::before {
+    position: absolute;
+    right: -2.5rem;
+    top: 0.25rem;
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    content: "";
+    background-color: #fff;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25rem;
+}
+.custom-control-label::after {
+    position: absolute;
+    right: -2.5rem;
+    top: 0.25rem;
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    content: "";
+    background: no-repeat 50% / 50% 50%;
+}
+.custom-control-input {
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 0;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #007bff;
+    background-color: #007bff;
+}
+.custom-control-input:checked ~ .custom-control-label::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
+}
+</style>
+@endpush
 @endsection

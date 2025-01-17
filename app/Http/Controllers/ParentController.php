@@ -205,23 +205,24 @@ class ParentController extends Controller
     public function storeLeave(Request $request)
     {
         $request->validate([
-            'student_id' => 'required',
+            'student_ids' => 'required|array',
+            'student_ids.*' => 'required|exists:users,id',
             'type' => 'required',
-            'date' => 'required|date',
-            'time' => 'required',
             'reason' => 'required'
         ]);
 
-        $leave = new \App\Models\LeaveRequest;
-        $leave->user_id = $request->student_id;
-        $leave->user_type = 3; // نوع المستخدم طالب
-        $leave->type = $request->type;
-        $leave->date = $request->date;
-        $leave->time = $request->time;
-        $leave->reason = $request->reason;
-        $leave->status = 0; // قيد الانتظار
-        $leave->created_by = Auth::user()->id;
-        $leave->save();
+        foreach ($request->student_ids as $student_id) {
+            $leave = new \App\Models\LeaveRequest;
+            $leave->user_id = $student_id;
+            $leave->user_type = 3; // نوع المستخدم طالب
+            $leave->type = $request->type;
+            $leave->date = date('Y-m-d');
+            $leave->time = date('H:i:s');
+            $leave->reason = $request->reason;
+            $leave->status = 0; // قيد الانتظار
+            $leave->created_by = Auth::user()->id;
+            $leave->save();
+        }
 
         return redirect('parent/leave/history')->with('success', 'تم تقديم طلب المغادرة بنجاح');
     }

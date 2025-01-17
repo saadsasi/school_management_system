@@ -121,7 +121,7 @@
             <select class="form-control" name="payment_type" required>
                   <option value="">Select</option>
                   <option value="Cash">Cash</option>
-                  <option value="Cheque">Cheque</option>
+                <!--  <option value="Cheque">Cheque</option>-->
             </select>
           </div>
 

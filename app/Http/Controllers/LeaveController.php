@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\LeaveRequest;
 use Auth;
+use DB;
+use Log;
 
 class LeaveController extends Controller
 {
@@ -12,6 +14,7 @@ class LeaveController extends Controller
     const LEAVE_TYPE_EARLY = 'early_leave';
     const LEAVE_TYPE_END_DAY = 'end_day_leave';
     const LEAVE_TYPE_FULL_DAY = 'full_day_leave'; // إضافة نوع جديد للمغادرة
+    
       
     public function requests()
     {
@@ -118,5 +121,68 @@ class LeaveController extends Controller
             ->orderBy('id', 'desc')
             ->get();
         return view('teacher.leave.history', $data);
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $request->validate([
+                'student_ids' => 'required|array',
+                'student_ids.*' => 'exists:users,id',
+                'type' => 'required',
+                'reason' => 'required'
+            ]);
+
+            // التحقق من أن جميع الطلاب المختارين هم أبناء ولي الأمر
+            $parent_id = auth()->id();
+            $parent_children = User::where('parent_id', $parent_id)->pluck('id')->toArray();
+            
+            foreach($request->student_ids as $student_id) {
+                if (!in_array($student_id, $parent_children)) {
+                    return redirect()->back()
+                        ->withInput()
+                        ->with('error', 'عذراً، لا يمكنك اختيار طلاب ليسوا من أبنائك');
+                }
+            }
+
+            DB::beginTransaction();
+            
+            // إنشاء طلب مغادرة لكل طالب
+            foreach($request->student_ids as $student_id) {
+                $leave = new LeaveRequest();
+                $leave->user_id = $student_id;
+                $leave->user_type = 'student';
+                $leave->parent_id = $parent_id;
+                $leave->type = $request->type;
+                $leave->reason = $request->reason;
+                $leave->status = 0; // قيد الانتظار
+                $leave->created_by = $parent_id;
+                $leave->save();
+
+                Log::info('تم إنشاء طلب مغادرة', [
+                    'leave_id' => $leave->id,
+                    'student_id' => $student_id,
+                    'parent_id' => $parent_id
+                ]);
+            }
+            
+            DB::commit();
+            
+            return redirect()->route('parent.leave.my-leaves')
+                ->with('success', 'تم إرسال طلب المغادرة بنجاح');
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($e->validator);
+                
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('خطأ في إنشاء طلب المغادرة: ' . $e->getMessage());
+            
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'حدث خطأ أثناء حفظ الطلب. الرجاء المحاولة مرة أخرى.');
+        }
     }
 }

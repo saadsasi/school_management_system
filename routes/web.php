@@ -21,6 +21,8 @@ use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\FeesCollectionController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ParentActivityController;
 
 // Language Switcher
 Route::get('locale/{lang}', function($lang) {
@@ -254,7 +256,12 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('admin/communicate/search_user', [CommunicateController::class, 'SearchUser']);
 
-    // homework 
+      // Activities Management Routes
+    Route::get('admin/activities', [ActivityController::class, 'index']);
+    Route::get('admin/activity/add', [ActivityController::class, 'create']);
+    Route::post('admin/activity/store', [ActivityController::class, 'store']);
+    Route::get('admin/activity/registrations', [ActivityController::class, 'registrations']);
+    Route::post('admin/activity/registration/update-status/{id}', [ActivityController::class, 'updateRegistrationStatus']);
 
     
     // Leave Management Routes
@@ -443,4 +450,10 @@ Route::group(['middleware' => ['parent','userActive']], function () {
     Route::get('parent/stripe/payment-error/{student_id}', [FeesCollectionController::class, 'PaymentErrorParent']);
 
      Route::get('parent/stripe/payment-success/{student_id}', [FeesCollectionController::class, 'PaymentSuccessStripeParent']);
+
+       // Parent Activities Routes
+    Route::get('parent/activities', [ParentActivityController::class, 'index']);
+    Route::get('parent/activity/register/{activity_id}', [ParentActivityController::class, 'register']);
+    Route::post('parent/activity/save-registration', [ParentActivityController::class, 'storeRegistration']);
+    Route::get('parent/activity/my-registrations', [ParentActivityController::class, 'myRegistrations']);
 });

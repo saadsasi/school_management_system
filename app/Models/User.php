@@ -58,11 +58,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function children()
+    {
+        return $this->hasMany(User::class, 'parent_id', 'id')->where('user_type', '=', 3);
+    }
     static public function getSingle($id)
     {
         return self::find($id);
     }
 
+    static public function getSingleBy($column, $value)
+    {
+        return self::where($column, $value)->first();
+    }
     public function OnlineUer()
     {
         return Cache::has('OnlineUer' . $this->id);

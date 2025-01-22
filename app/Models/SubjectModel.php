@@ -10,13 +10,27 @@ class SubjectModel extends Model
     use HasFactory;
 
     protected $table = 'subject';
-    protected $fillable = ['name', 'grade_level', 'type', 'status', 'created_by'];
+    protected $fillable = ['name', 'grade_level', 'type', 'curriculum_file', 'status', 'created_by'];
 
     static public function getSingle($id)
     {
         return self::find($id);
     }
 
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        
+        if ($request->hasFile('curriculum_file')) {
+            $file = $request->file('curriculum_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/curriculum'), $fileName);
+            $data['curriculum_file'] = $fileName;
+        }
+    
+        SubjectModel::create($data);
+        return redirect('admin/subject/list')->with('success', __('messages.success'));
+    }
     static public function getRecord()
     {
          $return = SubjectModel::select('subject.*', 'users.name as created_by_name')

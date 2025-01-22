@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ClassModel;
 use App\Exports\ExportStudent;
+use App\Models\SubjectModel;
 use Hash;
 use Auth;
 use Str;
 use Excel;
-
 
 class StudentController extends Controller
 {
@@ -194,4 +194,48 @@ class StudentController extends Controller
         return view('teacher.my_student',$data);
     }
 
+    public function downloadCurriculum($subject_id)
+    {
+        try {
+            $subject = SubjectModel::findOrFail($subject_id);
+            
+            if ($subject->curriculum_file) {
+                $path = public_path('uploads/curriculum/' . $subject->curriculum_file);
+                if (file_exists($path)) {
+                    return response()->download($path);
+                }
+            }
+            
+            return redirect()->back()->with('error', __('messages.file_not_found'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('messages.error_downloading_file'));
+        }
+    }
+
+    public function mySubject()
+    {
+        $student = Auth::user();
+        \Log::info('Student grade level: ' . $student->grade_level);
+        
+        $query = \DB::table('class_subject')
+            ->select('subject.id as subject_id', 'subject.name as subject_name', 
+                    'subject.type as subject_type', 'subject.curriculum_file')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->where('class.grade_level', '=', $student->grade_level)
+            ->where('class_subject.status', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)
+            ->orderBy('subject.name', 'ASC');
+
+        \Log::info('SQL Query: ' . $query->toSql());
+        \Log::info('Query Bindings: ', $query->getBindings());
+        
+        $getRecord = $query->get();
+        \Log::info('Records found: ' . count($getRecord));
+        \Log::info('Records: ', $getRecord->toArray());
+
+        $data['getRecord'] = $getRecord;
+        $data['header_title'] = "My Subject";
+        return view('student.my_subject', $data);
+    }
 }

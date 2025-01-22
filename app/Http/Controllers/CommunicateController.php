@@ -181,9 +181,108 @@ class CommunicateController extends Controller
 
     public function MyNoticeBoardTeacher()
     {
-        $data['getRecord'] = NoticeBoardModel::getRecordUser(Auth::user()->user_type);
-        $data['header_title'] = 'My Notice Board';
-        return view('teacher.my_notice_board', $data);
+        $data['getRecord'] = NoticeBoardModel::select('notice_board.*', 'users.name as created_by_name', 'users.user_type')
+                                           ->join('users', 'users.id', '=', 'notice_board.created_by')
+                                           ->whereDate('notice_board.publish_date', '=', date('Y-m-d'))
+                                           ->orderBy('notice_board.id', 'desc')
+                                           ->paginate(20);
+        $data['header_title'] = 'Notice Board';
+        return view('teacher.noticeboard.view', $data);
+    }
+
+    public function teacherNoticeBoard()
+    {
+        $data['getRecord'] = NoticeBoardModel::where('created_by', Auth::user()->id)
+                                            ->orderBy('id', 'desc')
+                                            ->paginate(20);
+        $data['header_title'] = 'Notice Board';
+        return view('teacher.noticeboard.list', $data);
+    }
+    
+    public function teacherAddNoticeBoard()
+    {
+        $data['header_title'] = 'Add New Notice';
+        return view('teacher.noticeboard.add', $data);
+    }
+    
+    public function teacherStoreNoticeBoard(Request $request)
+    {
+        $save = new NoticeBoardModel;
+        $save->title = $request->title;
+        $save->notice_date = $request->notice_date;
+        $save->publish_date = $request->publish_date;
+        $save->message = $request->message;
+        $save->created_by = Auth::user()->id;
+        $save->save();
+        
+        if(!empty($request->message_to))
+        {
+            foreach ($request->message_to as $message_to) 
+            {
+                $message = new NoticeBoardMessageModel;
+                $message->notice_board_id = $save->id;
+                $message->message_to = $message_to;
+                $message->save();
+            }    
+        }
+    
+        return redirect('teacher/noticeboard')->with('success', "Notice Board successfully created");
+    }
+
+    public function teacherEditNoticeBoard($id)
+    {
+        $data['getRecord'] = NoticeBoardModel::where('created_by', Auth::user()->id)
+                                            ->where('id', $id)
+                                            ->first();
+        if(!$data['getRecord']) {
+            return redirect('teacher/noticeboard')->with('error', "Notice not found");
+        }
+        $data['header_title'] = 'Edit Notice';
+        return view('teacher.noticeboard.edit', $data);
+    }
+
+    public function teacherUpdateNoticeBoard($id, Request $request)
+    {
+        $notice = NoticeBoardModel::where('created_by', Auth::user()->id)
+                                 ->where('id', $id)
+                                 ->first();
+        if(!$notice) {
+            return redirect('teacher/noticeboard')->with('error', "Notice not found");
+        }
+
+        $notice->title = $request->title;
+        $notice->notice_date = $request->notice_date;
+        $notice->publish_date = $request->publish_date;
+        $notice->message = $request->message;
+        $notice->save();
+
+        NoticeBoardMessageModel::where('notice_board_id', $id)->delete();
+        
+        if(!empty($request->message_to))
+        {
+            foreach ($request->message_to as $message_to) 
+            {
+                $message = new NoticeBoardMessageModel;
+                $message->notice_board_id = $notice->id;
+                $message->message_to = $message_to;
+                $message->save();
+            }    
+        }
+
+        return redirect('teacher/noticeboard')->with('success', "Notice Board successfully updated");
+    }
+
+    public function teacherDeleteNoticeBoard($id)
+    {
+        $notice = NoticeBoardModel::where('created_by', Auth::user()->id)
+                                 ->where('id', $id)
+                                 ->first();
+        if(!$notice) {
+            return redirect('teacher/noticeboard')->with('error', "Notice not found");
+        }
+
+        $notice->delete();
+        return redirect()->back()->with('success', "Notice Board successfully deleted");
     }
 
     // parent side work 
@@ -207,4 +306,3 @@ class CommunicateController extends Controller
     
     
 }
-

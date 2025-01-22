@@ -31,6 +31,7 @@
                            <tr>
                               <th>{{ __('messages.subject_name') }}</th>
                               <th>{{ __('messages.subject_type') }}</th>
+                              <th>{{ __('messages.curriculum_file') }}</th>
                               <th>{{ __('messages.action') }}</th>
                            </tr>
                         </thead>
@@ -39,12 +40,23 @@
                              <tr>
                                 <td>{{ $value->subject_name }}</td>
                                 <td>{{ $value->subject_type }}</td>
-
-                                 <td>
-                                  <a href="{{ url('parent/my_student/subject/class_timetable/'.$value->class_id.'/'.$value->subject_id.'/'.$getUser->id) }}" class="btn btn-primary">{{ __('messages.my_class_timetable') }}</a>
+                                <td>
+                                  @if($value->curriculum_file)
+                                    <a href="{{ url('student/subject/download-curriculum/'.$value->subject_id) }}" 
+                                       class="btn btn-info btn-sm">
+                                        <i class="fas fa-download"></i> {{__('messages.download_curriculum')}}
+                                    </a>
+                                  @else
+                                    <span class="text-muted">{{__('messages.no_curriculum_file')}}</span>
+                                  @endif
+                                </td>
+                                <td>
+                                  @if(isset($value->class_id))
+                                    <a href="{{ url('parent/my_student/subject/class_timetable/'.$value->class_id.'/'.$value->subject_id.'/'.$getUser->id) }}" class="btn btn-primary">{{ __('messages.my_class_timetable') }}</a>
+                                  @else
+                                    <span class="text-muted">{{ __('messages.no_timetable_available') }}</span>
+                                  @endif
                                 </td>  
-
-
                              </tr>
                            @endforeach
                         </tbody>

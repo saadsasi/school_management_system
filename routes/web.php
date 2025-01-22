@@ -33,10 +33,6 @@ Route::get('locale/{lang}', function($lang) {
     return redirect()->back();
 });
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,8 +59,6 @@ Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [AuthController::class, 'register']);
 
-
-
 Route::group(['middleware' => 'common'], function () {
 
      Route::get('chat', [ChatController::class, 'chat']);
@@ -76,9 +70,6 @@ Route::group(['middleware' => 'common'], function () {
      
 
 });
-
-
-
 
 Route::group(['middleware' => 'admin'], function () {
 
@@ -142,7 +133,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/teacher_subject/delete/{id}', [TeacherSubjectController::class, 'delete']);
     Route::post('admin/teacher_subject/update/{teacher_id}', [TeacherSubjectController::class, 'update']);
     Route::get('admin/teacher_subject/get-classes-subjects', [TeacherSubjectController::class, 'getClassesAndSubjects']);
-
+    Route::post('admin/teacher_subject/evaluate/{id}', [TeacherSubjectController::class, 'evaluate']);
+    Route::get('admin/teacher_subject/evaluations/{id}', [TeacherSubjectController::class, 'viewEvaluations']);
     // class url
 
     Route::get('admin/class/list', [ClassController::class, 'list']);
@@ -161,7 +153,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/subject/edit/{id}', [SubjectController::class, 'edit']);
     Route::post('admin/subject/edit/{id}', [SubjectController::class, 'update']);
     Route::get('admin/subject/delete/{id}', [SubjectController::class, 'delete']);
-    
+    Route::get('admin/subject/download-curriculum/{id}', [SubjectController::class, 'downloadCurriculum']);
 
     // assign_subject
 
@@ -294,7 +286,6 @@ Route::group(['middleware' => 'admin'], function () {
 
 });
 
-
 Route::group(['middleware' => ['teacher','userActive']], function () {
 
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
@@ -340,10 +331,22 @@ Route::group(['middleware' => ['teacher','userActive']], function () {
 
     Route::get('teacher/attendance/report', [AttendanceController::class, 'AttendanceReportTeacher']);
 
-    Route::get('teacher/my_notice_board', [CommunicateController::class, 'MyNoticeBoardTeacher']);
+    // Route::get('teacher/noticeboard/my_notice_board', [CommunicateController::class, 'MyNoticeBoardTeacher']);
+    // Route::get('teacher/noticeboard', 'CommunicateController@teacherNoticeBoard');
+    // Route::get('teacher/noticeboard/add', 'CommunicateController@teacherAddNoticeBoard');
+    // Route::post('teacher/noticeboard/store', 'CommunicateController@teacherStoreNoticeBoard');
+    // Route::get('teacher/noticeboard/edit/{id}', 'CommunicateController@teacherEditNoticeBoard');
+    // Route::post('teacher/noticeboard/update/{id}', 'CommunicateController@teacherUpdateNoticeBoard');
+    // Route::get('teacher/noticeboard/delete/{id}', 'CommunicateController@teacherDeleteNoticeBoard');
+Route::get('teacher/noticeboard', [CommunicateController::class, 'teacherNoticeBoard']);
+Route::get('teacher/noticeboard/add', [CommunicateController::class, 'teacherAddNoticeBoard']);
+Route::post('teacher/noticeboard/store', [CommunicateController::class, 'teacherStoreNoticeBoard']);
+Route::get('teacher/noticeboard/edit/{id}', [CommunicateController::class, 'teacherEditNoticeBoard']);
+Route::post('teacher/noticeboard/update/{id}', [CommunicateController::class, 'teacherUpdateNoticeBoard']);
+Route::get('teacher/noticeboard/delete/{id}', [CommunicateController::class, 'teacherDeleteNoticeBoard']);
+Route::get('teacher/noticeboard/view', [CommunicateController::class, 'MyNoticeBoardTeacher']);
 
 });
-
 
 Route::group(['middleware' => ['student','userActive']], function () {
 
@@ -391,13 +394,13 @@ Route::group(['middleware' => ['student','userActive']], function () {
     Route::get('student/paypal/payment-success', [FeesCollectionController::class, 'PaymentSuccess']);
 
     Route::get('student/stripe/payment-error', [FeesCollectionController::class, 'PaymentError']);
-    Route::get('student/stripe/payment-success', [FeesCollectionController::class, 'PaymentSuccessStripe']);
 
-    
-    
+     Route::get('student/stripe/payment-success', [FeesCollectionController::class, 'PaymentSuccessStripe']);
+
+    Route::get('student/my-subject', [StudentController::class, 'mySubject']);
+    Route::get('student/subject/download-curriculum/{subject_id}', [StudentController::class, 'downloadCurriculum']);
     
 });
-
 
 Route::group(['middleware' => ['parent','userActive']], function () {
 

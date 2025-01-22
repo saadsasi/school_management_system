@@ -54,6 +54,7 @@
                     <tr>
                       <th>{{__('messages.subject_name')}}</th>
                       <th>{{__('messages.subject_type')}}</th>
+                      <th>{{__('messages.curriculum_file')}}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -61,6 +62,22 @@
                     <tr>
                       <td>{{ $value->subject_name }}</td>
                       <td>{{ $value->subject_type }}</td>
+                      <td>
+                        <!-- Debug info -->
+                        @php
+                            \Log::info('Subject ID: ' . $value->subject_id);
+                            \Log::info('Curriculum File: ' . ($value->curriculum_file ?? 'null'));
+                        @endphp
+                        
+                        @if($value->curriculum_file)
+                          <a href="{{ url('student/subject/download-curriculum/'.$value->subject_id) }}" 
+                             class="btn btn-info btn-sm">
+                              <i class="fas fa-download"></i> {{__('messages.download_curriculum')}}
+                          </a>
+                        @else
+                          <span class="text-muted">{{__('messages.no_curriculum_file')}}</span>
+                        @endif
+                      </td>
                     </tr>
                    @endforeach
                   </tbody>

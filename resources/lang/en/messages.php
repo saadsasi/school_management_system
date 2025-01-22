@@ -466,6 +466,20 @@ return [
     'registrations_list'=> 'Registrations List',
     'pending_review'=> 'Pending Review',
     'pending_approval'=> 'Pending Approval',
+    'evaluate'=> 'Evaluate',
+    'view_evaluations'=> 'View Evaluations',
+    'curriculum_file' => 'Curriculum File',
+    'curriculum_file_help' => 'Curriculum File',
+    'edit_subject' => 'Edit Subject',
+    'download_current_file' => 'Download Current File',
+    'parent_activity' => 'Activity',
+    'parent_activities' => 'Activities',
+    'noticeboard' => 'Notice Board',
+    'noticeboard_list' => 'Notice Boards List',
+    'add_new_notice' => 'Add New Notice Board',
+    'notice_title' => 'Notice Title',
+    'notice_message' => 'Notice Message',
+    'notice_list' => 'Notice List',
 
     //  dashboard.blade Page
 

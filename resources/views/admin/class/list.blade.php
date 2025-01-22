@@ -39,15 +39,15 @@
                       <label>{{ __('messages.grade_level') }}</label>
                       <select class="form-control" name="grade_level">
                           <option value="">{{ __('messages.select_grade_level') }}</option>
-                          <option {{ (Request::get('grade_level') == 'first_primary') ? 'selected' : '' }} value="first_primary">الصف الأول الابتدائي</option>
-                          <option {{ (Request::get('grade_level') == 'second_primary') ? 'selected' : '' }} value="second_primary">الصف الثاني الابتدائي</option>
-                          <option {{ (Request::get('grade_level') == 'third_primary') ? 'selected' : '' }} value="third_primary">الصف الثالث الابتدائي</option>
-                          <option {{ (Request::get('grade_level') == 'fourth_primary') ? 'selected' : '' }} value="fourth_primary">الصف الرابع الابتدائي</option>
-                          <option {{ (Request::get('grade_level') == 'fifth_primary') ? 'selected' : '' }} value="fifth_primary">الصف الخامس الابتدائي</option>
-                          <option {{ (Request::get('grade_level') == 'sixth_primary') ? 'selected' : '' }} value="sixth_primary">الصف السادس الابتدائي</option>
-                          <option {{ (Request::get('grade_level') == 'first_preparatory') ? 'selected' : '' }} value="first_preparatory">الصف الأول الإعدادي</option>
-                          <option {{ (Request::get('grade_level') == 'second_preparatory') ? 'selected' : '' }} value="second_preparatory">الصف الثاني الإعدادي</option>
-                          <option {{ (Request::get('grade_level') == 'third_preparatory') ? 'selected' : '' }} value="third_preparatory">الصف الثالث الإعدادي</option>
+                          <option {{ (Request::get('grade_level') == 'first_primary') ? 'selected' : '' }} value="first_primary">{{ __('messages.first_primary') }}</option>
+                          <option {{ (Request::get('grade_level') == 'second_primary') ? 'selected' : '' }} value="second_primary">{{ __('messages.second_primary') }}</option>
+                          <option {{ (Request::get('grade_level') == 'third_primary') ? 'selected' : '' }} value="third_primary">{{ __('messages.third_primary') }}</option>
+                          <option {{ (Request::get('grade_level') == 'fourth_primary') ? 'selected' : '' }} value="fourth_primary">{{ __('messages.fourth_primary') }}</option>
+                          <option {{ (Request::get('grade_level') == 'fifth_primary') ? 'selected' : '' }} value="fifth_primary">{{ __('messages.fifth_primary') }}</option>
+                          <option {{ (Request::get('grade_level') == 'sixth_primary') ? 'selected' : '' }} value="sixth_primary">{{ __('messages.sixth_primary') }}</option>
+                          <option {{ (Request::get('grade_level') == 'first_preparatory') ? 'selected' : '' }} value="first_preparatory">{{ __('messages.first_preparatory') }}</option>
+                          <option {{ (Request::get('grade_level') == 'second_preparatory') ? 'selected' : '' }} value="second_preparatory">{{ __('messages.second_preparatory') }}</option>
+                          <option {{ (Request::get('grade_level') == 'third_preparatory') ? 'selected' : '' }} value="third_preparatory">{{ __('messages.third_preparatory') }}</option>
                       </select>
                   </div>
  
@@ -89,31 +89,31 @@
                         <td>
                           @switch($value->grade_level)
                               @case('first_primary')
-                                  الصف الأول الابتدائي
+                                  {{ __('messages.first_primary') }}
                                   @break
                               @case('second_primary')
-                                  الصف الثاني الابتدائي
+                                  {{ __('messages.second_primary') }}
                                   @break
                               @case('third_primary')
-                                  الصف الثالث الابتدائي
+                                  {{ __('messages.third_primary') }}
                                   @break
                               @case('fourth_primary')
-                                  الصف الرابع الابتدائي
+                                  {{ __('messages.fourth_primary') }}
                                   @break
                               @case('fifth_primary')
-                                  الصف الخامس الابتدائي
+                                  {{ __('messages.fifth_primary') }}
                                   @break
                               @case('sixth_primary')
-                                  الصف السادس الابتدائي
+                                  {{ __('messages.sixth_primary') }}
                                   @break
                               @case('first_preparatory')
-                                  الصف الأول الإعدادي
+                                  {{ __('messages.first_preparatory') }}
                                   @break
                               @case('second_preparatory')
-                                  الصف الثاني الإعدادي
+                                  {{ __('messages.second_preparatory') }}
                                   @break
                               @case('third_preparatory')
-                                  الصف الثالث الإعدادي
+                                  {{ __('messages.third_preparatory') }}
                                   @break
                           @endswitch
                         </td>

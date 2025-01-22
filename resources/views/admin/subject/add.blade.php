@@ -22,7 +22,7 @@
           <!-- left column -->
           <div class="col-md-12">
             <div class="card card-primary">
-              <form method="post" action="">
+              <form method="post" action="" enctype="multipart/form-data">
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
@@ -41,7 +41,7 @@
                         <option value="sixth_primary">{{ __('messages.sixth_primary') }}</option>
                         <option value="first_preparatory">{{ __('messages.first_preparatory') }}</option>
                         <option value="second_preparatory">{{ __('messages.second_preparatory') }}</option>
-                        <option value="third_preparatory">الصف الثالث الإعدادي</option>
+                        <option value="third_preparatory">{{ __('messages.third_preparatory') }}</option>
                     </select>
                 </div>
 
@@ -63,7 +63,12 @@
                     </select>
                     
                   </div>
-              
+
+                  <div class="form-group">
+                    <label>{{ __('messages.curriculum_file') }}</label>
+                    <input type="file" class="form-control" name="curriculum_file" accept=".pdf,.doc,.docx">
+                    <small class="text-muted">{{ __('messages.curriculum_file_help') }}</small>
+                  </div>
                 
                 </div>
                 <!-- /.card-body -->

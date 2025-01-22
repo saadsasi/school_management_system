@@ -10,6 +10,7 @@ use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassModel;
 use Auth;
+use App\Models\TeacherEvaluation;
 
 class TeacherSubjectController extends Controller
 {
@@ -142,6 +143,35 @@ public function getClassesAndSubjects(Request $request)
         return view('admin.teacher_subject.teacher_subjects', compact('teacher', 'subjects'));
     }
 
+    public function evaluate(Request $request, $id)
+    {
+        $request->validate([
+            'evaluation_date' => 'required|date',
+            'notes' => 'required|string'
+        ]);
+
+        // Save the evaluation to your database
+        TeacherEvaluation::create([
+            'teacher_subject_id' => $id,
+            'evaluation_date' => $request->evaluation_date,
+            'notes' => $request->notes,
+            'created_by' => Auth::id()
+        ]);
+
+        return redirect()->back()->with('success', 'تم حفظ التقييم بنجاح');
+    }
+
+    public function viewEvaluations($id)
+    {
+        $evaluations = TeacherEvaluation::where('teacher_subject_id', $id)
+            ->with(['creator'])
+            ->orderBy('evaluation_date', 'desc')
+            ->get();
+        
+        $subject = TeacherSubject::with(['subject', 'teacher'])->findOrFail($id);
+        
+        return view('admin.teacher_subject.evaluations', compact('evaluations', 'subject'));
+    }
 
     public function edit($id)
     {

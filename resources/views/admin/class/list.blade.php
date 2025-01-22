@@ -117,7 +117,7 @@
                                   @break
                           @endswitch
                         </td>
-                        <td>${{ number_format($value->amount, 2) }}</td>
+                        <td>{{ __('messages.in_dinars') }} {{ number_format($value->amount, 2) }}</td>
                         <td>
                           @if($value->status == 0)
                               {{ __('messages.active') }}

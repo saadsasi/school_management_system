@@ -39,19 +39,7 @@
                     </div>  
 
 
-                    <div class="form-group col-md-6">
-                      <label>{{ __('messages.admission_number') }} <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" value="{{ old('admission_number', $getRecord->admission_number) }}" name="admission_number" required placeholder="Admission Number">
-                      <div style="color:red">{{ $errors->first('admission_number') }}</div>
-                    </div>  
-
-
-
-                    <div class="form-group col-md-6">
-                      <label>{{ __('messages.roll_number') }} </label>
-                      <input type="text" class="form-control" value="{{ old('roll_number', $getRecord->roll_number) }}" name="roll_number" placeholder="{{ __('messages.roll_number') }}">
-                      <div style="color:red">{{ $errors->first('roll_number') }}</div>
-                    </div>  
+                  
 
                     <div class="form-group col-md-6">
                       <label>{{ __('messages.class') }} <span style="color: red;">*</span></label>

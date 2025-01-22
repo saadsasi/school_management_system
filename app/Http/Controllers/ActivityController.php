@@ -36,6 +36,29 @@ class ActivityController extends Controller
         return redirect('admin/activities')->with('success', 'تم إضافة النشاط بنجاح');
     }
 
+    public function edit($id)
+    {
+        $data['header_title'] = "تعديل النشاط";
+        $data['activity'] = Activity::findOrFail($id);
+        return view('admin.activity.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+            'max_students' => 'required|integer|min:0',
+            'cost' => 'required|numeric|min:0'
+        ]);
+
+        $activity = Activity::findOrFail($id);
+        $activity->update($request->all());
+        
+        return redirect('admin/activities')->with('success', 'تم تحديث النشاط بنجاح');
+    }
+
     public function registrations()
     {
         $data['header_title'] = "طلبات التسجيل في الأنشطة";

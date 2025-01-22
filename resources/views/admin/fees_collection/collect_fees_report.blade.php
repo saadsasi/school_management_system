@@ -75,8 +75,7 @@
                         <option value="">{{ __('messages.select') }}</option>
                         <option {{ (Request::get('payment_type') == 'Cash') ? 'selected' : '' }} value="Cash">{{ __('messages.Cash') }}</option>
                         <option {{ (Request::get('payment_type') == 'Cheque') ? 'selected' : '' }} value="Cheque">{{ __('messages.Cheque') }}</option>
-                        <option {{ (Request::get('payment_type') == 'Paypal') ? 'selected' : '' }} value="Paypal">{{ __('messages.Paypal') }}</option>
-                        <option {{ (Request::get('payment_type') == 'Stripe') ? 'selected' : '' }} value="Stripe">{{ __('messages.Stripe') }}</option>
+                      
                     </select>
                   </div>
 
@@ -137,9 +136,9 @@
                           <td>{{ $value->student_id }}</td>
                           <td>{{ $value->student_name_first }} {{ $value->student_name_last }}</td>
                           <td>{{ $value->class_name }}</td>
-                          <td>${{ number_format($value->total_amount, 2) }}</td>
-                          <td>${{ number_format($value->paid_amount, 2) }}</td>
-                          <td>${{ number_format($value->remaning_amount, 2) }}</td>
+                          <td>{{ __('messages.in_dinars') }} {{ number_format($value->total_amount, 2) }}</td>
+                          <td>{{ __('messages.in_dinars') }} {{ number_format($value->paid_amount, 2) }}</td>
+                          <td>{{ __('messages.in_dinars') }} {{ number_format($value->remaning_amount, 2) }}</td>
                           <td>{{ $value->payment_type }}</td>
                           <td>{{ $value->remark }}</td>
                           <td>{{ $value->created_name }}</td>

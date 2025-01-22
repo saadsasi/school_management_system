@@ -262,6 +262,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/activity/store', [ActivityController::class, 'store']);
     Route::get('admin/activity/registrations', [ActivityController::class, 'registrations']);
     Route::post('admin/activity/registration/update-status/{id}', [ActivityController::class, 'updateRegistrationStatus']);
+    Route::get('admin/activity/edit/{id}', [ActivityController::class, 'edit'])->name('admin.activity.edit');
+    Route::post('admin/activity/update/{id}', [ActivityController::class, 'update'])->name('admin.activity.update');
 
     
     // Leave Management Routes

@@ -114,7 +114,6 @@ class AuthController extends Controller
 
         if ($request->user_type == 'student') {
             $request->validate([
-                'admission_number' => 'required|unique:users',
                 'grade_level' => 'required|in:first_primary,second_primary,third_primary,fourth_primary,fifth_primary,sixth_primary',
                 'date_of_birth' => 'required|date',
             ]);
@@ -153,9 +152,7 @@ class AuthController extends Controller
         ]);
 
         if ($request->user_type == 'student') {
-            $user->admission_number = $request->admission_number;
             $user->class_id = $request->class_id;
-            $user->roll_number = $request->roll_number;
             $user->date_of_birth = $request->date_of_birth;
         } elseif ($request->user_type == 'teacher') {
             $user->qualification = $request->qualification;

@@ -83,8 +83,6 @@
                     <input type="hidden" name="name" value="{{ Request::get('name') }}">
                     <input type="hidden" name="last_name" value="{{ Request::get('last_name') }}">
                     <input type="hidden" name="email" value="{{ Request::get('email') }}">
-                    <input type="hidden" name="admission_number" value="{{ Request::get('admission_number') }}">
-                    <input type="hidden" name="roll_number" value="{{ Request::get('roll_number') }}">
                     <input type="hidden" name="gender" value="{{ Request::get('gender') }}">
                     <input type="hidden" name="class" value="{{ Request::get('class') }}">
                     <input type="hidden" name="grade_level" value="{{ Request::get('grade_level') }}">
@@ -106,8 +104,6 @@
                       <th>{{ __('messages.student_name') }}</th>
                       <th>{{ __('messages.parent_name') }}</th>
                       <th>{{ __('messages.email') }}</th>
-                      <th>{{ __('messages.admission_number') }}</th>
-                      <th>{{ __('messages.roll_number') }}</th>
                       <th>{{ __('messages.class') }}</th>
                       <th>{{ __('messages.grade_level') }}</th>
                       <th>{{ __('messages.gender') }}</th>
@@ -135,8 +131,6 @@
                           <td>{{ $value->name }} {{ $value->last_name }}</td>
                           <td>{{ $value->parent_name }} {{ $value->parent_last_name }}</td>
                           <td>{{ $value->email }}</td>
-                          <td>{{ $value->admission_number }}</td>
-                          <td>{{ $value->roll_number }}</td>
                           <td>{{ $value->class_name }}</td>
                           <td>{{ __('messages.'.$value->grade_level) }}</td>
                           <td>{{ __('messages.'.$value->gender) }}</td>

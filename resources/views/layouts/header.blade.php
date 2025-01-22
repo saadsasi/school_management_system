@@ -79,64 +79,11 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           @if(Auth::user()->user_type == 1)
-          <li class="nav-item">
-            <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                {{ __('messages.dashboard') }}
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                {{ __('messages.admin') }}
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('admin/teacher/list') }}" class="nav-link @if(Request::segment(2) == 'teacher') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                {{ __('messages.teacher') }}
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                {{ __('messages.student') }}
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                 {{ __('messages.parent') }}
-              </p>
-            </a>
-          </li>
-        
-          <li class="nav-item">
-            <a href="{{ url('admin/registrations/list') }}" class="nav-link @if(Request::segment(2) == 'registration') active @endif">
-              <i class="nav-icon far fa-user"></i>
-              <p>
-                 {{ __('messages.registration') }}
-              </p>
-            </a>
-          </li>
-
-          {{-- <li class="nav-item @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registration'])) menu-is-opening menu-open @endif">
-            <a href="#" class="nav-link @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registration'])) active @endif">
+          <li class="nav-item has-treeview @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registrations'])) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registrations'])) active @endif">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                Users
+                    {{ __('messages.user_management') }}
                     <i class="fas fa-angle-left right"></i>
                 </p>
             </a>
@@ -144,43 +91,41 @@
                 <li class="nav-item">
                     <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p> Admin </p>
+                        <p>{{ __('messages.admin') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('admin/teacher/list') }}" class="nav-link @if(Request::segment(2) == 'teacher') active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>  Teacher </p>
+                        <p>{{ __('messages.teacher') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('admin/student/list') }}" class="nav-link @if(Request::segment(2) == 'student') active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p> Student </p>
+                        <p>{{ __('messages.student') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('admin/parent/list') }}" class="nav-link @if(Request::segment(2) == 'parent') active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p> Parent  </p>
+                        <p>{{ __('messages.parent') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('admin/registrations/list') }}" class="nav-link @if(Request::segment(2) == 'registration') active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p> Registration  </p>
+                        <p>{{ __('messages.registration') }}</p>
                     </a>
                 </li>
             </ul>
-        </li> --}}
+        </li>
 
-
-
-        <li class="nav-item @if(Request::segment(2) == 'activity') menu-is-opening menu-open @endif">
-          <a href="#" class="nav-link @if(Request::segment(2) == 'activity') active @endif">
+        <li class="nav-item has-treeview @if(Request::segment(2) == 'activities' || (Request::segment(2) == 'activity' && Request::segment(3) == 'registrations')) menu-is-opening menu-open @endif">
+          <a href="#" class="nav-link @if(Request::segment(2) == 'activities' || (Request::segment(2) == 'activity' && Request::segment(3) == 'registrations')) active @endif">
               <i class="nav-icon fas fa-running"></i>
               <p>
-                  الأنشطة
+                  {{ __('messages.activities') }}
                   <i class="fas fa-angle-left right"></i>
               </p>
           </a>
@@ -188,13 +133,13 @@
               <li class="nav-item">
                   <a href="{{ url('admin/activities') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>قائمة الأنشطة</p>
+                      <p>{{ __('messages.activity_list') }}</p>
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="{{ url('admin/activity/registrations') }}" class="nav-link @if(Request::segment(3) == 'registrations') active @endif">
+                  <a href="{{ url('admin/activity/registrations') }}" class="nav-link @if(Request::segment(2) == 'activity' && Request::segment(3) == 'registrations') active @endif">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>طلبات التسجيل</p>
+                      <p>{{ __('messages.activity_registrations') }}</p>
                   </a>
               </li>
           </ul>
@@ -324,7 +269,7 @@
               
              
             </ul>
-          </li>
+          </li>   
 
 
          <li class="nav-item  @if(Request::segment(2) == 'attendance') menu-is-opening menu-open @endif">
@@ -355,7 +300,7 @@
         </li>
 
 
-          <li class="nav-item  @if(Request::segment(2) == 'communicate') menu-is-opening menu-open @endif">
+           <li class="nav-item  @if(Request::segment(2) == 'communicate') menu-is-opening menu-open @endif">
             <a href="#" class="nav-link  @if(Request::segment(2) == 'communicate') active @endif">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -382,14 +327,8 @@
               
 
             </ul>
-        </li>
+        </li> 
 
-        <li class="nav-item @if(Request::segment(2) == 'activities') menu-is-opening menu-open @endif">
-    <a href="{{ url('admin/activities/requests') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
-        <i class="nav-icon fas fa-running"></i>
-        <p> {{__('messages.activities')}} </p>
-    </a>
-</li>
         
         <li class="nav-item  @if(Request::segment(2) == 'leave') menu-is-opening menu-open @endif">
     <a href="{{ url('admin/leave/requests') }}" class="nav-link  @if(Request::segment(2) == 'leave') active @endif">
@@ -478,8 +417,7 @@
                 {{ __('messages.my_exam_timetable') }}
               </p>
             </a>
-          </li>
-
+          </li> 
           
           <li class="nav-item">
             <a href="{{ url('teacher/marks_register') }}" class="nav-link @if(Request::segment(2) == 'marks_register') active @endif">
@@ -488,7 +426,7 @@
                 {{ __('messages.marks_register') }}
               </p>
             </a>
-          </li>
+          </li> 
 
 
 
@@ -528,7 +466,7 @@
                 {{ __('messages.my_notice_board') }}
               </p>
             </a>
-          </li>
+          </li> 
 
 
 
@@ -635,16 +573,14 @@
               </a>
             </li>
 
-           <li class="nav-item">
+            <li class="nav-item">
             <a href="{{ url('student/fees_collection') }}" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 {{ __('messages.fees_collection') }}
               </p>
             </a>
-          </li>
-
-           
+          </li> 
 
 
           <li class="nav-item">
@@ -686,17 +622,17 @@
                 {{ __('messages.my_exam_timetable') }}
               </p>
             </a>
-          </li>
+          </li> 
 
 
-           <li class="nav-item">
+            <li class="nav-item">
             <a href="{{ url('student/my_exam_result') }}" class="nav-link @if(Request::segment(2) == 'my_exam_result') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 {{ __('messages.my_exam_result') }}
               </p>
             </a>
-          </li>
+          </li> 
 
 
           <li class="nav-item">
@@ -708,14 +644,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
+           <li class="nav-item">
             <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 {{ __('messages.my_notice_board') }}
               </p>
             </a>
-          </li>
+          </li> 
           <!--قائمة-->
           
 
@@ -762,7 +698,7 @@
           </li>
 
 
-          <li class="nav-item">
+           <li class="nav-item">
             <a href="{{ url('parent/my_student_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_student_notice_board') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
@@ -770,7 +706,7 @@
 
               </p>
             </a>
-          </li>
+          </li> 
 
 
           <li class="nav-item">
@@ -780,12 +716,12 @@
             {{ __('messages.parent_my_notice_board') }} 
               </p>
             </a>
-          </li>
+          </li> 
           <li class="nav-item @if(Request::segment(2) == 'activities') menu-is-opening menu-open @endif">
             <a href="{{ url('parent/activities') }}" class="nav-link @if(Request::segment(2) == 'activities') active @endif">
                 <i class="nav-icon fas fa-running"></i>
                 <p>
-                    الأنشطة
+                    {{ __('messages.parent_activities') }}
                     <i class="fas fa-angle-left right"></i>
                 </p>
             </a>
@@ -793,13 +729,13 @@
                 <li class="nav-item">
                     <a href="{{ url('parent/activities') }}" class="nav-link @if(Request::segment(2) == 'activities' && !Request::segment(3)) active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>الأنشطة المتاحة</p>
+                        <p>{{ __('messages.activity_list') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('parent/activity/my-registrations') }}" class="nav-link @if(Request::segment(3) == 'my-registrations') active @endif">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>تسجيلاتي</p>
+                        <p>{{ __('messages.my_registrations') }}</p>
                     </a>
                 </li>
             </ul>

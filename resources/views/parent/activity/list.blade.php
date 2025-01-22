@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>الأنشطة المتاحة</h1>
+                    <h1>{{ __('messages.activities') }}</h1>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@
                     @include('_message')
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">قائمة الأنشطة المتاحة للتسجيل</h3>
+                            <h3 class="card-title">{{__('messages.activity_list')}}</h3>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -30,12 +30,12 @@
                                             <h5 class="card-title">{{ $activity->name }}</h5>
                                             <p class="card-text">{{ $activity->description }}</p>
                                             <ul class="list-unstyled">
-                                                <li><strong>تاريخ البداية:</strong> {{ $activity->start_date }}</li>
-                                                <li><strong>تاريخ النهاية:</strong> {{ $activity->end_date }}</li>
-                                                <li><strong>التكلفة:</strong> {{ $activity->cost }} د.ل</li>
-                                                <li><strong>العدد المتاح:</strong> {{ $activity->max_students }}</li>
+                                                <li><strong>{{ __('messages.start_date') }}:</strong> {{ $activity->start_date }}</li>
+                                                <li><strong>{{ __('messages.end_date') }}:</strong> {{ $activity->end_date }}</li>
+                                                <li><strong>{{ __('messages.cost') }}:</strong> {{ $activity->cost }} د.ل</li>
+                                                <li><strong>{{ __('messages.max_students') }}:</strong> {{ $activity->max_students }}</li>
                                             </ul>
-                                            <a href="{{ url('parent/activity/register/'.$activity->id) }}" class="btn btn-primary">تسجيل</a>
+                                            <a href="{{ url('parent/activity/register/'.$activity->id) }}" class="btn btn-primary">{{ __('messages.register') }}</a>
                                         </div>
                                     </div>
                                 </div>

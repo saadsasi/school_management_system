@@ -120,9 +120,9 @@
                               <td>{{ $value->id }}</td>
                               <td>{{ $value->name }} {{ $value->last_name }}</td>
                               <td>{{ $value->class_name }}</td>
-                              <td>${{ number_format($value->amount, 2) }}</td>
-                              <td>${{ number_format($paid_amount, 2) }}</td>
-                              <td>${{ number_format($RemaningAmount, 2) }}</td>
+                              <td>{{ __('messages.in_dinars') }} {{ number_format($value->amount, 2) }}</td>
+                              <td>{{ __('messages.in_dinars') }} {{ number_format($paid_amount, 2) }}</td>
+                              <td>{{ __('messages.in_dinars') }} {{ number_format($RemaningAmount, 2) }}</td>
                               <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                               <td>
                                   <a href="{{ url('admin/fees_collection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-success">{{ __('messages.collect_fees') }}</a>

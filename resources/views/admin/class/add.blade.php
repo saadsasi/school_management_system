@@ -32,7 +32,7 @@
 
 
                   <div class="form-group">
-                    <label>{{ __('messages.amount') }} ($)</label>
+                    <label>{{ __('messages.amount') }} ({{ __('messages.in_dinars') }})</label>
                     <input type="number" class="form-control" name="amount" required placeholder="{{ __('messages.amount') }}">
                   </div>
 

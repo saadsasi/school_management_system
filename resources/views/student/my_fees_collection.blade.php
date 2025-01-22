@@ -116,14 +116,7 @@
             <input type="number" class="form-control" name="amount">
           </div>
 
-          <div class="form-group">
-            <label class="col-form-label">{{__('messages.payment_type')}} <span style="color:red;">*</span></label>
-            <select class="form-control" name="payment_type" required>
-                  <option value="">{{__('messages.select')}}</option>
-                  <option value="Paypal">{{__('messages.paypal')}}</option>
-                  <option value="Stripe">{{__('messages.stripe')}}</option>
-            </select>
-          </div>
+        
 
           <div class="form-group">
             <label class="col-form-label">{{__('messages.remark')}} </label>

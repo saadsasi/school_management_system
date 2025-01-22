@@ -32,6 +32,10 @@ class SubjectModel extends Model
                         $return = $return->where('subject.type', '=', Request::get('type'));
                     }
 
+                    if(!empty(Request::get('grade_level')))
+                    {
+                        $return = $return->where('subject.grade_level', '=', Request::get('grade_level'));
+                    }
 
                     if(!empty(Request::get('date')))
                     {

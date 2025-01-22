@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ __('messages.assign_class_teacher') }} ({{ $getRecord->total() }})</h1>
+            <h1>{{ __('messages.assign_class_supervisor') }} ({{ $getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
               <a href="{{ url('admin/assign_class_teacher/add') }}" class="btn btn-primary">{{ __('messages.add_new_assign_class_teacher') }}</a>
@@ -38,7 +38,7 @@
 
              <div class="card">
               <div class="card-header">
-                <h3 class="card-title">{{ __('messages.search_assign_class_teacher') }}</h3>
+                <h3 class="card-title">{{ __('messages.search_assign_class_supervisor') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -75,7 +75,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">{{ __('messages.assign_class_teacher_list') }}</h3>
+                <h3 class="card-title">{{ __('messages.assign_class_supervisor_list') }}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">

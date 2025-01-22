@@ -68,7 +68,7 @@
 
 
 
-           <div class="col-lg-3 col-6">
+           {{-- <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalNoticeBoard }}</h3>
@@ -80,7 +80,7 @@
               </div>
               <a href="{{ url('teacher/my_notice_board') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
+          </div> --}}
          
 
          

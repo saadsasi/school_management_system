@@ -52,8 +52,6 @@
                       <th>  {{ __('messages.parent_profile_pic') }}</th>
                       <th>  {{ __('messages.parent_student_name') }} </th>   
                       <th>   {{ __('messages.parent_email') }} </th>
-                      <th>   {{ __('messages.parent_admission_number') }}</th>
-                      <th>  {{ __('messages.parent_roll_number') }}</th>
                       <th> {{ __('messages.parent_class') }}</th>
                       
                       
@@ -79,8 +77,6 @@
 
                           <td>{{ $value->name }} {{ $value->last_name }}</td>
                           <td>{{ $value->email }}</td>
-                          <td>{{ $value->admission_number }}</td>
-                          <td>{{ $value->roll_number }}</td>
                           <td>{{ $value->class_name }}</td>
                         
                        
@@ -95,10 +91,10 @@
                           
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 300px;">
-                            <a  style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">{{ __('messages.subject') }}</a>
-                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">{{ __('messages.exam_timetable') }}</a>
+                            <a  style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">{{ __('messages.subjects') }}</a>
+                            {{-- <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">{{ __('messages.exam_timetable') }}</a>
 
-                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">{{ __('messages.exam_result') }}</a>
+                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">{{ __('messages.exam_result') }}</a> --}}
 
                             <a style="margin-bottom: 10px;" class="btn btn-warning btn-sm" href="{{ url('parent/my_student/calendar/'.$value->id) }}">{{ __('messages.calendar') }}</a>
 

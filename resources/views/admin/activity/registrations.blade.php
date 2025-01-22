@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-dark">تسجيلات الأنشطة</h1>
+                    <h1>{{ __('messages.activity_registrations') }}</h1>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>{{ $registrations->count() }}</h3>
-                            <p>إجمالي التسجيلات</p>
+                            <p>{{ __('messages.total_registrations') }}</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-clipboard-list"></i>
@@ -34,7 +34,7 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{ $registrations->where('status', 'approved')->count() }}</h3>
-                            <p>التسجيلات المقبولة</p>
+                            <p>{{ __('messages.approved_registrations') }}</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-check-circle"></i>
@@ -46,7 +46,7 @@
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>{{ $registrations->where('status', 'pending')->count() }}</h3>
-                            <p>في انتظار الموافقة</p>
+                            <p>{{ __('messages.pending_approval') }}</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-clock"></i>
@@ -58,10 +58,10 @@
             <!-- Registrations List -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">قائمة التسجيلات</h3>
+                    <h3 class="card-title">{{ __('messages.registrations_list') }}</h3>
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 250px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="بحث...">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="{{ __('messages.search') }}...">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fas fa-search"></i>
@@ -72,14 +72,14 @@
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
-                    <thead>
+                        <thead>
                             <tr>
                                 <th>#</th>
-                                <th>النشاط</th>
-                                <th>الطالب</th>
-                                <th>تاريخ التسجيل</th>
-                                <th>الحالة</th>
-                                <th>العمليات</th>
+                                <th>{{ __('messages.activity_name') }}</th>
+                                <th>{{ __('messages.student') }}</th>
+                                <th>{{ __('messages.registration_date') }}</th>
+                                <th>{{ __('messages.status') }}</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,21 +91,21 @@
                                 <td>{{ date('Y/m/d', strtotime($registration->created_at)) }}</td>
                                 <td>
                                     @if($registration->status == 'pending')
-                                        <span class="badge badge-warning">قيد المراجعة</span>
+                                        <span class="badge badge-warning">{{ __('messages.pending_review') }}</span>
                                     @elseif($registration->status == 'approved')
-                                        <span class="badge badge-success">مقبول</span>
+                                        <span class="badge badge-success">{{ __('messages.approved') }}</span>
                                     @elseif($registration->status == 'rejected')
-                                        <span class="badge badge-danger">مرفوض</span>
+                                        <span class="badge badge-danger">{{ __('messages.rejected') }}</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if($registration->status == 'pending')
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-success approve-btn" data-id="{{ $registration->id }}">
-                                            <i class="fas fa-check"></i> قبول
+                                            <i class="fas fa-check"></i> {{ __('messages.approve') }}
                                         </button>
                                         <button type="button" class="btn btn-sm btn-danger reject-btn" data-id="{{ $registration->id }}">
-                                            <i class="fas fa-times"></i> رفض
+                                            <i class="fas fa-times"></i> {{ __('messages.reject') }}
                                         </button>
                                     </div>
                                     @endif
@@ -113,7 +113,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center">لا توجد تسجيلات</td>
+                                <td colspan="6" class="text-center">{{ __('messages.no_registrations') }}</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -129,11 +129,11 @@
     </section>
 </div>
 
+@endsection
 
 @push('scripts')
 <script>
 $(document).ready(function() {
-    // دالة تحديث حالة التسجيل
     function updateRegistrationStatus(id, status) {
         $.ajax({
             url: "{{ url('admin/activity/registration/update-status') }}/" + id,
@@ -144,10 +144,8 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.success) {
-                    // تحديث الصفحة
                     location.reload();
                 } else {
-                    // عرض رسالة الخطأ
                     alert(response.message || 'حدث خطأ ما');
                 }
             },
@@ -157,14 +155,12 @@ $(document).ready(function() {
         });
     }
 
-    // معالجة زر القبول
     $('.approve-btn').click(function() {
         if (confirm('هل أنت متأكد من قبول هذا التسجيل؟')) {
             updateRegistrationStatus($(this).data('id'), 'approved');
         }
     });
 
-    // معالجة زر الرفض
     $('.reject-btn').click(function() {
         if (confirm('هل أنت متأكد من رفض هذا التسجيل؟')) {
             updateRegistrationStatus($(this).data('id'), 'rejected');
@@ -173,4 +169,3 @@ $(document).ready(function() {
 });
 </script>
 @endpush
-@endsection

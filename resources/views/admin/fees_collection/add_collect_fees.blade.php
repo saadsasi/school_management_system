@@ -46,9 +46,9 @@
                      @forelse($getFees as $value)
                       <tr>
                           <td>{{ $value->class_name }}</td>
-                          <td>${{ number_format($value->total_amount, 2) }}</td>
-                          <td>${{ number_format($value->paid_amount, 2) }}</td>
-                          <td>${{ number_format($value->remaning_amount, 2) }}</td>
+                          <td>{{ __('messages.in_dinars') }} {{ number_format($value->total_amount, 2) }}</td>
+                          <td>{{ __('messages.in_dinars') }} {{ number_format($value->paid_amount, 2) }}</td>
+                          <td>{{ __('messages.in_dinars') }} {{ number_format($value->remaning_amount, 2) }}</td>
                           <td>{{ $value->payment_type }}</td>
                           <td>{{ $value->remark }}</td>
                           <td>{{ $value->created_name }}</td>
@@ -97,18 +97,18 @@
 
 
           <div class="form-group">
-            <label class="col-form-label">{{ __('messages.total_amount') }} : ${{ number_format($getStudent->amount, 2) }}</label>            
+            <label class="col-form-label">{{ __('messages.total_amount') }} : {{ __('messages.in_dinars') }} {{ number_format($getStudent->amount, 2) }}</label>            
           </div>
 
           <div class="form-group">
-            <label class="col-form-label">{{ __('messages.paid_amount') }} : ${{ number_format($paid_amount, 2) }}</label>            
+            <label class="col-form-label">{{ __('messages.paid_amount') }} : {{ __('messages.in_dinars') }} {{ number_format($paid_amount, 2) }}</label>            
           </div>
 
           <div class="form-group">
             @php
               $RemaningAmount = $getStudent->amount - $paid_amount;
             @endphp
-            <label class="col-form-label">{{ __('messages.remaning_amount') }} : ${{ number_format($RemaningAmount, 2) }}</label>            
+            <label class="col-form-label">{{ __('messages.remaning_amount') }} : {{ __('messages.in_dinars') }} {{ number_format($RemaningAmount, 2) }}</label>            
           </div>
 
           <div class="form-group">

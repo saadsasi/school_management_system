@@ -184,7 +184,30 @@ class StudentController extends Controller
             abort(404);
         }
     }
+    // medical file
+    public function medicalFile($student_id)
+    {
+        $data['getRecord'] = User::getSingle($student_id);
+        $data['header_title'] = __('messages.medical_file');
+        return view('admin.student.medical_file', $data);
+    }
 
+    public function updateMedicalFile($student_id, Request $request)
+    {
+        $user = User::getSingle($student_id);
+        if(!empty($user)) {
+            $user->height = $request->height;
+            $user->weight = $request->weight;
+            $user->blood_group = $request->blood_group;
+            $user->allergies = $request->allergies;
+            $user->medical_condition = $request->medical_condition;
+            $user->save();
+
+            return redirect()->back()->with('success', __('messages.medical_info_updated'));
+        } else {
+            abort(404);
+        }
+    }
 
     // teacher side work
 

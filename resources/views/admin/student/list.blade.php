@@ -156,6 +156,7 @@
                             <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary btn-sm">{{ __('messages.edit') }}</a>
                             <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger btn-sm">{{ __('messages.delete') }}</a>
                             <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">{{ __('messages.send_message') }}</a>
+                            <a href="{{ url('admin/student/medical-file/'.$value->id) }}" class="btn btn-info btn-sm">{{ __('messages.medical_file') }}</a>
                           </td>
                         </tr>
                       @endforeach

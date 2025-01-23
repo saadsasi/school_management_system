@@ -475,7 +475,7 @@ return [
     'parent_activity' => 'Activity',
     'parent_activities' => 'Activities',
     'noticeboard' => 'Notice Board',
-    'noticeboard_list' => 'Notice Boards List',
+    'noticeboard_list' => 'Lesson objective',
     'add_new_notice' => 'Add New Notice Board',
     'notice_title' => 'Notice Title',
     'notice_message' => 'Notice Message',

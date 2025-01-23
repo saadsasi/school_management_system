@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\NoticeBoardModel;
 use App\Exports\ExportParent;
 use Hash;
 use Auth;
 use Str;
 use Excel;
-
 
 class ParentController extends Controller
 {
@@ -237,5 +237,24 @@ class ParentController extends Controller
                           $data['getRecord'] = \App\Models\LeaveRequest::whereIn('user_id', $student_ids)                            ->orderBy('id', 'desc')
                             ->get();
         return view('parent.leave.history', $data);
+    }
+
+    public function MyNoticeBoardParent()
+    {
+        $data['getRecord'] = NoticeBoardModel::select(
+                                'notice_board.id',
+                                'notice_board.title',
+                                'notice_board.message',
+                                'notice_board.notice_date',
+                                'notice_board.publish_date',
+                                'users.name as created_by_name',
+                                'users.user_type'
+                            )
+                            ->join('users', 'users.id', '=', 'notice_board.created_by')
+                            ->whereDate('notice_board.publish_date', '<=', date('Y-m-d'))
+                            ->orderBy('notice_board.id', 'desc')
+                            ->paginate(20);
+        $data['header_title'] = __('messages.noticeboard');
+        return view('parent.my_notice_board', $data);
     }
 }

@@ -28,19 +28,16 @@
                   <div class="row">
                     
                   
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>{{ __('messages.title') }}</label>
                     <input type="text" class="form-control" value="{{ Request::get('title') }}" name="title"  placeholder="{{ __('messages.title') }}">
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-4">
                     <label>{{ __('messages.notice_date_from') }}</label>
                     <input type="date" class="form-control" name="notice_date_from" value="{{ Request::get('notice_date_from') }}"  >
                   </div>
 
-                  <div class="form-group col-md-3">
-                    <label>{{ __('messages.notice_date_to') }}</label>
-                    <input type="date" class="form-control" name="notice_date_to" value="{{ Request::get('notice_date_to') }}"  >
-                  </div>
+                
                   <div class="form-group col-md-3">
 
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">{{ __('messages.search') }}</button>
@@ -61,7 +58,17 @@
             <div class="card-body p-0">
               <div class="mailbox-read-info">
                 <h5>{{ $value->title }}</h5>
-                <h6 style="margin-top: 10px;"> {{ date('d-m-Y', strtotime($value->notice_date)) }}</h6>
+                <h6 style="margin-top: 10px;">
+                    <span class="mailbox-read-time">
+                        {{ __('messages.notice_date') }}: {{ date('d-m-Y', strtotime($value->notice_date)) }}
+                    </span>
+                    <br>
+                    <span class="mailbox-read-time">
+                        {{ __('messages.created_by') }}: 
+                        {{ $value->created_by_name }}
+                        ({{ $value->user_type == 1 ? __('messages.admin') : __('messages.teacher') }})
+                    </span>
+                </h6>
               </div>
               <div class="mailbox-read-message">
                   {!! $value->message !!}

@@ -7,8 +7,10 @@ use App\Models\User;
 use App\Models\NoticeBoardModel;
 use App\Models\NoticeBoardMessageModel;
 use App\Mail\SendEmailUserMail;
+use Hash;
 use Auth;
 use Mail;
+use Str;
 class CommunicateController extends Controller
 {
 
@@ -179,14 +181,40 @@ class CommunicateController extends Controller
 
     // teacher side work   
 
-    public function MyNoticeBoardTeacher()
+    public function MyNoticeBoardTeacher(Request $request)
     {
-        $data['getRecord'] = NoticeBoardModel::select('notice_board.*', 'users.name as created_by_name', 'users.user_type')
-                                           ->join('users', 'users.id', '=', 'notice_board.created_by')
-                                           ->whereDate('notice_board.publish_date', '=', date('Y-m-d'))
-                                           ->orderBy('notice_board.id', 'desc')
-                                           ->paginate(20);
-        $data['header_title'] = 'Notice Board';
+        $query = NoticeBoardModel::select(
+                    'notice_board.id',
+                    'notice_board.title',
+                    'notice_board.message',
+                    'notice_board.notice_date',
+                    'notice_board.publish_date',
+                    'users.name as created_by_name',
+                    'users.user_type'
+                )
+                ->join('users', 'users.id', '=', 'notice_board.created_by');
+
+        // تطبيق الفلتر
+        if($request->filled('title'))
+        {
+            $query->where('notice_board.title', 'like', '%'.$request->title.'%');
+        }
+
+        if($request->filled('notice_date_from'))
+        {
+            $query->whereDate('notice_board.notice_date', '>=', $request->notice_date_from);
+        }
+
+        if($request->filled('notice_date_to'))
+        {
+            $query->whereDate('notice_board.notice_date', '<=', $request->notice_date_to);
+        }
+
+        $data['getRecord'] = $query->whereDate('notice_board.publish_date', '<=', date('Y-m-d'))
+                                 ->orderBy('notice_board.id', 'desc')
+                                 ->paginate(20);
+
+        $data['header_title'] = __('messages.noticeboard');
         return view('teacher.noticeboard.view', $data);
     }
 

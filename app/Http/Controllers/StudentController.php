@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ClassModel;
 use App\Exports\ExportStudent;
+use App\Models\NoticeBoardModel;
 use App\Models\SubjectModel;
 use Hash;
 use Auth;
@@ -237,5 +238,24 @@ class StudentController extends Controller
         $data['getRecord'] = $getRecord;
         $data['header_title'] = "My Subject";
         return view('student.my_subject', $data);
+    }
+
+    public function MyNoticeBoardStudent()
+    {
+        $data['getRecord'] = NoticeBoardModel::select(
+                                'notice_board.id',
+                                'notice_board.title',
+                                'notice_board.message',
+                                'notice_board.notice_date',
+                                'notice_board.publish_date',
+                                'users.name as created_by_name',
+                                'users.user_type'
+                            )
+                            ->join('users', 'users.id', '=', 'notice_board.created_by')
+                            ->whereDate('notice_board.publish_date', '<=', date('Y-m-d'))
+                            ->orderBy('notice_board.id', 'desc')
+                            ->paginate(20);
+        $data['header_title'] = __('messages.noticeboard');
+        return view('student.my_notice_board', $data);
     }
 }

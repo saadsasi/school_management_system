@@ -575,12 +575,6 @@
                 <p>{{ __('messages.noticeboard_list') }}</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="{{ url('teacher/noticeboard/add') }}" class="nav-link @if(Request::segment(2) == 'noticeboard' && Request::segment(3) == 'add') active @endif">
-                <i class="far fa-circle nav-icon"></i>
-                <p>{{ __('messages.add_new_notice') }}</p>
-              </a>
-            </li>
           </ul>
         </li>
 @endif

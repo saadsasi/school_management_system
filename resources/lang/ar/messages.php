@@ -224,7 +224,7 @@ return [
     'parent_activities' => 'النشاطات',
     'parent_activity' => 'النشاط',
     'noticeboard' => 'لوحة الإعلانات',
-    'noticeboard_list' => 'إعلاناتي',
+    'noticeboard_list' => 'هدف الدرس',
     'add_new_notice' => 'إضافة  جديدة',
     'notice_title' => 'عنوان الإعلان',
     'notice_message' => 'رسالة الإعلان',
@@ -349,7 +349,7 @@ return [
     'my_notice_board' => 'لوحة اللإعلانات',
     'title' => 'العنوان',
     'total_notice_board' => 'إجمالي لوحة الإعلانات',
-    'notice_date_from' => 'تاريخ الإعلان من',
+    'notice_date_from' => 'تاريخ الإعلان',
     'notice_date_to' => 'تاريخ الإعلان إلى',
     'my_student_list' => 'قائمة طلابي',
 

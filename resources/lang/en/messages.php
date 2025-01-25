@@ -480,6 +480,13 @@ return [
     'notice_title' => 'Notice Title',
     'notice_message' => 'Notice Message',
     'notice_list' => 'Notice List',
+    'medical_info' => 'medical info',
+    'medical_info_updated' => 'Medical Info Updated',
+    'allergies' => 'Allergies',
+    'medical_condition' => 'Medical Condition',
+    'save_medical_info' => 'Save',
+    'medical_history' => 'Medical History',
+    'record_date' => 'Date',
 
     //  dashboard.blade Page
 

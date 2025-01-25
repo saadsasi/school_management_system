@@ -110,6 +110,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/student/export_excel', [StudentController::class, 'export_excel']);
     Route::get('admin/student/medical-file/{id}', [StudentController::class, 'medicalFile']);
     Route::post('admin/student/medical-file/{id}', [StudentController::class, 'updateMedicalFile']);
+    Route::get('admin/student/medical-info/{student}', [StudentController::class, 'getMedicalInfo']);
 
     // parent
 

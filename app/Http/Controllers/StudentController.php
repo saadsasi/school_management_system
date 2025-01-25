@@ -8,6 +8,7 @@ use App\Models\ClassModel;
 use App\Exports\ExportStudent;
 use App\Models\NoticeBoardModel;
 use App\Models\SubjectModel;
+use App\Models\HealthRecord;
 use Hash;
 use Auth;
 use Str;
@@ -44,8 +45,7 @@ class StudentController extends Controller
         request()->validate([
             'email' => 'required|email|unique:users',
             'grade_level' => 'required',
-            'weight' => 'max:10',
-            'blood_group' => 'max:10',
+
             'mobile_number' => 'max:15|min:8',            
             'height' => 'max:10'            
         ]);
@@ -78,10 +78,7 @@ class StudentController extends Controller
         {
             $student->admission_date = trim($request->admission_date);    
         }
-        
-        $student->blood_group = trim($request->blood_group);
-        $student->height = trim($request->height);
-        $student->weight = trim($request->weight);
+       
         $student->status = trim($request->status);
         $student->email = trim($request->email);
         $student->password = Hash::make($request->password);
@@ -113,10 +110,9 @@ class StudentController extends Controller
     {
          request()->validate([
             'email' => 'required|email|unique:users,email,'.$id,
-            'weight' => 'max:10',
-            'blood_group' => 'max:10',
+          
             'mobile_number' => 'max:15|min:8',            
-            'height' => 'max:10'            
+                      
         ]);
 
 
@@ -153,9 +149,7 @@ class StudentController extends Controller
             $student->admission_date = trim($request->admission_date);    
         }
         
-        $student->blood_group = trim($request->blood_group);
-        $student->height = trim($request->height);
-        $student->weight = trim($request->weight);
+      
         $student->status = trim($request->status);
         $student->email = trim($request->email);
 
@@ -188,6 +182,9 @@ class StudentController extends Controller
     public function medicalFile($student_id)
     {
         $data['getRecord'] = User::getSingle($student_id);
+        $data['healthRecord'] = HealthRecord::where('student_id', $student_id)
+                                          ->latest('record_date')
+                                          ->first();
         $data['header_title'] = __('messages.medical_file');
         return view('admin.student.medical_file', $data);
     }
@@ -196,17 +193,59 @@ class StudentController extends Controller
     {
         $user = User::getSingle($student_id);
         if(!empty($user)) {
-            $user->height = $request->height;
-            $user->weight = $request->weight;
-            $user->blood_group = $request->blood_group;
-            $user->allergies = $request->allergies;
-            $user->medical_condition = $request->medical_condition;
-            $user->save();
+            HealthRecord::create([
+                'student_id' => $student_id,
+                'height' => $request->height,
+                'weight' => $request->weight,
+                'blood_group' => $request->blood_group,
+                'allergies' => $request->allergies,
+                'medical_condition' => $request->medical_condition,
+                'medications' => null,
+                'chronic_diseases' => null,
+                'previous_surgeries' => null,
+                'emergency_contact' => null,
+                'notes' => null,
+                'created_by' => auth()->user()->id,
+                'record_date' => date('Y-m-d')
+            ]);
 
             return redirect()->back()->with('success', __('messages.medical_info_updated'));
         } else {
             abort(404);
         }
+    }
+
+    public function getMedicalInfo($student_id)
+    {
+        $student = User::find($student_id);
+        $healthRecords = HealthRecord::where('student_id', $student_id)
+            ->orderBy('record_date', 'desc')
+            ->with('creator')
+            ->get()
+            ->map(function($record) {
+                return [
+                    'record_date' => $record->record_date,
+                    'height' => $record->height,
+                    'weight' => $record->weight,
+                    'blood_group' => $record->blood_group,
+                    'creator_name' => $record->creator->name
+                ];
+            });
+
+        // Get latest health record
+        $latestRecord = HealthRecord::where('student_id', $student_id)
+            ->orderBy('record_date', 'desc')
+            ->first();
+
+        return response()->json([
+            'student_name' => $student->name . ' ' . $student->last_name,
+            'height' => $latestRecord ? $latestRecord->height : null,
+            'weight' => $latestRecord ? $latestRecord->weight : null,
+            'blood_group' => $latestRecord ? $latestRecord->blood_group : null,
+            'allergies' => $latestRecord ? $latestRecord->allergies : null,
+            'medical_condition' => $latestRecord ? $latestRecord->medical_condition : null,
+            'health_records' => $healthRecords
+        ]);
     }
 
     // teacher side work

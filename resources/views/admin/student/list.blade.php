@@ -1,8 +1,21 @@
 @extends('layouts.app')
 
+@section('style')
+<style>
+.modal-body p {
+    margin-bottom: 1rem;
+}
+.modal-body .table {
+    margin-top: 1rem;
+}
+.modal-body strong {
+    font-weight: 600;
+    color: #61a5e9;
+}
+</style>
+@endsection
+
 @section('content')
-
-
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -87,7 +100,6 @@
                     <input type="hidden" name="class" value="{{ Request::get('class') }}">
                     <input type="hidden" name="grade_level" value="{{ Request::get('grade_level') }}">
                     <input type="hidden" name="mobile_number" value="{{ Request::get('mobile_number') }}">
-                    <input type="hidden" name="blood_group" value="{{ Request::get('blood_group') }}">
                     <input type="hidden" name="status" value="{{ Request::get('status') }}">
                     <input type="hidden" name="admission_date" value="{{ Request::get('admission_date') }}">
                     <input type="hidden" name="date" value="{{ Request::get('date') }}">
@@ -110,9 +122,6 @@
                       <th>{{ __('messages.date_of_birth') }} </th>
                       <th>{{ __('messages.mobile_number') }}</th>
                       <th>{{ __('messages.admission_date') }}</th>
-                      <th>{{ __('messages.blood_group') }}</th>
-                      <th>{{ __('messages.height') }}</th>
-                      <th>{{ __('messages.weight') }}</th>
                       <th>{{ __('messages.status') }}</th>
                       <th>{{ __('messages.created_date') }}</th>
                       <th>{{ __('messages.action') }}</th>
@@ -145,9 +154,7 @@
                               {{ date('d-m-Y', strtotime($value->admission_date)) }}
                               @endif
                           </td>
-                          <td>{{ $value->blood_group }}</td>
-                          <td>{{ $value->height }}</td>
-                          <td>{{ $value->weight }}</td>
+                          
                           <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                           
 
@@ -156,7 +163,9 @@
                             <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary btn-sm">{{ __('messages.edit') }}</a>
                             <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger btn-sm">{{ __('messages.delete') }}</a>
                             <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">{{ __('messages.send_message') }}</a>
-                            <a href="{{ url('admin/student/medical-file/'.$value->id) }}" class="btn btn-info btn-sm">{{ __('messages.medical_file') }}</a>
+                            <button type="button" class="btn btn-info btn-sm" onclick="showMedicalInfo({{ $value->id }})">
+                              <i class="fas fa-notes-medical"></i> {{ __('messages.medical_file') }}
+                            </button>
                           </td>
                         </tr>
                       @endforeach
@@ -182,4 +191,97 @@
     <!-- /.content -->
   </div>
 
+  <!-- Add Modal -->
+  <div class="modal fade" id="medicalInfoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ __('messages.medical_info') }}</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>{{ __('messages.height') }}:</strong> <span id="modal-height"></span> cm</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>{{ __('messages.weight') }}:</strong> <span id="modal-weight"></span> kg</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>{{ __('messages.blood_group') }}:</strong> <span id="modal-blood-group"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>{{ __('messages.allergies') }}:</strong> <span id="modal-allergies"></span></p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>{{ __('messages.medical_condition') }}:</strong> <span id="modal-medical-condition"></span></p>
+                    </div>
+                </div>
+
+                <div class="table-responsive mt-4">
+                    <h5>{{ __('messages.medical_history') }}</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ __('messages.record_date') }}</th>
+                                <th>{{ __('messages.height') }}</th>
+                                <th>{{ __('messages.weight') }}</th>
+                                <th>{{ __('messages.blood_group') }}</th>
+                                <th>{{ __('messages.created_by') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medical-history-table">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="edit-medical-info" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> {{ __('messages.edit') }}
+                </a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('messages.close') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+function showMedicalInfo(studentId) {
+    $.ajax({
+        url: '/admin/student/medical-info/' + studentId,
+        type: 'GET',
+        success: function(response) {
+            $('#modal-height').text(response.height || '-');
+            $('#modal-weight').text(response.weight || '-');
+            $('#modal-blood-group').text(response.blood_group || '-');
+            $('#modal-allergies').text(response.allergies || '-');
+            $('#modal-medical-condition').text(response.medical_condition || '-');
+            
+            $('#edit-medical-info').attr('href', '/admin/student/medical-file/' + studentId);
+            
+            let historyHtml = '';
+            response.health_records.forEach(function(record) {
+                historyHtml += `
+                    <tr>
+                        <td>${moment(record.record_date).format('DD-MM-YYYY')}</td>
+                        <td>${record.height || '-'}  cm</td>
+                        <td>${record.weight || '-'}  kg</td>
+                        <td>${record.blood_group || '-'}</td>
+                        <td>${record.creator_name}</td>
+                    </tr>
+                `;
+            });
+            $('#medical-history-table').html(historyHtml);
+            
+            $('#medicalInfoModal').modal('show');
+        }
+    });
+}
+</script>
 @endsection

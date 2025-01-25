@@ -145,10 +145,9 @@ class UserController extends Controller
         
         request()->validate([
             'email' => 'required|email|unique:users,email,'.$id,
-            'weight' => 'max:10',
-            'blood_group' => 'max:10',
+           
             'mobile_number' => 'max:15|min:8',            
-            'height' => 'max:10'            
+                       
         ]);
 
     
@@ -179,9 +178,7 @@ class UserController extends Controller
         }
 
         $student->mobile_number = trim($request->mobile_number);
-        $student->blood_group = trim($request->blood_group);
-        $student->height = trim($request->height);
-        $student->weight = trim($request->weight);
+       
         $student->email = trim($request->email);
         $student->save();
 

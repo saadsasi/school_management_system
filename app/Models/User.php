@@ -284,11 +284,6 @@ class User extends Authenticatable
                             $return = $return->where('users.mobile_number','like', '%'.Request::get('mobile_number').'%');
                         }
 
-                        if(!empty(Request::get('blood_group')))
-                        {
-                            $return = $return->where('users.blood_group','like', '%'.Request::get('blood_group').'%');
-                        }
-
                         if(!empty(Request::get('admission_date')))
                         {
                             $return = $return->whereDate('users.admission_date','=', Request::get('admission_date'));
@@ -630,4 +625,15 @@ class User extends Authenticatable
     }
 
 
+    // العلاقة مع السجلات الصحية
+    public function healthRecords()
+    {
+        return $this->hasMany(HealthRecord::class, 'student_id');
+    }
+
+    // دالة للحصول على آخر سجل صحي
+    public function getLatestHealthRecord()
+    {
+        return $this->healthRecords()->latest('record_date')->first();
+    }
 }

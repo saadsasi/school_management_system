@@ -230,6 +230,13 @@ return [
     'notice_message' => 'رسالة الإعلان',
     'notice_publish_date' => 'تاريخ النشر',
     'notice_list' => 'قائمة الإعلانات',
+    'medical_info' => 'معلومات طبية',
+    'medical_info_updated' => 'تم تحديث المعلومات الطبية',
+    'allergies' => 'العلاجيات',
+    'medical_condition' => 'الحالة الطبية',
+    'save_medical_info' => 'حفظ',
+    'medical_history' => 'تاريخ الحالة الطبية',
+    'record_date' => 'تاريخ الإنشاء',
 
     // change_password
     'change_password_title' => 'تغيير كلمة المرور',

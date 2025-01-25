@@ -92,26 +92,6 @@
                       @endif
                     </div> 
 
-                     <div class="form-group col-md-6">
-                      <label>{{ __('messages.blood_group') }} <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" name="blood_group" value="{{ old('blood_group', $getRecord->blood_group) }}" placeholder="{{ __('messages.blood_group') }}">
-                      <div style="color:red">{{ $errors->first('blood_group') }}</div>
-                    </div> 
-
-
-                     <div class="form-group col-md-6">
-                      <label>{{ __('messages.height') }} <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" name="height" value="{{ old('height', $getRecord->height) }}" placeholder="{{ __('messages.height') }}">
-                      <div style="color:red">{{ $errors->first('height') }}</div>
-                    </div> 
-
-
-                     <div class="form-group col-md-6">
-                      <label>{{ __('messages.weight') }} <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" name="weight" value="{{ old('weight', $getRecord->weight) }}" placeholder="{{ __('messages.weight') }}">
-                      <div style="color:red">{{ $errors->first('weight') }}</div>
-                    </div> 
-
 
                      <div class="form-group col-md-6">
                       <label>{{ __('messages.status') }} <span style="color: red;">*</span></label>
@@ -127,8 +107,6 @@
 
                   <hr />
 
-
-                  
                   <div class="form-group">
                     <label>{{ __('messages.email') }} <span style="color: red;">*</span></label>
                     <input type="email" class="form-control" name="email" value="{{ old('email', $getRecord->email) }}" required placeholder="{{ __('messages.email') }}">

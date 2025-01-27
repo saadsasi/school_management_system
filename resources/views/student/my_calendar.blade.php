@@ -68,6 +68,16 @@
         @endforeach
     @endforeach
 
+    @foreach($getActivities as $activity)
+        events.push({
+            title: '{{ __('messages.activity') }}: {{ $activity['name'] }}',
+            start: '{{ $activity['start_date'] }}',
+            end: '{{ $activity['end_date'] }}',
+            color: 'green',
+            url: '{{ url('student/my_activities') }}'
+        });
+    @endforeach
+
     var calendarID = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarID, {
         headerToolbar: {

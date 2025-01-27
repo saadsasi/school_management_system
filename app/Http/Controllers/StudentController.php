@@ -193,26 +193,35 @@ class StudentController extends Controller
     {
         $user = User::getSingle($student_id);
         if(!empty($user)) {
-            HealthRecord::create([
-                'student_id' => $student_id,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'blood_group' => $request->blood_group,
-                'allergies' => $request->allergies,
-                'medical_condition' => $request->medical_condition,
-                'medications' => null,
-                'chronic_diseases' => null,
-                'previous_surgeries' => null,
-                'emergency_contact' => null,
-                'notes' => null,
-                'created_by' => auth()->user()->id,
-                'record_date' => date('Y-m-d')
-            ]);
+            $healthRecord = HealthRecord::updateOrCreate(
+                [
+                    'student_id' => $student_id,
+                    'record_date' => now()->toDateString()
+                ],
+                [
+                    'height' => $request->height,
+                    'weight' => $request->weight,
+                    'blood_group' => $request->blood_group,
+                    'vaccination_name' => $request->vaccination_name,
+                    'vaccination_date' => $request->vaccination_date,
+                    'allergy_type' => $request->allergy_type,
+                    'allergy_severity' => $request->allergy_severity,
+                    'disease_name' => $request->disease_name,
+                    'disease_medications' => $request->disease_medications,
+                    'visit_date' => $request->visit_date,
+                    'visit_reason' => $request->visit_reason,
+                    'visit_diagnosis' => $request->visit_diagnosis,
+                    'visit_treatment' => $request->visit_treatment,
+                    'medical_condition' => $request->medical_condition,
+                    'notes' => $request->notes,
+                    'created_by' => auth()->id()
+                ]
+            );
 
             return redirect()->back()->with('success', __('messages.medical_info_updated'));
-        } else {
-            abort(404);
         }
+
+        return redirect()->back()->with('error', __('messages.student_not_found'));
     }
 
     public function getMedicalInfo($student_id)
@@ -319,5 +328,6 @@ class StudentController extends Controller
                             ->paginate(20);
         $data['header_title'] = __('messages.noticeboard');
         return view('student.my_notice_board', $data);
+        
     }
 }

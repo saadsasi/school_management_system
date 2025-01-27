@@ -630,5 +630,30 @@ return [
      'stripe_checkout' => 'Stripe Checkout',
      
 
+    'vaccinations' => 'Vaccinations',
+    'vaccination_name' => 'Vaccination Name',
+    'vaccination_date' => 'Vaccination Date',
+    'allergy_type' => 'Allergy Type',
+    'severity' => 'Severity',
+    'mild' => 'Mild',
+    'moderate' => 'Moderate',
+    'severe' => 'Severe',
+    'chronic_diseases' => 'Chronic Diseases',
+    'disease_name' => 'Disease Name',
+    'diagnosis_date' => 'Diagnosis Date',
+    'medications' => 'Medications',
+    'medical_visits' => 'Medical Visits',
+    'visit_date' => 'Visit Date',
+    'diagnosis' => 'Diagnosis',
+    'treatment' => 'Treatment',
+    'allergy_severity' => 'Allergy Severity',
+    "disease_medications" => "Disease Medications",
+    "visit_reason" => "Visit Reason",
+    "visit_treatment" => "Visit Treatment",
+    "last_medical_visit" => "Last Medical Visit",
+    "visit_diagnosis" => "Visit Diagnosis",
+    'medical_file' => 'Medical File',
+    'select_student_note' => 'you can select multiple student',
+    'select_subject_note' => 'you can select multiple subject',
+    'reports' => 'Reports'
 ];
-

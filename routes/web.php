@@ -23,6 +23,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ParentActivityController;
+use App\Http\Controllers\ReportController;
 
 // Language Switcher
 Route::get('locale/{lang}', function($lang) {
@@ -333,13 +334,7 @@ Route::group(['middleware' => ['teacher','userActive']], function () {
 
     Route::get('teacher/attendance/report', [AttendanceController::class, 'AttendanceReportTeacher']);
 
-    // Route::get('teacher/noticeboard/my_notice_board', [CommunicateController::class, 'MyNoticeBoardTeacher']);
-    // Route::get('teacher/noticeboard', 'CommunicateController@teacherNoticeBoard');
-    // Route::get('teacher/noticeboard/add', 'CommunicateController@teacherAddNoticeBoard');
-    // Route::post('teacher/noticeboard/store', 'CommunicateController@teacherStoreNoticeBoard');
-    // Route::get('teacher/noticeboard/edit/{id}', 'CommunicateController@teacherEditNoticeBoard');
-    // Route::post('teacher/noticeboard/update/{id}', 'CommunicateController@teacherUpdateNoticeBoard');
-    // Route::get('teacher/noticeboard/delete/{id}', 'CommunicateController@teacherDeleteNoticeBoard');
+
 Route::get('teacher/noticeboard', [CommunicateController::class, 'teacherNoticeBoard']);
 Route::get('teacher/noticeboard/add', [CommunicateController::class, 'teacherAddNoticeBoard']);
 Route::post('teacher/noticeboard/store', [CommunicateController::class, 'teacherStoreNoticeBoard']);
@@ -347,6 +342,14 @@ Route::get('teacher/noticeboard/edit/{id}', [CommunicateController::class, 'teac
 Route::post('teacher/noticeboard/update/{id}', [CommunicateController::class, 'teacherUpdateNoticeBoard']);
 Route::get('teacher/noticeboard/delete/{id}', [CommunicateController::class, 'teacherDeleteNoticeBoard']);
 Route::get('teacher/noticeboard/view', [CommunicateController::class, 'MyNoticeBoardTeacher']);
+
+// Reports Routes
+Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports.index');    Route::get('/students', [ReportController::class, 'studentsReport'])->name('reports.students');
+    Route::get('/teachers', [ReportController::class, 'teachersReport'])->name('reports.teachers');
+    Route::get('/financial', [ReportController::class, 'financialReport'])->name('reports.financial');
+    Route::get('/examinations', [ReportController::class, 'examinationsReport'])->name('reports.examinations');
+});
 
 });
 
@@ -357,6 +360,7 @@ Route::group(['middleware' => ['student','userActive']], function () {
     Route::get('student/account', [UserController::class, 'MyAccount']);
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
 
+    Route::get('student/my_activities', [ActivityController::class, 'myActivities']);
     
     Route::get('student/my_subject', [SubjectController::class, 'MySubject']);
     Route::get('student/my_timetable', [ClassTimetableController::class, 'MyTimetable']);
@@ -402,6 +406,14 @@ Route::group(['middleware' => ['student','userActive']], function () {
     Route::get('student/my-subject', [StudentController::class, 'mySubject']);
     Route::get('student/subject/download-curriculum/{subject_id}', [StudentController::class, 'downloadCurriculum']);
     
+});
+
+Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/students', [ReportController::class, 'studentsReport'])->name('reports.students');
+    Route::get('/teachers', [ReportController::class, 'teachersReport'])->name('reports.teachers');
+    Route::get('/financial', [ReportController::class, 'financialReport'])->name('reports.financial');
+    Route::get('/examinations', [ReportController::class, 'examinationsReport'])->name('reports.examinations');
 });
 
 Route::group(['middleware' => ['parent','userActive']], function () {

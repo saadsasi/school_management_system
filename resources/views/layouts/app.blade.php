@@ -178,6 +178,7 @@ body.dark-mode .table {
 <script src="{{ url('dist/js/pages/dashboard.js') }}"></script>
 
 @yield('script')
+@stack('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
       const darkModeToggle = document.getElementById('darkModeToggle');

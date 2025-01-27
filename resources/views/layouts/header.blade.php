@@ -339,6 +339,12 @@
     </a>  
 </li>
 
+<li class="nav-item">
+  <a href="{{ route('reports.index') }}" class="nav-link">
+      <i class="nav-icon fas fa-chart-bar"></i>
+      <p> {{ __('messages.reports') }} </p>
+  </a>
+</li>
 
 
         <li class="nav-item">
@@ -350,7 +356,6 @@
             </a>
           </li>
           
-
 
           <li class="nav-item">
             <a href="{{ url('admin/setting') }}" class="nav-link @if(Request::segment(2) == 'setting') active @endif">
@@ -572,26 +577,27 @@
 
           @elseif(Auth::user()->user_type == 3)
 
-          <li class="nav-item">
-              <a href="{{ url('student/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  {{ __('messages.dashboard') }}
-                </p>
-              </a>
-            </li>
+         
 
             <li class="nav-item">
             <a href="{{ url('student/fees_collection') }}" class="nav-link @if(Request::segment(2) == 'fees_collection') active @endif">
-              <i class="nav-icon far fa-user"></i>
+              <i class="nav-icon fas fa-money-bill"></i>
               <p>
                 {{ __('messages.fees_collection') }}
               </p>
             </a>
-          </li> 
+          </li>
 
+            <li class="nav-item">
+              <a href="{{ url('student/my_activities') }}" class="nav-link @if(Request::segment(2) == 'my_activities') active @endif">
+                <i class="nav-icon fas fa-running"></i>
+                <p>
+                  {{ __('messages.my_activities') }}
+                </p>
+              </a>
+            </li>
 
-          <li class="nav-item">
+           <li class="nav-item">
             <a href="{{ url('student/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>

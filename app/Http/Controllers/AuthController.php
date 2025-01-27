@@ -20,7 +20,7 @@ class AuthController extends Controller
             } elseif (Auth::user()->user_type == 2) {
                 return redirect('teacher/dashboard');
             } elseif (Auth::user()->user_type == 3) {
-                return redirect('student/dashboard');
+                return redirect('student/my_calendar');
             } elseif (Auth::user()->user_type == 4) {
                 return redirect('parent/dashboard');
             }
@@ -39,7 +39,7 @@ class AuthController extends Controller
             } elseif (Auth::user()->user_type == 2) {
                 return redirect('teacher/dashboard');
             } elseif (Auth::user()->user_type == 3) {
-                return redirect('student/dashboard');
+                return redirect('student/my_calendar');
             } elseif (Auth::user()->user_type == 4) {
                 return redirect('parent/dashboard');
             }

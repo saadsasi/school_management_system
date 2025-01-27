@@ -27,14 +27,14 @@
                                 <div class="form-group">
                                     <label>نوع المغادرة <span style="color: red;">*</span></label>
                                     <select class="form-control" required name="type">
-                                        <option value="">اختر النوع</option>
+                                        <option value="">{{ __('messages.select') }}</option>
                                         <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_EARLY }}">مغادرة مبكرة</option>
                                         <option value="{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_END_DAY }}">نهاية الدوام</option>
                                      </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>اختر الطلاب <span style="color: red;">*</span></label>
+                                    <label>{{ __('messages.select_student') }} <span style="color: red;">*</span></label>
                                     <div class="student-checkboxes">
                                         @foreach($getStudent as $student)
                                             <div class="custom-control custom-checkbox">
@@ -48,17 +48,17 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <small class="form-text text-muted">يمكنك اختيار أكثر من طالب</small>
+                                    <small class="form-text text-muted">{{ __('messages.select_student_note') }}</small>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>السبب <span style="color: red;">*</span></label>
-                                    <textarea class="form-control" required name="reason" rows="4">{{ old('reason') }}</textarea>
+                                    <label>{{ __('messages.reason') }} <span style="color: red;" class="reason-required">*</span></label>
+                                    <textarea class="form-control" id="reason" name="reason" rows="4">{{ old('reason') }}</textarea>
                                 </div>
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">إرسال</button>
+                                <button type="submit" class="btn btn-primary">{{ __('messages.submit') }}</button>
                             </div>
                         </form>
                     </div>
@@ -127,5 +127,29 @@
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
 }
 </style>
+@endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const leaveTypeSelect = document.querySelector('select[name="type"]');
+    const reasonTextarea = document.getElementById('reason');
+    const reasonRequired = document.querySelector('.reason-required');
+
+    function updateReasonField() {
+        const isEndDay = leaveTypeSelect.value === '{{ \App\Http\Controllers\LeaveController::LEAVE_TYPE_END_DAY }}';
+        reasonTextarea.required = !isEndDay;
+        reasonRequired.style.display = isEndDay ? 'none' : 'inline';
+        if (isEndDay) {
+            reasonTextarea.value = '{{ __('messages.end_day') }}';
+        } else {
+            reasonTextarea.value = '';
+        }
+    }
+
+    leaveTypeSelect.addEventListener('change', updateReasonField);
+    updateReasonField(); // Run on initial load
+});
+</script>
 @endpush
 @endsection

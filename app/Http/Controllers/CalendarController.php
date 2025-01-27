@@ -9,6 +9,7 @@ use App\Models\ClassSubjectTimetableModel;
 use App\Models\ExamScheduleModel;
 use App\Models\AssignClassTeacherModel;
 use App\Models\User;
+use App\Models\ActivityRegistration;
 
 use Auth;
 class CalendarController extends Controller
@@ -18,7 +19,7 @@ class CalendarController extends Controller
 
         $data['getMyTimetable'] = $this->getTimetable(Auth::user()->class_id);
         $data['getExamTimetable'] = $this->getExamTimetable(Auth::user()->class_id);
-     
+        $data['getActivities'] = $this->getActivities(Auth::user()->id);
         $data['header_title'] = "My Calendar";
         return view('student.my_calendar',$data);
     }
@@ -87,6 +88,26 @@ class CalendarController extends Controller
 
         return $result;
         
+    }
+
+    public function getActivities($student_id)
+    {
+        $registrations = ActivityRegistration::where('student_id', $student_id)
+            ->where('status', 'approved')
+            ->with('activity')
+            ->get();
+
+        $result = array();
+        foreach($registrations as $registration) {
+            if($registration->activity) {
+                $data = array();
+                $data['name'] = $registration->activity->name;
+                $data['start_date'] = $registration->activity->start_date;
+                $data['end_date'] = $registration->activity->end_date;
+                $result[] = $data;
+            }
+        }
+        return $result;
     }
 
     // parent side

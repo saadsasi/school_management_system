@@ -88,4 +88,14 @@ class ActivityController extends Controller
             ], 500);
         }
     }
+
+    public function myActivities()
+    {
+        $data['header_title'] = "أنشطتي";
+        $data['activities'] = ActivityRegistration::where('student_id', Auth::user()->id)
+            ->with('activity')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('student.activities', $data);
+    }
 }

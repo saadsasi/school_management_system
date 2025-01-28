@@ -41,23 +41,9 @@
               <form method="get" action="">
                 <div class="card-body">
                   <div class="row">
-                    
-                  
-                  <div class="form-group col-md-2">
-                    <label>{{ __('messages.class') }}</label>
-                    <select class="form-control" name="class_id">
-                        <option value="">{{ __('messages.Select_Class') }}</option>
-                        @foreach($getClass as $class)
-                        <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
-                        @endforeach
-                    </select>
-                  </div>
 
 
-                   <div class="form-group col-md-2">
-                    <label>{{ __('messages.student_id') }}</label>
-                    <input type="text" class="form-control" value="{{ Request::get('student_id') }}" name="student_id"  placeholder="{{ __('messages.student_id') }}">
-                  </div>
+                
 
 
                   <div class="form-group col-md-3">
@@ -84,6 +70,17 @@
                         <option {{ (Request::get('grade_level') == 'first_preparatory') ? 'selected' : '' }} value="first_preparatory">{{ __('messages.first_preparatory') }}</option>
                         <option {{ (Request::get('grade_level') == 'second_preparatory') ? 'selected' : '' }} value="second_preparatory">{{ __('messages.second_preparatory') }}</option>
                         <option {{ (Request::get('grade_level') == 'third_preparatory') ? 'selected' : '' }} value="third_preparatory">{{ __('messages.third_preparatory') }}</option>
+                    </select>
+                  </div>
+
+                  
+                  <div class="form-group col-md-2">
+                    <label>{{ __('messages.class') }}</label>
+                    <select class="form-control" name="class_id">
+                        <option value="">{{ __('messages.Select_Class') }}</option>
+                        @foreach($getClass as $class)
+                        <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
+                        @endforeach
                     </select>
                   </div>
 

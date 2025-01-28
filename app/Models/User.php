@@ -206,8 +206,7 @@ class User extends Authenticatable
 
     static public function getCollectFeesStudent()
     { 
-
-        $return = self::select('users.*', 'class.name as class_name', 'class.amount')
+        $return = self::select('users.*', 'class.name as class_name', 'class.amount', 'class.grade_level')
                         ->join('class', 'class.id', '=', 'users.class_id')
                         ->where('users.user_type','=',3)
                         ->where('users.is_delete','=',0);
@@ -222,7 +221,6 @@ class User extends Authenticatable
                             $return = $return->where('users.id','=', Request::get('student_id'));
                         }
 
-
                         if(!empty(Request::get('first_name')))
                         {
                             $return = $return->where('users.name','like', '%'.Request::get('first_name').'%');
@@ -231,6 +229,11 @@ class User extends Authenticatable
                         if(!empty(Request::get('last_name')))
                         {
                             $return = $return->where('users.last_name','like', '%'.Request::get('last_name').'%');
+                        }
+
+                        if(!empty(Request::get('grade_level')))
+                        {
+                            $return = $return->where('class.grade_level','=', Request::get('grade_level'));
                         }
                         
         $return = $return->orderBy('users.name', 'asc')

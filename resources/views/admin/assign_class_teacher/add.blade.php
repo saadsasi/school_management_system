@@ -26,16 +26,27 @@
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
-                    <label>{{ __('messages.class_name') }}</label>
-                     <select class="form-control" name="class_id" required>
-                        <option value="">{{ __('messages.select_class') }}</option>
-                        @foreach($getClass as $class)
-                          <option value="{{ $class->id }}">{{ $class->name }}</option>
-                        @endforeach
+                    <label>{{ __('messages.grade_level') }}</label>
+                    <select class="form-control" name="grade_level" id="grade_level" required>
+                        <option value="">{{ __('messages.select_grade_level') }}</option>
+                        <option value="first_primary">{{ __('messages.first_primary') }}</option>
+                        <option value="second_primary">{{ __('messages.second_primary') }}</option>
+                        <option value="third_primary">{{ __('messages.third_primary') }}</option>
+                        <option value="fourth_primary">{{ __('messages.fourth_primary') }}</option>
+                        <option value="fifth_primary">{{ __('messages.fifth_primary') }}</option>
+                        <option value="sixth_primary">{{ __('messages.sixth_primary') }}</option>
+                        <option value="first_preparatory">{{ __('messages.first_preparatory') }}</option>
+                        <option value="second_preparatory">{{ __('messages.second_preparatory') }}</option>
+                        <option value="third_preparatory">{{ __('messages.third_preparatory') }}</option>
                     </select>
-
                   </div>
 
+                  <div class="form-group">
+                    <label>{{ __('messages.class_name') }}</label>
+                    <select class="form-control" name="class_id" id="class_id" required>
+                        <option value="">{{ __('messages.select_class') }}</option>
+                    </select>
+                  </div>
 
                    <div class="form-group">
                     <label>{{ __('messages.teacher_name') }}</label>
@@ -80,4 +91,24 @@
     <!-- /.content -->
   </div>
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $('#grade_level').change(function() {
+        var grade_level = $(this).val();
+        $.ajax({
+            url: "{{ url('admin/assign_class_teacher/get_class_by_grade_level') }}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                grade_level: grade_level
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#class_id').html(response.html);
+            }
+        });
+    });
+</script>
 @endsection

@@ -330,4 +330,10 @@ class StudentController extends Controller
         return view('student.my_notice_board', $data);
         
     }
+
+    public function getClassesByGrade($gradeLevel)
+    {
+        $classes = ClassModel::where('grade_level', $gradeLevel)->get();
+        return response()->json(['classes' => $classes]);
+    }
 }

@@ -18,11 +18,17 @@ use App\Models\StudentAttendanceModel;
 
 
 
+
+
 class DashboardController extends Controller
 {
     public function dashboard()
     {
         $data['header_title'] = 'Dashboard';
+        if(Auth::user()->user_type == 3)
+        {
+            return redirect('student/my-calendar');
+        }
         if(Auth::user()->user_type == 1)
         {
             $data['getTotalFees'] = StudentAddFeesModel::getTotalFees();
@@ -46,17 +52,6 @@ class DashboardController extends Controller
             $data['TotalSubject'] = AssignClassTeacherModel::getMyClassSubjectCount(Auth::user()->id);
             $data['TotalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::user()->user_type);
             return view('teacher.dashboard', $data);
-        }
-        else if(Auth::user()->user_type == 3)
-        {
-            $data['TotalPaidAmount'] = StudentAddFeesModel::TotalPaidAmountStudent(Auth::user()->id);
-            $data['TotalSubject'] = ClassSubjectModel::MySubjectTotal(Auth::user()->class_id);       
-            $data['TotalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::user()->user_type);
-            
-            $data['TotalAttendance'] = StudentAttendanceModel::getRecordStudentCount(Auth::user()->id);
-        
-
-            return view('student.dashboard', $data);
         }
         else if(Auth::user()->user_type == 4)
         {

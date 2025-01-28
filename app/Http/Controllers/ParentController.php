@@ -161,13 +161,14 @@ class ParentController extends Controller
     }
 
 
-    public function AssignStudentParent($student_id, $parent_id)
+    public function AssignStudentParent($student_id, $parent_id, Request $request)
     {
         $student = User::getSingle($student_id);
         $student->parent_id = $parent_id;
+        $student->relationship_type = $request->relationship_type;
         $student->save();
 
-        return redirect()->back()->with('success', "Student Successfully Assign");
+        return redirect()->back()->with('success', "Student Successfully Assigned");
     }
 
     public function AssignStudentParentDelete($student_id)

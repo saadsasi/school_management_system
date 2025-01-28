@@ -16,14 +16,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('messages.teachers') }}</h3>
+                            <h3 class="card-title">{{ __('messages.teachers_list') }}</h3>
                         </div>
                         <form method="get" action="">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-3">
-                                        <label>{{ __('messages.teacher_name') }}</label>
-                                        <input type="text" class="form-control" name="name" value="{{ Request::get('name') }}" placeholder="{{ __('messages.enter_teacher_name') }}">
+                                        <label>{{ __('messages.name') }}</label>
+                                        <input type="text" class="form-control" name="name" value="{{ Request::get('name') }}" placeholder="{{ __('messages.name') }}">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label>{{ __('messages.last_name') }}</label>
+                                        <input type="text" class="form-control" name="last_name" value="{{ Request::get('last_name') }}" placeholder="{{ __('messages.last_name') }}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label>{{ __('messages.subject') }}</label>
@@ -47,27 +51,29 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __('messages.id') }}</th>
-                                        <th>{{ __('messages.teacher_name') }}</th>
+                                        <th>{{ __('messages.name') }}</th>
+                                        <th>{{ __('messages.last_name') }}</th>
                                         <th>{{ __('messages.subjects_count') }}</th>
                                         <th>{{ __('messages.action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($teachers as $teacher)
+                                    @foreach($users as $user)
                                     <tr>
-                                        <td>{{ $teacher->id }}</td>
-                                        <td>{{ $teacher->name }}</td>
-                                        <td>{{ $teacher->subjects_count }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->last_name }}</td>
+                                        <td>{{ $user->subjects_count }}</td>
                                         <td>
-                                            <a href="{{ url('admin/teacher_subject/add/'.$teacher->id) }}" class="btn btn-primary">
+                                            <a href="{{ url('admin/teacher_subject/add/'.$user->id) }}" class="btn btn-primary">
                                                 {{ __('messages.assign_subjects') }}
                                             </a>
                                            
-                                            @if($teacher->subjects_count > 0)
-                                            <a href="{{ url('admin/teacher_subject/edit/'.$teacher->id) }}" class="btn btn-warning">
+                                            @if($user->subjects_count > 0)
+                                            <a href="{{ url('admin/teacher_subject/edit/'.$user->id) }}" class="btn btn-warning">
                                                 {{ __('messages.edit_subjects') }}
                                             </a>
-                                            <a href="{{ url('admin/teacher_subject/view/'.$teacher->id) }}" class="btn btn-info">
+                                            <a href="{{ url('admin/teacher_subject/view/'.$user->id) }}" class="btn btn-info">
                                                 {{ __('messages.view_subjects') }}
                                             </a>
                                             @endif
@@ -77,7 +83,7 @@
                                 </tbody>
                             </table>
                             <div style="padding: 10px; float: right;">
-                                {!! $teachers->appends(request()->except('page'))->links() !!}
+                                {!! $users->appends(request()->except('page'))->links() !!}
                             </div>
                         </div>
                     </div>

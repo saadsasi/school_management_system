@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-dark">الأنشطة المدرسية</h1>
+                    <h1 class="text-dark">{{ __('messages.activity_list') }}</h1>
                 </div>
-                <div class="col-sm-6 text-left">
+                <div class="col-sm-6 text-right">
                     <a href="{{ url('admin/activity/add') }}" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> إضافة نشاط جديد
+                        <i class="fas fa-plus"></i> {{ __('messages.add_new') }}
                     </a>
                 </div>
             </div>
@@ -23,11 +23,11 @@
             
             <!-- Small Box Stats -->
             <div class="row">
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>{{ $activities->count() }}</h3>
-                            <p>إجمالي الأنشطة</p>
+                            <p>{{ __('messages.total_activities') }}</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-running"></i>
@@ -35,11 +35,11 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{ $activities->where('status', 'active')->count() }}</h3>
-                            <p>الأنشطة النشطة</p>
+                            <p>{{ __('messages.active_activities') }}</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-check-circle"></i>
@@ -57,9 +57,9 @@
                             <h3 class="card-title">{{ $activity->name }}</h3>
                             <div class="card-tools">
                                 @if($activity->status == 'active')
-                                    <span class="badge badge-success">نشط</span>
+                                    <span class="badge badge-success">{{ __('messages.active') }}</span>
                                 @else
-                                    <span class="badge badge-danger">غير نشط</span>
+                                    <span class="badge badge-danger">{{ __('messages.inactive') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -67,16 +67,19 @@
                             <div class="activity-details">
                                 <p class="text-muted mb-2">
                                     <i class="far fa-calendar-alt ml-2"></i>
-                                    من {{ date('Y/m/d', strtotime($activity->start_date)) }}
-                                    إلى {{ date('Y/m/d', strtotime($activity->end_date)) }}
+                                    {{ __('messages.from') }} {{ date('Y/m/d', strtotime($activity->start_date)) }}
+                                    {{ __('messages.to') }} {{ date('Y/m/d', strtotime($activity->end_date)) }}
                                 </p>
                                 <p class="text-muted mb-2">
                                     <i class="fas fa-users ml-2"></i>
-                                    العدد الأقصى: {{ $activity->max_students }} طالب
+                                    {{ __('messages.registered_students') }}: 
+                                    <span class="badge {{ $activity->registrations_count >= $activity->max_students ? 'badge-danger' : 'badge-info' }}">
+                                        {{ $activity->registrations_count }} / {{ $activity->max_students }}
+                                    </span>
                                 </p>
                                 <p class="text-muted mb-2">
                                     <i class="fas fa-money-bill-wave ml-2"></i>
-                                    التكلفة: {{ $activity->cost }} د.ل
+                                    {{ __('messages.cost') }}: {{ $activity->cost }} {{ __('messages.in_dinars') }}
                                 </p>
                                 @if($activity->description)
                                 <p class="text-muted mb-0">
@@ -90,14 +93,14 @@
                             <div class="row">
                                 <div class="col">
                                     <a href="{{ url('admin/activity/edit/'.$activity->id) }}" class="btn btn-primary btn-sm btn-block">
-                                        <i class="fas fa-edit"></i> تعديل
+                                        <i class="fas fa-edit"></i> {{ __('messages.edit') }}
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a href="{{ url('admin/activity/delete/'.$activity->id) }}" 
                                        class="btn btn-danger btn-sm btn-block" 
-                                       onclick="return confirm('هل أنت متأكد من حذف هذا النشاط؟')">
-                                        <i class="fas fa-trash"></i> حذف
+                                       onclick="return confirm('{{ __('messages.are_you_sure_to_delete') }}')">
+                                        <i class="fas fa-trash"></i> {{ __('messages.delete') }}
                                     </a>
                                 </div>
                             </div>
@@ -110,7 +113,7 @@
             @if($activities->isEmpty())
             <div class="text-center mt-4">
                 <img src="{{ url('dist/img/no-data.svg') }}" style="width: 150px; opacity: 0.5;">
-                <p class="text-muted mt-3">لا توجد أنشطة مضافة حتى الآن</p>
+                <p class="text-muted mt-3">{{ __('messages.no_activities') }}</p>
             </div>
             @endif
         </div>

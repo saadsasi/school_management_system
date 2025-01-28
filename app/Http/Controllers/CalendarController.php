@@ -94,17 +94,28 @@ class CalendarController extends Controller
     {
         $registrations = ActivityRegistration::where('student_id', $student_id)
             ->where('status', 'approved')
-            ->with('activity')
+            ->with(['activity' => function($q) {
+                $q->with(['schedules' => function($q) {
+                    $q->join('week', 'activity_schedule.week_id', '=', 'week.id')
+                      ->select('activity_schedule.*', 'week.fullcalendar_day');
+                }]);
+            }])
             ->get();
 
         $result = array();
         foreach($registrations as $registration) {
             if($registration->activity) {
-                $data = array();
-                $data['name'] = $registration->activity->name;
-                $data['start_date'] = $registration->activity->start_date;
-                $data['end_date'] = $registration->activity->end_date;
-                $result[] = $data;
+                foreach($registration->activity->schedules as $schedule) {
+                    $data = array();
+                    $data['name'] = $registration->activity->name;
+                    $data['daysOfWeek'] = [$schedule->fullcalendar_day];
+                    $data['startTime'] = $schedule->start_time;
+                    $data['endTime'] = $schedule->end_time;
+                    $data['location'] = $schedule->location;
+                    $data['startRecur'] = $registration->activity->start_date;
+                    $data['endRecur'] = $registration->activity->end_date;
+                    $result[] = $data;
+                }
             }
         }
         return $result;
@@ -118,6 +129,7 @@ class CalendarController extends Controller
 
         $data['getMyTimetable'] = $this->getTimetable($getStudent->class_id);
         $data['getExamTimetable'] = $this->getExamTimetable($getStudent->class_id);
+        $data['getActivities'] = $this->getActivities($student_id);
 
         $data['getStudent'] = $getStudent;
         $data['header_title'] = "Student Calendar";

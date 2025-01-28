@@ -41,6 +41,47 @@
                                     <input type="date" class="form-control" name="end_date" required>
                                 </div>
 
+                                <!-- Weekly Schedule Section -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">جدول النشاط الأسبوعي</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="schedule-container">
+                                            <div class="schedule-row">
+                                                <div class="form-group">
+                                                    <label>اليوم</label>
+                                                    <select class="form-control" name="schedule[0][week_id]">
+                                                        <option value="">اختر اليوم</option>
+                                                        <option value="1">الأحد</option>
+                                                        <option value="2">الإثنين</option>
+                                                        <option value="3">الثلاثاء</option>
+                                                        <option value="4">الأربعاء</option>
+                                                        <option value="5">الخميس</option>
+                                                        <option value="6">الجمعة</option>
+                                                        <option value="7">السبت</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>وقت البداية</label>
+                                                    <input type="time" class="form-control" name="schedule[0][start_time]">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>وقت النهاية</label>
+                                                    <input type="time" class="form-control" name="schedule[0][end_time]">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>المكان</label>
+                                                    <input type="text" class="form-control" name="schedule[0][location]" placeholder="مكان النشاط">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-info mt-2" id="addScheduleRow">
+                                            <i class="fas fa-plus"></i> إضافة موعد آخر
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label>العدد الأقصى للطلاب <span style="color: red;">*</span></label>
                                     <input type="number" class="form-control" name="max_students" required min="0">
@@ -72,4 +113,55 @@
     </section>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function() {
+    let scheduleCount = 1;
+    
+    $('#addScheduleRow').click(function() {
+        const newRow = `
+            <div class="schedule-row mt-3">
+                <hr>
+                <div class="form-group">
+                    <label>اليوم</label>
+                    <select class="form-control" name="schedule[${scheduleCount}][week_id]">
+                        <option value="">اختر اليوم</option>
+                        <option value="1">الأحد</option>
+                        <option value="2">الإثنين</option>
+                        <option value="3">الثلاثاء</option>
+                        <option value="4">الأربعاء</option>
+                        <option value="5">الخميس</option>
+                        <option value="6">الجمعة</option>
+                        <option value="7">السبت</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>وقت البداية</label>
+                    <input type="time" class="form-control" name="schedule[${scheduleCount}][start_time]">
+                </div>
+                <div class="form-group">
+                    <label>وقت النهاية</label>
+                    <input type="time" class="form-control" name="schedule[${scheduleCount}][end_time]">
+                </div>
+                <div class="form-group">
+                    <label>المكان</label>
+                    <input type="text" class="form-control" name="schedule[${scheduleCount}][location]" placeholder="مكان النشاط">
+                </div>
+                <button type="button" class="btn btn-danger remove-schedule">
+                    <i class="fas fa-trash"></i> حذف
+                </button>
+            </div>
+        `;
+        
+        $('.schedule-container').append(newRow);
+        scheduleCount++;
+    });
+    
+    $(document).on('click', '.remove-schedule', function() {
+        $(this).closest('.schedule-row').remove();
+    });
+});
+</script>
 @endsection

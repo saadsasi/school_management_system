@@ -42,16 +42,31 @@
                   
 
                     <div class="form-group col-md-6">
+                      <label>{{ __('messages.grade_level') }} <span style="color: red;">*</span></label>
+                      <select class="form-control" required name="grade_level" id="grade_level">
+                          <option value="">{{ __('messages.select_grade_level') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'first_primary') ? 'selected' : '' }} value="first_primary">{{ __('messages.first_primary') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'second_primary') ? 'selected' : '' }} value="second_primary">{{ __('messages.second_primary') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'third_primary') ? 'selected' : '' }} value="third_primary">{{ __('messages.third_primary') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'fourth_primary') ? 'selected' : '' }} value="fourth_primary">{{ __('messages.fourth_primary') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'fifth_primary') ? 'selected' : '' }} value="fifth_primary">{{ __('messages.fifth_primary') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'sixth_primary') ? 'selected' : '' }} value="sixth_primary">{{ __('messages.sixth_primary') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'first_preparatory') ? 'selected' : '' }} value="first_preparatory">{{ __('messages.first_preparatory') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'second_preparatory') ? 'selected' : '' }} value="second_preparatory">{{ __('messages.second_preparatory') }}</option>
+                        <option {{ (old('grade_level', $getRecord->grade_level) == 'third_preparatory') ? 'selected' : '' }} value="third_preparatory">{{ __('messages.third_preparatory') }}</option>
+                      </select>
+                      <div style="color:red">{{ $errors->first('grade_level') }}</div>
+                    </div>
+
+                    <div class="form-group col-md-6">
                       <label>{{ __('messages.class') }} <span style="color: red;">*</span></label>
-                      <select class="form-control" required name="class_id">
+                      <select class="form-control" required name="class_id" id="class_id">
                           <option value="">{{ __('messages.select_class') }}</option>
-                          @foreach($getClass as $value)
-                            <option {{ (old('class_id', $getRecord->class_id) == $value->id) ? 'selected' : '' }} value="{{ $value->id }}">{{ $value->name }}</option>
-                          @endforeach
                       </select>
                       <div style="color:red">{{ $errors->first('class_id') }}</div>
                     </div>  
 
+                    
                     <div class="form-group col-md-6">
                       <label>{{ __('messages.gender') }} <span style="color: red;">*</span></label>
                       <select class="form-control" required name="gender">
@@ -81,6 +96,7 @@
                       <input type="date" class="form-control" value="{{ old('admission_date', $getRecord->admission_date) }}" name="admission_date"  required>
                       <div style="color:red">{{ $errors->first('admission_date') }}</div>
                     </div> 
+
 
 
                     <div class="form-group col-md-6">
@@ -141,4 +157,44 @@
     <!-- /.content -->
   </div>
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+$(document).ready(function() {
+    // Function to load classes based on grade level
+    function loadClasses(gradeLevel) {
+        $.ajax({
+            url: '/get-classes-by-grade/' + gradeLevel,
+            type: 'GET',
+            success: function(response) {
+                var classSelect = $('#class_id');
+                classSelect.empty();
+                classSelect.append('<option value="">{{ __("messages.select_class") }}</option>');
+                
+                $.each(response.classes, function(key, value) {
+                    var selected = (value.id == '{{ $getRecord->class_id }}') ? 'selected' : '';
+                    classSelect.append('<option value="' + value.id + '" ' + selected + '>' + value.name + '</option>');
+                });
+            }
+        });
+    }
+
+    // Load classes when grade level changes
+    $('#grade_level').on('change', function() {
+        var gradeLevel = $(this).val();
+        if (gradeLevel) {
+            loadClasses(gradeLevel);
+        } else {
+            $('#class_id').empty().append('<option value="">{{ __("messages.select_class") }}</option>');
+        }
+    });
+
+    // Load classes for initial grade level if set
+    var initialGradeLevel = $('#grade_level').val();
+    if (initialGradeLevel) {
+        loadClasses(initialGradeLevel);
+    }
+});
+</script>
 @endsection

@@ -100,7 +100,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -111,13 +110,11 @@ class AuthController extends Controller
             'mobile_number' => 'required',
         ]);
 
-
         if ($request->user_type == 'student') {
             $request->validate([
-                'grade_level' => 'required|in:first_primary,second_primary,third_primary,fourth_primary,fifth_primary,sixth_primary',
+                'grade_level' => 'required|in:first_primary,second_primary,third_primary,fourth_primary,fifth_primary,sixth_primary,first_preparatory,second_preparatory,third_preparatory',
                 'date_of_birth' => 'required|date',
             ]);
-
         } elseif ($request->user_type == 'teacher') {
             $request->validate([
                 'qualification' => 'required',
@@ -140,19 +137,19 @@ class AuthController extends Controller
             'parent' => 4
         ];
 
-        $user = User::create([
-            'name' => $request->name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'user_type' => $userTypeMap[$request->user_type],
-            'gender' => $request->gender,
-            'mobile_number' => $request->mobile_number,
-            'profile_pic' => $profile_pic,
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->user_type = $userTypeMap[$request->user_type];
+        $user->gender = $request->gender;
+        $user->mobile_number = $request->mobile_number;
+        $user->profile_pic = $profile_pic;
+        $user->status = 1;
 
         if ($request->user_type == 'student') {
-            $user->class_id = $request->class_id;
+            $user->grade_level = $request->grade_level;
             $user->date_of_birth = $request->date_of_birth;
         } elseif ($request->user_type == 'teacher') {
             $user->qualification = $request->qualification;
@@ -161,10 +158,10 @@ class AuthController extends Controller
             $user->occupation = $request->occupation;
             $user->address = $request->address;
         }
-        $user->status = 1;
+
         $user->save();
 
-        return redirect(url('/'))->with('success', "Registration successfully completed,wait for approvel");
+        return redirect(url('/'))->with('success', "Registration successfully completed, wait for approval");
     }
 
     public function logout()

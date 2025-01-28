@@ -33,6 +33,7 @@
                                                 <th>{{ __('messages.description') }}</th>
                                                 <th>{{ __('messages.start_date') }}</th>
                                                 <th>{{ __('messages.end_date') }}</th>
+                                                <th>{{ __('messages.schedule') }}</th>
                                                 <th>{{ __('messages.status') }}</th>
                                                 <th>{{ __('messages.registration_date') }}</th>
                                             </tr>
@@ -44,6 +45,19 @@
                                                     <td>{{ $activity->activity->description }}</td>
                                                     <td>{{ date('Y-m-d', strtotime($activity->activity->start_date)) }}</td>
                                                     <td>{{ date('Y-m-d', strtotime($activity->activity->end_date)) }}</td>
+                                                    <td>
+                                                        @if($activity->activity->schedules->count() > 0)
+                                                            @foreach($activity->activity->schedules as $schedule)
+                                                                <div class="mb-2">
+                                                                    <strong>{{ __('messages.' . strtolower(date('l', strtotime('Sunday +' . ($schedule->week_id - 1) . ' days')))) }}</strong><br>
+                                                                    {{ date('H:i', strtotime($schedule->start_time)) }} - {{ date('H:i', strtotime($schedule->end_time)) }}<br>
+                                                                    {{ $schedule->location }}
+                                                                </div>
+                                                            @endforeach
+                                                        @else
+                                                            {{ __('messages.no_schedule_available') }}
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         @if($activity->status == 'pending')
                                                             <span class="badge badge-warning">{{ __('messages.pending') }}</span>

@@ -72,6 +72,8 @@ class AssignClassTeacherController extends Controller
             $data['getAssignTeacherID'] = AssignClassTeacherModel::getAssignTeacherID($getRecord->class_id);
             $data['getClass'] = ClassModel::getClass();
             $data['getTeacher'] = User::getTeacherClass();
+            // Get the class details to get the grade level
+            $data['classDetails'] = ClassModel::find($getRecord->class_id);
             $data['header_title'] = "Edit Assign Class Teacher";
             return view('admin.assign_class_teacher.edit', $data);    
         }
@@ -79,7 +81,6 @@ class AssignClassTeacherController extends Controller
         {
             abort(404);
         }
-        
     }
 
     public function update($id, Request $request)
@@ -174,4 +175,20 @@ class AssignClassTeacherController extends Controller
         return view('teacher.my_class_subject', $data); 
     }
 
+    public function get_class_by_grade_level(Request $request)
+    {
+        $getClass = ClassModel::select('id', 'name')
+                    ->where('grade_level', '=', $request->grade_level)
+                    ->where('is_delete', '=', 0)
+                    ->where('status', '=', 0)
+                    ->orderBy('name', 'asc')
+                    ->get();
+
+        $html = '<option value="">'. __('messages.select_class') .'</option>';
+        foreach($getClass as $class) {
+            $html .= '<option value="'.$class->id.'">'.$class->name.'</option>';
+        }
+
+        return response()->json(['html' => $html]);
+    }
 }

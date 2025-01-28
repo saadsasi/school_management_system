@@ -84,6 +84,7 @@
                     <tr>
                       <th>#</th>
                       <th>{{ __('messages.class_name') }}</th>
+                      <th>{{ __('messages.grade_level') }}</th>
                       <th>{{ __('messages.teacher_name') }}</th>
                       <th>{{ __('messages.status') }}</th>
                       <th>{{ __('messages.created_by') }}</th>
@@ -96,6 +97,7 @@
                         <tr>
                           <td>{{ $value->id }}</td>
                           <td>{{ $value->class_name }}</td>
+                          <td>{{ !empty($value->grade_level) ? __('messages.'.$value->grade_level) : '' }}</td>
                           <td>{{ $value->teacher_name }} {{ $value->teacher_last_name }}</td>
                           <td>
                             @if($value->status == 0)

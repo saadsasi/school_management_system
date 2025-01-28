@@ -70,28 +70,33 @@
 
     @foreach($getActivities as $activity)
         events.push({
-            title: '{{ __('messages.activity') }}: {{ $activity['name'] }}',
-            start: '{{ $activity['start_date'] }}',
-            end: '{{ $activity['end_date'] }}',
+            title: '{{ __('messages.activity') }}: {{ $activity['name'] }} - {{ $activity['location'] }}',
+            daysOfWeek: [ {{ $activity['daysOfWeek'][0] }} ],
+            startTime: '{{ $activity['startTime'] }}',
+            endTime: '{{ $activity['endTime'] }}',
+            startRecur: '{{ $activity['startRecur'] }}',
+            endRecur: '{{ $activity['endRecur'] }}',
             color: 'green',
             url: '{{ url('student/my_activities') }}'
         });
     @endforeach
 
-    var calendarID = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarID, {
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',  
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        initialDate: '<?=date('Y-m-d')?>',
+        events: events,
+        height: 'auto',
         navLinks: true,
         editable: false,
-        events: events,
-        // initialView: 'timeGridWeek',
+        selectable: true,
+      });
+      calendar.render();
     });
-
-    calendar.render();
 </script>
 @endsection

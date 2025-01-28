@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1> {{__('messages.my_student_list')}} ({{ $getParent->name }} {{ $getParent->last_name }})</h1>
+            <h1> {{__('messages.my_kids_list')}} ({{ $getParent->name }} {{ $getParent->last_name }})</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -86,6 +86,7 @@
                       <th> {{__('messages.student_name')}} </th>
                       <th> {{__('messages.email')}} </th>
                       <th> {{__('messages.parent_name')}} </th>
+                      <th> {{__('messages.relationship_type')}} </th>
                       <th> {{__('messages.created_date')}} </th>
                       <th> {{__('messages.action')}} </th>
                     </tr>
@@ -102,12 +103,46 @@
                           <td>{{ $value->name }} {{ $value->last_name }}</td>
                           <td>{{ $value->email }}</td>
                           <td>{{ $value->parent_name }}</td>
-                          
+                          <td>{{ !empty($value->relationship_type) ? __('messages.'.$value->relationship_type) : '' }}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 150px;">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#assignModal{{ $value->id }}">
+                              {{__('messages.add_student_to_parent')}}
+                            </button>
 
-                            <a href="{{ url('admin/parent/assign_student_parent/'.$value->id.'/'.$parent_id) }}" class="btn btn-primary btn-sm"> {{__('messages.add_student_to_parent')}} </a>
-                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="assignModal{{ $value->id }}" tabindex="-1" role="dialog" aria-labelledby="assignModalLabel{{ $value->id }}" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="assignModalLabel{{ $value->id }}">{{__('messages.select_relationship_type')}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <form method="post" action="{{ url('admin/parent/assign_student_parent/'.$value->id.'/'.$parent_id) }}">
+                                    {{ csrf_field() }}
+                                    <div class="modal-body">
+                                      <div class="form-group">
+                                        <label>{{__('messages.relationship_type')}} <span style="color: red;">*</span></label>
+                                        <select class="form-control" required name="relationship_type">
+                                          <option value="">{{__('messages.select_relationship_type')}}</option>
+                                          <option value="father">{{__('messages.father')}}</option>
+                                          <option value="grandfather">{{__('messages.grandfather')}}</option>
+                                          <option value="brother">{{__('messages.brother')}}</option>
+                                          <option value="uncle">{{__('messages.uncle')}}</option>
+                                          <option value="maternal_uncle">{{__('messages.maternal_uncle')}}</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('messages.close')}}</button>
+                                      <button type="submit" class="btn btn-primary">{{__('messages.assign')}}</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
                           </td>
                         </tr>
                       @endforeach
@@ -139,6 +174,7 @@
                       <th> {{__('messages.student_name')}} </th>
                       <th> {{__('messages.email')}} </th>
                       <th> {{__('messages.parent_name')}} </th>
+                      <th> {{__('messages.relationship_type')}} </th>
                       <th> {{__('messages.created_date')}} </th>
                       <th> {{__('messages.action')}} </th>
                     </tr>
@@ -155,7 +191,7 @@
                           <td>{{ $value->name }} {{ $value->last_name }}</td>
                           <td>{{ $value->email }}</td>
                           <td>{{ $value->parent_name }}</td>
-                          
+                          <td>{{ !empty($value->relationship_type) ? __('messages.'.$value->relationship_type) : '' }}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 150px;">
 

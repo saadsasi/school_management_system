@@ -67,20 +67,34 @@
         @endforeach
     @endforeach
 
-    var calendarID = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarID, {
+    @foreach($getActivities as $activity)
+        events.push({
+            title: '{{ $activity['name'] }} ({{ $activity['location'] }})',
+            daysOfWeek: {{ json_encode($activity['daysOfWeek']) }},
+            startTime: '{{ $activity['startTime'] }}',
+            endTime: '{{ $activity['endTime'] }}',
+            startRecur: '{{ $activity['startRecur'] }}',
+            endRecur: '{{ $activity['endRecur'] }}',
+            color: '#28a745'  // Green color for activities
+        });
+    @endforeach
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',  // Set default view to month
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        initialDate: '<?=date('Y-m-d')?>',
+        events: events,
+        height: 'auto',
         navLinks: true,
         editable: false,
-        events: events,
-        // initialView: 'timeGridWeek',
+        selectable: true,
+      });
+      calendar.render();
     });
-
-    calendar.render();
 </script>
 @endsection

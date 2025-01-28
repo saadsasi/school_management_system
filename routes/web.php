@@ -122,22 +122,21 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/parent/edit/{id}', [ParentController::class, 'update']);
     Route::get('admin/parent/delete/{id}', [ParentController::class, 'delete']);
     Route::get('admin/parent/my-student/{id}', [ParentController::class, 'myStudent']);
-    Route::get('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
+    Route::post('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
     Route::get('admin/parent/assign_student_parent_delete/{student_id}', [ParentController::class, 'AssignStudentParentDelete']);
     Route::post('admin/parent/export_excel', [ParentController::class, 'export_excel']);
     
 
     // Teacher Subject Routes
-    Route::get('admin/teacher_subject/list', [TeacherSubjectController::class, 'index']);
+    Route::get('admin/teacher_subject/list', [TeacherSubjectController::class, 'list']);
     Route::get('admin/teacher_subject/add/{teacher_id}', [TeacherSubjectController::class, 'add']);
-    Route::post('admin/teacher_subject/add', [TeacherSubjectController::class, 'store']);
-    Route::get('admin/teacher_subject/view/{teacher_id}', [TeacherSubjectController::class, 'view']);
+    Route::post('admin/teacher_subject/store', [TeacherSubjectController::class, 'store']);
     Route::get('admin/teacher_subject/edit/{teacher_id}', [TeacherSubjectController::class, 'editSubjects']);
-    Route::get('admin/teacher_subject/delete/{id}', [TeacherSubjectController::class, 'delete']);
-    Route::post('admin/teacher_subject/update/{teacher_id}', [TeacherSubjectController::class, 'update']);
+    Route::get('admin/teacher_subject/view/{teacher_id}', [TeacherSubjectController::class, 'view']);
     Route::get('admin/teacher_subject/get-classes-subjects', [TeacherSubjectController::class, 'getClassesAndSubjects']);
     Route::post('admin/teacher_subject/evaluate/{id}', [TeacherSubjectController::class, 'evaluate']);
     Route::get('admin/teacher_subject/evaluations/{id}', [TeacherSubjectController::class, 'viewEvaluations']);
+
     // class url
 
     Route::get('admin/class/list', [ClassController::class, 'list']);
@@ -200,7 +199,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/assign_class_teacher/edit_single/{id}', [AssignClassTeacherController::class, 'edit_single']);
     Route::post('admin/assign_class_teacher/edit_single/{id}', [AssignClassTeacherController::class, 'update_single']);
     Route::get('admin/assign_class_teacher/delete/{id}', [AssignClassTeacherController::class, 'delete']);
-
+    Route::post('admin/assign_class_teacher/get_class_by_grade_level', [AssignClassTeacherController::class, 'get_class_by_grade_level']);
     
     
     Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);  
@@ -356,7 +355,7 @@ Route::prefix('reports')->group(function () {
 Route::group(['middleware' => ['student','userActive']], function () {
 
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
-    
+    Route::get('student/my-calendar', [CalendarController::class, 'myCalendar'])->name('student.calendar');
     Route::get('student/account', [UserController::class, 'MyAccount']);
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
 
@@ -476,3 +475,12 @@ Route::group(['middleware' => ['parent','userActive']], function () {
     Route::post('parent/activity/save-registration', [ParentActivityController::class, 'storeRegistration']);
     Route::get('parent/activity/my-registrations', [ParentActivityController::class, 'myRegistrations']);
 });
+
+// Temporary test route
+Route::get('test-schedule', function() {
+    $data['header_title'] = "{{__('messages.my_activities')}}";
+    $data['schedules'] = \App\Models\ActivitySchedule::with('activity')->get();
+    return view('admin.activity.test_schedule', $data);
+});
+
+Route::get('get-classes-by-grade/{grade_level}', [StudentController::class, 'getClassesByGrade']);

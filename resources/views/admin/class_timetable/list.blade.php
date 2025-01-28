@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ __('messages.class_timetable') }}</h1>
+            <h1>{{ __('messages.subject_timetable') }}</h1>
           </div>
       
 
@@ -37,7 +37,7 @@
           
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">{{ __('messages.search_class_timetable') }}</h3>
+                <h3 class="card-title">{{ __('messages.search_subject_timetable') }}</h3>
               </div>
               <form method="get" action="">
                 <div class="card-body">
@@ -108,7 +108,7 @@
                       <tr>
                           <th>
                              <input type="hidden" name="timetable[{{ $i }}][week_id]" value="{{ $value['week_id'] }}">
-                            {{ $value['week_name'] }}
+                            {{ __('messages.'.strtolower($value['week_name'])) }}
                           </th>
                           <td>
                             <input type="time" name="timetable[{{ $i }}][start_time]" value="{{ $value['start_time'] }}" class="form-control">

@@ -27,4 +27,10 @@ class Activity extends Model
     {
         return $this->belongsToMany(User::class, 'activity_registrations', 'activity_id', 'student_id');
     }
+
+    // علاقة مع جدول النشاط
+    public function schedules()
+    {
+        return $this->hasMany(ActivitySchedule::class);
+    }
 }

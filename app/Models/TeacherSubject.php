@@ -32,4 +32,9 @@ class TeacherSubject extends Model
     {
         return $this->belongsTo(ClassModel::class, 'class_id');
     }
+
+    public function evaluations()
+    {
+        return $this->hasMany(TeacherEvaluation::class);
+    }
 }

@@ -70,9 +70,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p><strong> {{__('messages.admission_number')}}:</strong> {{ $user->admission_number }}</p>
-                                                                    <p><strong> {{__('messages.grade_level')}}:</strong> {{ $user->grade_level }}</p>
-                                                                    <p><strong> {{__('messages.roll_number')}}:</strong> {{ $user->roll_number }}</p>
+                                                                    <p><strong> {{__('messages.grade_level')}}:</strong> {{ !empty($user->grade_level) ? __('messages.'.$user->grade_level) : '' }}</p>
                                                                     <p><strong> {{__('messages.date_of_birth')}}:</strong> {{ $user->date_of_birth }}</p>
                                                                 </div>
                                                             </div>
@@ -114,7 +112,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <p><strong> {{__('messages.name')}}:</strong> {{ $user->name }}</p>
+                                                                    <p><strong> {{__('messages.email')}}:</strong> {{ $user->email }}</p>
                                                                     <p><strong> {{__('messages.mobile_number')}}:</strong> {{ $user->mobile_number}}</p>
                                                                 </div>
                                                             </div>

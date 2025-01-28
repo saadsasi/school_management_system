@@ -79,6 +79,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           @if(Auth::user()->user_type == 1)
+          <li>
+          <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              {{ __('messages.dashboard') }}
+            </p>
+          </a>
+        </li>
           <li class="nav-item has-treeview @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registrations'])) menu-is-opening menu-open @endif">
             <a href="#" class="nav-link @if(in_array(Request::segment(2), ['admin', 'teacher', 'student', 'parent', 'registrations'])) active @endif">
                 <i class="nav-icon fas fa-users"></i>
@@ -588,14 +596,7 @@
             </a>
           </li>
 
-            <li class="nav-item">
-              <a href="{{ url('student/my_activities') }}" class="nav-link @if(Request::segment(2) == 'my_activities') active @endif">
-                <i class="nav-icon fas fa-running"></i>
-                <p>
-                  {{ __('messages.my_activities') }}
-                </p>
-              </a>
-            </li>
+            
 
            <li class="nav-item">
             <a href="{{ url('student/my_calendar') }}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
@@ -606,7 +607,7 @@
             </a>
           </li>
 
-
+        
 
            <li class="nav-item">
             <a href="{{ url('student/my_subject') }}" class="nav-link @if(Request::segment(2) == 'my_subject') active @endif">
@@ -616,6 +617,7 @@
               </p>
             </a>
           </li>
+
 
 
            <li class="nav-item">
@@ -657,6 +659,16 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ url('student/my_activities') }}" class="nav-link @if(Request::segment(2) == 'my_activities') active @endif">
+              <i class="nav-icon fas fa-running"></i>
+              <p>
+                {{ __('messages.my_activities') }}
+              </p>
+            </a>
+          </li>
+          
 
            <li class="nav-item">
             <a href="{{ url('student/my_notice_board') }}" class="nav-link @if(Request::segment(2) == 'my_notice_board') active @endif">

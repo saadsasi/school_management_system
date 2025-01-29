@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -18,14 +16,10 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-       
-
-          
           <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalStudent }}</h3>
-
                 <p>{{ __('messages.total_student') }}</p>
               </div>
               <div class="icon">
@@ -35,13 +29,10 @@
             </div>
           </div>
 
-
-
-           <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6">
             <div class="small-box bg-primary">
               <div class="inner">
                 <h3>{{ $TotalClass }}</h3>
-
                 <p>{{ __('messages.total_class') }}</p>
               </div>
               <div class="icon">
@@ -51,12 +42,10 @@
             </div>
           </div>
 
-
-           <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3>{{ $TotalSubject }}</h3>
-
                 <p>{{ __('messages.total_subject') }}</p>
               </div>
               <div class="icon">
@@ -66,31 +55,21 @@
             </div>
           </div>
 
-
-
-           {{-- <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
               <div class="inner">
-                <h3>{{ $TotalNoticeBoard }}</h3>
-
-                <p>{{ __('messages.total_notice_board') }}</p>
+                <h3>{{ $TotalWeeklyClasses }}</h3>
+                <p>{{ __('messages.total_weekly_classes') }}</p>
               </div>
               <div class="icon">
-                <i class="nav-icon fas fa-table"></i>
+                <i class="nav-icon fas fa-clock"></i>
               </div>
-              <a href="{{ url('teacher/my_notice_board') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('teacher/my_class_subject') }}" class="small-box-footer">{{ __('messages.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div> --}}
-         
-
-         
+          </div>
         </div>
-   
-       
       </div>
     </section>
   </div>
-
-
 
 @endsection

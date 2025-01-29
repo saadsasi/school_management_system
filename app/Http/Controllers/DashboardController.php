@@ -13,12 +13,7 @@ use App\Models\NoticeBoardModel;
 use App\Models\AssignClassTeacherModel;
 use App\Models\ClassSubjectModel;
 use App\Models\StudentAttendanceModel;
-
-
-
-
-
-
+use App\Models\ClassSubjectTimetableModel;
 
 class DashboardController extends Controller
 {
@@ -50,6 +45,7 @@ class DashboardController extends Controller
             $data['TotalStudent'] = User::getTeacherStudentCount(Auth::user()->id);
             $data['TotalClass'] = AssignClassTeacherModel::getMyClassSubjectGroupCount(Auth::user()->id);
             $data['TotalSubject'] = AssignClassTeacherModel::getMyClassSubjectCount(Auth::user()->id);
+            $data['TotalWeeklyClasses'] = ClassSubjectTimetableModel::getTotalWeeklyClasses(Auth::user()->id);
             $data['TotalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::user()->user_type);
             return view('teacher.dashboard', $data);
         }

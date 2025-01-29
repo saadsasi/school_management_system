@@ -33,6 +33,7 @@ class StudentController extends Controller
         $data['getClass'] = ClassModel::select('class.*')
             ->where('is_delete', 0)
             ->where('status', 0)
+            ->orderBy('grade_level', 'asc')
             ->orderBy('name', 'asc')
             ->get();
             
@@ -45,7 +46,6 @@ class StudentController extends Controller
         request()->validate([
             'email' => 'required|email|unique:users',
             'grade_level' => 'required',
-
             'mobile_number' => 'max:15|min:8',            
             'height' => 'max:10'            
         ]);
@@ -54,6 +54,7 @@ class StudentController extends Controller
         $student->name = trim($request->name);
         $student->last_name = trim($request->last_name);
         $student->grade_level = $request->grade_level;
+        $student->class_id = !empty($request->class_id) ? $request->class_id : null;
         $student->gender = $request->gender;
  
         if(!empty($request->date_of_birth))
@@ -110,16 +111,15 @@ class StudentController extends Controller
     {
          request()->validate([
             'email' => 'required|email|unique:users,email,'.$id,
-          
+            'grade_level' => 'required',
             'mobile_number' => 'max:15|min:8',            
-                      
         ]);
 
-
-        $student = User::getSingle($id);;
+        $student = User::getSingle($id);
         $student->name = trim($request->name);
         $student->last_name = trim($request->last_name);
-        $student->class_id = trim($request->class_id);
+        $student->grade_level = trim($request->grade_level);
+        $student->class_id = !empty($request->class_id) ? trim($request->class_id) : null;
         $student->gender = trim($request->gender);
 
         if(!empty($request->date_of_birth))

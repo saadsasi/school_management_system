@@ -62,7 +62,11 @@
                       <select class="form-control"  name="class_id" id="class_id">
                           <option value="">{{__('messages.select_class')}}</option>
                           @foreach($getClass as $value)
-                            <option {{ (old('class_id') == $value->id) ? 'selected' : '' }} value="{{ $value->id }}" data-grade="{{ $value->grade_level }}">{{ $value->name }}</option>
+                            <option {{ (old('class_id') == $value->id) ? 'selected' : '' }} 
+                                    value="{{ $value->id }}" 
+                                    data-grade="{{ $value->grade_level }}">
+                                {{ $value->name }}
+                            </option>
                           @endforeach
                       </select>
                       <div style="color:red">{{ $errors->first('class_id') }}</div>
@@ -103,26 +107,6 @@
                       <label>{{__('messages.profile_pic')}} <span style="color: red;"></span></label>
                       <input type="file" class="form-control" name="profile_pic" >
                       <div style="color:red">{{ $errors->first('profile_pic') }}</div>
-                    </div> 
-
-                     <div class="form-group col-md-6">
-                      <label>{{__('messages.blood_group')}} <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" name="blood_group" value="{{ old('blood_group') }}" placeholder="{{__('messages.blood_group')}}">
-                      <div style="color:red">{{ $errors->first('blood_group') }}</div>
-                    </div> 
-
-
-                     <div class="form-group col-md-6">
-                      <label>{{__('messages.height')}} <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" name="height" value="{{ old('height') }}" placeholder="{{__('messages.height')}}">
-                      <div style="color:red">{{ $errors->first('height') }}</div>
-                    </div> 
-
-
-                     <div class="form-group col-md-6">
-                      <label>{{__('messages.weight')}} <span style="color: red;"></span></label>
-                      <input type="text" class="form-control" name="weight" value="{{ old('weight') }}" placeholder="{{__('messages.weight')}}">
-                      <div style="color:red">{{ $errors->first('weight') }}</div>
                     </div> 
 
 
@@ -170,12 +154,13 @@
 @section('script')
 <script type="text/javascript">
 $(document).ready(function() {
-    // Hide all class options initially except the placeholder
+    // Initial state - hide all class options
     $("#class_id option:not(:first)").hide();
     
     // When grade level changes
     $("#grade_level").change(function() {
         var selectedGrade = $(this).val();
+        console.log("Selected Grade:", selectedGrade); // Debug log
         
         // Reset class selection
         $("#class_id").val("");
@@ -185,11 +170,19 @@ $(document).ready(function() {
         
         // Show only classes matching the selected grade
         $("#class_id option").each(function() {
-            if ($(this).data('grade') === selectedGrade) {
+            var gradeAttr = $(this).data('grade');
+            console.log("Option Grade:", gradeAttr); // Debug log
+            
+            if (gradeAttr === selectedGrade) {
                 $(this).show();
             }
         });
     });
+    
+    // Trigger change event if grade is pre-selected
+    if ($("#grade_level").val()) {
+        $("#grade_level").trigger('change');
+    }
 });
 </script>
 @endsection

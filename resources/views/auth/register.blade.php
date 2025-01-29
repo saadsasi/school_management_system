@@ -61,10 +61,9 @@
         <!-- Student Specific Fields -->
         <div id="student_fields" style="display: none;">
           <div class="row">
-
             <div class="form-group col-md-6">
               <label>{{__('messages.grade_level')}} <span style="color: red;">*</span></label>
-              <select class="form-control" name="grade_level">
+              <select class="form-control" name="grade_level" id="grade_level">
                   <option value="">{{__('messages.select_grade_level')}}</option>
                   <option value="first_primary">{{__('messages.first_primary')}}</option>
                   <option value="second_primary">{{__('messages.second_primary')}}</option>

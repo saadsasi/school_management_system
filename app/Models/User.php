@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Request;
 use Cache;
+use App\Models\ClassModel;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -246,7 +247,7 @@ class User extends Authenticatable
 
     static public function getStudent($remove_pagination = 0)
     {
-        $return = self::select('users.*', 'class.name as class_name', 'class.grade_level', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
                         ->join('users as parent','parent.id', '=', 'users.parent_id', 'left')
                         ->join('class', 'class.id', '=', 'users.class_id', 'left')
                         ->where('users.user_type','=',3)
@@ -273,7 +274,7 @@ class User extends Authenticatable
 
                         if(!empty(Request::get('grade_level')))
                         {
-                            $return = $return->where('class.grade_level','=', Request::get('grade_level'));
+                            $return = $return->where('users.grade_level','=', Request::get('grade_level'));
                         }
 
                         if(!empty(Request::get('gender')))
@@ -299,22 +300,19 @@ class User extends Authenticatable
 
                         if(!empty(Request::get('status')))
                         {
-                            $status = (Request::get('status') == 100) ? 0 : 1;
-                            $return = $return->where('users.status','=', $status);
+                            $return = $return->where('users.status','=', Request::get('status'));
                         }
 
-
-        $return = $return->orderBy('users.id', 'desc');
-
-            if(!empty($remove_pagination))
-            {
-                $return = $return->get();
-            }
-            else
-            {
-                $return = $return->paginate(40);
-            }
+                        $return = $return->orderBy('users.id', 'desc');
                         
+                        if(!empty($remove_pagination))
+                        {
+                            $return = $return->get();
+                        }
+                        else
+                        {
+                            $return = $return->paginate(50);
+                        }
 
         return $return;
     }
@@ -638,5 +636,10 @@ class User extends Authenticatable
     public function getLatestHealthRecord()
     {
         return $this->healthRecords()->latest('record_date')->first();
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(ClassModel::class, 'class_id');
     }
 }

@@ -17,7 +17,11 @@ class ClassTimetableController extends Controller
 {
     public function list(Request $request)
     {
-        $data['getClass'] = ClassModel::getClass();
+        if(!empty($request->grade_level)) {
+            $data['getClass'] = ClassModel::where('grade_level', $request->grade_level)->get();
+        } else {
+            $data['getClass'] = ClassModel::getClass();
+        }
 
         if(!empty($request->class_id))
         {
@@ -69,16 +73,34 @@ class ClassTimetableController extends Controller
     public function get_subject(Request $request)
     {
         $getSubject = ClassSubjectModel::MySubject($request->class_id);
-
-        $html = "<option value=''>Select</option>";
-
-        foreach($getSubject as $value)
+        $html = '<option value="">Select</option>';
+        
+        foreach($getSubject as $subject)
         {
-            $html .= "<option value='".$value->subject_id."'>".$value->subject_name."</option>";
+            $html .= '<option value="'.$subject->subject_id.'">'.$subject->subject_name.'</option>';
         }
-
+        
         $json['html'] = $html;
         echo json_encode($json);
+    }
+
+    public function get_classes_by_grade(Request $request)
+    {
+        $html = '<option value="">'. __('messages.select') .'</option>';
+        
+        if(!empty($request->grade_level))
+        {
+            $getClass = ClassModel::where('grade_level', $request->grade_level)
+                                ->where('status', '=', 0)
+                                ->orderBy('name', 'asc')
+                                ->get();
+            foreach($getClass as $class)
+            {
+                $html .= '<option value="'.$class->id.'">'.$class->name.'</option>';
+            }
+        }
+        
+        return response()->json(['html' => $html]);
     }
 
     public function insert_update(Request $request)

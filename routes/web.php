@@ -173,6 +173,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list']);
     Route::post('admin/class_timetable/get_subject', [ClassTimetableController::class, 'get_subject']);
     Route::post('admin/class_timetable/add', [ClassTimetableController::class, 'insert_update']);
+    Route::post('admin/class_timetable/get_classes_by_grade', [ClassTimetableController::class, 'get_classes_by_grade']);
 
 
 

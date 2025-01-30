@@ -61,20 +61,6 @@
                       @endif
                     </div> 
 
-                     <div class="form-group col-md-6">
-                      <label>{{__('messages.blood_group')}}</label>
-                      <input type="text" class="form-control" value="{{ $getRecord->blood_group }}" readonly>
-                    </div> 
-
-                     <div class="form-group col-md-6">
-                      <label>{{__('messages.height')}}</label>
-                      <input type="text" class="form-control" value="{{ $getRecord->height }}" readonly>
-                    </div> 
-
-                     <div class="form-group col-md-6">
-                      <label>{{__('messages.weight')}}</label>
-                      <input type="text" class="form-control" value="{{ $getRecord->weight }}" readonly>
-                    </div> 
 
                   </div>
 

@@ -561,7 +561,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ url('admin/registrations') }}" class="nav-link @if(Request::segment(2) == 'registrations') active @endif">
+            <a href="{{ url('admin/registrations/list') }}" class="nav-link @if(Request::segment(2) == 'registration') active @endif">
               <i class="nav-icon fas fa-user-check"></i>
               <p>{{ __('messages.registration_management') }}</p>
             </a>

@@ -88,6 +88,7 @@ return [
     'search_filter' => 'Search Filter',
     'edit_single' => 'Edit Single',
     'add_new_subject' => 'Add New Subject',
+    'no_schedule_available' => 'No Schedule Available',
     'no_record_found' => 'No Record Found',
     'message_student' => 'Message Student',
     'message_parent' => 'Message Parent',

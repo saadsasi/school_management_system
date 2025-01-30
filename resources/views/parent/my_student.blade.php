@@ -56,9 +56,7 @@
                       
                       
                       <th> {{ __('messages.parent_admission_date') }}</th>
-                      <th>     {{ __('messages.parent_blood_group') }}</th>
-                      <th>   {{ __('messages.parent_height') }}</th>
-                      <th>   {{ __('messages.parent_weight') }}</th>
+
                       <th>  {{ __('messages.parent_created_date') }}</th>
                       <th>  {{ __('messages.parent_action') }}</th>
                      
@@ -85,16 +83,12 @@
                               {{ date('d-m-Y', strtotime($value->admission_date)) }}
                               @endif
                           </td>
-                          <td>{{ $value->blood_group }}</td>
-                          <td>{{ $value->height }}</td>
-                          <td>{{ $value->weight }}</td>
+                         
                           
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td style="min-width: 300px;">
                             <a  style="margin-bottom: 10px;" class="btn btn-success btn-sm" href="{{ url('parent/my_student/subject/'.$value->id) }}">{{ __('messages.subjects') }}</a>
-                            {{-- <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_timetable/'.$value->id) }}">{{ __('messages.exam_timetable') }}</a>
-
-                            <a style="margin-bottom: 10px;" class="btn btn-primary btn-sm" href="{{ url('parent/my_student/exam_result/'.$value->id) }}">{{ __('messages.exam_result') }}</a> --}}
+                  
 
                             <a style="margin-bottom: 10px;" class="btn btn-warning btn-sm" href="{{ url('parent/my_student/calendar/'.$value->id) }}">{{ __('messages.calendar') }}</a>
 

@@ -580,6 +580,7 @@ return [
         'message_parent' => 'رسالة لولي الأمر',
         'search_filter' => 'بحث في التلاميذ',
         'no_record_found' => 'لا يوجد نتائج',
+        'no_schedule_available' => 'لا يتوفر جدول حالياً',
         'friday' => 'الجمعة',
         'saturday' => 'السبت',
         'sunday' => 'الأحد',

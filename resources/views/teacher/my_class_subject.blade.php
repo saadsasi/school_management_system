@@ -49,7 +49,8 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      
+                      <th>#</th>
+                      <th>{{ __('messages.grade_level') }}</th>
                       <th>{{ __('messages.class_name') }}</th>
                       <th>{{ __('messages.subject_name') }}</th>
                       <th>{{ __('messages.subject_type') }}</th>
@@ -62,6 +63,8 @@
 
                     @foreach($getRecord as $value)
                         <tr>
+                          <td>{{ $value->id }}</td>
+                          <td>{{ __('messages.'.$value->grade_level) }}</td>
                           <td>{{ $value->class_name }}</td>
                           <td>{{ $value->subject_name }}</td>                          
                           <td>{{ $value->subject_type }}</td>

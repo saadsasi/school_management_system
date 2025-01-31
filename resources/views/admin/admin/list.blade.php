@@ -74,7 +74,7 @@
                         <td>
                           <a href="{{ url('admin/admin/edit/'.$value->id) }}" class="btn btn-primary">{{ __('messages.edit') }}</a>
                           <a href="{{ url('admin/admin/delete/'.$value->id) }}" class="btn btn-danger">{{ __('messages.delete') }}</a>
-                          <a href="{{ url('admin/admin/chat/'.$value->id) }}" class="btn btn-success">{{ __('messages.send_message') }}</a>
+                          <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success">{{ __('messages.send_message') }}</a>
                         </td>
                       </tr>
                     @endforeach

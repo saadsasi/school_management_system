@@ -100,7 +100,7 @@
                         </td>
                         <td>{{ $value->name }} {{ $value->last_name }}</td>
                         <td>{{ $value->email }}</td>
-                        <td>{{ $value->gender }}</td>
+                        <td>{{ __('messages.'.strtolower($value->gender)) }}</td>
                         <td>
                           @if(!empty($value->date_of_birth))
                             {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
@@ -112,7 +112,7 @@
                           @endif
                         </td>
                         <td>{{ $value->mobile_number }}</td>
-                        <td>{{ $value->marital_status }}</td>
+                        <td>{{ __('messages.'.strtolower($value->marital_status)) }}</td>
                         <td>{{ $value->address }}</td>
                         <td>{{ $value->permanent_address }}</td>
                         <td>{{ $value->qualification }}</td>

@@ -168,7 +168,7 @@ class ParentController extends Controller
         $student->relationship_type = $request->relationship_type;
         $student->save();
 
-        return redirect()->back()->with('success', "Student Successfully Assigned");
+        return redirect()->back()->with('success',__('messages.assign_success'));
     }
 
     public function AssignStudentParentDelete($student_id)
@@ -177,7 +177,7 @@ class ParentController extends Controller
         $student->parent_id = null;
         $student->save();
 
-        return redirect()->back()->with('success', "Student Successfully Assign Deleted");
+        return redirect()->back()->with('success', __('messages.assign_success_deleted'));
     }
 
 

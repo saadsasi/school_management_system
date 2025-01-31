@@ -170,7 +170,7 @@
                               @endif
                           </td>
                           
-                          <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
+                          <td>{{ ($value->status == 0) ? __('messages.active') : __('messages.inactive') }}</td>
                           
 
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>

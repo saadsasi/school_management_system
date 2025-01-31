@@ -120,11 +120,11 @@
 
                            <td>{{ $value->name }} {{ $value->last_name }}</td>
                            <td>{{ $value->email }}</td>
-                           <td>{{ $value->gender }}</td>
+                           <td>{{ __('messages.'.$value->gender) }}</td>
                            <td>{{ $value->mobile_number }}</td>
                            <td>{{ $value->occupation }}</td>
                            <td>{{ $value->address }}</td>
-                           <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
+                           <td>{{ ($value->status == 0) ? __('messages.active') : __('messages.inactive') }}</td>
                            
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>

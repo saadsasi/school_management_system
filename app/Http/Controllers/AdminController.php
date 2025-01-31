@@ -48,7 +48,7 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect('admin/admin/list')->with('success', "Admin successfully created");
+        return redirect('admin/admin/list')->with('success', __('messages.admin_created'));
     }
 
 
@@ -99,7 +99,7 @@ class AdminController extends Controller
         
         $user->save();
 
-        return redirect('admin/admin/list')->with('success', "Admin successfully updated");
+        return redirect('admin/admin/list')->with('success', __('messages.admin_updated'));
     }
 
 
@@ -109,7 +109,7 @@ class AdminController extends Controller
         $user->is_delete = 1;
         $user->save();
 
-        return redirect('admin/admin/list')->with('success', "Admin successfully deleted");
+        return redirect('admin/admin/list')->with('success', __('messages.admin_deleted'));
     }
     
 
@@ -129,7 +129,7 @@ class AdminController extends Controller
         $user->status = 0; // 0 for active
         $user->save();
 
-        return redirect()->back()->with('success', 'User registration approved successfully');
+        return redirect()->back()->with('success', __('messages.registration_approved'));
     }
 
     public function rejectRegistration($id)
@@ -137,7 +137,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->back()->with('success', 'User registration rejected successfully');
+        return redirect()->back()->with('success', __('messages.registration_rejected'));
     }
 
     

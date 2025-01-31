@@ -77,10 +77,10 @@ class SubjectController extends Controller
                 }
             }
 
-            return redirect('admin/subject/list')->with('success', 'Subject Successfully Added');
+            return redirect('admin/subject/list')->with('success', __('messages.success_subject_created'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Error saving subject: ' . $e->getMessage());
+                ->with('error', __('messages.error_saving_subject') . $e->getMessage());
         }
     }
 
@@ -182,10 +182,10 @@ class SubjectController extends Controller
             }
 
             return redirect('admin/subject/list')
-                ->with('success', "Subject Successfully Updated");
+                ->with('success', __('messages.success_subject_updated'));
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Error saving subject: ' . $e->getMessage());
+                ->with('error', __('messages.error_saving_subject') . $e->getMessage());
         }
     }
 
@@ -206,7 +206,7 @@ class SubjectController extends Controller
         $save->is_delete = 1;
         $save->save();
 
-        return redirect()->back()->with('success', "Subject Sucessfully Deleted");
+        return redirect()->back()->with('success', __('messages.success_subject_deleted'));
     }
 
 

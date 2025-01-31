@@ -55,7 +55,7 @@ class ClassController extends Controller
             $assign->save();
         }
 
-        return redirect('admin/class/list')->with('success', "Class Successfully Created with Assigned Subjects");
+        return redirect('admin/class/list')->with('success', __('messages.success_class_created'));
     }
     public function edit($id)
     {
@@ -105,7 +105,7 @@ class ClassController extends Controller
             }
         }
 
-        return redirect('admin/class/list')->with('success', "Class Successfully Updated with New Subjects");
+        return redirect('admin/class/list')->with('success', __('messages.success_class_updated'));
     }
     public function delete($id)
     {
@@ -113,6 +113,6 @@ class ClassController extends Controller
         $save->is_delete = 1;
         $save->save();
 
-        return redirect()->back()->with('success', "Class Successfully Deleted");
+        return redirect()->back()->with('success', __('messages.success_class_deleted'));
     }
 }

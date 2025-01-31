@@ -26,7 +26,7 @@
                                             <select name="grade_level" class="form-control" id="grade_level" required>
                                                 <option value="">{{ __('messages.select_grade') }}</option>
                                                 @foreach($grades as $grade)
-                                                    <option value="{{ $grade->grade_level }}">{{ $grade->grade_level }}</option>
+                                                    <option value="{{ $grade->grade_level }}">{{ __('messages.' . $grade->grade_level) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

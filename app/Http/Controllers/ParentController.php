@@ -66,7 +66,7 @@ class ParentController extends Controller
         $student->user_type = 4;
         $student->save();
 
-        return redirect('admin/parent/list')->with('success', "Parent Successfully Created");
+        return redirect('admin/parent/list')->with('success', __('messages.success_parent_created'));
     }
 
 
@@ -129,7 +129,7 @@ class ParentController extends Controller
         
         $student->save();
 
-        return redirect('admin/parent/list')->with('success', "Parent Successfully Updated");
+        return redirect('admin/parent/list')->with('success', __('messages.success_parent_updated'));
     }
 
 
@@ -141,7 +141,7 @@ class ParentController extends Controller
             $getRecord->is_delete = 1;
             $getRecord->save();
 
-            return redirect()->back()->with('success', "Parent Successfully Deleted");
+            return redirect()->back()->with('success', __('messages.success_parent_deleted'));
         }
         else
         {
@@ -225,7 +225,7 @@ class ParentController extends Controller
             $leave->save();
         }
 
-        return redirect('parent/leave/history')->with('success', 'تم تقديم طلب المغادرة بنجاح');
+        return redirect('parent/leave/history')->with('success', __('messages.success_parent_leave_request'));
     }
 
     public function leaveHistory()

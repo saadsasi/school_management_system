@@ -31,7 +31,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label>{{ __('messages.curriculum_file') }}</label>
+                    <label>{{ __('messages.curriculum_file_show') }}</label>
                     <input type="file" class="form-control" name="curriculum_file" accept=".pdf,.doc,.docx">
                     @if($getRecord->curriculum_file)
                       <p class="mt-2">

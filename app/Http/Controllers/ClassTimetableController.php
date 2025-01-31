@@ -122,7 +122,7 @@ class ClassTimetableController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', "Class Timetable Successfully Saved");
+        return redirect()->back()->with('success', __('messages.class_timetable_successfully_saved'));
     }
 
 

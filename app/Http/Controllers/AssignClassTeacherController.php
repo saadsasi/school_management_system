@@ -53,11 +53,11 @@ class AssignClassTeacherController extends Controller
                 }
             }
 
-            return redirect('admin/assign_class_teacher/list')->with('success', "Assign Class to Teacher Successfully");
+            return redirect('admin/assign_class_teacher/list')->with('success', __('messages.assign_class_teacher_successfully'));
         }
         else
         {
-            return redirect()->back()->with('error', 'Due to some error pls try again');
+            return redirect()->back()->with('error', __('messages.due_to_some_error_pls_try_again'));
         }
         
     }
@@ -110,7 +110,7 @@ class AssignClassTeacherController extends Controller
             }            
         }
 
-        return redirect('admin/assign_class_teacher/list')->with('success', "Assign Class to Teacher Successfully");
+        return redirect('admin/assign_class_teacher/list')->with('success', __('messages.assign_class_teacher_successfully'));
     }
 
     public function edit_single($id)
@@ -141,7 +141,7 @@ class AssignClassTeacherController extends Controller
                 $getAlreadyFirst->status = $request->status;
                 $getAlreadyFirst->save();
 
-                return redirect('admin/assign_class_teacher/list')->with('success', "Status Successfully Updated");
+                return redirect('admin/assign_class_teacher/list')->with('success', __('messages.status_successfully_updated'));
 
             }
             else
@@ -152,7 +152,7 @@ class AssignClassTeacherController extends Controller
                 $save->status = $request->status;
                 $save->save();    
 
-                return redirect('admin/assign_class_teacher/list')->with('success', "Assign Class to Teacher Successfully Updated");
+                return redirect('admin/assign_class_teacher/list')->with('success', __('messages.assign_class_teacher_successfully_updated'));
             }                    
     }
 
@@ -162,7 +162,7 @@ class AssignClassTeacherController extends Controller
         $save = AssignClassTeacherModel::getSingle($id);
         $save->delete();
 
-        return redirect()->back()->with('success', "Assign Class to Teacher Successfully Deleted");
+        return redirect()->back()->with('success', __('messages.assign_class_teacher_successfully_deleted'));
     }
 
 

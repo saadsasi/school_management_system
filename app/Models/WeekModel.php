@@ -13,7 +13,16 @@ class WeekModel extends Model
 
     static public function getRecord()
     {
-        return WeekModel::get();
+        return WeekModel::whereNotIn('name', ['Friday'])
+                        ->orderByRaw("CASE 
+                            WHEN name = 'Saturday' THEN 1 
+                            WHEN name = 'Sunday' THEN 2
+                            WHEN name = 'Monday' THEN 3
+                            WHEN name = 'Tuesday' THEN 4
+                            WHEN name = 'Wednesday' THEN 5
+                            WHEN name = 'Thursday' THEN 6
+                            END")
+                        ->get();
     }
 
     static public function getWeekUsingName($weekname)

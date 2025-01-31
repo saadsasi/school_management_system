@@ -69,18 +69,18 @@
                       <div style="color:red">{{ $errors->first('mobile_number') }}</div>
                     </div> 
 
+
                     <div class="form-group col-md-6">
-                      <label>{{__('messages.marital_status') }}  <span style="color: red;"></span></label>
+                      <label>{{ __('messages.marital_status') }} <span style="color: red;"></span></label>
                       <select class="form-control" name="marital_status">
-                        <option value="">{{__('messages.select_marital_status') }}</option>
-                        <option {{ (old('marital_status', $getRecord->marital_status) == 'single') ? 'selected' : '' }} value="single">{{__('messages.single') }}</option>
-                        <option {{ (old('marital_status', $getRecord->marital_status) == 'married') ? 'selected' : '' }} value="married">{{__('messages.married') }}</option>
-                        <option {{ (old('marital_status', $getRecord->marital_status) == 'divorced') ? 'selected' : '' }} value="divorced">{{__('messages.divorced') }}</option>
-                        <option {{ (old('marital_status', $getRecord->marital_status) == 'widower') ? 'selected' : '' }} value="widower">{{__('messages.widower') }}</option>
+                          <option value="">{{ __('messages.select_marital_status') }}</option>
+                          <option {{ (old('marital_status') == 'Single') ? 'selected' : '' }} value="Single">{{ __('messages.single') }}</option>
+                          <option {{ (old('marital_status') == 'Married') ? 'selected' : '' }} value="Married">{{ __('messages.married') }}</option>
+                          <option {{ (old('marital_status') == 'divorced') ? 'selected' : '' }} value="divorced">{{ __('messages.divorced') }}</option>
+                          <option {{ (old('marital_status') == 'widower') ? 'selected' : '' }} value="widower">{{ __('messages.widower') }}</option>
                       </select>
                       <div style="color:red">{{ $errors->first('marital_status') }}</div>
-                    </div> 
-
+                  </div>
                     
 
                  

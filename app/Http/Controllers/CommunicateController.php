@@ -82,7 +82,7 @@ class CommunicateController extends Controller
         }
 
 
-        return redirect()->back()->with('success', "Mail successfully send");        
+        return redirect()->back()->with('success', __('messages.mail_successfully_send'));        
     }
 
     public function NoticeBoard()
@@ -121,7 +121,7 @@ class CommunicateController extends Controller
         }
         
 
-        return redirect('admin/communicate/notice_board')->with('success', "Notice Board successfully created");
+        return redirect('admin/communicate/notice_board')->with('success', __('messages.noticeboard_successfully_created'));
     }
 
     public function EditNoticeBoard($id)
@@ -156,7 +156,7 @@ class CommunicateController extends Controller
         }
         
 
-        return redirect('admin/communicate/notice_board')->with('success', "Notice Board successfully updated");
+        return redirect('admin/communicate/notice_board')->with('success', __('messages.noticeboard_successfully_updated'));
     }
 
     public function DeleteNoticeBoard($id)
@@ -166,7 +166,7 @@ class CommunicateController extends Controller
 
         NoticeBoardMessageModel::DeleteRecord($id);
 
-        return redirect()->back()->with('success', "Notice Board successfully delted");
+        return redirect()->back()->with('success', __('messages.noticeboard_successfully_delted'));
     }
 
 
@@ -254,7 +254,7 @@ class CommunicateController extends Controller
             }    
         }
     
-        return redirect('teacher/noticeboard')->with('success', "Notice Board successfully created");
+        return redirect('teacher/noticeboard')->with('success', __('messages.noticeboard_successfully_created'));
     }
 
     public function teacherEditNoticeBoard($id)
@@ -263,7 +263,7 @@ class CommunicateController extends Controller
                                             ->where('id', $id)
                                             ->first();
         if(!$data['getRecord']) {
-            return redirect('teacher/noticeboard')->with('error', "Notice not found");
+            return redirect('teacher/noticeboard')->with('error', __('messages.notice_not_found'));
         }
         $data['header_title'] = 'Edit Notice';
         return view('teacher.noticeboard.edit', $data);
@@ -275,7 +275,7 @@ class CommunicateController extends Controller
                                  ->where('id', $id)
                                  ->first();
         if(!$notice) {
-            return redirect('teacher/noticeboard')->with('error', "Notice not found");
+            return redirect('teacher/noticeboard')->with('error', __('messages.notice_not_found'));
         }
 
         $notice->title = $request->title;
@@ -297,7 +297,7 @@ class CommunicateController extends Controller
             }    
         }
 
-        return redirect('teacher/noticeboard')->with('success', "Notice Board successfully updated");
+        return redirect('teacher/noticeboard')->with('success', __('messages.noticeboard_successfully_updated'));
     }
 
     public function teacherDeleteNoticeBoard($id)
@@ -306,11 +306,11 @@ class CommunicateController extends Controller
                                  ->where('id', $id)
                                  ->first();
         if(!$notice) {
-            return redirect('teacher/noticeboard')->with('error', "Notice not found");
+            return redirect('teacher/noticeboard')->with('error', __('messages.notice_not_found'));
         }
 
         $notice->delete();
-        return redirect()->back()->with('success', "Notice Board successfully deleted");
+        return redirect()->back()->with('success', __('messages.noticeboard_successfully_delted'));
     }
 
     // parent side work 

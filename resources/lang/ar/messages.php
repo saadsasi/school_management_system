@@ -344,6 +344,12 @@ return [
     'school_name' => 'اسم المدرسة',
     'exam_description' => 'الوصف',
     'save' => 'حفظ',
+    
+    'notice_not_found'=> 'الملاحظة غير موجودة',
+    'noticeboard_successfully_delted'=> 'تم حذف الملاحظة بنجاح',
+    'noticeboard_successfully_updated'=> 'تم تحديث الملاحظة بنجاح',
+    'mail_successfully_send'=> 'تم إرسال البريد بنجاح',
+    'noticeboard_successfully_created'=> 'تم إنشاء الملاحظة بنجاح',
 
     'old_password_is_not_currect'=> 'كلمة المرور القديمة غير صحيحة',
     'password_successfully_updated'=> 'تم تحديث كلمة المرور بنجاح',

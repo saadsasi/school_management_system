@@ -54,7 +54,7 @@ class UserController extends Controller
 
         $setting->save();
 
-        return redirect()->back()->with('success', "Setting Successfully Updated");
+        return redirect()->back()->with('success', __('messages.setting_successfully_updated'));
     }
 
     public function MyAccount()
@@ -92,7 +92,7 @@ class UserController extends Controller
         $admin->email = trim($request->email);
         $admin->save();
         
-        return redirect()->back()->with('success', "Account Successfully Updated");
+        return redirect()->back()->with('success', __('messages.account_successfully_updated'));
     }
 
     public function UpdateMyAccount(Request $request)
@@ -136,7 +136,7 @@ class UserController extends Controller
         $teacher->email = trim($request->email);
         $teacher->save();
 
-        return redirect()->back()->with('success', "Account Successfully Updated");
+        return redirect()->back()->with('success', __('messages.account_successfully_updated'));
     }
 
     public function UpdateMyAccountStudent(Request $request)
@@ -182,7 +182,7 @@ class UserController extends Controller
         $student->email = trim($request->email);
         $student->save();
 
-        return redirect()->back()->with('success', "Account Successfully Updated");
+        return redirect()->back()->with('success', __('messages.account_successfully_updated'));
     }
 
     public function UpdateMyAccountParent(Request $request)
@@ -225,7 +225,7 @@ class UserController extends Controller
         $parent->email = trim($request->email);
         $parent->save();
 
-        return redirect()->back()->with('success', "Account Successfully Updated");
+        return redirect()->back()->with('success', __('messages.account_successfully_updated'));
     }
 
 
@@ -243,11 +243,11 @@ class UserController extends Controller
         {
             $user->password = Hash::make($request->new_password);
             $user->save();
-            return redirect()->back()->with('success', "Password successfully updated");
+            return redirect()->back()->with('success', __('messages.password_successfully_updated'));
         }
         else
         {
-            return redirect()->back()->with('error', "Old Password is not Currect");
+            return redirect()->back()->with('error', __('messages.old_password_is_not_currect'));
         }
     }
 }

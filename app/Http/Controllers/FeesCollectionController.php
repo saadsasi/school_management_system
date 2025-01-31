@@ -71,22 +71,22 @@ class FeesCollectionController extends Controller
               $payment->paid_amount = $request->amount;
               $payment->total_amount = $RemaningAmount;
               $payment->remaning_amount = $remaning_amount_user;
-              $payment->payment_type = $request->payment_type;
+              $payment->payment_type = __('messages.' . strtolower($request->payment_type));
               $payment->remark = $request->remark;
               $payment->created_by = Auth::user()->id;
               $payment->is_payment = 1;              
               $payment->save();
               
-              return redirect()->back()->with('success', "Fees Successfully Add");
+              return redirect()->back()->with('success', __('messages.fees_successfully_add'));
            }
            else
            {
-               return redirect()->back()->with('error', "Your amount go to greather than remaning amount");
+               return redirect()->back()->with('error', __('messages.your_amount_go_to_greather_than_remaning_amount'));
            }
         }
         else
         {
-            return redirect()->back()->with('error', "You need add your amount atleast $1");
+            return redirect()->back()->with('error', __('messages.you_need_add_your_amount_atleast_1'));
         }
      }
 
@@ -127,7 +127,7 @@ class FeesCollectionController extends Controller
                 $payment->paid_amount  = $request->amount;
                 $payment->total_amount = $RemaningAmount;
                 $payment->remaning_amount = $remaning_amount_user;
-                $payment->payment_type = $request->payment_type;
+                $payment->payment_type = __('messages.' . strtolower($request->payment_type));
                 $payment->remark = $request->remark;
                 $payment->created_by = Auth::user()->id;                        
                 $payment->save();
@@ -137,12 +137,12 @@ class FeesCollectionController extends Controller
             }
             else
             {
-                return redirect()->back()->with('error', "Your amount go to greather than remaning amount");
+                return redirect()->back()->with('error', __('messages.your_amount_go_to_greather_than_remaning_amount'));
             }
         }
         else
         {
-            return redirect()->back()->with('error', "You need add your amount atleast $1");
+            return redirect()->back()->with('error', __('messages.you_need_add_your_amount_atleast_1'));
         } 
 
      }
@@ -150,7 +150,7 @@ class FeesCollectionController extends Controller
    
      public function PaymentError()
      {
-         return redirect('student/fees_collection')->with('error', "Due to some error please try again");
+         return redirect('student/fees_collection')->with('error', __('messages.due_to_some_error_please_try_again'));
      }
 
 
@@ -165,16 +165,16 @@ class FeesCollectionController extends Controller
                 $fees->payment_data = json_encode($request->all());                
                 $fees->save();
                 
-                return redirect('student/fees_collection')->with('success', "Your Payment Successfully");       
+                return redirect('student/fees_collection')->with('success', __('messages.your_payment_successfully'));       
             }
             else
             {
-                return redirect('student/fees_collection')->with('error', "Due to some error please try again");       
+                return redirect('student/fees_collection')->with('error', __('messages.due_to_some_error_please_try_again'));       
             }
         }
         else
         {
-            return redirect('student/fees_collection')->with('error', "Due to some error please try again");
+            return redirect('student/fees_collection')->with('error', __('messages.due_to_some_error_please_try_again'));
         }
      }
 
@@ -215,7 +215,7 @@ class FeesCollectionController extends Controller
                 $payment->paid_amount  = $request->amount;
                 $payment->total_amount = $RemaningAmount;
                 $payment->remaning_amount = $remaning_amount_user;
-                $payment->payment_type = $request->payment_type;
+                $payment->payment_type = __('messages.' . strtolower($request->payment_type));
                 $payment->remark = $request->remark;
                 $payment->created_by = Auth::user()->id;                        
                 $payment->save();
@@ -226,12 +226,12 @@ class FeesCollectionController extends Controller
             }
             else
             {
-                return redirect()->back()->with('error', "Your amount go to greather than remaning amount");
+                return redirect()->back()->with('error', __('messages.your_amount_go_to_greather_than_remaning_amount'));
             }
         }
         else
         {
-            return redirect()->back()->with('error', "You need add your amount atleast $1");
+            return redirect()->back()->with('error', __('messages.you_need_add_your_amount_atleast_1'));
         } 
 
      }
@@ -239,7 +239,7 @@ class FeesCollectionController extends Controller
 
     public function PaymentErrorParent($student_id)
     {
-        return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error please try again");
+        return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', __('messages.due_to_some_error_please_try_again'));
     }
 
     public function PaymentSuccessParent($student_id, Request $request)
@@ -253,16 +253,16 @@ class FeesCollectionController extends Controller
                 $fees->payment_data = json_encode($request->all());                
                 $fees->save();
                 
-                return redirect('parent/my_student/fees_collection/'.$student_id)->with('success', "Your Payment Successfully");       
+                return redirect('parent/my_student/fees_collection/'.$student_id)->with('success', __('messages.your_payment_successfully'));       
             }
             else
             {
-                return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error please try again");       
+                return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', __('messages.due_to_some_error_please_try_again'));       
             }
         }
         else
         {
-            return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', "Due to some error please try again");
+            return redirect('parent/my_student/fees_collection/'.$student_id)->with('error', __('messages.due_to_some_error_please_try_again'));
         }
     }
 

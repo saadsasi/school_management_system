@@ -13,14 +13,14 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $data['header_title'] = "{{__('messages.activities')}}";
+        $data['header_title'] = "activities";
         $data['activities'] = Activity::withCount('registrations')->orderBy('id', 'desc')->get();
         return view('admin.activity.list', $data);
     }
 
     public function create()
     {
-        $data['header_title'] = "{{__('messages.add_activity')}}";
+        $data['header_title'] = "add activity";
         $data['getWeek'] = DB::table('week')->get();
         return view('admin.activity.add', $data);
     }
@@ -77,7 +77,7 @@ class ActivityController extends Controller
 
     public function edit($id)
     {
-        $data['header_title'] = "{{__('messages.edit_activity')}}";
+        $data['header_title'] = "edit activity";
         $data['activity'] = Activity::findOrFail($id);
         $data['schedules'] = DB::table('activity_schedule')->where('activity_id', $id)->get();
         $data['getWeek'] = DB::table('week')->get();
@@ -140,7 +140,7 @@ class ActivityController extends Controller
 
     public function registrations()
     {
-        $data['header_title'] = "{{__('messages.my_activities')}}";
+        $data['header_title'] = "my activities";
         $data['registrations'] = ActivityRegistration::with(['activity', 'student'])
             ->orderBy('id', 'desc')
             ->paginate(10);
@@ -170,7 +170,7 @@ class ActivityController extends Controller
 
     public function myActivities()
     {
-        $data['header_title'] = "{{__('messages.my_activities')}}";
+        $data['header_title'] = "my activities";
         $data['activities'] = ActivityRegistration::where('student_id', Auth::user()->id)
             ->with(['activity' => function($q) {
                 $q->with('schedules');

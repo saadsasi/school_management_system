@@ -28,6 +28,7 @@ class User extends Authenticatable
         'user_type',
         'gender',
         'mobile_number',
+        'marital_status',
         'profile_pic',
         'class_id',
         'date_of_birth',

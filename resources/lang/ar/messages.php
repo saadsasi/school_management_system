@@ -344,7 +344,7 @@ return [
     'school_name' => 'اسم المدرسة',
     'exam_description' => 'الوصف',
     'save' => 'حفظ',
-    
+    'no_activities_found'=> 'لا يوجد نشاطات',
     'notice_not_found'=> 'الملاحظة غير موجودة',
     'noticeboard_successfully_delted'=> 'تم حذف الملاحظة بنجاح',
     'noticeboard_successfully_updated'=> 'تم تحديث الملاحظة بنجاح',
@@ -516,9 +516,9 @@ return [
     'parent_student_list' => 'قائمة الطلاب',
     'parent_stuent_notice_board' => 'لوحة إعلانات الطلاب',
     'parent_total_paid_amount' => 'إجمالي المبلغ المدفوع',
-    'parent_total_students' => 'إجمالي الطلاب',
+    'parent_total_students' => 'الأبناء المسجلين',
     'parent_notice_board' => 'لوحة الإعلانات',
-    'parent_total_attendance' => 'إجمالي الحضور',
+    'parent_total_attendance' => 'تسجيلات الحضور',
     'parent_more_info' => 'المزيد من المعلومات',
     // Parent Attendance Page
     'my_attendance' => 'حضوري',
@@ -571,8 +571,9 @@ return [
     
         // شريط التنقل للوالد
         'parent_dashboard' => 'لوحة التحكم',
-        'parent_my_student' => 'طلابي',
-        'parent_my_student_notice_board' => 'لوحة إعلانات طلابي',
+        'parent_my_student' => 'أبنائي',
+        'parent_my_student_notice_board' => 'لوحة إعلانات التلاميذ',
+        'account_successfully_updated' => 'تم تحديث حسابك بنجاح',
         'parent_my_notice_board' => 'لوحة إعلاناتي',
         'parent_my_account' => 'حسابي',
         'parent_change_password' => 'تغيير كلمة المرور',

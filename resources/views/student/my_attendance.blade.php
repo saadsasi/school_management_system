@@ -27,15 +27,7 @@
                 <form method="get" action="">
                   <div class="card-body">
                     <div class="row">
-                    <div class="form-group col-md-2">
-                      <label>{{__('messages.class')}}</label>
-                      <select class="form-control" name="class_id" >
-                          <option value="">{{__('messages.select')}}</option>                                              
-                          @foreach($getClass as $class)
-                            <option {{ (Request::get('class_id') == $class->class_id) ? 'selected' : '' }} value="{{ $class->class_id }}">{{ $class->class_name }}</option>
-                          @endforeach
-                      </select>
-                    </div>
+                
 
                     <div class="form-group col-md-2">
                       <label>{{__('messages.attendance_type')}}</label>

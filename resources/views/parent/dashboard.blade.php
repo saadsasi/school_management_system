@@ -21,7 +21,7 @@
           <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>${{ number_format($TotalPaidAmount, 2) }}</h3>
+                <h3>{{__('messages.in_dinars')}}{{ number_format($TotalPaidAmount, 2) }}</h3>
                 <p>  {{ __('messages.parent_total_paid_amount') }}    </p>
               </div>
               <div class="icon">
@@ -48,19 +48,6 @@
             </div>
           </div>
 
-
-          {{-- <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>{{ $TotalNoticeBoard }}</h3>
-                <p> {{ __('messages.parent_notice_board') }}   </p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{{ url('parent/my_notice_board') }}" class="small-box-footer">{{ __('messages.parent_more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div> --}}
 
            <div class="col-lg-3 col-6">
             <div class="small-box bg-success">

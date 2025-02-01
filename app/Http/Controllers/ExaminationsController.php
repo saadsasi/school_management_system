@@ -14,11 +14,6 @@ use App\Models\User;
 use App\Models\MarksGradeModel;
 use App\Models\SettingModel;
 
-
-
-
-
-
 class ExaminationsController extends Controller
 {
     public function exam_list()
@@ -27,7 +22,6 @@ class ExaminationsController extends Controller
         $data['header_title'] = "Exam List";
         return view('admin.examinations.exam.list',$data);
     }
-
 
     public function exam_add()
     {        
@@ -46,7 +40,6 @@ class ExaminationsController extends Controller
         return redirect('admin/examinations/exam/list')->with('success', "Exam successfully created");
     }
 
-
     public function exam_edit($id)
     {
         $data['getRecord'] = ExamModel::getSingle($id);
@@ -62,7 +55,6 @@ class ExaminationsController extends Controller
         
     }
 
-
     public function exam_update($id, Request $request)
     {
         $exam = ExamModel::getSingle($id);;
@@ -72,7 +64,6 @@ class ExaminationsController extends Controller
 
         return redirect('admin/examinations/exam/list')->with('success', "Exam successfully updated");
     }
-
 
     public function exam_delete($id)
     {
@@ -91,88 +82,202 @@ class ExaminationsController extends Controller
         
     }
 
-
     public function exam_schedule(Request $request)
     {
-        $data['getClass'] = ClassModel::getClass();
-        $data['getExam'] = ExamModel::getExam();
-        
-        $result = array();
-        if(!empty($request->get('exam_id')) && !empty($request->get('class_id')))
-        {
-            $getSubject = ClassSubjectModel::MySubject($request->get('class_id'));
-            foreach($getSubject as $value)
-            {
-                $dataS = array();
-                $dataS['subject_id'] = $value->subject_id;
-                $dataS['class_id'] = $value->class_id;
-                $dataS['subject_name'] = $value->subject_name;
-                $dataS['subject_type'] = $value->subject_type;
+        try {
+            // Get unique grade levels where classes exist and are not deleted
+            $data['getGradeLevels'] = ClassModel::select('grade_level')
+                ->where('is_delete', 0)
+                ->where('status', 0)
+                ->whereNotNull('grade_level')
+                ->groupBy('grade_level')
+                ->orderBy('grade_level', 'asc')
+                ->get();
 
-                $ExamSchedule = ExamScheduleModel::getRecordSingle($request->get('exam_id'), $request->get('class_id'), $value->subject_id);
-
-                if(!empty($ExamSchedule))
-                {
-                    $dataS['exam_date'] = $ExamSchedule->exam_date;
-                    $dataS['start_time'] = $ExamSchedule->start_time;
-                    $dataS['end_time'] = $ExamSchedule->end_time;
-                    $dataS['room_number'] = $ExamSchedule->room_number;
-                    $dataS['full_marks'] = $ExamSchedule->full_marks;
-                    $dataS['passing_mark'] = $ExamSchedule->passing_mark;
-                }
-                else
-                {
-                    $dataS['exam_date'] = '';
-                    $dataS['start_time'] = '';
-                    $dataS['end_time'] = '';
-                    $dataS['room_number'] = '';
-                    $dataS['full_marks'] = '';
-                    $dataS['passing_mark'] = '';
-                }
-
-
-                $result[] = $dataS;
+            if($data['getGradeLevels']->isEmpty()) {
+                return redirect()->back()->with('error', __('messages.no_grade_levels_found'));
             }
+
+            $data['getExam'] = ExamModel::getExam();
+            if($data['getExam']->isEmpty()) {
+                return redirect()->back()->with('error', __('messages.no_exams_found'));
+            }
+            
+            $result = array();
+            if(!empty($request->get('exam_id')) && !empty($request->get('grade_level')))
+            {
+                // Validate if exam exists
+                $examExists = ExamModel::where('id', $request->get('exam_id'))
+                    ->where('is_delete', 0)
+                    ->exists();
+                if(!$examExists) {
+                    return redirect()->back()->with('error', __('messages.exam_not_found'));
+                }
+
+                // Validate if grade level exists
+                $gradeExists = ClassModel::where('grade_level', $request->get('grade_level'))
+                    ->where('is_delete', 0)
+                    ->where('status', 0)
+                    ->exists();
+                if(!$gradeExists) {
+                    return redirect()->back()->with('error', __('messages.grade_level_not_found'));
+                }
+
+                // Get all subjects for this grade level
+                $subjects = ClassSubjectModel::select('class_subject.*', 'subject.name as subject_name', 'subject.type as subject_type')
+                    ->join('class', 'class_subject.class_id', '=', 'class.id')
+                    ->join('subject', 'class_subject.subject_id', '=', 'subject.id')
+                    ->where('class.grade_level', $request->get('grade_level'))
+                    ->where('class.is_delete', 0)
+                    ->where('class.status', 0)
+                    ->groupBy('subject.id')
+                    ->get();
+
+                if($subjects->isEmpty()) {
+                    return redirect()->back()->with('error', __('messages.no_subjects_found_for_grade'));
+                }
+                               
+                foreach($subjects as $subject) {
+                    $dataS = array();
+                    $dataS['subject_id'] = $subject->subject_id;
+                    $dataS['subject_name'] = $subject->subject_name;
+                    $dataS['subject_type'] = $subject->subject_type;
+
+                    // Get exam schedule for this subject in this grade level
+                    $ExamSchedule = ExamScheduleModel::where('exam_id', $request->get('exam_id'))
+                        ->where('subject_id', $subject->subject_id)
+                        ->whereIn('class_id', function($query) use ($request) {
+                            $query->select('id')
+                                ->from('class')
+                                ->where('grade_level', $request->get('grade_level'))
+                                ->where('is_delete', 0)
+                                ->where('status', 0);
+                        })
+                        ->first();
+
+                    if(!empty($ExamSchedule)) {
+                        $dataS['exam_date'] = $ExamSchedule->exam_date;
+                        $dataS['start_time'] = $ExamSchedule->start_time;
+                        $dataS['end_time'] = $ExamSchedule->end_time;
+                        $dataS['room_number'] = $ExamSchedule->room_number;
+                        $dataS['full_marks'] = $ExamSchedule->full_marks;
+                        $dataS['passing_mark'] = $ExamSchedule->passing_mark;
+                    } else {
+                        $dataS['exam_date'] = '';
+                        $dataS['start_time'] = '';
+                        $dataS['end_time'] = '';
+                        $dataS['room_number'] = '';
+                        $dataS['full_marks'] = '';
+                        $dataS['passing_mark'] = '';
+                    }
+
+                    $result[] = $dataS;
+                }
+            }
+
+            $data['getRecord'] = $result;
+            $data['header_title'] = "Exam Schedule";
+            return view('admin.examinations.exam_schedule',$data);   
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('messages.something_went_wrong'));
         }
-
-
-        $data['getRecord'] = $result;
-
-
-        $data['header_title'] = "Exam Schedule";
-        return view('admin.examinations.exam_schedule',$data);   
     }
 
     public function exam_schedule_insert(Request $request)
     {
-        ExamScheduleModel::deleteRecord($request->exam_id, $request->class_id);
-        
-        if(!empty($request->schedule))
-        {
-            foreach($request->schedule as $schedule)
-            {
-                if(!empty($schedule['subject_id']) && !empty($schedule['exam_date']) && !empty($schedule['start_time']) && !empty($schedule['end_time']) && !empty($schedule['room_number']) && !empty($schedule['full_marks']) && !empty($schedule['passing_mark']))
-                {
-                    $exam = new ExamScheduleModel;
-                    $exam->exam_id = $request->exam_id;
-                    $exam->class_id = $request->class_id;
-                    $exam->subject_id = $schedule['subject_id'];
-                    $exam->exam_date = $schedule['exam_date'];
-                    $exam->start_time = $schedule['start_time'];
-                    $exam->end_time = $schedule['end_time'];
-                    $exam->room_number = $schedule['room_number'];
-                    $exam->full_marks = $schedule['full_marks'];
-                    $exam->passing_mark = $schedule['passing_mark'];
-                    $exam->created_by = Auth::user()->id;
-                    $exam->save();                    
-                }
-                
+        try {
+            // Validate required fields
+            if(empty($request->exam_id) || empty($request->grade_level)) {
+                return redirect()->back()->with('error', __('messages.exam_and_grade_required'));
             }
-        }
 
-        return redirect()->back()->with('success', "Exam Schedule Successfully Saved");
+            // Validate if exam exists
+            $examExists = ExamModel::where('id', $request->exam_id)
+                ->where('is_delete', 0)
+                ->exists();
+            if(!$examExists) {
+                return redirect()->back()->with('error', __('messages.exam_not_found'));
+            }
+
+            // Validate if grade level exists
+            $gradeExists = ClassModel::where('grade_level', $request->grade_level)
+                ->where('is_delete', 0)
+                ->where('status', 0)
+                ->exists();
+            if(!$gradeExists) {
+                return redirect()->back()->with('error', __('messages.grade_level_not_found'));
+            }
+
+            // Validate schedule data
+            if(empty($request->schedule)) {
+                return redirect()->back()->with('error', __('messages.schedule_data_required'));
+            }
+
+            foreach($request->schedule as $schedule) {
+                if(empty($schedule['exam_date']) || empty($schedule['start_time']) || 
+                   empty($schedule['end_time']) || empty($schedule['room_number']) || 
+                   empty($schedule['full_marks']) || empty($schedule['passing_mark'])) {
+                    return redirect()->back()->with('error', __('messages.all_schedule_fields_required'));
+                }
+
+                // Validate that end time is after start time
+                if(strtotime($schedule['end_time']) <= strtotime($schedule['start_time'])) {
+                    return redirect()->back()->with('error', __('messages.end_time_must_be_after_start_time'));
+                }
+
+                // Validate marks
+                if(!is_numeric($schedule['full_marks']) || !is_numeric($schedule['passing_mark'])) {
+                    return redirect()->back()->with('error', __('messages.marks_must_be_numeric'));
+                }
+
+                if($schedule['passing_mark'] > $schedule['full_marks']) {
+                    return redirect()->back()->with('error', __('messages.passing_marks_cannot_exceed_full_marks'));
+                }
+            }
+
+            // Delete existing schedules for this exam and grade level
+            ExamScheduleModel::whereIn('class_id', function($query) use ($request) {
+                $query->select('id')
+                    ->from('class')
+                    ->where('grade_level', $request->grade_level)
+                    ->where('is_delete', 0)
+                    ->where('status', 0);
+            })->where('exam_id', $request->exam_id)->delete();
+            
+            // Get all classes for this grade level
+            $classes = ClassModel::where('grade_level', $request->grade_level)
+                               ->where('is_delete', 0)
+                               ->where('status', 0)
+                               ->get();
+
+            if($classes->isEmpty()) {
+                return redirect()->back()->with('error', __('messages.no_classes_found_for_grade'));
+            }
+
+            foreach($request->schedule as $key => $value) {
+                foreach($classes as $class) {
+                    $exam_schedule = new ExamScheduleModel;
+                    $exam_schedule->exam_id = $request->exam_id;
+                    $exam_schedule->class_id = $class->id;
+                    $exam_schedule->subject_id = $value['subject_id'];
+                    $exam_schedule->exam_date = $value['exam_date'];
+                    $exam_schedule->start_time = $value['start_time'];
+                    $exam_schedule->end_time = $value['end_time'];
+                    $exam_schedule->room_number = $value['room_number'];
+                    $exam_schedule->full_marks = $value['full_marks'];
+                    $exam_schedule->passing_mark = $value['passing_mark'];
+                    $exam_schedule->created_by = auth()->user()->id;
+                    $exam_schedule->save();
+                }
+            }
+
+            return redirect()->back()->with('success', __('messages.exam_schedule_successfully_saved'));
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('messages.something_went_wrong'));
+        }
     }
-    
 
     public function marks_register(Request $request)
     {
@@ -270,7 +375,6 @@ class ExaminationsController extends Controller
         echo json_encode($json);
     }
 
-
     public function single_submit_marks_register(Request $request)
     {
         $id = $request->id;
@@ -319,9 +423,7 @@ class ExaminationsController extends Controller
         }
        
         echo json_encode($json);
-
     }
-
 
     public function marks_grade()
     {
@@ -410,8 +512,6 @@ class ExaminationsController extends Controller
         return view('student.my_exam_timetable',$data);   
     }
 
-
-
     public function myExamResult()
     {
         $result = array();
@@ -446,7 +546,6 @@ class ExaminationsController extends Controller
         $data['header_title'] = "My Exam Result";
         return view('student.my_exam_result',$data);  
     }
-
 
     public function myExamResultPrint(Request $request)
     {   
@@ -531,7 +630,6 @@ class ExaminationsController extends Controller
         return view('teacher.my_exam_timetable',$data);   
     }
 
-
     // parent side
 
     public function ParentMyExamTimetable($student_id)
@@ -563,14 +661,12 @@ class ExaminationsController extends Controller
             $dataE['exam'] = $resultS;
             $result[] = $dataE;
         }
-        // dd($result);
 
         $data['getRecord'] = $result;
         $data['getStudent'] = $getStudent;
         $data['header_title'] = "Exam Timetable";
         return view('parent.my_exam_timetable',$data); 
     }
-
 
     public function ParentMyExamResult($student_id)
     {
@@ -607,7 +703,4 @@ class ExaminationsController extends Controller
         $data['header_title'] = "My Exam Result";
         return view('parent.my_exam_result',$data);  
     }
-
-    
-    
 }

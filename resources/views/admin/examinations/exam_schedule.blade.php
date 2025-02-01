@@ -41,6 +41,16 @@
               </div>
               <form method="get" action="">
                 <div class="card-body">
+                  @if(Session::has('error'))
+                    <div class="alert alert-danger alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                      <h5><i class="icon fas fa-ban"></i> {{ __('messages.error') }}!</h5>
+                      {{ Session::get('error') }}
+                    </div>
+                  @endif
+
+                 
+
                   <div class="row">
                     
                   
@@ -55,12 +65,21 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>{{ __('messages.class') }}</label>
-                    <select class="form-control" name="class_id" required>
+                    <label>{{ __('messages.grade_level') }}</label>
+                    <select class="form-control" name="grade_level" required>
                         <option value="">{{ __('messages.select') }}</option>                                              
-                        @foreach($getClass as $class)                                         
-                          <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
-                        @endforeach
+                        @if(!empty($getGradeLevels))
+                            @foreach($getGradeLevels as $grade)                                         
+                                <option {{ (Request::get('grade_level') == $grade->grade_level) ? 'selected' : '' }} value="{{ $grade->grade_level }}">
+                                    @if(App::getLocale() == 'ar')
+                                    {{ __('messages.' . $grade->grade_level) }}
+
+                                    @else
+                                    {{ __('messages.' . $grade->grade_level) }}
+                                    @endif
+                                </option>
+                            @endforeach
+                        @endif
                     </select>
                   </div>
           
@@ -86,7 +105,7 @@
            <form action="{{ url('admin/examinations/exam_schedule_insert') }}" method="post">
                {{ csrf_field() }}
                 <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
-                <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+                <input type="hidden" name="grade_level" value="{{ Request::get('grade_level') }}">
 
 
             <div class="card">

@@ -54,21 +54,18 @@
                     <tr>
                       <th>{{__('messages.subject_name')}}</th>
                       <th>{{__('messages.subject_type')}}</th>
+                      <th>{{__('messages.subject_teacher')}}</th>
                       <th>{{__('messages.curriculum_file')}}</th>
+                      <th>{{__('messages.action')}}</th>
                     </tr>
                   </thead>
                   <tbody>
                    @foreach($getRecord as $value)
                     <tr>
                       <td>{{ $value->subject_name }}</td>
-                      <td>{{ $value->subject_type }}</td>
+                      <td>{{ __('messages.'.strtolower($value->subject_type)) }}</td>
+                      <td>{{ $value->teacher_name ?? __('messages.not_assigned') }}</td>
                       <td>
-                        <!-- Debug info -->
-                        @php
-                            \Log::info('Subject ID: ' . $value->subject_id);
-                            \Log::info('Curriculum File: ' . ($value->curriculum_file ?? 'null'));
-                        @endphp
-                        
                         @if($value->curriculum_file)
                           <a href="{{ url('student/subject/download-curriculum/'.$value->subject_id) }}" 
                              class="btn btn-info btn-sm">
@@ -76,6 +73,16 @@
                           </a>
                         @else
                           <span class="text-muted">{{__('messages.no_curriculum_file')}}</span>
+                        @endif
+                      </td>
+                      <td>
+                        @if($value->teacher_id)
+                          <a href="{{ url('chat?receiver_id='.base64_encode($value->teacher_id)) }}" 
+                             class="btn btn-primary btn-sm">
+                              <i class="fas fa-envelope"></i> {{__('messages.send_message')}}
+                          </a>
+                        @else
+                          <span class="text-muted">{{__('messages.not_assigned')}}</span>
                         @endif
                       </td>
                     </tr>

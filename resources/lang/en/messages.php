@@ -491,6 +491,7 @@ return [
     'grade' => 'Grade',
     'month' => 'Month',
     'today' => 'Today',
+    'subject_teacher' => 'Subject Teacher',
 
     // Parent Calendar Page
     'my_calendar' => 'My Calendar',

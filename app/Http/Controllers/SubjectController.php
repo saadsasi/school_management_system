@@ -219,9 +219,13 @@ class SubjectController extends Controller
                 'subject.id as subject_id',
                 'subject.name as subject_name',
                 'subject.type as subject_type',
-                'subject.curriculum_file'
+                'subject.curriculum_file',
+                'users.id as teacher_id',
+                DB::raw('CONCAT(users.name, " ", COALESCE(users.last_name, "")) as teacher_name')
             )
             ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->leftJoin('teacher_subjects', 'subject.id', '=', 'teacher_subjects.subject_id')
+            ->leftJoin('users', 'users.id', '=', 'teacher_subjects.teacher_id')
             ->where('class_subject.class_id', '=', Auth::user()->class_id)
             ->where('class_subject.status', '=', 0)
             ->where('class_subject.is_delete', '=', 0)

@@ -562,6 +562,7 @@ return [
     'grade' => 'الدرجة',
     'month' => 'الشهر',
     'today' => 'اليوم',
+    'subject_teacher' => 'معلم المادة',
     
     // Parent Calendar Page
     'my_calendar' => 'التقويم',

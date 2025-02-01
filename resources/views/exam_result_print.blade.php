@@ -138,9 +138,7 @@
 						      <tr>
 						         <th style="text-align: left;" class="th">{{__('messages.subject')}}</th>
 						         <th class="th">{{__('messages.class_work')}}</th>
-						         <th class="th">{{__('messages.test_work')}}</th>
-						         <th class="th">{{__('messages.home_work')}}</th>
-						         <th class="th">{{__('messages.exam')}}</th>
+						         <th class="th">{{__('messages.exam')}} </th>
 						         <th class="th">{{__('messages.total_score')}}</th>
 						         <th class="th">{{__('messages.passing_marks')}}</th>
 						         <th class="th">{{__('messages.full_marks')}}</th>
@@ -163,8 +161,6 @@
                     <tr>
                       <td class="td" style="width: 300px; text-align: left;">{{ $exam['subject_name'] }}</td>
                       <td class="td">{{ $exam['class_work'] }}</td>
-                      <td class="td">{{ $exam['test_work'] }}</td>
-                      <td class="td">{{ $exam['home_work'] }}</td>
                       <td class="td">{{ $exam['exam'] }}</td>
                       <td class="td">{{ $exam['total_score'] }}</td>
                       <td class="td">{{ $exam['passing_mark'] }}</td>
@@ -194,10 +190,8 @@
                         @endphp
                         <b>{{__('messages.percentage')}}: {{ round($percentage, 2) }}%</b>
                       </td>
-                      <td class="td" colspan="2">
-                        <b>{{__('messages.grade')}}: {{ $getGrade }}</b>
-                      </td>
                       <td class="td" colspan="3">
+                        <b>{{__('messages.grade')}}: {{ $getGrade }}</b><br>
                         <b>{{__('messages.total_passing_mark')}}: {{ $total_passing_marks }}</b><br>
                         <b>{{__('messages.result')}}:  @if($total_score >= $total_passing_marks) 
                                       <span style="color: green;">{{__('messages.pass')}}</span>  

@@ -120,33 +120,25 @@
 
                                     if(!empty($getMark))
                                     {
-                                        $totalMark = $getMark->class_work + $getMark->home_work + $getMark->test_work + $getMark->exam;
+                                        // Only include class work and exam scores
+                                        $totalMark = $getMark->class_work + $getMark->exam;
                                     }
 
-                                    $totalStudentMark = $totalStudentMark+$totalMark;
+                                    $totalStudentMark = $totalStudentMark + $totalMark;
                                 @endphp
 
                                 <td>
                                   <div style="margin-bottom: 10px;">
-                                      Class Work
+                                      {{ __('messages.class_work') }} 
                                       <input type="hidden" name="mark[{{ $i }}][full_marks]" value="{{ $subject->full_marks }}">
                                       <input type="hidden" name="mark[{{ $i }}][passing_mark]" value="{{ $subject->passing_mark }}">
                                       <input type="hidden" name="mark[{{ $i }}][id]" value="{{ $subject->id }}">
                                       <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
                                       <input type="text" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][class_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : ''  }}" class="form-control">
                                   </div>
-                                  <div style="margin-bottom: 10px;">
-                                    {{ __('messages.home_work') }}
-                                      <input type="text" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][home_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->home_work) ? $getMark->home_work : ''  }}" class="form-control">
-                                  </div>
 
                                   <div style="margin-bottom: 10px;">
-                                      {{ __('messages.test_work') }}
-                                      <input type="text" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][test_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->test_work) ? $getMark->test_work : ''  }}" class="form-control">
-                                  </div>
-
-                                  <div style="margin-bottom: 10px;">
-                                      {{ __('messages.exam') }}
+                                      {{ __('messages.exam') }} 
                                       <input type="text" id="exam_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][exam]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->exam) ? $getMark->exam : ''  }}" class="form-control">
                                   </div>
 
@@ -174,8 +166,6 @@
                                       @endif
                                     </div>
                                   @endif
-                                    
-
                                 </td>
                               @php
                                 $i++;

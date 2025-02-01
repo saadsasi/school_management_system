@@ -489,6 +489,8 @@ return [
     'grand_total' => 'Grand Total',
     'percentage' => 'Percentage',
     'grade' => 'Grade',
+    'month' => 'Month',
+    'today' => 'Today',
 
     // Parent Calendar Page
     'my_calendar' => 'My Calendar',

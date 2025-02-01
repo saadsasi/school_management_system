@@ -560,6 +560,8 @@ return [
     'grand_total' => 'الإجمالي الكلي',
     'percentage' => 'النسبة المئوية',
     'grade' => 'الدرجة',
+    'month' => 'الشهر',
+    'today' => 'اليوم',
     
     // Parent Calendar Page
     'my_calendar' => 'التقويم',

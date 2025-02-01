@@ -40,6 +40,7 @@
 
 @section('script')
 <script src='{{ url('dist/fullcalendar/index.global.js') }}'></script>
+<script src='{{ url('dist/fullcalendar/locales/ar.js') }}'></script>
 
 <script type="text/javascript">
     var events = new Array();
@@ -84,11 +85,19 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',  
+        initialView: 'dayGridMonth',
+        locale: 'ar',
+        direction: 'rtl',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        buttonText: {
+          today: '{{ __('messages.today') }}',
+          month: '{{ __('messages.month') }}',
+          week: '{{ __('messages.week') }}',
+          day: '{{ __('messages.day') }}'
         },
         events: events,
         height: 'auto',

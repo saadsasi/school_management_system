@@ -36,16 +36,37 @@
 			padding-left: 5px;
 		}
 
+		.save-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+        }
+        .save-button:hover {
+            background-color: #45a049;
+        }
+
 		@media print {
 			@page {
 				margin: 0px;
 				margin-left: 20px;
 				margin-right: 20px;
 			}
+			.save-button {
+                display: none;
+            }
 		}
 	</style>
 </head>
 <body>
+	<button onclick="savePDF()" class="save-button">{{__('messages.save_all')}}</button>
 		<div id="page">
 				<table style="width: 100%; text-align: center;">
 					<tr>
@@ -208,7 +229,10 @@
 		</div>
 
 		<script type="text/javascript">
-			window.print();
+			function savePDF() {
+                window.print();
+            }
+            window.print();
 		</script>
 </body>
 </html>

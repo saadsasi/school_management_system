@@ -73,6 +73,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">{{ __('messages.marks_register') }}</h3>
+                <button type="button" class="btn btn-success float-right SaveAllMarks">{{ __('messages.save_all') }}</button>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0" style="overflow: auto;">
@@ -237,7 +238,7 @@
 
 @endsection
 
-@section('script').
+@section('script')
 
 <script type="text/javascript">
   $('.SubmitForm').submit(function(e) {
@@ -253,6 +254,25 @@
       });
   });
 
+  $('.SaveAllMarks').click(function() {
+    var promises = [];
+    $('.SubmitForm').each(function() {
+      var form = $(this);
+      var promise = $.ajax({
+        type: "POST",
+        url: "{{ url('admin/examinations/submit_marks_register') }}",
+        data: form.serialize(),
+        dataType: "json"
+      });
+      promises.push(promise);
+    });
+
+    Promise.all(promises).then(function(results) {
+      alert("{{ __('messages.all_marks_saved_successfully') }}");
+    }).catch(function(error) {
+      alert("{{ __('messages.error_saving_marks') }}");
+    });
+  });
 
   $('.SaveSingleSubject').click(function(e) {
     var student_id = $(this).attr('id');

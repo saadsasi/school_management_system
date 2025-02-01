@@ -671,7 +671,7 @@ class ExaminationsController extends Controller
         $mark->created_by = Auth::user()->id;
         $mark->save();
 
-        return redirect('admin/examinations/marks_grade')->with('success', "Marks Grade successfully created");
+        return redirect('admin/examinations/marks_grade')->with('success', __('messages.marks_grade_successfully_saved'));
     }
 
     public function marks_grade_edit($id)
@@ -689,7 +689,7 @@ class ExaminationsController extends Controller
         $mark->percent_to = trim($request->percent_to);
         $mark->save();
 
-        return redirect('admin/examinations/marks_grade')->with('success', "Marks Grade successfully updated");
+        return redirect('admin/examinations/marks_grade')->with('success', __('messages.marks_grade_successfully_updated'));
     }
 
     public function marks_grade_delete($id)
@@ -697,6 +697,6 @@ class ExaminationsController extends Controller
         $mark = MarksGradeModel::getSingle($id);
         $mark->delete();
 
-        return redirect('admin/examinations/marks_grade')->with('success', "Marks Grade successfully deleted");   
+        return redirect('admin/examinations/marks_grade')->with('success', __('messages.marks_grade_successfully_deleted'));   
     }
 }

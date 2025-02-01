@@ -492,6 +492,7 @@ return [
     'home_work' => 'الواجب المنزلي',
     'total_score' => 'الدرجة الإجمالية',
     'passing_marks' => 'علامات النجاح',
+    'no_subjects_found_for_grade' => 'لا يوجد مواد لهذا الصف',
     'marks_register_successfully_saved'=> 'تم حفظ علامات النجاح بنجاح',
     'marks_grade_successfully_saved'=> 'تم حفظ جدول العلامات بنجاح',
     'marks_grade_successfully_updated'=> 'تم تحديث جدول العلامات بنجاح',

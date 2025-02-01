@@ -538,6 +538,7 @@ return [
     'total_subject_mark'=> 'Total Subject Mark',
     'total_passing_mark'=> 'Total Passing Mark',
     'total_student_mark'=> 'Total Student Mark',
+    'no_subjects_found_for_grade'=> 'No subjects found for grade',
     'enter_marks'=> 'Enter Marks',
     'all_marks_saved_successfully'=> 'All marks saved successfully',
     'save_all' => 'Save All',

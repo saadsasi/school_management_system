@@ -86,7 +86,7 @@ class StudentController extends Controller
         $student->user_type = 3;
         $student->save();
 
-        return redirect('admin/student/list')->with('success', "Student Successfully Created");
+        return redirect('admin/student/list')->with('success', __('messages.student_created'));
         
         
     }
@@ -160,7 +160,7 @@ class StudentController extends Controller
         
         $student->save();
 
-        return redirect('admin/student/list')->with('success', "Student Successfully Updated");
+        return redirect('admin/student/list')->with('success', __('messages.student_updated'));
     }
 
     public function delete($id)
@@ -171,7 +171,7 @@ class StudentController extends Controller
             $getRecord->is_delete = 1;
             $getRecord->save();
 
-            return redirect()->back()->with('success', "Student Successfully Deleted");
+            return redirect()->back()->with('success', __('messages.student_deleted'));
         }
         else
         {

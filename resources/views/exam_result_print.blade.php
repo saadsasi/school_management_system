@@ -130,12 +130,14 @@
                     @php
                       $total_score = 0;
                       $full_marks = 0;
+                      $total_passing_marks = 0;
                       $result_validation = 0;
                     @endphp
                     @foreach($getExamMark as $exam)
                         @php
                           $total_score = $total_score + $exam['total_score'];
                           $full_marks = $full_marks + $exam['full_marks'];
+                          $total_passing_marks = $total_passing_marks + $exam['passing_mark'];
                         @endphp
                     <tr>
                       <td class="td" style="width: 300px; text-align: left;">{{ $exam['subject_name'] }}</td>
@@ -155,28 +157,28 @@
                             @endphp
                             <span style="color: red; font-weight: bold;">{{__('messages.fail')}}</span>
                           @endif
-
                       </td>
                     </tr>
                     @endforeach
 
                     <tr>
                       <td class="td" colspan="2">
-                        <b>{{__('messages.grand_total')}}: {{ $total_score }}/{{ $full_marks }}</b>
+                        <b>{{__('messages.total_student_mark')}}: {{ $total_score }}</b><br>
+                        <b>{{__('messages.total_mark')}}: {{ $full_marks }}</b>
                       </td>
                       <td class="td" colspan="2">
                         @php
-                          $percentage = ($total_score * 100) / $full_marks;
+                          $percentage = $full_marks > 0 ? ($total_score * 100) / $full_marks : 0;
                           $getGrade = App\Models\MarksGradeModel::getGrade($percentage);
                         @endphp
                         <b>{{__('messages.percentage')}}: {{ round($percentage, 2) }}%</b>
                       </td>
-
                       <td class="td" colspan="2">
                         <b>{{__('messages.grade')}}: {{ $getGrade }}</b>
                       </td>
                       <td class="td" colspan="3">
-                        <b>{{__('messages.result')}}:  @if($result_validation == 0) 
+                        <b>{{__('messages.total_passing_mark')}}: {{ $total_passing_marks }}</b><br>
+                        <b>{{__('messages.result')}}:  @if($total_score >= $total_passing_marks) 
                                       <span style="color: green;">{{__('messages.pass')}}</span>  
                                     @else  
                                       <span style="color: red;">{{__('messages.fail')}}</span>

@@ -39,12 +39,16 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label>{{ __('messages.class') }}</label>
-                    <select class="form-control" name="class_id" required>
+                    <label>{{ __('messages.grade_level') }}</label>
+                    <select class="form-control" name="grade_level" required>
                         <option value="">{{ __('messages.select') }}</option>                                              
-                        @foreach($getClass as $class)                                         
-                          <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
-                        @endforeach
+                        @if(!empty($getGradeLevels))
+                            @foreach($getGradeLevels as $grade)                                         
+                                <option {{ (Request::get('grade_level') == $grade->grade_level) ? 'selected' : '' }} value="{{ $grade->grade_level }}">
+                                    {{ __('messages.' . $grade->grade_level) }}
+                                </option>
+                            @endforeach
+                        @endif
                     </select>
                   </div>
           
@@ -92,7 +96,7 @@
                               {{ csrf_field() }}
                               <input type="hidden" name="student_id" value="{{ $student->id }}">
                               <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
-                              <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+                              <input type="hidden" name="grade_level" value="{{ Request::get('grade_level') }}">
                               
                             <tr>
                               <td>{{ $student->name }} {{ $student->last_name }}</td>
@@ -111,7 +115,7 @@
                                     $totalPassingMark = $totalPassingMark + $subject->passing_mark;
                                     
 
-                                    $getMark = $subject->getMark($student->id, Request::get('exam_id'), Request::get('class_id'), $subject->subject_id);
+                                    $getMark = $subject->getMark($student->id, Request::get('exam_id'), Request::get('grade_level'), $subject->subject_id);
 
                                     if(!empty($getMark))
                                     {
@@ -146,7 +150,7 @@
                                   </div>
 
                                   <div style="margin-bottom: 10px;">
-                                    <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-schedule="{{ $subject->id }}" data-class="{{ Request::get('class_id') }}">{{ __('messages.save') }}</button>
+                                    <button type="button" class="btn btn-primary SaveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-schedule="{{ $subject->id }}" data-grade="{{ Request::get('grade_level') }}">{{ __('messages.save') }}</button>
                                   </div>
 
                                   @if(!empty($getMark))
@@ -254,14 +258,13 @@
     var student_id = $(this).attr('id');
     var subject_id = $(this).attr('data-val');
     var exam_id = $(this).attr('data-exam');
-    var class_id = $(this).attr('data-class');
+    var grade_level = $(this).attr('data-grade');
     var id = $(this).attr('data-schedule');
     
     var class_work = $('#class_work_'+student_id+subject_id).val();
     var home_work = $('#home_work_'+student_id+subject_id).val();
     var test_work = $('#test_work_'+student_id+subject_id).val();
     var exam = $('#exam_'+student_id+subject_id).val();
-
 
     $.ajax({
           type: "POST",
@@ -272,7 +275,7 @@
             student_id : student_id,
             subject_id : subject_id,
             exam_id : exam_id,
-            class_id : class_id,
+            grade_level : grade_level,
             class_work : class_work,
             home_work : home_work,
             test_work : test_work,

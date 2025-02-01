@@ -551,7 +551,7 @@ return [
     'end_attendance_date' => 'تاريخ النهاية',
     'class_name' => 'اسم الفصل',
     'attendance_date' => 'تاريخ الحضور',
-    'my_exam_result' => 'نتيجة الامتحان الخاص بي',
+    'my_exam_result' => 'عرض النتائج',
     'my_exam_timetable' => 'جدول الامتحانات',
     'my_class_timetable' => 'جدول الحصص',
     'dob' => 'تاريخ الميلاد',

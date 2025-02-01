@@ -480,7 +480,7 @@ return [
      'end_attendance_date' => 'End Attendance Date',
      'class_name' => 'Class Name',
      'attendance_date' => 'Attendance Date',
-    'my_exam_result' => 'My Exam Result',
+    'my_exam_result' => 'My Results',
     'my_exam_timetable' => 'My Exam Timetable',
     'my_class_timetable' => 'My Class Timetable',
     'dob' => 'Date of Birth',

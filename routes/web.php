@@ -460,7 +460,8 @@ Route::group(['middleware' => ['parent','userActive']], function () {
      Route::get('parent/my_student/fees_collection/{student_id}', [FeesCollectionController::class, 'CollectFeesStudentParent']);
 
      Route::post('parent/my_student/fees_collection/{student_id}', [FeesCollectionController::class, 'CollectFeesStudentPaymentParent']);
-
+    Route::get('parent/my_student/my_exam_timetable/{student_id}', [ExaminationsController::class, 'ParentMyExamTimetable']);
+    Route::get('parent/my_student/my_exam_result/{student_id}', [ExaminationsController::class, 'ParentMyExamResult']);
 
 
        // Parent Activities Routes

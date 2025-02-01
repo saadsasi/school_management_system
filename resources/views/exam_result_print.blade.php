@@ -73,8 +73,9 @@
 								<table class="margin-bottom" style="width: 100%;">
 									<tbody>
 										<tr>
-											<td width="23%">{{__('messages.admission_number')}} : </td>
-											<td style="border-bottom: 1px solid; width: 100%;">{{ $getStudent->admission_number }}</td>
+											<td width="23%">{{__('messages.grade_level')}} : </td>
+											<td style="border-bottom: 1px solid; width: 100%;">{{ __('messages.' . $getStudent->grade_level) }}
+											</td>
 										</tr>
 									</tbody>
 								</table>

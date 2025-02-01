@@ -543,6 +543,7 @@ return [
     'noticeboard_successfully_created'=> 'Noticeboard successfully created',
     'no_activities_found'=> 'No activities found',
     'account_successfully_updated'=> 'Account successfully updated',
+    'signature'=> 'Supervisor Signature',
     'your_amount_go_to_greather_than_remaning_amount'=> 'Your amount go to greather than remaning amount',
     'you_need_add_your_amount_atleast_1'=> 'You need add your amount atleast 1',
     'due_to_some_error_please_try_again'=> 'Due to some error please try again',

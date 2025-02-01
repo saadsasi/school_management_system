@@ -19,16 +19,11 @@ class ExportStudent implements  FromCollection, WithMapping, WithHeadings
             "Student Name",
             "Parent Name",
             "Email",
-            "Admission Number",
-            "Roll Number",
             "Class",
             "Gender",
             "Date of Birth",
             "Mobile Number",
             "Admission Date",
-            "Blood Group",
-            "Height",
-            "Weight",
             "Status",
             "Created Date"
         ];
@@ -58,16 +53,11 @@ class ExportStudent implements  FromCollection, WithMapping, WithHeadings
             $student_name,            
             $parent_name,           
             $value->email,
-            $value->admission_number,
-            $value->roll_number,
             $value->class_name,
             $value->gender,
             $date_of_birth,
             $value->mobile_number,
             $admission_date,
-            $value->blood_group,
-            $value->height,
-            $value->weight,
             $status,
             date('d-m-Y H:i A', strtotime($value->created_at))
         ];

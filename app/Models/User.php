@@ -208,8 +208,10 @@ class User extends Authenticatable
 
     static public function getCollectFeesStudent()
     { 
-        $return = self::select('users.*', 'class.name as class_name', 'class.amount', 'class.grade_level')
+        $return = self::select('users.*', 'class.name as class_name', 'class.amount', 'class.grade_level',
+                              'parent.name as parent_name', 'parent.last_name as parent_last_name', 'parent.id as parent_id')
                         ->join('class', 'class.id', '=', 'users.class_id')
+                        ->leftJoin('users as parent', 'parent.id', '=', 'users.parent_id')
                         ->where('users.user_type','=',3)
                         ->where('users.is_delete','=',0);
 

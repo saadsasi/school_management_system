@@ -479,3 +479,4 @@ Route::get('test-schedule', function() {
 });
 
 Route::get('get-classes-by-grade/{grade_level}', [StudentController::class, 'getClassesByGrade']);
+Route::get('admin/get-classes-by-grade/{grade_level}', [AttendanceController::class, 'getClassesByGrade']);

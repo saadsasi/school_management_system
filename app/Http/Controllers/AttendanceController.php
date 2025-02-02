@@ -16,7 +16,15 @@ class AttendanceController extends Controller
 {
     public function AttendanceStudent(Request $request)
     {
-        $data['getClass'] = ClassModel::getClass();
+        $data['getClass'] = [];
+        
+        if($request->get('grade_level')) {
+            $data['getClass'] = ClassModel::where('grade_level', $request->get('grade_level'))
+                                        ->where('is_delete', 0)
+                                        ->where('status', 0)
+                                        ->orderBy('name', 'asc')
+                                        ->get();
+        }
 
         if(!empty($request->get('class_id')) && !empty($request->get('attendance_date')))
         {
@@ -123,5 +131,16 @@ class AttendanceController extends Controller
         $data['getRecord'] = StudentAttendanceModel::getRecordStudent($student_id);
         $data['header_title'] = "Student Attendance";
         return view('parent.my_attendance', $data);
+    }
+
+    public function getClassesByGrade($grade_level)
+    {
+        $classes = ClassModel::where('grade_level', $grade_level)
+                           ->where('is_delete', 0)
+                           ->where('status', 0)
+                           ->orderBy('name', 'asc')
+                           ->get();
+        
+        return response()->json($classes);
     }
 }

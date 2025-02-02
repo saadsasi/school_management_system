@@ -112,6 +112,7 @@
                     <tr>
                       <th>{{ __('messages.student_id') }}</th>
                       <th>{{ __('messages.student_name') }}</th>
+                      <th>{{ __('messages.parent_name') }}</th>
                       <th>{{ __('messages.class_name') }}</th>
                       <th>{{ __('messages.grade_level') }}</th>
                       <th>{{ __('messages.total_amount') }}</th>
@@ -132,6 +133,7 @@
                             <tr>
                               <td>{{ $value->id }}</td>
                               <td>{{ $value->name }} {{ $value->last_name }}</td>
+                              <td>{{ $value->parent_name }} {{ $value->parent_last_name }}</td>
                               <td>{{ $value->class_name }}</td>
                               <td>
                                   @switch($value->grade_level)
@@ -172,6 +174,8 @@
                               <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                               <td>
                                   <a href="{{ url('admin/fees_collection/collect_fees/add_fees/'.$value->id) }}" class="btn btn-success">{{ __('messages.collect_fees') }}</a>
+                                  <a href="{{ url('chat?receiver_id='.base64_encode($value->parent_id)) }}" class="btn btn-primary">{{ __('messages.send_message') }}</a>
+
                               </td>
                             </tr>
                           @empty

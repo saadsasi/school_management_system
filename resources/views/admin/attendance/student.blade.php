@@ -27,8 +27,24 @@
                 <div class="card-body">
                   <div class="row">
                   <div class="form-group col-md-3">
+                    <label>{{ __('messages.grade_level') }}</label>
+                    <select class="form-control" name="grade_level" id="grade_level" required>
+                        <option value="">{{ __('messages.select_grade_level') }}</option>
+                        <option {{ (Request::get('grade_level') == 'first_primary') ? 'selected' : '' }} value="first_primary">{{ __('messages.first_primary') }}</option>
+                        <option {{ (Request::get('grade_level') == 'second_primary') ? 'selected' : '' }} value="second_primary">{{ __('messages.second_primary') }}</option>
+                        <option {{ (Request::get('grade_level') == 'third_primary') ? 'selected' : '' }} value="third_primary">{{ __('messages.third_primary') }}</option>
+                        <option {{ (Request::get('grade_level') == 'fourth_primary') ? 'selected' : '' }} value="fourth_primary">{{ __('messages.fourth_primary') }}</option>
+                        <option {{ (Request::get('grade_level') == 'fifth_primary') ? 'selected' : '' }} value="fifth_primary">{{ __('messages.fifth_primary') }}</option>
+                        <option {{ (Request::get('grade_level') == 'sixth_primary') ? 'selected' : '' }} value="sixth_primary">{{ __('messages.sixth_primary') }}</option>
+                        <option {{ (Request::get('grade_level') == 'first_preparatory') ? 'selected' : '' }} value="first_preparatory">{{ __('messages.first_preparatory') }}</option>
+                        <option {{ (Request::get('grade_level') == 'second_preparatory') ? 'selected' : '' }} value="second_preparatory">{{ __('messages.second_preparatory') }}</option>
+                        <option {{ (Request::get('grade_level') == 'third_preparatory') ? 'selected' : '' }} value="third_preparatory">{{ __('messages.third_preparatory') }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-3">
                     <label>{{ __('messages.class') }}</label>
-                    <select class="form-control" name="class_id" id="getClass" required required>
+                    <select class="form-control" name="class_id" id="getClass" required>
                         <option value="">{{ __('messages.select') }}</option>                                              
                         @foreach($getClass as $class)                                         
                           <option {{ (Request::get('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
@@ -128,6 +144,31 @@
 @section('script')
 
 <script type="text/javascript">
+  $(document).ready(function() {
+    // Handle grade level change
+    $('#grade_level').change(function() {
+      var grade_level = $(this).val();
+      
+      // Clear class dropdown
+      $('#getClass').html('<option value="">{{ __('messages.select') }}</option>');
+      
+      if(grade_level) {
+        // Get classes for selected grade level
+        $.ajax({
+          type: "GET",
+          url: "{{ url('admin/get-classes-by-grade') }}/" + grade_level,
+          success: function(data) {
+            if(data.length > 0) {
+              data.forEach(function(item) {
+                $('#getClass').append('<option value="' + item.id + '">' + item.name + '</option>');
+              });
+            }
+          }
+        });
+      }
+    });
+  });
+
   $('#saveAllAttendance').click(function(e) {
     var attendanceData = [];
     

@@ -78,6 +78,7 @@
                       <th>{{__('messages.profile_pic')}}</th>
                       <th>{{__('messages.name')}}</th>
                       <th>{{__('messages.email')}}</th>
+                      <th>{{__('messages.grade_level')}}</th>
                       <th>{{__('messages.class')}}</th>
                       <th>{{__('messages.parent_name')}}</th>
                       <th>{{__('messages.gender')}}</th>
@@ -99,6 +100,7 @@
                           </td>
                           <td>{{ $value->name }} {{ $value->last_name }}</td>
                           <td>{{ $value->email }}</td>
+                          <td>{{ __('messages.'.strtolower($value->grade_level)) }}</td>
                           <td>{{ $value->class_name }}</td>
                           <td>{{ $value->parent_name }}</td>
                           <td>{{ $value->gender }}</td>

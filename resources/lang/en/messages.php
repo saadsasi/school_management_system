@@ -493,6 +493,7 @@ return [
     'today' => 'Today',
     'subject_teacher' => 'Subject Teacher',
     'parent_total_activities' => 'Total Activities',
+    'not_assigned' => 'Not Assigned',
 
     // Parent Calendar Page
     'my_calendar' => 'My Calendar',

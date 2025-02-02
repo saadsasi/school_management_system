@@ -563,6 +563,7 @@ return [
     'month' => 'الشهر',
     'today' => 'اليوم',
     'subject_teacher' => 'معلم المادة',
+    'not_assigned' => 'لم يتم تعيينه',
     'parent_total_activities' => 'تسجيلات النشاطات',
     
     // Parent Calendar Page

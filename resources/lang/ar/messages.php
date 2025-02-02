@@ -563,6 +563,7 @@ return [
     'month' => 'الشهر',
     'today' => 'اليوم',
     'subject_teacher' => 'معلم المادة',
+    'parent_total_activities' => 'تسجيلات النشاطات',
     
     // Parent Calendar Page
     'my_calendar' => 'التقويم',

@@ -14,6 +14,7 @@ use App\Models\AssignClassTeacherModel;
 use App\Models\ClassSubjectModel;
 use App\Models\StudentAttendanceModel;
 use App\Models\ClassSubjectTimetableModel;
+use App\Http\Controllers\ActivityController;
 
 class DashboardController extends Controller
 {
@@ -58,12 +59,13 @@ class DashboardController extends Controller
             {
                 $data['TotalPaidAmount'] = StudentAddFeesModel::TotalPaidAmountStudentParent($student_ids);
                 $data['TotalAttendance'] = StudentAttendanceModel::getRecordStudentParentCount($student_ids);
-
+                $data['TotalActivities'] = ActivityController::getTotalActivitiesForStudents($student_ids);
             }
             else
             {
                 $data['TotalPaidAmount'] = 0;
                 $data['TotalAttendance'] = 0;
+                $data['TotalActivities'] = 0;
             }
             
 

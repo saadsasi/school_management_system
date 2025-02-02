@@ -31,6 +31,7 @@
                            <tr>
                               <th>{{ __('messages.subject_name') }}</th>
                               <th>{{ __('messages.subject_type') }}</th>
+                              <th>{{ __('messages.subject_teacher') }}</th>
                               <th>{{ __('messages.curriculum_file') }}</th>
                               <th>{{ __('messages.action') }}</th>
                            </tr>
@@ -39,7 +40,8 @@
                            @foreach($getRecord as $value)
                              <tr>
                                 <td>{{ $value->subject_name }}</td>
-                                <td>{{ $value->subject_type }}</td>
+                                <td>{{ __('messages.'.strtolower($value->subject_type)) }}</td>
+                                <td>{{ $value->teacher_name ?? __('messages.not_assigned') }}</td>
                                 <td>
                                   @if($value->curriculum_file)
                                     <a href="{{ url('student/subject/download-curriculum/'.$value->subject_id) }}" 
@@ -52,9 +54,15 @@
                                 </td>
                                 <td>
                                   @if(isset($value->class_id))
-                                    <a href="{{ url('parent/my_student/subject/class_timetable/'.$value->class_id.'/'.$value->subject_id.'/'.$getUser->id) }}" class="btn btn-primary">{{ __('messages.my_class_timetable') }}</a>
-                                  @else
-                                    <span class="text-muted">{{ __('messages.no_timetable_available') }}</span>
+                                    <a href="{{ url('parent/my_student/subject/class_timetable/'.$value->class_id.'/'.$value->subject_id.'/'.$getUser->id) }}" class="btn btn-primary btn-sm">
+                                      <i class="fas fa-calendar"></i> {{ __('messages.my_class_timetable') }}
+                                    </a>
+                                  @endif
+                                  @if($value->teacher_id)
+                                    <a href="{{ url('chat?receiver_id='.base64_encode($value->teacher_id)) }}" 
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-envelope"></i> {{__('messages.send_message')}}
+                                    </a>
                                   @endif
                                 </td>  
                              </tr>

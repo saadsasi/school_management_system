@@ -179,4 +179,10 @@ class ActivityController extends Controller
             ->get();
         return view('student.activities', $data);
     }
+
+    public static function getTotalActivitiesForStudents($student_ids)
+    {
+        return ActivityRegistration::whereIn('student_id', $student_ids)
+            ->count();
+    }
 }

@@ -492,6 +492,7 @@ return [
     'month' => 'Month',
     'today' => 'Today',
     'subject_teacher' => 'Subject Teacher',
+    'parent_total_activities' => 'Total Activities',
 
     // Parent Calendar Page
     'my_calendar' => 'My Calendar',

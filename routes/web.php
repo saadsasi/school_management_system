@@ -345,10 +345,15 @@ Route::get('teacher/noticeboard/view', [CommunicateController::class, 'MyNoticeB
 
 // Reports Routes
 Route::prefix('reports')->group(function () {
-    Route::get('/', [ReportController::class, 'index'])->name('reports.index');    Route::get('/students', [ReportController::class, 'studentsReport'])->name('reports.students');
+    Route::get('/', [ReportController::class, 'index'])->name('reports.index');    
+    Route::get('/students', [ReportController::class, 'studentsReport'])->name('reports.students');
     Route::get('/teachers', [ReportController::class, 'teachersReport'])->name('reports.teachers');
     Route::get('/financial', [ReportController::class, 'financialReport'])->name('reports.financial');
     Route::get('/examinations', [ReportController::class, 'examinationsReport'])->name('reports.examinations');
+    Route::get('students-with-guardians', [ReportController::class, 'studentsWithGuardians'])->name('reports.students-with-guardians');
+    Route::get('students-without-guardians', [ReportController::class, 'studentsWithoutGuardians'])->name('reports.students-without-guardians');
+    Route::get('guardians-without-students', [ReportController::class, 'guardiansWithoutStudents'])->name('reports.guardians-without-students');
+    Route::get('classes-with-students', [ReportController::class, 'classesWithStudents'])->name('reports.classes-with-students');
 });
 
 });
@@ -414,6 +419,10 @@ Route::prefix('reports')->group(function () {
     Route::get('/teachers', [ReportController::class, 'teachersReport'])->name('reports.teachers');
     Route::get('/financial', [ReportController::class, 'financialReport'])->name('reports.financial');
     Route::get('/examinations', [ReportController::class, 'examinationsReport'])->name('reports.examinations');
+    Route::get('students-with-guardians', [ReportController::class, 'studentsWithGuardians'])->name('reports.students-with-guardians');
+    Route::get('students-without-guardians', [ReportController::class, 'studentsWithoutGuardians'])->name('reports.students-without-guardians');
+    Route::get('guardians-without-students', [ReportController::class, 'guardiansWithoutStudents'])->name('reports.guardians-without-students');
+    Route::get('classes-with-students', [ReportController::class, 'classesWithStudents'])->name('reports.classes-with-students');
 });
 
 Route::group(['middleware' => ['parent','userActive']], function () {
@@ -480,3 +489,5 @@ Route::get('test-schedule', function() {
 
 Route::get('get-classes-by-grade/{grade_level}', [StudentController::class, 'getClassesByGrade']);
 Route::get('admin/get-classes-by-grade/{grade_level}', [AttendanceController::class, 'getClassesByGrade']);
+// Add this with your other auth routes
+Route::get('/chat/{sender}/{receiver}', [ChatController::class, 'show'])->name('chat.show');

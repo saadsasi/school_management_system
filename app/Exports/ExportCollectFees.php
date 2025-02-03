@@ -5,53 +5,108 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use App\Models\StudentAddFeesModel;
+use App\Models\User;
 
 class ExportCollectFees implements FromCollection, WithMapping, WithHeadings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+    protected $data;
+    protected $reportType;
 
-    public function headings(): array
+    public function __construct($data, $reportType)
     {
-        return [
-            "ID",
-            "Student ID",
-            "Student Name",
-            "Class Name",
-            "Total Amount",
-            "Paid Amount",
-            "Remaning Amount",
-            "Payment Type",
-            "Remark",
-            "Created By",
-            "Created Date"
-        ];
-    }
-
-    public function map($value): array
-    {
-        $student_name = $value->student_name_first.' '.$value->student_name_last;
-
-        return [
-            $value->id,
-            $value->student_id,
-            $student_name,
-            $value->class_name,
-            '$'.number_format($value->total_amount, 2),
-            '$'.number_format($value->paid_amount, 2),
-            '$'.number_format($value->remaning_amount, 2),
-            $value->payment_type,
-            $value->remark,
-            $value->created_name,
-            date('d-m-Y', strtotime($value->created_at))
-        ];
+        $this->data = $data;
+        $this->reportType = $reportType;
     }
 
     public function collection()
     {
-        $remove_pagination = 1;
-        return StudentAddFeesModel::getRecord($remove_pagination);
+        return $this->data;
+    }
+
+    public function headings(): array
+    {
+        switch ($this->reportType) {
+            case 'pending_fees':
+                return [
+                    'اسم الطالب',
+                    'الصف',
+                    'إجمالي الرسوم',
+                    'المبلغ المدفوع',
+                    'المبلغ المتبقي',
+                    'نسبة السداد'
+                ];
+
+            case 'completed_fees':
+                return [
+                    'اسم الطالب',
+                    'الصف',
+                    'إجمالي الرسوم',
+                    'تاريخ اكتمال السداد',
+                    'طريقة الدفع'
+                ];
+
+            case 'payment_analysis':
+                return [
+                    'طريقة الدفع',
+                    'عدد المعاملات',
+                    'إجمالي المبلغ',
+                    'النسبة المئوية'
+                ];
+
+            default:
+                return [
+                    'اسم الطالب',
+                    'الصف',
+                    'نوع الرسوم',
+                    'المبلغ',
+                    'الحالة',
+                    'تاريخ الدفع'
+                ];
+        }
+    }
+
+    public function map($row): array
+    {
+        switch ($this->reportType) {
+            case 'pending_fees':
+                $percentage = ($row->total_fees > 0) ? 
+                    round(($row->paid_amount / $row->total_fees) * 100, 2) : 0;
+                
+                return [
+                    $row->name,
+                    $row->class_name,
+                    $row->total_fees,
+                    $row->paid_amount,
+                    $row->remaining_amount,
+                    $percentage . '%'
+                ];
+
+            case 'completed_fees':
+                return [
+                    $row->name,
+                    $row->class_name,
+                    $row->total_fees,
+                    date('Y-m-d', strtotime($row->payment_date)),
+                    $row->payment_method
+                ];
+
+            case 'payment_analysis':
+                return [
+                    $row->payment_method,
+                    $row->count,
+                    $row->total_amount,
+                    round($row->percentage, 2) . '%'
+                ];
+
+            default:
+                return [
+                    $row->student_name,
+                    $row->class_name,
+                    $row->fee_type,
+                    $row->amount,
+                    $row->status == 'paid' ? 'مدفوع' : 'غير مدفوع',
+                    date('Y-m-d', strtotime($row->created_at))
+                ];
+        }
     }
 }

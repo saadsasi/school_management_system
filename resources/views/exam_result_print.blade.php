@@ -72,7 +72,7 @@
 					<tr>
 						<td width="5%"></td>
 						<td width="15%"><img style="width: 110px;" src="{{ $getSetting->getLogo() }}"></td>
-						<td align="left">
+						<td align="right">
 							<h1>{!! $getSetting->school_name !!}</h1>
 						</td>
 					</tr>
@@ -125,7 +125,7 @@
 							<td width="20%" valign="top">
 								<img src="{{ $getStudent->getProfileDirect() }}" style="border-radius: 6px;" height="100px" width="100px">
 								<br>
-								{{__('messages.gender')}} : {{ $getStudent->gender }}
+								{{__('messages.gender')}} : {{ __('messages.'.strtolower($getStudent->gender)) }}
 							</td>
 						</tr>
 				</table>

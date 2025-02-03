@@ -98,6 +98,7 @@
                           <input type="hidden" name="student_id" value="{{ Request::get('student_id') }}">
                           <input type="hidden" name="student_name" value="{{ Request::get('student_name') }}">
                           <input type="hidden" name="student_last_name" value="{{ Request::get('student_last_name') }}">
+                          <input type="hidden" name="grade_level" value="{{ Request::get('grade_level') }}">
                           <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
                           <input type="hidden" name="start_attendance_date" value="{{ Request::get('start_attendance_date') }}">
                           <input type="hidden" name="end_attendance_date" value="{{ Request::get('end_attendance_date') }}">
@@ -113,6 +114,7 @@
                           <tr>
                             <th>{{ __('messages.student_id') }}</th>
                             <th>{{ __('messages.student_name') }}</th>
+                            <th>{{ __('messages.grade_level') }}</th>
                             <th>{{ __('messages.class_name') }}</th>
                             <th>{{ __('messages.attendance_type') }}</th>
                             <th>{{ __('messages.attendance_date') }}</th>
@@ -125,6 +127,7 @@
                             <tr>
                               <td>{{ $value->student_id }}</td>
                               <td>{{ $value->student_name }} {{ $value->student_last_name }}</td>
+                              <td>{{ $value->grade_level }}</td>
                               <td>{{ $value->class_name }}</td>
                               <td>
                                   @if($value->attendance_type == 1)

@@ -494,6 +494,14 @@ return [
     'subject_teacher' => 'Subject Teacher',
     'parent_total_activities' => 'Total Activities',
     'not_assigned' => 'Not Assigned',
+    'schedule' => 'Schedule',
+    'Your_account_is_inactive' => 'Your account is inactive',
+    'common_success' => 'Registration successfully completed, wait for approval',
+    'Please_enter_correct_email_and_password' => 'Please enter correct email and password',
+    'Please_check_your_email_and_reset_your_password' => 'Please check your email and reset your password',
+    'Email_not_found_in_the_system' => 'Email not found in the system',
+    'Password_successfully_reset' => 'Password successfully reset',
+    'Password_and_confirm_password_do_not_match' => 'Password and confirm password do not match',
 
     // Parent Calendar Page
     'my_calendar' => 'My Calendar',

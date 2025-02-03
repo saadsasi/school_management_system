@@ -112,47 +112,6 @@
                                 </tfoot>
                             </table>
                         </div>
-                    @else
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3>{{ $data['income'] }}</h3>
-                                        <p>إجمالي الإيرادات</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-money-bill-wave"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="small-box bg-danger">
-                                    <div class="inner">
-                                        <h3>{{ $data['expenses'] }}</h3>
-                                        <p>إجمالي المصروفات</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3>{{ $data['balance'] }}</h3>
-                                        <p>الرصيد</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-wallet"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <canvas id="financialChart" height="200"></canvas>
-                            </div>
-                        </div>
                     @endif
                 </div>
             </div>

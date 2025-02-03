@@ -25,21 +25,26 @@
                                 <div class="form-group">
                                     <label>نوع التقرير</label>
                                     <select name="report_type" class="form-control select2">
-                                        <option value="attendance">الحضور والغياب</option>
-                                        <option value="grades">الدرجات</option>
-                                        <option value="fees">الرسوم الدراسية</option>
+                                        <option value="students_with_guardians">الطلبة مع أولياء الأمور</option>
+                                        <option value="students_without_guardians">الطلبة بدون أولياء أمور</option>
+                                        <option value="guardians_without_students">أولياء الأمور بدون طلبة</option>
+                                        <option value="classes_students">الفصول والطلبة</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>الصف</label>
-                                    <select name="class_id" class="form-control select2">
-                                        @foreach($classes as $class)
-                                            <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                <div class="form-group grade-level-group">
+                                    <label>المرحلة الدراسية</label>
+                                    <select name="grade_level" class="form-control select2">
+                                        <option value="">جميع المراحل</option>
+                                        @foreach($classes->pluck('grade_level')->unique()->sort() as $level)
+                                            <option value="{{ $level }}">{{ $level }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">
                                     <i class="fas fa-file-alt ml-2"></i>عرض التقرير
+                                </button>
+                                <button type="submit" name="export" value="1" class="btn btn-success btn-block mt-2">
+                                    <i class="fas fa-file-excel ml-2"></i>تصدير إلى Excel
                                 </button>
                             </form>
                         </div>
@@ -57,17 +62,16 @@
                                 <div class="form-group">
                                     <label>نوع التقرير</label>
                                     <select name="report_type" class="form-control select2">
-                                        <option value="classes">الفصول الدراسية</option>
-                                        <option value="attendance">الحضور</option>
-                                        <option value="performance">الأداء</option>
+                                        <option value="assigned_classes">الفصول الموكلة</option>
+                                        <option value="evaluations">تقييمات المعلمين</option>
+                                        <option value="subjects">المواد المسجلة</option>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>التاريخ</label>
-                                    <input type="date" name="date" class="form-control datepicker">
                                 </div>
                                 <button type="submit" class="btn btn-success btn-block">
                                     <i class="fas fa-file-alt ml-2"></i>عرض التقرير
+                                </button>
+                                <button type="submit" name="export" value="1" class="btn btn-success btn-block mt-2">
+                                    <i class="fas fa-file-excel ml-2"></i>تصدير إلى Excel
                                 </button>
                             </form>
                         </div>
@@ -85,21 +89,16 @@
                                 <div class="form-group">
                                     <label>نوع التقرير</label>
                                     <select name="report_type" class="form-control select2">
-                                        <option value="fees_collection">تحصيل الرسوم</option>
-                                        <option value="expenses">المصروفات</option>
-                                        <option value="summary">ملخص مالي</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>الفترة</label>
-                                    <select name="period" class="form-control select2">
-                                        <option value="monthly">شهري</option>
-                                        <option value="quarterly">ربع سنوي</option>
-                                        <option value="yearly">سنوي</option>
+                                        <option value="pending_fees">الطلبة المتبقي عليهم رسوم</option>
+                                        <option value="completed_fees">الطلبة المسددين بالكامل</option>
+                                        <option value="payment_analysis">تحليل طرق السداد</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-warning btn-block">
                                     <i class="fas fa-file-alt ml-2"></i>عرض التقرير
+                                </button>
+                                <button type="submit" name="export" value="1" class="btn btn-success btn-block mt-2">
+                                    <i class="fas fa-file-excel ml-2"></i>تصدير إلى Excel
                                 </button>
                             </form>
                         </div>
@@ -117,9 +116,9 @@
                                 <div class="form-group">
                                     <label>نوع التقرير</label>
                                     <select name="report_type" class="form-control select2">
-                                        <option value="results">نتائج الامتحانات</option>
-                                        <option value="analysis">تحليل الأداء</option>
-                                        <option value="comparison">مقارنة النتائج</option>
+                                        <option value="performance_analysis">تحليل الأداء</option>
+                                        <option value="results_comparison">مقارنة النتائج</option>
+                                        <option value="grades_distribution">توزيع العلامات</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -132,6 +131,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-info btn-block">
                                     <i class="fas fa-file-alt ml-2"></i>عرض التقرير
+                                </button>
+                                <button type="submit" name="export" value="1" class="btn btn-success btn-block mt-2">
+                                    <i class="fas fa-file-excel ml-2"></i>تصدير إلى Excel
                                 </button>
                             </form>
                         </div>
@@ -194,20 +196,22 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        // Initialize select2 for better dropdown experience
         $('.select2').select2({
             theme: 'bootstrap4',
             width: '100%'
         });
         
-        // Initialize datepicker
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true,
-            rtl: true,
-            language: 'ar'
+        // Show/hide grade level based on report type for student reports
+        $('select[name="report_type"]').on('change', function() {
+            if ($(this).val() === 'classes_students') {
+                $('.grade-level-group').show();
+            } else {
+                $('.grade-level-group').hide();
+            }
         });
+
+        // Trigger change event on page load
+        $('select[name="report_type"]').trigger('change');
     });
 </script>
 @endsection

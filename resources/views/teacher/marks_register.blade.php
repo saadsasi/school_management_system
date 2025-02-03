@@ -132,15 +132,6 @@
                                       <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
                                       <input type="text" name="mark[{{ $i }}][class_work]" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : ''  }}" class="form-control">
                                   </div>
-                                  <div style="margin-bottom: 10px;">
-                                      {{__('messages.home_work')}}
-                                      <input type="text" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][home_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->home_work) ? $getMark->home_work : ''  }}" class="form-control">
-                                  </div>
-
-                                  <div style="margin-bottom: 10px;">
-                                      {{__('messages.test_work')}}
-                                      <input type="text" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" name="mark[{{ $i }}][test_work]" style="width:200px;" placeholder="{{ __('messages.enter_marks') }}" value="{{ !empty($getMark->test_work) ? $getMark->test_work : ''  }}" class="form-control">
-                                  </div>
 
                                   <div style="margin-bottom: 10px;">
                                       {{__('messages.exam')}}

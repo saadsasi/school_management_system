@@ -9,70 +9,110 @@ use App\Models\User;
 
 class ExportTeacher implements FromCollection, WithMapping, WithHeadings
 {
-     /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function headings(): array
+    protected $data;
+    protected $reportType;
+
+    public function __construct($data, $reportType)
     {
-        return [
-          "ID",
-          "Teacher Name",
-          "Email",
-          "Gender",
-          "Date of Birth ",
-          "Date Of Joining",
-          "Mobile Number",
-          "Marital Status  ",
-          "Current Address ",
-          "Permanent Address ",
-          "Qualification",
-          "Work Experience",
-          "Note",
-          "Status",
-          "Created Date",
-        ];
-    }
-
-    public function map($value): array
-    {
-        $tacher_name = $value->name.' '.$value->last_name;
-
-        $date_of_birth = '';
-        if(!empty($value->date_of_birth))
-        {
-            $date_of_birth = date('d-m-Y', strtotime($value->date_of_birth));
-        }
-
-        $admission_date = '';
-        if(!empty($value->admission_date))
-        {
-            $admission_date = date('d-m-Y', strtotime($value->admission_date));
-        }
-
-        $status = ($value->status == 0) ? 'Active' : 'Inactive';
-
-        return [
-            $value->id,
-            $tacher_name,
-            $value->email,
-            $value->gender,
-            $date_of_birth,
-            $admission_date,
-            $value->mobile_number,
-            $value->marital_status,
-            $value->address,
-            $value->permanent_address,
-            $value->qualification,
-            $value->work_experience,
-            $value->note,
-            $status,
-            date('d-m-Y H:i A', strtotime($value->created_at)) 
-        ];
+        $this->data = $data;
+        $this->reportType = $reportType;
     }
 
     public function collection()
     {
-        $remove_pagination = 1;
-        return User::getTeacher($remove_pagination);
+        return $this->data;
+    }
+
+    public function headings(): array
+    {
+        switch ($this->reportType) {
+            case 'assigned_classes':
+                return [
+                    'اسم المعلم',
+                    'المادة',
+                    'الفصول المسندة',
+                    'عدد الطلاب',
+                    'الحالة'
+                ];
+
+            case 'evaluations':
+                return [
+                    'اسم المعلم',
+                    'التقييم',
+                    'الملاحظات',
+                    'تاريخ التقييم',
+                    'المقيم'
+                ];
+
+            case 'subjects':
+                return [
+                    'اسم المعلم',
+                    'المادة',
+                    'المستوى',
+                    'عدد الحصص',
+                    'الحالة'
+                ];
+
+            default:
+                return [
+                    'ID',
+                    'اسم المعلم',
+                    'البريد الإلكتروني',
+                    'رقم الهاتف',
+                    'التخصص',
+                    'الخبرة',
+                    'تاريخ التعيين',
+                    'الحالة'
+                ];
+        }
+    }
+
+    public function map($row): array
+    {
+        switch ($this->reportType) {
+            case 'assigned_classes':
+                $classes = $row->assignedClasses->pluck('name')->implode(', ');
+                $totalStudents = $row->assignedClasses->sum(function($class) {
+                    return $class->students->count();
+                });
+                
+                return [
+                    $row->name,
+                    $row->subject_name,
+                    $classes,
+                    $totalStudents,
+                    $row->status == 0 ? 'نشط' : 'غير نشط'
+                ];
+
+            case 'evaluations':
+                return [
+                    $row->name,
+                    $row->evaluation_score,
+                    $row->evaluation_notes,
+                    date('Y-m-d', strtotime($row->evaluation_date)),
+                    $row->evaluator_name
+                ];
+
+            case 'subjects':
+                return [
+                    $row->name,
+                    $row->subject_name,
+                    $row->grade_level,
+                    $row->weekly_classes,
+                    $row->status == 0 ? 'نشط' : 'غير نشط'
+                ];
+
+            default:
+                return [
+                    $row->id,
+                    $row->name.' '.$row->last_name,
+                    $row->email,
+                    $row->mobile_number,
+                    $row->qualification,
+                    $row->work_experience,
+                    date('Y-m-d', strtotime($row->joining_date)),
+                    $row->status == 0 ? 'نشط' : 'غير نشط'
+                ];
+        }
     }
 }

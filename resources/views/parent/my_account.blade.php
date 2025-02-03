@@ -111,8 +111,10 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">  {{ __('messages.update') }}</button>
+                  <button type="submit" class="btn btn-primary mr-2">{{ __('messages.update') }}</button>
+                  <button type="button" class="btn btn-success" onclick="startChat({{ Auth::id() }}, 1)">{{ __('messages.chat_with_admin') }}</button>
                 </div>
+                
               </form>
             </div>
          

@@ -103,7 +103,7 @@
                           <td>{{ __('messages.'.strtolower($value->grade_level)) }}</td>
                           <td>{{ $value->class_name }}</td>
                           <td>{{ $value->parent_name }}</td>
-                          <td>{{ $value->gender }}</td>
+                          <td>{{ __('messages.'.strtolower($value->gender)) }}</td>
                           <td>
                               @if(!empty($value->date_of_birth))
                                 {{ date('d-m-Y', strtotime($value->date_of_birth)) }}

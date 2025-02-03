@@ -43,7 +43,7 @@
                   <tbody>
                     @foreach($getRecord as $valueW)
                       <tr>
-                        <td>{{ $valueW['week_name'] }}</td>
+                        <td>{{ __('messages.'.strtolower($valueW['week_name'])) }}</td>
                         <td>{{ !empty($valueW['start_time']) ? date('h:i A',strtotime($valueW['start_time'])) : '' }}</td>
                         <td>{{ !empty($valueW['end_time']) ? date('h:i A',strtotime($valueW['end_time'])) : '' }}</td>                        
                         <td>{{ $valueW['room_number'] }}</td>

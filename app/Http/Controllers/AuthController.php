@@ -44,7 +44,7 @@ class AuthController extends Controller
                 return redirect('parent/dashboard');
             }
         } else {
-            return redirect()->back()->with('error', 'Please enter correct email and password');
+            return redirect()->back()->with('error', __('messages.Please_enter_correct_email_and_password'));
         }
     }
 
@@ -62,9 +62,9 @@ class AuthController extends Controller
 
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
-            return redirect()->back()->with('success', "Please check your email and reset your password");
+            return redirect()->back()->with('success', __('messages.Please_check_your_email_and_reset_your_password'));
         } else {
-            return redirect()->back()->with('error', "Email not found in the system.");
+            return redirect()->back()->with('error', __('messages.Email_not_found_in_the_system'));
         }
     }
 
@@ -87,9 +87,9 @@ class AuthController extends Controller
             $user->remember_token = Str::random(30);
             $user->save();
 
-            return redirect(url(''))->with('success', "Password successfully reset");
+            return redirect(url(''))->with('success', __('messages.Password_successfully_reset'));
         } else {
-            return redirect()->back()->with('error', "Password and confirm password do not match");
+            return redirect()->back()->with('error', __('messages.Password_and_confirm_password_do_not_match'));
         }
     }
 
@@ -161,7 +161,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        return redirect(url('/'))->with('success', "Registration successfully completed, wait for approval");
+        return redirect(url('/'))->with('success', __('messages.common.success'));
     }
 
     public function logout()

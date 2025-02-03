@@ -67,7 +67,7 @@
                           <td>{{ __('messages.'.$value->grade_level) }}</td>
                           <td>{{ $value->class_name }}</td>
                           <td>{{ $value->subject_name }}</td>                          
-                          <td>{{ $value->subject_type }}</td>
+                          <td>{{ __('messages.'.strtolower($value->subject_type)) }}</td>
                           <td>
                             @php
                             $ClassSubject = $value->getMyTimeTable($value->class_id, $value->subject_id);

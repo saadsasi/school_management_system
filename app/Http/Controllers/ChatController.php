@@ -23,7 +23,7 @@ class ChatController extends Controller
             if($receiver_id == $sender_id)
             {
                 return redirect()->back()->with('error', 'Due to some error please try again');
-                exit();
+                
             }
             
             ChatModel::updateCount($sender_id, $receiver_id);

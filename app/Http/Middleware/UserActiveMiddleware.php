@@ -19,7 +19,7 @@ public function handle(Request $request, Closure $next)
         else
         {
             Auth::logout();
-            return redirect(url('/'))->withError('Your account is inactive');
+            return redirect(url('/'))->withError(__('messages.Your_account_is_inactive'));
         } 
            
     }
@@ -27,7 +27,7 @@ public function handle(Request $request, Closure $next)
     {
         Auth::logout();
         return redirect(url('/'))->withErrors(
-            'Your account is inactive'
+            __('messages.Your_account_is_inactive')
         );
     }
 

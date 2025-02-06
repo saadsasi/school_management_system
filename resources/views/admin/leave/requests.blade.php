@@ -130,18 +130,19 @@ $(document).ready(function() {
 });
 
 function filterLeaves(type, button) {
-    // إزالة الفلتر السابق
+    // Remove previous filter
     $('.leave-row').hide();
     
-     
-    // تطبيق الفلتر الجديد
+    // Apply new filter
     if (type === 'all') {
         $('.leave-row').show();
-    } else {
-        $('.leave-row.' + type).show();
+    } else if (type === 'early') {
+        $('.leave-row.early_leave').show();
+    } else if (type === 'end_day') {
+        $('.leave-row.end_day_leave').show();
     }
     
-    // تحديث حالة الأزرار
+    // Update button states
     $('.btn-group .btn').removeClass('active');
     $(button).addClass('active');
 }

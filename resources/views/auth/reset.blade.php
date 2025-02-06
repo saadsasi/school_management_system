@@ -41,7 +41,7 @@
         </div>
 
          <div class="input-group mb-3">
-          <input type="password" class="form-control" required  name="cpassword" placeholder="{{ __('messages.confrim_password') }}">
+          <input type="password" class="form-control" required  name="cpassword" placeholder="{{ __('messages.confirm_password') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

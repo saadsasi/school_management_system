@@ -108,6 +108,7 @@ class AuthController extends Controller
             'user_type' => 'required|in:teacher,student,parent',
             'gender' => 'required|in:Male,Female',
             'mobile_number' => 'required',
+            'profile_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
         ]);
 
         if ($request->user_type == 'student') {
@@ -120,14 +121,17 @@ class AuthController extends Controller
                 'qualification' => 'required',
             ]);
         }
+        $user = new User();
 
         $profile_pic = null;
-        if ($request->hasFile('profile_pic')) {
+        if (!empty($request->file('profile_pic'))) {
+            $ext = $request->file('profile_pic')->getClientOriginalExtension();
             $file = $request->file('profile_pic');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
             $file->move('upload/profile/', $filename);
-            $profile_pic = 'upload/profile/' . $filename;
+
+            $user->profile_pic = $filename;
         }
 
         // Map string user type to numeric value
@@ -137,7 +141,6 @@ class AuthController extends Controller
             'parent' => 4
         ];
 
-        $user = new User();
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
@@ -145,7 +148,6 @@ class AuthController extends Controller
         $user->user_type = $userTypeMap[$request->user_type];
         $user->gender = $request->gender;
         $user->mobile_number = $request->mobile_number;
-        $user->profile_pic = $profile_pic;
         $user->status = 1;
 
         if ($request->user_type == 'student') {
@@ -160,7 +162,6 @@ class AuthController extends Controller
         }
 
         $user->save();
-
         return redirect(url('/'))->with('success', __('messages.common.success'));
     }
 

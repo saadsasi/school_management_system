@@ -490,7 +490,9 @@ return [
     'percentage' => 'Percentage',
     'grade' => 'Grade',
     'month' => 'Month',
+    'confirm_password' => 'Confirm Password',
     'today' => 'Today',
+    'forgot' => 'password reset',
     'subject_teacher' => 'Subject Teacher',
     'parent_total_activities' => 'Total Activities',
     'not_assigned' => 'Not Assigned',
@@ -751,9 +753,10 @@ return [
         'i_already_have_an_account' => 'I already have an account',
         'password_note' => 'do you need to change your password? if so please add new password',
         'profile_picture' => 'Profile Picture',
-        'confirm_password' => 'Confirm Password',
+        'common.success'=>'registration was successful. Please wait for the account activation by the administration.',
+        'common.error'=>'registration was not successful. Please try again.',
         // Stripe Charge Page
-     'stripe_checkout' => 'Stripe Checkout',
+   
      
 
     'vaccinations' => 'Vaccinations',

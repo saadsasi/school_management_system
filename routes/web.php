@@ -136,7 +136,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/teacher_subject/get-classes-subjects', [TeacherSubjectController::class, 'getClassesAndSubjects']);
     Route::post('admin/teacher_subject/evaluate/{id}', [TeacherSubjectController::class, 'evaluate']);
     Route::get('admin/teacher_subject/evaluations/{id}', [TeacherSubjectController::class, 'viewEvaluations']);
-
+    Route::get('admin/teacher_subject/delete/{id}', [TeacherSubjectController::class, 'deleteSubject']);
     // class url
 
     Route::get('admin/class/list', [ClassController::class, 'list']);

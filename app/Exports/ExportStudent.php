@@ -9,57 +9,15 @@ use App\Models\User;
 
 class ExportStudent implements FromCollection, WithMapping, WithHeadings
 {
-    protected $data;
-    protected $reportType;
-
-    public function __construct($data, $reportType)
-    {
-        $this->data = $data;
-        $this->reportType = $reportType;
-    }
 
     public function collection()
     {
-        return $this->data;
+        return User::where('user_type', 3)->get();
     }
 
     public function headings(): array
     {
-        switch ($this->reportType) {
-            case 'students_with_guardians':
-                return [
-                    'اسم الطالب',
-                    'اسم ولي الأمر',
-                    'رقم هاتف ولي الأمر',
-                    'البريد الإلكتروني لولي الأمر'
-                ];
-
-            case 'students_without_guardians':
-                return [
-                    'اسم الطالب',
-                    'الصف',
-                    'رقم الهاتف',
-                    'البريد الإلكتروني'
-                ];
-
-            case 'guardians_without_students':
-                return [
-                    'اسم ولي الأمر',
-                    'رقم الهاتف',
-                    'البريد الإلكتروني',
-                    'العنوان'
-                ];
-
-            case 'classes_students':
-                return [
-                    'الصف',
-                    'اسم الطالب',
-                    'رقم الهاتف',
-                    'البريد الإلكتروني',
-                    'ولي الأمر'
-                ];
-
-            default:
+        
                 return [
                     'ID',
                     'اسم الطالب',
@@ -73,46 +31,11 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
                     'الحالة',
                     'تاريخ الإنشاء'
                 ];
-        }
     }
 
     public function map($row): array
     {
-        switch ($this->reportType) {
-            case 'students_with_guardians':
-                return [
-                    $row->name,
-                    $row->guardian_name,
-                    $row->guardian_mobile,
-                    $row->guardian_email
-                ];
-
-            case 'students_without_guardians':
-                return [
-                    $row->name,
-                    $row->class_name,
-                    $row->mobile_number,
-                    $row->email
-                ];
-
-            case 'guardians_without_students':
-                return [
-                    $row->name,
-                    $row->mobile_number,
-                    $row->email,
-                    $row->address
-                ];
-
-            case 'classes_students':
-                return [
-                    $row->name, // class name
-                    $row->student_name,
-                    $row->mobile_number,
-                    $row->email,
-                    $row->guardian_name ?? 'لا يوجد'
-                ];
-
-            default:
+       
                 $student_name = $row->name.' '.$row->last_name;
                 $parent_name = $row->parent_name.' '.$row->parent_last_name;
                 $date_of_birth = !empty($row->date_of_birth) ? date('d-m-Y', strtotime($row->date_of_birth)) : '';
@@ -132,6 +55,5 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
                     $status,
                     date('Y-m-d', strtotime($row->created_at))
                 ];
-        }
     }
 }

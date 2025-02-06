@@ -54,7 +54,7 @@
                       <th>{{ __('messages.class_name') }}</th>
                       <th>{{ __('messages.subject_name') }}</th>
                       <th>{{ __('messages.subject_type') }}</th>
-                      <th>{{ __('messages.my_class_timetable') }}</th>
+                      {{-- <th>{{ __('messages.my_class_timetable') }}</th> --}}
                       <th>{{ __('messages.created_date') }}</th>
                       <th>{{ __('messages.action') }}</th>
                     </tr>
@@ -65,10 +65,10 @@
                         <tr>
                           <td>{{ $value->id }}</td>
                           <td>{{ __('messages.'.$value->grade_level) }}</td>
-                          <td>{{ $value->class_name }}</td>
-                          <td>{{ $value->subject_name }}</td>                          
-                          <td>{{ __('messages.'.strtolower($value->subject_type)) }}</td>
-                          <td>
+                          <td>{{ $value->class->name }}</td>
+                          <td>{{ $value->subject->name }}</td>                          
+                          <td>{{ __('messages.'.strtolower($value->subject->type)) }}</td>
+                          {{-- <td>
                             @php
                             $ClassSubject = $value->getMyTimeTable($value->class_id, $value->subject_id);
                             @endphp
@@ -77,7 +77,7 @@
                               <br />
                               {{__('messages.room_number')}} : {{ $ClassSubject->room_number }}
                             @endif
-                          </td>                                                    
+                          </td>                                                     --}}
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>    
                           <td>
                             <a href="{{ url('teacher/my_class_subject/class_timetable/'.$value->class_id.'/'.$value->subject_id) }}" class="btn btn-primary">{{ __('messages.my_class_timetable') }}</a>

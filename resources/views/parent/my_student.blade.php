@@ -85,7 +85,10 @@
                       @endforeach
                   </tbody>
                 </table>
-                <div style="padding: 10px; float: right;"></div>
+                <div style="padding: 10px; float: right;">
+                  <a href="{{ url('chat?receiver_id='.base64_encode(1)) }}" class="btn btn-success"> {{ __('messages.send_message') }} </a>
+
+                </div>
               </div>
             </div>
           </div>

@@ -11,9 +11,7 @@
           <div class="col-sm-6">
             <h1>{{ __('messages.fees_collection') }} <span style="color: blue;">({{ $getStudent->name }} {{ $getStudent->last_name }})</span> </h1>
           </div>
-          <div class="col-sm-6" style="text-align: right;">
-            <button type="button" class="btn btn-primary" id="AddFees">{{ __('messages.add_fees') }}</button>
-          </div>              
+        
         </div>
       </div>
     </section>

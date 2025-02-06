@@ -208,7 +208,7 @@
 					
 				</div>
 
-				<div>
+				<div dir="auto">
 					<p>{{ $getSetting->exam_description }}</p>
 				</div>
 

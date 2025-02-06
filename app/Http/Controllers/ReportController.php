@@ -9,6 +9,7 @@ use App\Models\StudentAddFeesModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ExportStudent;
 use App\Exports\ExportTeacher;
@@ -37,7 +38,7 @@ class ReportController extends Controller
         $data['totalFees'] = StudentAddFeesModel::sum('paid_amount');
 
         return view('reports.reports', $data);
-    } 
+    }
 
     public function studentsReport(Request $request)
     {
@@ -90,7 +91,7 @@ class ReportController extends Controller
                 break;
         }
 
-        
+
 
         return view('reports.students', compact('data', 'reportType', 'class'));
     }
@@ -118,7 +119,7 @@ class ReportController extends Controller
             case 'attendance':
                 $query = DB::table('teacher_attendance')
                     ->join('users', 'users.id', '=', 'teacher_attendance.teacher_id');
-                
+
                 if ($date) {
                     $query->whereDate('teacher_attendance.date', $date);
                 }
@@ -127,8 +128,8 @@ class ReportController extends Controller
                     'users.name as teacher_name',
                     'teacher_attendance.*'
                 )
-                ->get()
-                ->groupBy('teacher_name');
+                    ->get()
+                    ->groupBy('teacher_name');
                 break;
 
             case 'performance':
@@ -171,8 +172,8 @@ class ReportController extends Controller
                     'class.name as class_name',
                     'fees_collection.*'
                 )
-                ->get()
-                ->groupBy('class_name');
+                    ->get()
+                    ->groupBy('class_name');
                 break;
 
             case 'expenses':
@@ -288,13 +289,21 @@ class ReportController extends Controller
 
     public function studentsWithGuardians()
     {
-        $data = User::where('user_type', '=', 3) // Students
-            ->join('users as guardians', 'users.guardian_id', '=', 'guardians.id')
-            ->select('users.name', 'users.email', 'users.mobile_number',
-                    'guardians.name as guardian_name',
-                    'guardians.email as guardian_email',
-                    'guardians.mobile_number as guardian_mobile')
+        $data = DB::table('users as students')
+            ->join('users as guardians', 'students.guardian_id', '=', 'guardians.id')
+            ->where('students.user_type', '=', 3) // Students
+            ->whereNotNull('students.guardian_id')
+            ->select(
+                'students.name',
+                'students.email',
+                'students.mobile_number',
+                'guardians.name as guardian_name',
+                'guardians.email as guardian_email',
+                'guardians.mobile_number as guardian_mobile'
+            )
             ->get();
+
+        Log::info('Students with guardians data:', ['count' => $data->count(), 'data' => $data->toArray()]);
 
         return view('reports.students', [
             'reportType' => 'students_with_guardians',
@@ -305,11 +314,19 @@ class ReportController extends Controller
 
     public function studentsWithoutGuardians()
     {
-        $data = User::where('user_type', '=', 3) // Students
-            ->whereNull('guardian_id')
-            ->leftJoin('class', 'users.class_id', '=', 'class.id')
-            ->select('users.*', 'class.name as class_name')
+        $data = DB::table('users as students')
+            ->leftJoin('class', 'students.class_id', '=', 'class.id')
+            ->where('students.user_type', '=', 3) // Students
+            ->whereNull('students.guardian_id')
+            ->select(
+                'students.name',
+                'students.email',
+                'students.mobile_number',
+                'class.name as class_name'
+            )
             ->get();
+
+        Log::info('Students without guardians data:', ['count' => $data->count(), 'data' => $data->toArray()]);
 
         return view('reports.students', [
             'reportType' => 'students_without_guardians',
@@ -320,14 +337,22 @@ class ReportController extends Controller
 
     public function guardiansWithoutStudents()
     {
-        $data = User::where('user_type', '=', 4) // Guardians
-            ->whereNotExists(function($query) {
+        $data = DB::table('users as guardians')
+            ->where('guardians.user_type', '=', 4) // Guardians
+            ->whereNotExists(function ($query) {
                 $query->select(DB::raw(1))
-                      ->from('users as students')
-                      ->whereRaw('students.guardian_id = users.id');
+                    ->from('users as students')
+                    ->whereRaw('students.guardian_id = guardians.id');
             })
-            ->select('users.*')
+            ->select(
+                'guardians.name',
+                'guardians.email',
+                'guardians.mobile_number',
+                'guardians.address'
+            )
             ->get();
+
+        Log::info('Guardians without students data:', ['count' => $data->count(), 'data' => $data->toArray()]);
 
         return view('reports.students', [
             'reportType' => 'guardians_without_students',
@@ -338,14 +363,16 @@ class ReportController extends Controller
 
     public function classesWithStudents()
     {
-        $data = ClassModel::with(['students' => function($query) {
-            $query->select('users.*')
-                  ->leftJoin('users as guardians', 'users.guardian_id', '=', 'guardians.id')
-                  ->addSelect('guardians.name as guardian_name');
-        }])
-        ->where('is_delete', 0)
-        ->where('status', 0)
-        ->get();
+        $data = ClassModel::with([
+            'students' => function ($query) {
+                $query->select('users.*')
+                    ->leftJoin('users as guardians', 'users.guardian_id', '=', 'guardians.id')
+                    ->addSelect('guardians.name as guardian_name');
+            }
+        ])
+            ->where('is_delete', 0)
+            ->where('status', 0)
+            ->get();
 
         return view('reports.students', [
             'reportType' => 'classes_students',
@@ -358,45 +385,65 @@ class ReportController extends Controller
     {
         $reportType = $request->get('report_type', 'students_with_guardians');
         $gradeLevel = $request->get('grade_level');
-        
+
         switch ($reportType) {
             case 'students_with_guardians':
-                $data = User::where('users.user_type', '=', 3)
-                    ->join('users as guardians', 'users.guardian_id', '=', 'guardians.id')
-                    ->select('users.name', 'users.email', 'users.mobile_number',
-                            'guardians.name as guardian_name',
-                            'guardians.email as guardian_email',
-                            'guardians.mobile_number as guardian_mobile')
+                $data = DB::table('users as students')
+                    ->join('users as guardians', 'students.guardian_id', '=', 'guardians.id')
+                    ->where('students.user_type', '=', 3) // Students
+                    ->whereNotNull('students.guardian_id')
+                    ->select(
+                        'students.name',
+                        'students.email',
+                        'students.mobile_number',
+                        'guardians.name as guardian_name',
+                        'guardians.email as guardian_email',
+                        'guardians.mobile_number as guardian_mobile'
+                    )
                     ->get();
                 break;
 
             case 'students_without_guardians':
-                $data = User::where('user_type', '=', 3)
-                    ->whereNull('guardian_id')
-                    ->leftJoin('class', 'users.class_id', '=', 'class.id')
-                    ->select('users.*', 'class.name as class_name')
+                $data = DB::table('users as students')
+                    ->leftJoin('class', 'students.class_id', '=', 'class.id')
+                    ->where('students.user_type', '=', 3) // Students
+                    ->whereNull('students.guardian_id')
+                    ->select(
+                        'students.name',
+                        'students.email',
+                        'students.mobile_number',
+                        'class.name as class_name'
+                    )
                     ->get();
                 break;
 
             case 'guardians_without_students':
-                $data = User::where('user_type', '=', 4)
-                    ->whereNotExists(function($query) {
+                $data = DB::table('users as guardians')
+                    ->where('guardians.user_type', '=', 4) // Guardians
+                    ->whereNotExists(function ($query) {
                         $query->select(DB::raw(1))
-                              ->from('users as students')
-                              ->whereRaw('students.guardian_id = users.id');
+                            ->from('users as students')
+                            ->whereRaw('students.guardian_id = guardians.id');
                     })
-                    ->select('users.*')
+                    ->select(
+                        'guardians.name',
+                        'guardians.email',
+                        'guardians.mobile_number',
+                        'guardians.address'
+                    )
                     ->get();
                 break;
 
             case 'classes_students':
-                $query = ClassModel::with(['students' => function($query) {
-                    $query->select('users.*')
-                          ->leftJoin('users as guardians', 'users.guardian_id', '=', 'guardians.id')
-                          ->addSelect('guardians.name as guardian_name');
-                }])
-                ->where('is_delete', 0)
-                ->where('status', 0);
+                $query = ClassModel::with([
+                    'students' => function ($query) {
+                        $query->select('users.*')
+                            ->leftJoin('users as guardians', 'users.guardian_id', '=', 'guardians.id')
+                            ->addSelect('guardians.name as guardian_name');
+                    }
+                ])
+                    ->where('is_delete', 0)
+                    ->where('status', 0);
 
                 if ($gradeLevel) {
                     $query->where('grade_level', $gradeLevel);
@@ -419,13 +466,15 @@ class ReportController extends Controller
     public function teachers(Request $request)
     {
         $reportType = $request->get('report_type', 'assigned_classes');
-        
+
         switch ($reportType) {
             case 'assigned_classes':
                 $data = User::where('users.user_type', '=', 2)
-                    ->with(['assignedClasses' => function($query) {
-                        $query->where('is_delete', 0);
-                    }])
+                    ->with([
+                        'assignedClasses' => function ($query) {
+                            $query->where('is_delete', 0);
+                        }
+                    ])
                     ->get();
                 break;
 
@@ -455,15 +504,17 @@ class ReportController extends Controller
     public function financial(Request $request)
     {
         $reportType = $request->get('report_type', 'pending_fees');
-        
+
         switch ($reportType) {
             case 'pending_fees':
                 $data = User::where('users.user_type', '=', 3)
                     ->join('student_fees', 'users.id', '=', 'student_fees.student_id')
-                    ->select('users.*', 
-                            DB::raw('SUM(student_fees.amount) as total_fees'),
-                            DB::raw('SUM(student_fees.paid_amount) as paid_amount'),
-                            DB::raw('SUM(student_fees.amount - student_fees.paid_amount) as remaining_amount'))
+                    ->select(
+                        'users.*',
+                        DB::raw('SUM(student_fees.amount) as total_fees'),
+                        DB::raw('SUM(student_fees.paid_amount) as paid_amount'),
+                        DB::raw('SUM(student_fees.amount - student_fees.paid_amount) as remaining_amount')
+                    )
                     ->groupBy('users.id')
                     ->having('remaining_amount', '>', 0)
                     ->get();
@@ -472,9 +523,11 @@ class ReportController extends Controller
             case 'completed_fees':
                 $data = User::where('user_type', '=', 3)
                     ->join('student_fees', 'users.id', '=', 'student_fees.student_id')
-                    ->select('users.*', 
-                            DB::raw('SUM(student_fees.amount) as total_fees'),
-                            DB::raw('SUM(student_fees.paid_amount) as paid_amount'))
+                    ->select(
+                        'users.*',
+                        DB::raw('SUM(student_fees.amount) as total_fees'),
+                        DB::raw('SUM(student_fees.paid_amount) as paid_amount')
+                    )
                     ->groupBy('users.id')
                     ->having(DB::raw('SUM(student_fees.amount - student_fees.paid_amount)'), '=', 0)
                     ->get();
@@ -482,10 +535,12 @@ class ReportController extends Controller
 
             case 'payment_analysis':
                 $data = DB::table('student_fees')
-                    ->select('payment_method',
-                            DB::raw('COUNT(*) as count'),
-                            DB::raw('SUM(paid_amount) as total_amount'),
-                            DB::raw('(SUM(paid_amount) / (SELECT SUM(paid_amount) FROM student_fees) * 100) as percentage'))
+                    ->select(
+                        'payment_method',
+                        DB::raw('COUNT(*) as count'),
+                        DB::raw('SUM(paid_amount) as total_amount'),
+                        DB::raw('(SUM(paid_amount) / (SELECT SUM(paid_amount) FROM student_fees) * 100) as percentage')
+                    )
                     ->groupBy('payment_method')
                     ->get();
                 break;
@@ -505,16 +560,18 @@ class ReportController extends Controller
     {
         $reportType = $request->get('report_type', 'performance_analysis');
         $classId = $request->get('class_id');
-        
+
         switch ($reportType) {
             case 'performance_analysis':
                 $data = DB::table('exam_results')
                     ->join('users', 'exam_results.student_id', '=', 'users.id')
                     ->where('users.class_id', $classId)
-                    ->select('users.name',
-                            'exam_results.subject_id',
-                            'exam_results.marks',
-                            'exam_results.exam_date')
+                    ->select(
+                        'users.name',
+                        'exam_results.subject_id',
+                        'exam_results.marks',
+                        'exam_results.exam_date'
+                    )
                     ->get();
                 break;
 
@@ -522,10 +579,12 @@ class ReportController extends Controller
                 $data = DB::table('exam_results')
                     ->join('users', 'exam_results.student_id', '=', 'users.id')
                     ->where('users.class_id', $classId)
-                    ->select('users.name',
-                            'exam_results.subject_id',
-                            'exam_results.marks',
-                            'exam_results.exam_date')
+                    ->select(
+                        'users.name',
+                        'exam_results.subject_id',
+                        'exam_results.marks',
+                        'exam_results.exam_date'
+                    )
                     ->orderBy('exam_results.exam_date', 'desc')
                     ->get();
                 break;
@@ -534,7 +593,8 @@ class ReportController extends Controller
                 $data = DB::table('exam_results')
                     ->join('users', 'exam_results.student_id', '=', 'users.id')
                     ->where('users.class_id', $classId)
-                    ->select(DB::raw('
+                    ->select(
+                        DB::raw('
                         CASE 
                             WHEN marks >= 90 THEN "ممتاز"
                             WHEN marks >= 80 THEN "جيد جداً"
@@ -543,7 +603,8 @@ class ReportController extends Controller
                             ELSE "ضعيف"
                         END as grade'),
                         DB::raw('COUNT(*) as count'),
-                        DB::raw('(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM exam_results WHERE class_id = exam_results.class_id)) as percentage'))
+                        DB::raw('(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM exam_results WHERE class_id = exam_results.class_id)) as percentage')
+                    )
                     ->groupBy('grade')
                     ->get();
                 break;

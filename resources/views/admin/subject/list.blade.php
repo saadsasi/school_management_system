@@ -152,7 +152,7 @@
                                     @break
                             @endswitch
                         </td>
-                          <td>{{ $value->type }}</td>
+                          <td>{{ __('messages.'.strtolower($value->type)) }}</td>
                           <td>
                             @if($value->status == 0)
                               {{ __('messages.active') }}

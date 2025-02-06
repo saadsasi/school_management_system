@@ -516,6 +516,10 @@ return [
     'exam_timetable' => 'جدول الامتحانات',
     'calendar' => 'التقويم',
     'schedule' => 'جدول',
+    'common.success'=>'تم التسجيل بنجاح. يرجى الانتظار حتى تتم التفعيل من قبل الادارة.',
+    'common.error'=>'لم يتم التسجيل بنجاح. يرجى المحاولة مرة أخرى.',
+    'confirm_password' => 'تاكيد كلمة المرور',
+    'forgot' => 'اعادة تعيين',
     'exam_result' => 'نتيجة الامتحان',
     'student_subject' => 'المادة',
     'payment_detail' => 'تفاصيل الدفع',
@@ -805,7 +809,6 @@ return [
         'i_already_have_an_account' => 'لدي حساب بالفعل',
         'password_note' => 'هل تحتاج إلى تغيير كلمة المرور الخاصة بك؟ إذا كان الأمر كذلك، يرجى إضافة كلمة مرور جديدة',
         'profile_picture' => 'صورة الملف الشخصي',
-        'confirm_password' => 'تأكيد كلمة المرور',
         // صفحة الدفع عبر Stripe
         'stripe_checkout' => 'الدفع عبر Stripe',    
 ];

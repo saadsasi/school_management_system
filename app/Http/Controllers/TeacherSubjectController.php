@@ -228,4 +228,16 @@ class TeacherSubjectController extends Controller
         $teacherSubject->delete();
         return redirect('admin/teacher_subject/list')->with('success', 'Teacher Subject Successfully Deleted');
     }
+
+    public function deleteSubject($id)
+{
+    $subject = SubjectModel::find($id); // Assuming you have a Subject model
+
+    if ($subject) {
+        $subject->delete();
+        return redirect()->back()->with('success', __('messages.subject_deleted')); // Adjust the message as needed
+    } else {
+        return redirect()->back()->with('error', __('messages.subject_not_found')); // Adjust the message as needed
+    }
+}
 }

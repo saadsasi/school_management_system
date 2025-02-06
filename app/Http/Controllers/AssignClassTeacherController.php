@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TeacherSubject;
 use Illuminate\Http\Request;
 use App\Models\ClassModel;
 use App\Models\User;
@@ -170,7 +171,11 @@ class AssignClassTeacherController extends Controller
 
     public function MyClassSubject()
     {
-        $data['getRecord'] = AssignClassTeacherModel::getMyClassSubject(Auth::user()->id);
+        $data['getRecord'] = TeacherSubject::where('teacher_id', '=', Auth::user()->id)
+            ->whereHas('subject', function ($query) {
+                $query->where('is_delete', '=', 0);
+            })
+        ->with(['class', 'subject'])->get();
         $data['header_title'] = "My Class & Subject";
         return view('teacher.my_class_subject', $data); 
     }

@@ -13,7 +13,6 @@ use Hash;
 use Auth;
 use Str;
 use Excel;
-
 class StudentController extends Controller
 {
     public function export_excel(Request $request)

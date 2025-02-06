@@ -82,7 +82,7 @@ class TeacherController extends Controller
         $teacher->user_type = 2;
         $teacher->save();
 
-        return redirect('admin/teacher/list')->with('success', "Teacher Successfully Created");
+        return redirect('admin/teacher/list')->with('success', __('messages.teacher_created'));
     }
 
     public function edit($id)
@@ -150,7 +150,7 @@ class TeacherController extends Controller
         
         $teacher->save();
 
-        return redirect('admin/teacher/list')->with('success', "Teacher Successfully Updated");
+        return redirect('admin/teacher/list')->with('success', __('messages.teacher_updated'));
     }
 
     public function delete($id)
@@ -161,7 +161,7 @@ class TeacherController extends Controller
             $getRecord->is_delete = 1;
             $getRecord->save();
 
-            return redirect()->back()->with('success', "Teacher Successfully Deleted");
+            return redirect()->back()->with('success', __('messages.teacher_deleted'));
         }
         else
         {
@@ -174,6 +174,6 @@ class TeacherController extends Controller
     $teacher->is_supervisor = !$teacher->is_supervisor;
     $teacher->save();
     
-    return redirect()->back()->with('success', "Teacher Successfully Updated");
+    return redirect()->back()->with('success', __('messages.teacher_updated'));
 }
 }

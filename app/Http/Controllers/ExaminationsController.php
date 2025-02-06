@@ -20,13 +20,13 @@ class ExaminationsController extends Controller
     {
         $data['getRecord'] = ExamModel::getRecord();
         $data['header_title'] = "Exam List";
-        return view('admin.examinations.exam.list',$data);
+        return view('admin.examinations.exam.list', $data);
     }
 
     public function exam_add()
-    {        
+    {
         $data['header_title'] = "Add New Exam";
-        return view('admin.examinations.exam.add',$data);
+        return view('admin.examinations.exam.add', $data);
     }
 
     public function exam_insert(Request $request)
@@ -43,21 +43,19 @@ class ExaminationsController extends Controller
     public function exam_edit($id)
     {
         $data['getRecord'] = ExamModel::getSingle($id);
-        if(!empty($data['getRecord']))
-        {
+        if (!empty($data['getRecord'])) {
             $data['header_title'] = "Edit Exam";
-            return view('admin.examinations.exam.edit',$data);    
-        }
-        else
-        {
+            return view('admin.examinations.exam.edit', $data);
+        } else {
             abort(404);
         }
-        
+
     }
 
     public function exam_update($id, Request $request)
     {
-        $exam = ExamModel::getSingle($id);;
+        $exam = ExamModel::getSingle($id);
+        ;
         $exam->name = trim($request->name);
         $exam->note = trim($request->note);
         $exam->save();
@@ -68,18 +66,15 @@ class ExaminationsController extends Controller
     public function exam_delete($id)
     {
         $getRecord = ExamModel::getSingle($id);
-        if(!empty($getRecord))
-        {
+        if (!empty($getRecord)) {
             $getRecord->is_delete = 1;
             $getRecord->save();
 
             return redirect()->back()->with('success', __('messages.exam_successfully_deleted'));
-        }
-        else
-        {
+        } else {
             abort(404);
         }
-        
+
     }
 
     public function exam_schedule(Request $request)
@@ -94,23 +89,22 @@ class ExaminationsController extends Controller
                 ->orderBy('grade_level', 'asc')
                 ->get();
 
-            if($data['getGradeLevels']->isEmpty()) {
+            if ($data['getGradeLevels']->isEmpty()) {
                 return redirect()->back()->with('error', __('messages.no_grade_levels_found'));
             }
 
             $data['getExam'] = ExamModel::getExam();
-            if($data['getExam']->isEmpty()) {
+            if ($data['getExam']->isEmpty()) {
                 return redirect()->back()->with('error', __('messages.no_exams_found'));
             }
-            
+
             $result = array();
-            if(!empty($request->get('exam_id')) && !empty($request->get('grade_level')))
-            {
+            if (!empty($request->get('exam_id')) && !empty($request->get('grade_level'))) {
                 // Validate if exam exists
                 $examExists = ExamModel::where('id', $request->get('exam_id'))
                     ->where('is_delete', 0)
                     ->exists();
-                if(!$examExists) {
+                if (!$examExists) {
                     return redirect()->back()->with('error', __('messages.exam_not_found'));
                 }
 
@@ -119,7 +113,7 @@ class ExaminationsController extends Controller
                     ->where('is_delete', 0)
                     ->where('status', 0)
                     ->exists();
-                if(!$gradeExists) {
+                if (!$gradeExists) {
                     return redirect()->back()->with('error', __('messages.grade_level_not_found'));
                 }
 
@@ -128,16 +122,16 @@ class ExaminationsController extends Controller
                     ->join('class', 'class_subject.class_id', '=', 'class.id')
                     ->join('subject', 'class_subject.subject_id', '=', 'subject.id')
                     ->where('class.grade_level', $request->get('grade_level'))
-                    ->where('class.is_delete', 0)
+                    ->where('subject.is_delete', 0)
                     ->where('class.status', 0)
                     ->groupBy('subject.id')
                     ->get();
 
-                if($subjects->isEmpty()) {
+                if ($subjects->isEmpty()) {
                     return redirect()->back()->with('error', __('messages.no_subjects_found_for_grade'));
                 }
-                               
-                foreach($subjects as $subject) {
+
+                foreach ($subjects as $subject) {
                     $dataS = array();
                     $dataS['subject_id'] = $subject->subject_id;
                     $dataS['subject_name'] = $subject->subject_name;
@@ -146,7 +140,7 @@ class ExaminationsController extends Controller
                     // Get exam schedule for this subject in this grade level
                     $ExamSchedule = ExamScheduleModel::where('exam_id', $request->get('exam_id'))
                         ->where('subject_id', $subject->subject_id)
-                        ->whereIn('class_id', function($query) use ($request) {
+                        ->whereIn('class_id', function ($query) use ($request) {
                             $query->select('id')
                                 ->from('class')
                                 ->where('grade_level', $request->get('grade_level'))
@@ -155,7 +149,7 @@ class ExaminationsController extends Controller
                         })
                         ->first();
 
-                    if(!empty($ExamSchedule)) {
+                    if (!empty($ExamSchedule)) {
                         $dataS['exam_date'] = $ExamSchedule->exam_date;
                         $dataS['start_time'] = $ExamSchedule->start_time;
                         $dataS['end_time'] = $ExamSchedule->end_time;
@@ -177,7 +171,7 @@ class ExaminationsController extends Controller
 
             $data['getRecord'] = $result;
             $data['header_title'] = "Exam Schedule";
-            return view('admin.examinations.exam_schedule',$data);   
+            return view('admin.examinations.exam_schedule', $data);
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', __('messages.something_went_wrong'));
@@ -188,7 +182,7 @@ class ExaminationsController extends Controller
     {
         try {
             // Validate required fields
-            if(empty($request->exam_id) || empty($request->grade_level)) {
+            if (empty($request->exam_id) || empty($request->grade_level)) {
                 return redirect()->back()->with('error', __('messages.exam_and_grade_required'));
             }
 
@@ -196,7 +190,7 @@ class ExaminationsController extends Controller
             $examExists = ExamModel::where('id', $request->exam_id)
                 ->where('is_delete', 0)
                 ->exists();
-            if(!$examExists) {
+            if (!$examExists) {
                 return redirect()->back()->with('error', __('messages.exam_not_found'));
             }
 
@@ -205,58 +199,60 @@ class ExaminationsController extends Controller
                 ->where('is_delete', 0)
                 ->where('status', 0)
                 ->exists();
-            if(!$gradeExists) {
+            if (!$gradeExists) {
                 return redirect()->back()->with('error', __('messages.grade_level_not_found'));
             }
 
             // Validate schedule data
-            if(empty($request->schedule)) {
+            if (empty($request->schedule)) {
                 return redirect()->back()->with('error', __('messages.schedule_data_required'));
             }
 
-            foreach($request->schedule as $schedule) {
-                if(empty($schedule['exam_date']) || empty($schedule['start_time']) || 
-                   empty($schedule['end_time']) || empty($schedule['room_number']) || 
-                   empty($schedule['full_marks']) || empty($schedule['passing_mark'])) {
+            foreach ($request->schedule as $schedule) {
+                if (
+                    empty($schedule['exam_date']) || empty($schedule['start_time']) ||
+                    empty($schedule['end_time']) || empty($schedule['room_number']) ||
+                    empty($schedule['full_marks']) || empty($schedule['passing_mark'])
+                ) {
                     return redirect()->back()->with('error', __('messages.all_schedule_fields_required'));
                 }
 
                 // Validate that end time is after start time
-                if(strtotime($schedule['end_time']) <= strtotime($schedule['start_time'])) {
+                if (strtotime($schedule['end_time']) <= strtotime($schedule['start_time'])) {
                     return redirect()->back()->with('error', __('messages.end_time_must_be_after_start_time'));
                 }
 
                 // Validate marks
-                if(!is_numeric($schedule['full_marks']) || !is_numeric($schedule['passing_mark'])) {
+                if (!is_numeric($schedule['full_marks']) || !is_numeric($schedule['passing_mark'])) {
                     return redirect()->back()->with('error', __('messages.marks_must_be_numeric'));
                 }
 
-                if($schedule['passing_mark'] > $schedule['full_marks']) {
+                if ($schedule['passing_mark'] > $schedule['full_marks']) {
                     return redirect()->back()->with('error', __('messages.passing_marks_cannot_exceed_full_marks'));
                 }
             }
 
             // Delete existing schedules for this exam and grade level
-            ExamScheduleModel::whereIn('class_id', function($query) use ($request) {
+            ExamScheduleModel::whereIn('class_id', function ($query) use ($request) {
                 $query->select('id')
                     ->from('class')
                     ->where('grade_level', $request->grade_level)
                     ->where('is_delete', 0)
                     ->where('status', 0);
             })->where('exam_id', $request->exam_id)->delete();
-            
+
             // Get all classes for this grade level
             $classes = ClassModel::where('grade_level', $request->grade_level)
-                               ->where('is_delete', 0)
-                               ->where('status', 0)
-                               ->get();
+                ->where('is_delete', 0)
+                ->where('status', 0)
+                ->get();
 
-            if($classes->isEmpty()) {
+            if ($classes->isEmpty()) {
                 return redirect()->back()->with('error', __('messages.no_classes_found_for_grade'));
             }
 
-            foreach($request->schedule as $key => $value) {
-                foreach($classes as $class) {
+            foreach ($request->schedule as $key => $value) {
+                foreach ($classes as $class) {
                     $exam_schedule = new ExamScheduleModel;
                     $exam_schedule->exam_id = $request->exam_id;
                     $exam_schedule->class_id = $class->id;
@@ -291,8 +287,7 @@ class ExaminationsController extends Controller
                 ->orderBy('grade_level', 'asc')
                 ->get();
 
-            if(!empty($request->get('exam_id')) && !empty($request->get('grade_level')))
-            {
+            if (!empty($request->get('exam_id')) && !empty($request->get('grade_level'))) {
                 // Get all subjects for this grade level
                 $data['getSubject'] = ExamScheduleModel::select('exam_schedule.*', 'subject.name as subject_name', 'subject.type as subject_type')
                     ->join('subject', 'exam_schedule.subject_id', '=', 'subject.id')
@@ -322,27 +317,22 @@ class ExaminationsController extends Controller
     public function submit_marks_register(Request $request)
     {
         try {
-            if(!empty($request->mark))
-            {
-                foreach($request->mark as $mark)
-                {
+            if (!empty($request->mark)) {
+                foreach ($request->mark as $mark) {
                     // Get student's class_id
                     $student = User::find($request->student_id);
-                    if(!$student) {
+                    if (!$student) {
                         continue;
                     }
 
                     $getAlreadyFirst = MarksRegisterModel::getAlreadyFirst($request->student_id, $request->exam_id, $request->grade_level, $mark['subject_id']);
-                    
-                    if(!empty($getAlreadyFirst))
-                    {
+
+                    if (!empty($getAlreadyFirst)) {
                         $save = $getAlreadyFirst;
-                    }
-                    else
-                    {
+                    } else {
                         $save = new MarksRegisterModel;
                     }
-                    
+
                     $save->student_id = $request->student_id;
                     $save->exam_id = $request->exam_id;
                     $save->class_id = $student->class_id;
@@ -358,9 +348,7 @@ class ExaminationsController extends Controller
                 }
 
                 $json['message'] = __('messages.marks_register_successfully_saved');
-            }
-            else
-            {
+            } else {
                 $json['message'] = __('messages.please_enter_marks');
             }
         } catch (\Exception $e) {
@@ -374,21 +362,18 @@ class ExaminationsController extends Controller
         try {
             // Get student's class_id
             $student = User::find($request->student_id);
-            if(!$student) {
+            if (!$student) {
                 throw new \Exception(__('messages.student_not_found'));
             }
 
             $getAlreadyFirst = MarksRegisterModel::getAlreadyFirst($request->student_id, $request->exam_id, $request->grade_level, $request->subject_id);
-            
-            if(!empty($getAlreadyFirst))
-            {
+
+            if (!empty($getAlreadyFirst)) {
                 $save = $getAlreadyFirst;
-            }
-            else
-            {
+            } else {
                 $save = new MarksRegisterModel;
             }
-            
+
             $save->student_id = $request->student_id;
             $save->exam_id = $request->exam_id;
             $save->class_id = $student->class_id;
@@ -399,7 +384,7 @@ class ExaminationsController extends Controller
             $save->exam = !empty($request->exam) ? $request->exam : 0;
             $save->created_by = auth()->user()->id;
             $save->save();
-            
+
             $json['message'] = __('messages.marks_register_successfully_saved');
         } catch (\Exception $e) {
             $json['message'] = $e->getMessage();
@@ -411,16 +396,15 @@ class ExaminationsController extends Controller
     {
         $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
         $data['getExam'] = ExamScheduleModel::getExamTeacher(Auth::user()->id);
-        
-        if(!empty($request->get('exam_id')) && !empty($request->get('class_id')))
-        {
+
+        if (!empty($request->get('exam_id')) && !empty($request->get('class_id'))) {
             $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
 
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
         }
-        
+
         $data['header_title'] = "Marks Register";
-        return view('teacher.marks_register',$data);   
+        return view('teacher.marks_register', $data);
     }
 
     public function myExamTimetable(Request $request)
@@ -428,14 +412,12 @@ class ExaminationsController extends Controller
         $class_id = Auth::user()->class_id;
         $getExam = ExamScheduleModel::getExam($class_id);
         $result = array();
-        foreach($getExam as $value)
-        {
+        foreach ($getExam as $value) {
             $dataE = array();
             $dataE['name'] = $value->exam_name;
             $getExamTimetable = ExamScheduleModel::getExamTimetable($value->exam_id, $class_id);
             $resultS = array();
-            foreach($getExamTimetable as $valueS)
-            {
+            foreach ($getExamTimetable as $valueS) {
                 $dataS = array();
                 $dataS['subject_name'] = $valueS->subject_name;
                 $dataS['exam_date'] = $valueS->exam_date;
@@ -454,24 +436,22 @@ class ExaminationsController extends Controller
         $data['getRecord'] = $result;
 
         $data['header_title'] = "My Exam Timetable";
-        return view('student.my_exam_timetable',$data);   
+        return view('student.my_exam_timetable', $data);
     }
 
     public function myExamResult()
     {
         $result = array();
         $getExam = MarksRegisterModel::getExam(Auth::user()->id);
-        foreach($getExam as $value)
-        {
+        foreach ($getExam as $value) {
             $dataE = array();
             $dataE['exam_name'] = $value->exam_name;
             $dataE['exam_id'] = $value->exam_id;
             $getExamSubject = MarksRegisterModel::getExamSubject($value->exam_id, Auth::user()->id);
 
             $dataSubject = array();
-            foreach($getExamSubject as $exam)
-            {
-                $total_score = $exam['class_work'] +  $exam['test_work'] + $exam['home_work'] + $exam['exam'];
+            foreach ($getExamSubject as $exam) {
+                $total_score = $exam['class_work'] + $exam['test_work'] + $exam['home_work'] + $exam['exam'];
                 $dataS = array();
                 $dataS['subject_name'] = $exam['subject_name'];
                 $dataS['class_work'] = $exam['class_work'];
@@ -489,11 +469,11 @@ class ExaminationsController extends Controller
 
         $data['getRecord'] = $result;
         $data['header_title'] = "My Exam Result";
-        return view('student.my_exam_result',$data);  
+        return view('student.my_exam_result', $data);
     }
 
     public function myExamResultPrint(Request $request)
-    {   
+    {
         $exam_id = $request->exam_id;
         $student_id = $request->student_id;
 
@@ -503,13 +483,12 @@ class ExaminationsController extends Controller
         $data['getClass'] = MarksRegisterModel::getClass($exam_id, $student_id);
 
         $data['getSetting'] = SettingModel::getSingle();
-        
+
         $getExamSubject = MarksRegisterModel::getExamSubject($exam_id, $student_id);
 
         $dataSubject = array();
-        foreach($getExamSubject as $exam)
-        {
-            $total_score = $exam['class_work'] +  $exam['test_work'] + $exam['home_work'] + $exam['exam'];
+        foreach ($getExamSubject as $exam) {
+            $total_score = $exam['class_work'] + $exam['test_work'] + $exam['home_work'] + $exam['exam'];
 
             $dataS = array();
             $dataS['subject_name'] = $exam['subject_name'];
@@ -525,7 +504,7 @@ class ExaminationsController extends Controller
 
         $data['getExamMark'] = $dataSubject;
 
-        return view('exam_result_print', $data); 
+        return view('exam_result_print', $data);
     }
 
     // teacher side work
@@ -534,22 +513,19 @@ class ExaminationsController extends Controller
     {
         $result = array();
         $getClass = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
-        foreach($getClass as $class)
-        {
+        foreach ($getClass as $class) {
             $dataC = array();
-            $dataC['class_name'] =  $class->class_name;
+            $dataC['class_name'] = $class->class_name;
 
             $getExam = ExamScheduleModel::getExam($class->class_id);
             $examArray = array();
-            foreach($getExam as $exam)
-            {
+            foreach ($getExam as $exam) {
                 $dataE = array();
                 $dataE['exam_name'] = $exam->exam_name;
 
                 $getExamTimetable = ExamScheduleModel::getExamTimetable($exam->exam_id, $class->class_id);
                 $subjectArray = array();
-                foreach($getExamTimetable as $valueS)
-                {
+                foreach ($getExamTimetable as $valueS) {
                     $dataS = array();
                     $dataS['subject_name'] = $valueS->subject_name;
                     $dataS['exam_date'] = $valueS->exam_date;
@@ -572,7 +548,7 @@ class ExaminationsController extends Controller
         $data['getRecord'] = $result;
 
         $data['header_title'] = "My Exam Timetable";
-        return view('teacher.my_exam_timetable',$data);   
+        return view('teacher.my_exam_timetable', $data);
     }
 
     // parent side
@@ -584,14 +560,12 @@ class ExaminationsController extends Controller
         $class_id = $getStudent->class_id;
         $getExam = ExamScheduleModel::getExam($class_id);
         $result = array();
-        foreach($getExam as $value)
-        {
+        foreach ($getExam as $value) {
             $dataE = array();
             $dataE['name'] = $value->exam_name;
             $getExamTimetable = ExamScheduleModel::getExamTimetable($value->exam_id, $class_id);
             $resultS = array();
-            foreach($getExamTimetable as $valueS)
-            {
+            foreach ($getExamTimetable as $valueS) {
                 $dataS = array();
                 $dataS['subject_name'] = $valueS->subject_name;
                 $dataS['exam_date'] = $valueS->exam_date;
@@ -610,7 +584,7 @@ class ExaminationsController extends Controller
         $data['getRecord'] = $result;
         $data['getStudent'] = $getStudent;
         $data['header_title'] = "Exam Timetable";
-        return view('parent.my_exam_timetable',$data); 
+        return view('parent.my_exam_timetable', $data);
     }
 
     public function ParentMyExamResult($student_id)
@@ -618,17 +592,15 @@ class ExaminationsController extends Controller
         $data['getStudent'] = User::getSingle($student_id);
         $result = array();
         $getExam = MarksRegisterModel::getExam($student_id);
-        foreach($getExam as $value)
-        {
+        foreach ($getExam as $value) {
             $dataE = array();
             $dataE['exam_id'] = $value->exam_id;
             $dataE['exam_name'] = $value->exam_name;
             $getExamSubject = MarksRegisterModel::getExamSubject($value->exam_id, $student_id);
 
             $dataSubject = array();
-            foreach($getExamSubject as $exam)
-            {
-                $total_score = $exam['class_work'] +  $exam['test_work'] + $exam['home_work'] + $exam['exam'];
+            foreach ($getExamSubject as $exam) {
+                $total_score = $exam['class_work'] + $exam['test_work'] + $exam['home_work'] + $exam['exam'];
                 $dataS = array();
                 $dataS['subject_name'] = $exam['subject_name'];
                 $dataS['class_work'] = $exam['class_work'];
@@ -646,20 +618,20 @@ class ExaminationsController extends Controller
 
         $data['getRecord'] = $result;
         $data['header_title'] = "My Exam Result";
-        return view('parent.my_exam_result',$data);  
+        return view('parent.my_exam_result', $data);
     }
 
     public function marks_grade()
     {
         $data['getRecord'] = MarksGradeModel::getRecord();
         $data['header_title'] = "Marks Grade";
-        return view('admin.examinations.marks_grade.list',$data);   
+        return view('admin.examinations.marks_grade.list', $data);
     }
 
     public function marks_grade_add()
     {
         $data['header_title'] = "Add New Marks Grade";
-        return view('admin.examinations.marks_grade.add',$data);   
+        return view('admin.examinations.marks_grade.add', $data);
     }
 
     public function marks_grade_insert(Request $request)
@@ -678,7 +650,7 @@ class ExaminationsController extends Controller
     {
         $data['getRecord'] = MarksGradeModel::getSingle($id);
         $data['header_title'] = "Edit Marks Grade";
-        return view('admin.examinations.marks_grade.edit',$data);   
+        return view('admin.examinations.marks_grade.edit', $data);
     }
 
     public function marks_grade_update($id, Request $request)
@@ -697,6 +669,6 @@ class ExaminationsController extends Controller
         $mark = MarksGradeModel::getSingle($id);
         $mark->delete();
 
-        return redirect('admin/examinations/marks_grade')->with('success', __('messages.marks_grade_successfully_deleted'));   
+        return redirect('admin/examinations/marks_grade')->with('success', __('messages.marks_grade_successfully_deleted'));
     }
 }

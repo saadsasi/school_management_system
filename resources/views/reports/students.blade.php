@@ -23,6 +23,16 @@
 
         <div class="content">
             <div class="container-fluid">
+                <!-- Debug information -->
+                @if(config('app.debug'))
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5>Debug Info:</h5>
+                            <p>Report Type: {{ $reportType }}</p>
+                            <p>Data Count: {{ is_countable($data) ? count($data) : 'N/A' }}</p>
+                        </div>
+                    </div>
+                @endif
                 <!-- Report Type Selection -->
                 <div class="card">
                     <div class="card-header">

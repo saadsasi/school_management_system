@@ -445,8 +445,8 @@
 
 
 
-         <li class="nav-item  @if(Request::segment(2) == 'attendance') menu-is-opening menu-open @endif">
-            <a href="#" class="nav-link  @if(Request::segment(2) == 'attendance') active @endif">
+         <li class="nav-item   @if(Request::is('teacher/attendance/report') || Request::is('teacher/attendance/student')) menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link  @if(Request::is('teacher/attendance/report') || Request::is('teacher/attendance/student')) active @endif">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 {{ __('messages.attendance') }}
@@ -456,7 +456,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="{{ url('teacher/attendance/student') }}" class="nav-link @if(Request::segment(3) == 'student') active @endif">
+                <a href="{{ url('teacher/attendance/student') }}" class="nav-link @if(Request::is('teacher/attendance/student')) active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{ __('messages.student_attendance') }}</p>
                 </a>
@@ -600,7 +600,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ url('admin/attendance/student') }}" class="nav-link @if(Request::segment(2) == 'attendance') active @endif">
+            <a href="{{ url('admin/attendance/student') }}" class="nav-link @if(Request::is('admin/attendance/student')) active @endif">
               <i class="nav-icon fas fa-user-check"></i>
               <p>{{ __('messages.attendance') }}</p>
             </a>

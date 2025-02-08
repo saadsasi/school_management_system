@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ __('messages.my_exam_result') }} <span style="color: blue;">({{ $getStudent->name }} {{ $getStudent->last_name }})</span></h1>
+            <h1>{{ __('messages.my_exam_result') }} <span style="color:rgb(192, 209, 109)">({{ $getStudent->name }} {{ $getStudent->last_name }})</span></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->

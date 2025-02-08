@@ -172,9 +172,11 @@ class ActivityController extends Controller
     {
         $data['header_title'] = "my activities";
         $data['activities'] = ActivityRegistration::where('student_id', Auth::user()->id)
-            ->with(['activity' => function($q) {
-                $q->with('schedules');
-            }])
+            ->with([
+                'activity' => function ($q) {
+                    $q->with('schedules');
+                }
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
         return view('student.activities', $data);
@@ -185,4 +187,18 @@ class ActivityController extends Controller
         return ActivityRegistration::whereIn('student_id', $student_ids)
             ->count();
     }
+
+    public function destroy($id)
+    {
+        $activity = Activity::find($id);
+
+        if (!$activity) {
+            return redirect()->back()->with('error', __('messages.activity_not_found'));
+        }
+
+        $activity->delete();
+
+        return redirect()->back()->with('success', __('messages.activity_deleted_successfully'));
+    }
+
 }

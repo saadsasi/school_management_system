@@ -33,15 +33,11 @@ class MarksRegisterModel extends Model
 
     static public function getExamSubject($exam_id, $student_id)
     {
-        return self::select('marks_register.*', 'subject.name as subject_name', 'exam_schedule.full_marks', 'exam_schedule.passing_mark')
-            ->join('subject', 'subject.id', '=', 'marks_register.subject_id')
-            ->join('exam_schedule', function($join) {
-                $join->on('exam_schedule.exam_id', '=', 'marks_register.exam_id')
-                    ->on('exam_schedule.subject_id', '=', 'marks_register.subject_id');
-            })
+        return self::select('marks_register.*', 'subject.name as subject_name')
+            ->join('subject', 'marks_register.subject_id', '=', 'subject.id')
             ->where('marks_register.exam_id', '=', $exam_id)
             ->where('marks_register.student_id', '=', $student_id)
-            ->groupBy('marks_register.subject_id')
+            ->where('subject.status', 'active')
             ->get();
     }
 

@@ -64,7 +64,7 @@ class TeacherSubjectController extends Controller
     {
         $subject_ids = $request->subject_ids;
         $class = ClassModel::find($request->class_id);
-        
+
         if (!empty($subject_ids)) {
             foreach ($subject_ids as $subject_id) {
                 TeacherSubject::create([
@@ -75,24 +75,24 @@ class TeacherSubjectController extends Controller
                 ]);
             }
         }
-        
-        return redirect('admin/teacher_subject/view/'.$request->teacher_id)->with('success', 'Subjects Successfully Added');
+
+        return redirect('admin/teacher_subject/view/' . $request->teacher_id)->with('success', 'Subjects Successfully Added');
     }
 
     public function add($teacher_id)
     {
         $data['getTeacher'] = User::find($teacher_id);
         $data['grades'] = ClassModel::select('grade_level')
-                            ->distinct()
-                            ->where('is_delete', 0)
-                            ->where('status', 0)
-                            ->orderBy('grade_level')
-                            ->get();
+            ->distinct()
+            ->where('is_delete', 0)
+            ->where('status', 0)
+            ->orderBy('grade_level')
+            ->get();
 
         // Get existing teacher subjects
         $data['existingSubjects'] = TeacherSubject::where('teacher_id', $teacher_id)
-                                    ->pluck('subject_id')
-                                    ->toArray();
+            ->pluck('subject_id')
+            ->toArray();
 
         return view('admin.teacher_subject.add', $data);
     }
@@ -101,46 +101,46 @@ class TeacherSubjectController extends Controller
     {
         $grade_level = $request->grade_level;
         $teacher_id = $request->teacher_id;
-        
+
         // Get classes for this grade level
         $classes = ClassModel::where('grade_level', $grade_level)
-                        ->where('is_delete', 0)
-                        ->where('status', 0)
-                        ->orderBy('name')
-                        ->get();
+            ->where('is_delete', 0)
+            ->where('status', 0)
+            ->orderBy('name')
+            ->get();
 
         // Get subjects for this grade level only
         $subjects = SubjectModel::where('grade_level', $grade_level)
-                        ->where('is_delete', 0)
-                        ->where('status', 0)
-                        ->orderBy('name')
-                        ->get();
+            ->where('is_delete', 0)
+            ->where('status', 0)
+            ->orderBy('name')
+            ->get();
 
         // Get all existing subjects for this teacher (to maintain checked status)
         $existingSubjects = TeacherSubject::where('teacher_id', $teacher_id)
-                            ->pluck('subject_id')
-                            ->toArray();
-        
+            ->pluck('subject_id')
+            ->toArray();
+
         return response()->json([
             'classes' => $classes,
             'subjects' => $subjects,
             'existingSubjects' => $existingSubjects
         ]);
     }
-    
+
     public function editSubjects($teacher_id)
     {
         $data['getTeacher'] = User::find($teacher_id);
         $data['grades'] = ClassModel::select('grade_level')
-                    ->distinct()
-                    ->orderBy('grade_level')
-                    ->get();
+            ->distinct()
+            ->orderBy('grade_level')
+            ->get();
         $data['getSubjects'] = SubjectModel::orderBy('name')->get();
         $data['getClass'] = ClassModel::orderBy('name')->get();
         $data['assignedSubjects'] = TeacherSubject::where('teacher_id', $teacher_id)
             ->with(['subject', 'class'])
             ->get();
-    
+
         return view('admin.teacher_subject.edit', $data);
     }
 
@@ -150,17 +150,17 @@ class TeacherSubjectController extends Controller
         $subjects = TeacherSubject::where('teacher_id', $teacher_id)
             ->with(['subject', 'class'])
             ->get();
-        
+
         return view('admin.teacher_subject.view', compact('teacher', 'subjects'));
     }
-    
+
     public function showSubjects($teacher_id)
     {
         $teacher = User::find($teacher_id);
         $subjects = TeacherSubject::where('teacher_id', $teacher_id)
             ->with(['subject', 'class'])
             ->get();
-        
+
         return view('admin.teacher_subject.teacher_subjects', compact('teacher', 'subjects'));
     }
 
@@ -188,7 +188,7 @@ class TeacherSubjectController extends Controller
             ->with(['creator'])
             ->orderBy('evaluation_date', 'desc')
             ->get();
-        
+
         return view('admin.teacher_subject.evaluations', compact('evaluations', 'subject'));
     }
 
@@ -205,10 +205,10 @@ class TeacherSubjectController extends Controller
     public function update(Request $request, $teacher_id)
     {
         TeacherSubject::where('teacher_id', $teacher_id)->delete();
-        
+
         $subject_ids = $request->subject_ids;
         $class = ClassModel::find($request->class_id);
-        
+
         if (!empty($subject_ids)) {
             foreach ($subject_ids as $subject_id) {
                 TeacherSubject::create([
@@ -219,8 +219,8 @@ class TeacherSubjectController extends Controller
                 ]);
             }
         }
-        
-        return redirect('admin/teacher_subject/view/'.$teacher_id)->with('success', 'Subjects Successfully Updated');
+
+        return redirect('admin/teacher_subject/view/' . $teacher_id)->with('success', 'Subjects Successfully Updated');
     }
     public function delete($id)
     {
@@ -230,14 +230,33 @@ class TeacherSubjectController extends Controller
     }
 
     public function deleteSubject($id)
-{
-    $subject = SubjectModel::find($id); // Assuming you have a Subject model
+    {
+        $subject = SubjectModel::find($id); // Assuming you have a Subject model
 
-    if ($subject) {
-        $subject->delete();
-        return redirect()->back()->with('success', __('messages.subject_deleted')); // Adjust the message as needed
-    } else {
-        return redirect()->back()->with('error', __('messages.subject_not_found')); // Adjust the message as needed
+        if ($subject) {
+            $subject->delete();
+            return redirect()->back()->with('success', __('messages.subject_deleted')); // Adjust the message as needed
+        } else {
+            return redirect()->back()->with('error', __('messages.subject_not_found')); // Adjust the message as needed
+        }
     }
-}
+
+    public function destroy($id)
+    {
+        try {
+            $teacherSubject = TeacherSubject::findOrFail($id);
+
+            // حذف السجل
+            $teacherSubject->delete();
+
+            return redirect()
+                ->back()
+                ->with('success', __('messages.deleted_successfully'));
+
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->with('error', __('messages.delete_failed'));
+        }
+    }
 }

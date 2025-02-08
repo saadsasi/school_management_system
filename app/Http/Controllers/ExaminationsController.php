@@ -123,6 +123,7 @@ class ExaminationsController extends Controller
                     ->join('subject', 'class_subject.subject_id', '=', 'subject.id')
                     ->where('class.grade_level', $request->get('grade_level'))
                     ->where('subject.is_delete', 0)
+                    ->where('subject.status', 'active')
                     ->where('class.status', 0)
                     ->groupBy('subject.id')
                     ->get();
@@ -294,6 +295,7 @@ class ExaminationsController extends Controller
                     ->join('class', 'exam_schedule.class_id', '=', 'class.id')
                     ->where('exam_schedule.exam_id', '=', $request->get('exam_id'))
                     ->where('class.grade_level', '=', $request->get('grade_level'))
+                    ->where('subject.status', 'active')
                     ->groupBy('subject.id')
                     ->get();
 

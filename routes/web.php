@@ -26,7 +26,7 @@ use App\Http\Controllers\ParentActivityController;
 use App\Http\Controllers\ReportController;
 
 // Language Switcher
-Route::get('locale/{lang}', function($lang) {
+Route::get('locale/{lang}', function ($lang) {
     if (in_array($lang, ['en', 'ar'])) {
         session(['locale' => $lang]);
         app()->setLocale($lang);
@@ -62,13 +62,13 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::group(['middleware' => 'common'], function () {
 
-     Route::get('chat', [ChatController::class, 'chat']);
-     Route::post('submit_message', [ChatController::class, 'submit_message']);
-     Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
-     Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
-     
-     
-     
+    Route::get('chat', [ChatController::class, 'chat']);
+    Route::post('submit_message', [ChatController::class, 'submit_message']);
+    Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
+    Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
+
+
+
 
 });
 
@@ -81,14 +81,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/leave/approve/{id}', [LeaveController::class, 'approve']);
     Route::get('admin/leave/reject/{id}', [LeaveController::class, 'reject']);
     Route::get('admin/leave/delete/{id}', [LeaveController::class, 'delete']);
-    
+
     Route::get('admin/admin/list', [AdminController::class, 'list']);
     Route::get('admin/admin/add', [AdminController::class, 'add']);
     Route::post('admin/admin/add', [AdminController::class, 'insert']);
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit']);
     Route::post('admin/admin/edit/{id}', [AdminController::class, 'update']);
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete']);
-        
+
     // teacher 
 
     Route::get('admin/teacher/list', [TeacherController::class, 'list']);
@@ -100,7 +100,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/teacher/export_excel', [TeacherController::class, 'export_excel']);
     Route::post('admin/teacher/toggle-supervisor/{id}', [TeacherController::class, 'toggleSupervisor']);
 
-         // student 
+    // student 
 
     Route::get('admin/student/list', [StudentController::class, 'list']);
     Route::get('admin/student/add', [StudentController::class, 'add']);
@@ -125,7 +125,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
     Route::get('admin/parent/assign_student_parent_delete/{student_id}', [ParentController::class, 'AssignStudentParentDelete']);
     Route::post('admin/parent/export_excel', [ParentController::class, 'export_excel']);
-    
+
 
     // Teacher Subject Routes
     Route::get('admin/teacher_subject/list', [TeacherSubjectController::class, 'list']);
@@ -136,7 +136,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/teacher_subject/get-classes-subjects', [TeacherSubjectController::class, 'getClassesAndSubjects']);
     Route::post('admin/teacher_subject/evaluate/{id}', [TeacherSubjectController::class, 'evaluate']);
     Route::get('admin/teacher_subject/evaluations/{id}', [TeacherSubjectController::class, 'viewEvaluations']);
-    Route::get('admin/teacher_subject/delete/{id}', [TeacherSubjectController::class, 'deleteSubject']);
+    Route::delete('admin/teacher_subject/delete/{id}', [TeacherSubjectController::class, 'deleteSubject'])->name('teacher_subject.delete');
+    Route::post('admin/teacher_subject/update/{id}', [TeacherSubjectController::class, 'update'])
+        ->name('admin.teacher_subject.update');
+    Route::delete('admin/teacher_subject/{id}', [TeacherSubjectController::class, 'destroy'])->name('teacher_subject.destroy');
     // class url
 
     Route::get('admin/class/list', [ClassController::class, 'list']);
@@ -145,7 +148,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/class/edit/{id}', [ClassController::class, 'edit']);
     Route::post('admin/class/edit/{id}', [ClassController::class, 'update']);
     Route::get('admin/class/delete/{id}', [ClassController::class, 'delete']);
-    
+
 
     // subject url
 
@@ -201,23 +204,23 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/assign_class_teacher/edit_single/{id}', [AssignClassTeacherController::class, 'update_single']);
     Route::get('admin/assign_class_teacher/delete/{id}', [AssignClassTeacherController::class, 'delete']);
     Route::post('admin/assign_class_teacher/get_class_by_grade_level', [AssignClassTeacherController::class, 'get_class_by_grade_level']);
-    
-    
-    Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);  
-    Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);  
-    Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'exam_insert']);  
-    Route::get('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_edit']);  
-    Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_update']);    
-    Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']); 
+
+
+    Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
+    Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
+    Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'exam_insert']);
+    Route::get('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_edit']);
+    Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_update']);
+    Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
     Route::get('admin/my_exam_result/print', [ExaminationsController::class, 'myExamResultPrint']);
 
-    Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']); 
-    Route::post('admin/examinations/exam_schedule_insert', [ExaminationsController::class, 'exam_schedule_insert']); 
+    Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
+    Route::post('admin/examinations/exam_schedule_insert', [ExaminationsController::class, 'exam_schedule_insert']);
 
 
-    Route::get('admin/examinations/marks_register', [ExaminationsController::class, 'marks_register']); 
-    Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']); 
-    Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']); 
+    Route::get('admin/examinations/marks_register', [ExaminationsController::class, 'marks_register']);
+    Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
+    Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
 
 
@@ -227,31 +230,31 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
     Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
-    
+
 
     Route::get('admin/attendance/student', [AttendanceController::class, 'AttendanceStudent']);
     Route::post('admin/attendance/student/save', [AttendanceController::class, 'AttendanceStudentSubmit']);
     Route::get('admin/attendance/report', [AttendanceController::class, 'AttendanceReport']);
     Route::post('admin/attendance/report_export_excel', [AttendanceController::class, 'AttendanceReportExportExcel']);
 
-        
+
     Route::get('admin/communicate/notice_board', [CommunicateController::class, 'NoticeBoard']);
     Route::get('admin/communicate/notice_board/add', [CommunicateController::class, 'AddNoticeBoard']);
     Route::post('admin/communicate/notice_board/add', [CommunicateController::class, 'InsertNoticeBoard']);
-    
+
     Route::get('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'EditNoticeBoard']);
 
     Route::post('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'UpdateNoticeBoard']);
 
     Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'DeleteNoticeBoard']);
-    
-         
+
+
     Route::get('admin/communicate/send_email', [CommunicateController::class, 'SendEmail']);
     Route::post('admin/communicate/send_email', [CommunicateController::class, 'SendEmailUser']);
 
     Route::get('admin/communicate/search_user', [CommunicateController::class, 'SearchUser']);
 
-      // Activities Management Routes
+    // Activities Management Routes
     Route::get('admin/activities', [ActivityController::class, 'index']);
     Route::get('admin/activity/add', [ActivityController::class, 'create']);
     Route::post('admin/activity/store', [ActivityController::class, 'store']);
@@ -259,37 +262,38 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/activity/registration/update-status/{id}', [ActivityController::class, 'updateRegistrationStatus']);
     Route::get('admin/activity/edit/{id}', [ActivityController::class, 'edit'])->name('admin.activity.edit');
     Route::post('admin/activity/update/{id}', [ActivityController::class, 'update'])->name('admin.activity.update');
+    Route::get('admin/activity/delete/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
 
-    
+
     // Leave Management Routes
     Route::get('admin/leave/requests', [LeaveController::class, 'requests']);
     Route::get('admin/leave/approve/{id}', [LeaveController::class, 'approve']);
     Route::get('admin/leave/reject/{id}', [LeaveController::class, 'reject']);
     Route::get('admin/leave/delete/{id}', [LeaveController::class, 'delete']);
 
-    
+
     Route::get('admin/fees_collection/collect_fees', [FeesCollectionController::class, 'collect_fees']);
     Route::get('admin/fees_collection/collect_fees_report', [FeesCollectionController::class, 'collect_fees_report']);
 
     Route::post('admin/fees_collection/export_collect_fees_report', [FeesCollectionController::class, 'export_collect_fees_report']);
 
-    
+
 
     Route::get('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'collect_fees_add']);
-    
+
     Route::post('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'collect_fees_insert']);
 
     Route::get('admin/registrations/list', [AdminController::class, 'registrations'])->name('admin.registrations');
     Route::get('admin/registration/approve/{id}', [AdminController::class, 'approveRegistration'])->name('admin.registration.approve');
     Route::get('admin/registration/reject/{id}', [AdminController::class, 'rejectRegistration'])->name('admin.registration.reject');
-    
-  
-    
+
+
+
 
 
 });
 
-Route::group(['middleware' => ['teacher','userActive']], function () {
+Route::group(['middleware' => ['teacher', 'userActive']], function () {
 
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -310,23 +314,23 @@ Route::group(['middleware' => ['teacher','userActive']], function () {
     Route::get('teacher/leave/history', [LeaveController::class, 'historyTeacher']);
 
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'MyClassSubject']);
-    
+
 
 
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'MyClassSubject']);
     Route::get('teacher/my_class_subject/class_timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'MyTimetableTeacher']);
-    
 
-    
+
+
     Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetableTeacher']);
     Route::get('teacher/my_exam_result/print', [ExaminationsController::class, 'myExamResultPrint']);
 
     Route::get('teacher/my_calendar', [CalendarController::class, 'MyCalendarTeacher']);
 
 
-    Route::get('teacher/marks_register', [ExaminationsController::class, 'marks_register_teacher']); 
-    Route::post('teacher/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']); 
-    Route::post('teacher/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']); 
+    Route::get('teacher/marks_register', [ExaminationsController::class, 'marks_register_teacher']);
+    Route::post('teacher/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
+    Route::post('teacher/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
 
     Route::get('teacher/attendance/student', [AttendanceController::class, 'AttendanceStudentTeacher']);
@@ -335,30 +339,30 @@ Route::group(['middleware' => ['teacher','userActive']], function () {
     Route::get('teacher/attendance/report', [AttendanceController::class, 'AttendanceReportTeacher']);
 
 
-Route::get('teacher/noticeboard', [CommunicateController::class, 'teacherNoticeBoard']);
-Route::get('teacher/noticeboard/add', [CommunicateController::class, 'teacherAddNoticeBoard']);
-Route::post('teacher/noticeboard/store', [CommunicateController::class, 'teacherStoreNoticeBoard']);
-Route::get('teacher/noticeboard/edit/{id}', [CommunicateController::class, 'teacherEditNoticeBoard']);
-Route::post('teacher/noticeboard/update/{id}', [CommunicateController::class, 'teacherUpdateNoticeBoard']);
-Route::get('teacher/noticeboard/delete/{id}', [CommunicateController::class, 'teacherDeleteNoticeBoard']);
-Route::get('teacher/noticeboard/view', [CommunicateController::class, 'MyNoticeBoardTeacher']);
+    Route::get('teacher/noticeboard', [CommunicateController::class, 'teacherNoticeBoard']);
+    Route::get('teacher/noticeboard/add', [CommunicateController::class, 'teacherAddNoticeBoard']);
+    Route::post('teacher/noticeboard/store', [CommunicateController::class, 'teacherStoreNoticeBoard']);
+    Route::get('teacher/noticeboard/edit/{id}', [CommunicateController::class, 'teacherEditNoticeBoard']);
+    Route::post('teacher/noticeboard/update/{id}', [CommunicateController::class, 'teacherUpdateNoticeBoard']);
+    Route::get('teacher/noticeboard/delete/{id}', [CommunicateController::class, 'teacherDeleteNoticeBoard']);
+    Route::get('teacher/noticeboard/view', [CommunicateController::class, 'MyNoticeBoardTeacher']);
 
-// Reports Routes
-Route::prefix('reports')->group(function () {
-    Route::get('/', [ReportController::class, 'index'])->name('reports.index');    
-    Route::get('/students', [ReportController::class, 'studentsReport'])->name('reports.students');
-    Route::get('/teachers', [ReportController::class, 'teachersReport'])->name('reports.teachers');
-    Route::get('/financial', [ReportController::class, 'financialReport'])->name('reports.financial');
-    Route::get('/examinations', [ReportController::class, 'examinationsReport'])->name('reports.examinations');
-    Route::get('students-with-guardians', [ReportController::class, 'studentsWithGuardians'])->name('reports.students-with-guardians');
-    Route::get('students-without-guardians', [ReportController::class, 'studentsWithoutGuardians'])->name('reports.students-without-guardians');
-    Route::get('guardians-without-students', [ReportController::class, 'guardiansWithoutStudents'])->name('reports.guardians-without-students');
-    Route::get('classes-with-students', [ReportController::class, 'classesWithStudents'])->name('reports.classes-with-students');
+    // Reports Routes
+    Route::prefix('reports')->group(function () {
+        Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+        Route::get('/students', [ReportController::class, 'studentsReport'])->name('reports.students');
+        Route::get('/teachers', [ReportController::class, 'teachersReport'])->name('reports.teachers');
+        Route::get('/financial', [ReportController::class, 'financialReport'])->name('reports.financial');
+        Route::get('/examinations', [ReportController::class, 'examinationsReport'])->name('reports.examinations');
+        Route::get('students-with-guardians', [ReportController::class, 'studentsWithGuardians'])->name('reports.students-with-guardians');
+        Route::get('students-without-guardians', [ReportController::class, 'studentsWithoutGuardians'])->name('reports.students-without-guardians');
+        Route::get('guardians-without-students', [ReportController::class, 'guardiansWithoutStudents'])->name('reports.guardians-without-students');
+        Route::get('classes-with-students', [ReportController::class, 'classesWithStudents'])->name('reports.classes-with-students');
+    });
+
 });
 
-});
-
-Route::group(['middleware' => ['student','userActive']], function () {
+Route::group(['middleware' => ['student', 'userActive']], function () {
 
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('student/my-calendar', [CalendarController::class, 'myCalendar'])->name('student.calendar');
@@ -366,12 +370,12 @@ Route::group(['middleware' => ['student','userActive']], function () {
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
 
     Route::get('student/my_activities', [ActivityController::class, 'myActivities']);
-    
+
     Route::get('student/my_subject', [SubjectController::class, 'MySubject']);
     Route::get('student/my_timetable', [ClassTimetableController::class, 'MyTimetable']);
 
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'MyExamTimetable']);
-    
+
 
     Route::get('student/change_password', [UserController::class, 'change_password']);
     Route::post('student/change_password', [UserController::class, 'update_change_password']);
@@ -379,22 +383,22 @@ Route::group(['middleware' => ['student','userActive']], function () {
 
     Route::get('student/my_calendar', [CalendarController::class, 'MyCalendar']);
 
-    Route::get('student/my_exam_result', [ExaminationsController::class, 'myExamResult']); 
-    Route::get('student/my_exam_result/print', [ExaminationsController::class, 'myExamResultPrint']); 
+    Route::get('student/my_exam_result', [ExaminationsController::class, 'myExamResult']);
+    Route::get('student/my_exam_result/print', [ExaminationsController::class, 'myExamResultPrint']);
 
-    
+
     // مسارات طلبات المغادرة للطالب
     Route::get('student/leave/add', [LeaveController::class, 'addStudent']);
     Route::post('student/leave/add', [LeaveController::class, 'insertStudent']);
     Route::get('student/leave/history', [LeaveController::class, 'historyStudent']);
 
 
-    Route::get('student/my_attendance', [AttendanceController::class, 'MyAttendanceStudent']); 
+    Route::get('student/my_attendance', [AttendanceController::class, 'MyAttendanceStudent']);
 
 
-    Route::get('student/my_notice_board', [CommunicateController::class, 'MyNoticeBoardStudent']); 
+    Route::get('student/my_notice_board', [CommunicateController::class, 'MyNoticeBoardStudent']);
 
-    
+
 
     Route::get('student/fees_collection', [FeesCollectionController::class, 'CollectFeesStudent']);
 
@@ -406,11 +410,11 @@ Route::group(['middleware' => ['student','userActive']], function () {
 
     Route::get('student/stripe/payment-error', [FeesCollectionController::class, 'PaymentError']);
 
-     Route::get('student/stripe/payment-success', [FeesCollectionController::class, 'PaymentSuccessStripe']);
+    Route::get('student/stripe/payment-success', [FeesCollectionController::class, 'PaymentSuccessStripe']);
 
     Route::get('student/my-subject', [StudentController::class, 'mySubject']);
     Route::get('student/subject/download-curriculum/{subject_id}', [StudentController::class, 'downloadCurriculum']);
-    
+
 });
 
 Route::prefix('reports')->group(function () {
@@ -425,7 +429,7 @@ Route::prefix('reports')->group(function () {
     Route::get('classes-with-students', [ReportController::class, 'classesWithStudents'])->name('reports.classes-with-students');
 });
 
-Route::group(['middleware' => ['parent','userActive']], function () {
+Route::group(['middleware' => ['parent', 'userActive']], function () {
 
     Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -440,9 +444,9 @@ Route::group(['middleware' => ['parent','userActive']], function () {
     Route::get('parent/my_student/exam_timetable/{student_id}', [ExaminationsController::class, 'ParentMyExamTimetable']);
     Route::get('parent/my_student/exam_result/{student_id}', [ExaminationsController::class, 'ParentMyExamResult']);
 
-    
+
     // مسارات طلبات المغادرة لولي الأمر
-  
+
     // Parent Leave Routes
     Route::get('parent/leave/add', [ParentController::class, 'addLeave']);
     Route::post('parent/leave/add', [ParentController::class, 'storeLeave']);
@@ -456,24 +460,24 @@ Route::group(['middleware' => ['parent','userActive']], function () {
 
     Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'MyCalendarParent']);
 
-    Route::get('parent/my_student/attendance/{student_id}', [AttendanceController::class, 'MyAttendanceParent']); 
+    Route::get('parent/my_student/attendance/{student_id}', [AttendanceController::class, 'MyAttendanceParent']);
 
-    
+
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
-    
-    Route::get('parent/my_student_notice_board', [CommunicateController::class, 'MyStudentNoticeBoardParent']); 
-    Route::get('parent/my_notice_board', [CommunicateController::class, 'MyNoticeBoardParent']); 
-    
-    
 
-     Route::get('parent/my_student/fees_collection/{student_id}', [FeesCollectionController::class, 'CollectFeesStudentParent']);
+    Route::get('parent/my_student_notice_board', [CommunicateController::class, 'MyStudentNoticeBoardParent']);
+    Route::get('parent/my_notice_board', [CommunicateController::class, 'MyNoticeBoardParent']);
 
-     Route::post('parent/my_student/fees_collection/{student_id}', [FeesCollectionController::class, 'CollectFeesStudentPaymentParent']);
+
+
+    Route::get('parent/my_student/fees_collection/{student_id}', [FeesCollectionController::class, 'CollectFeesStudentParent']);
+
+    Route::post('parent/my_student/fees_collection/{student_id}', [FeesCollectionController::class, 'CollectFeesStudentPaymentParent']);
     Route::get('parent/my_student/my_exam_timetable/{student_id}', [ExaminationsController::class, 'ParentMyExamTimetable']);
     Route::get('parent/my_student/my_exam_result/{student_id}', [ExaminationsController::class, 'ParentMyExamResult']);
 
 
-       // Parent Activities Routes
+    // Parent Activities Routes
     Route::get('parent/activities', [ParentActivityController::class, 'index']);
     Route::get('parent/activity/register/{activity_id}', [ParentActivityController::class, 'register']);
     Route::post('parent/activity/save-registration', [ParentActivityController::class, 'storeRegistration']);
@@ -481,7 +485,7 @@ Route::group(['middleware' => ['parent','userActive']], function () {
 });
 
 // Temporary test route
-Route::get('test-schedule', function() {
+Route::get('test-schedule', function () {
     $data['header_title'] = "{{__('messages.my_activities')}}";
     $data['schedules'] = \App\Models\ActivitySchedule::with('activity')->get();
     return view('admin.activity.test_schedule', $data);
@@ -491,3 +495,5 @@ Route::get('get-classes-by-grade/{grade_level}', [StudentController::class, 'get
 Route::get('admin/get-classes-by-grade/{grade_level}', [AttendanceController::class, 'getClassesByGrade']);
 // Add this with your other auth routes
 Route::get('/chat/{sender}/{receiver}', [ChatController::class, 'show'])->name('chat.show');
+Route::delete('/subjects/{subject}/unassign', [SubjectController::class, 'unassign'])->name('subjects.unassign');
+Route::delete('/teacher-subjects/{subject}/unassign', [TeacherSubjectController::class, 'unassign'])->name('teacher.subjects.unassign');

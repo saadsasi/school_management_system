@@ -17,12 +17,28 @@
                 <div class="col-md-12">
                     @include('_message')
                     <div class="card card-primary">
-                        <form method="post" action="{{ url('admin/activity/update/'.$activity->id) }}">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="post" action="{{ url('admin/activity/update/'.$activity->id) }}" id="activityForm">
                             {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>{{ __('messages.name') }} <span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="name" value="{{ $activity->name }}" required placeholder="{{ __('messages.enter_activity_name') }}">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                                        name="name" value="{{ old('name', $activity->name) }}" required 
+                                        placeholder="{{ __('messages.enter_activity_name') }}">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
@@ -59,6 +75,7 @@
                                         <div class="schedule-container">
                                             @foreach($activity->schedules as $index => $schedule)
                                             <div class="schedule-row">
+                                                <input type="hidden" name="schedule[{{ $index }}][id]" value="{{ $schedule->id }}">
                                                 <div class="form-group">
                                                     <label>{{ __('messages.day') }}</label>
                                                     <select class="form-control" name="schedule[{{ $index }}][week_id]">
@@ -74,11 +91,29 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('messages.start_time') }}</label>
-                                                    <input type="time" class="form-control" name="schedule[{{ $index }}][start_time]" value="{{ $schedule->start_time }}">
+                                                    <input type="time" class="form-control @error('schedule.'.$index.'.start_time') is-invalid @enderror" 
+                                                           name="schedule[{{ $index }}][start_time]" 
+                                                           value="{{ old('schedule.'.$index.'.start_time', \Carbon\Carbon::parse($schedule->start_time)->format('H:i')) }}"
+                                                           pattern="[0-9]{2}:[0-9]{2}"
+                                                           required>
+                                                    @error('schedule.'.$index.'.start_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('messages.end_time') }}</label>
-                                                    <input type="time" class="form-control" name="schedule[{{ $index }}][end_time]" value="{{ $schedule->end_time }}">
+                                                    <input type="time" class="form-control @error('schedule.'.$index.'.end_time') is-invalid @enderror" 
+                                                           name="schedule[{{ $index }}][end_time]" 
+                                                           value="{{ old('schedule.'.$index.'.end_time', \Carbon\Carbon::parse($schedule->end_time)->format('H:i')) }}"
+                                                           pattern="[0-9]{2}:[0-9]{2}"
+                                                           required>
+                                                    @error('schedule.'.$index.'.end_time')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>{{ __('messages.location') }}</label>
@@ -99,6 +134,7 @@
                                 <a href="{{ url('admin/activities') }}" class="btn btn-default">{{ __('messages.cancel') }}</a>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -130,11 +166,17 @@ $(document).ready(function() {
                 </div>
                 <div class="form-group">
                     <label>{{ __('messages.start_time') }}</label>
-                    <input type="time" class="form-control" name="schedule[${scheduleIndex}][start_time]">
+                    <input type="time" class="form-control" 
+                           name="schedule[\${scheduleIndex}][start_time]"
+                           pattern="[0-9]{2}:[0-9]{2}"
+                           required>
                 </div>
                 <div class="form-group">
                     <label>{{ __('messages.end_time') }}</label>
-                    <input type="time" class="form-control" name="schedule[${scheduleIndex}][end_time]">
+                    <input type="time" class="form-control" 
+                           name="schedule[\${scheduleIndex}][end_time]"
+                           pattern="[0-9]{2}:[0-9]{2}"
+                           required>
                 </div>
                 <div class="form-group">
                     <label>{{ __('messages.location') }}</label>
@@ -144,6 +186,38 @@ $(document).ready(function() {
         `;
         $('.schedule-container').append(newRow);
         scheduleIndex++;
+    });
+
+    // إضافة التحقق من صحة النموذج
+    $('#activityForm').submit(function(e) {
+        let isValid = true;
+        
+        // التحقق من تاريخ البداية والنهاية
+        const startDate = new Date($('input[name="start_date"]').val());
+        const endDate = new Date($('input[name="end_date"]').val());
+        
+        if (endDate < startDate) {
+            alert("{{ __('messages.end_date_must_be_after_start_date') }}");
+            isValid = false;
+        }
+
+        // التحقق من الحد الأقصى للطلاب
+        const maxStudents = parseInt($('input[name="max_students"]').val());
+        if (maxStudents <= 0) {
+            alert("{{ __('messages.max_students_must_be_positive') }}");
+            isValid = false;
+        }
+
+        // التحقق من التكلفة
+        const cost = parseFloat($('input[name="cost"]').val());
+        if (cost < 0) {
+            alert("{{ __('messages.cost_must_be_non_negative') }}");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+        }
     });
 });
 </script>

@@ -36,13 +36,9 @@
                                     <tr>
                                         <td>{{ $subject->subject->name }}</td>
                                         <td>{{ $subject->class->name }}</td>
-                                        <td>{{ $subject->grade_level }}</td>
-                                        <td>
-                                            <a href="{{ url('admin/teacher_subject/delete/'.$subject->id) }}" 
-                                               class="btn btn-danger" 
-                                               onclick="return confirm('{{ __('messages.confirm_delete') }}');">
-                                                {{ __('messages.unassign') }}
-                                            </a>
+                                        <td>{{ __('messages.'.$subject->grade_level) }}</td>
+                                        <td> 
+                                              
                                             <button type="button" 
                                                     class="btn btn-primary" 
                                                     data-toggle="modal" 
@@ -53,6 +49,19 @@
                                                class="btn btn-info">
                                                 <i class="fas fa-history"></i> {{ __('messages.view_evaluations') }}
                                             </a>
+                                            
+                                            <form action="{{ url('admin/teacher_subject/'.$subject->id) }}" 
+                                                  method="POST" 
+                                                  style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                        class="btn btn-danger" 
+                                                        onclick="return confirm('{{ __('messages.are_you_sure') }}')">
+                                                    <i class="fas fa-trash"></i> {{ __('messages.delete') }}
+                                                </button>
+                                            </form>
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

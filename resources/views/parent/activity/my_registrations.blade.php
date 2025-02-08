@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>تسجيلاتي في الأنشطة</h1>
+                    <h1>{{ __('messages.my_registrations') }}</h1>
                 </div>
             </div>
         </div>
@@ -19,17 +19,18 @@
                     @include('_message')
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">قائمة التسجيلات</h3>
+                            <h3 class="card-title">{{ __('messages.my_registrations') }}</h3>
                         </div>
                         <div class="card-body p-0">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>النشاط</th>
-                                        <th>الطالب</th>
-                                        <th>تاريخ التسجيل</th>
-                                        <th>الحالة</th>
-                                        <th>ملاحظات</th>
+                                        <th>{{ __('messages.activity') }}</th>
+                                        <th>{{ __('messages.student') }}</th>
+                                        <th>{{ __('messages.registration_date') }}</th>
+                                        <th>{{ __('messages.status') }}</th>
+                                        <th>{{ __('messages.notes') }}</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,11 +41,12 @@
                                         <td>{{ $registration->created_at }}</td>
                                         <td>
                                             @if($registration->status == 'pending')
-                                                <span class="badge badge-warning">قيد المراجعة</span>
+                                                <span class="badge badge-warning">{{ __('messages.pending') }}</span>
                                             @elseif($registration->status == 'approved')
-                                                <span class="badge badge-success">تم القبول</span>
+                                                <span class="badge badge-success">{{ __('messages.approved') }}</span>
+
                                             @else
-                                                <span class="badge badge-danger">تم الرفض</span>
+                                                <span class="badge badge-danger">{{ __('messages.rejected') }}</span>
                                             @endif
                                         </td>
                                         <td>{{ $registration->notes }}</td>

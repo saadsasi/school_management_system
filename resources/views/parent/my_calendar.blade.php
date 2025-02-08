@@ -82,12 +82,19 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',  // Set default view to month
+        initialView: 'dayGridMonth',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
+        buttonText: {
+          today: '{{ __('messages.today') }}',
+          month: '{{ __('messages.month') }}',
+          week: '{{ __('messages.week') }}',
+          day: '{{ __('messages.day') }}'
+        },
+        locale: '{{ app()->getLocale() }}',
         events: events,
         height: 'auto',
         navLinks: true,

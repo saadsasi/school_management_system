@@ -11,7 +11,7 @@ class ParentActivityController extends Controller
 {
     public function index()
     {
-        $data['header_title'] = "الأنشطة المتاحة";
+        $data['header_title'] = __('messages.available_activities');
         $data['activities'] = Activity::where('status', 'active')
             ->where('end_date', '>=', now())
             ->orderBy('start_date', 'asc')
@@ -19,13 +19,15 @@ class ParentActivityController extends Controller
         return view('parent.activity.list', $data);
     }
 
+
     public function register($activity_id)
     {
-        $data['header_title'] = "تسجيل في نشاط";
+        $data['header_title'] = __('messages.register_activity');
         $data['activity'] = Activity::findOrFail($activity_id);
         $data['children'] = Auth::user()->children;
         return view('parent.activity.register', $data);
     }
+
 
     public function storeRegistration(Request $request)
     {
@@ -41,23 +43,25 @@ class ParentActivityController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'الطالب مسجل مسبقاً في هذا النشاط');
+            return redirect()->back()->with('error', __('messages.student_already_registered'));
         }
 
+
         ActivityRegistration::create($request->all());
-        return redirect('parent/activities')->with('success', 'تم تسجيل الطلب بنجاح');
+        return redirect('parent/activities')->with('success', __('messages.registration_success'));
     }
+
 
     public function myRegistrations()
     {
-        $data['header_title'] = "تسجيلاتي في الأنشطة";
+        $data['header_title'] = __('messages.my_registrations');
         $children_ids = Auth::user()->children->pluck('id');
-        
+
         $data['registrations'] = ActivityRegistration::whereIn('student_id', $children_ids)
             ->with(['activity', 'student'])
             ->orderBy('id', 'desc')
             ->get();
-            
+
         return view('parent.activity.my_registrations', $data);
     }
 }

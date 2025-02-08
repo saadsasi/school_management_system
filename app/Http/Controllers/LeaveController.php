@@ -15,8 +15,8 @@ class LeaveController extends Controller
     const LEAVE_TYPE_EARLY = 'early_leave';
     const LEAVE_TYPE_END_DAY = 'end_day_leave';
     const LEAVE_TYPE_FULL_DAY = 'full_day_leave'; // إضافة نوع جديد للمغادرة
-    
-      
+
+
     public function requests()
     {
         $data['header_title'] = "طلبات المغادرة";
@@ -29,7 +29,7 @@ class LeaveController extends Controller
     public function approve($id)
     {
         $leave = LeaveRequest::find($id);
-        if(!empty($leave)) {
+        if (!empty($leave)) {
             $leave->status = 1;
             $leave->save();
             return redirect()->back()->with('success', 'تمت الموافقة على الطلب بنجاح');
@@ -40,7 +40,7 @@ class LeaveController extends Controller
     public function reject($id)
     {
         $leave = LeaveRequest::find($id);
-        if(!empty($leave)) {
+        if (!empty($leave)) {
             $leave->status = 2;
             $leave->save();
             return redirect()->back()->with('success', 'تم رفض الطلب بنجاح');
@@ -51,7 +51,7 @@ class LeaveController extends Controller
     public function delete($id)
     {
         $leave = LeaveRequest::find($id);
-        if(!empty($leave)) {
+        if (!empty($leave)) {
             $leave->delete();
             return redirect()->back()->with('success', 'تم حذف الطلب بنجاح');
         }
@@ -83,7 +83,7 @@ class LeaveController extends Controller
 
     public function historyStudent()
     {
-        $data['header_title'] = "سجل طلبات المغادرة";
+        $data['header_title'] = __('messages.leave_history');
         $data['getRecord'] = LeaveRequest::where('user_id', Auth::user()->id)
             ->where('user_type', 'student')
             ->orderBy('id', 'desc')
@@ -116,7 +116,7 @@ class LeaveController extends Controller
 
     public function historyTeacher()
     {
-        $data['header_title'] = "سجل طلبات المغادرة";
+        $data['header_title'] = __('messages.leave_history');
         $data['getRecord'] = LeaveRequest::where('user_id', Auth::user()->id)
             ->where('user_type', 'teacher')
             ->orderBy('id', 'desc')
@@ -137,8 +137,8 @@ class LeaveController extends Controller
             // التحقق من أن جميع الطلاب المختارين هم أبناء ولي الأمر
             $parent_id = auth()->id();
             $parent_children = User::where('parent_id', $parent_id)->pluck('id')->toArray();
-            
-            foreach($request->student_ids as $student_id) {
+
+            foreach ($request->student_ids as $student_id) {
                 if (!in_array($student_id, $parent_children)) {
                     return redirect()->back()
                         ->withInput()
@@ -147,9 +147,9 @@ class LeaveController extends Controller
             }
 
             DB::beginTransaction();
-            
+
             // إنشاء طلب مغادرة لكل طالب
-            foreach($request->student_ids as $student_id) {
+            foreach ($request->student_ids as $student_id) {
                 $leave = new LeaveRequest();
                 $leave->user_id = $student_id;
                 $leave->user_type = 'student';
@@ -166,9 +166,9 @@ class LeaveController extends Controller
                     'parent_id' => $parent_id
                 ]);
             }
-            
+
             DB::commit();
-            
+
             return redirect()->route('parent.leave.my-leaves')
                 ->with('success', 'تم إرسال طلب المغادرة بنجاح');
 
@@ -176,11 +176,11 @@ class LeaveController extends Controller
             return redirect()->back()
                 ->withInput()
                 ->withErrors($e->validator);
-                
+
         } catch (\Exception $e) {
             DB::rollback();
             Log::error('خطأ في إنشاء طلب المغادرة: ' . $e->getMessage());
-            
+
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'حدث خطأ أثناء حفظ الطلب. الرجاء المحاولة مرة أخرى.');

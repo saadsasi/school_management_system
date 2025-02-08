@@ -86,7 +86,7 @@
                   </tbody>
                 </table>
                 <div style="padding: 10px; float: right;">
-                  <a href="{{ url('chat?receiver_id='.base64_encode(1)) }}" class="btn btn-success"> {{ __('messages.send_message') }} </a>
+                  <a href="{{ url('chat?receiver_id='.base64_encode(1)) }}" class="btn btn-success"> {{ __('messages.send_message_to_admin') }} </a>
 
                 </div>
               </div>

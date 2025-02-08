@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <form action="{{ url('admin/teacher_subject/update/'.$getTeacher->id) }}" method="post">
+                        <form action="{{ route('admin.teacher_subject.update', $getTeacher->id) }}" method="post">
                             {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="row">

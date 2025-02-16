@@ -80,7 +80,18 @@
         navLinks: true,
         editable: false,
         events: events,
-        // initialView: 'timeGridWeek',
+        buttonText: {
+            today: "{{ __('messages.today') }}",
+            month: "{{ __('messages.month') }}",
+            week: "{{ __('messages.week') }}",
+            day: "{{ __('messages.day') }}",
+            list: "{{ __('messages.list') }}"
+        },
+        locale: "{{ app()->getLocale() }}",
+        firstDay: 0,
+        dayHeaderFormat: {
+            weekday: 'long'
+        }
     });
 
     calendar.render();

@@ -61,12 +61,12 @@ class SubjectController extends Controller
 
             // Get all classes with the same grade level
             $classes = ClassModel::getClassesByGradeLevel($request->grade_level);
-            
+
             // Assign the subject to all matching classes
             foreach ($classes as $class) {
                 // Check if the subject is not already assigned to this class
                 $check = ClassSubjectModel::getAlreadyFirst($class->id, $save->id);
-                
+
                 if (empty($check)) {
                     $assign = new ClassSubjectModel;
                     $assign->class_id = $class->id;
@@ -87,22 +87,19 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $data['getRecord'] = SubjectModel::getSingle($id);
-        if(!empty($data['getRecord']))
-        {
+        if (!empty($data['getRecord'])) {
             $data['header_title'] = "Edit Subject";
-            return view('admin.subject.edit', $data);    
-        }
-        else
-        {
+            return view('admin.subject.edit', $data);
+        } else {
             abort(404);
-        }       
+        }
     }
 
     public function update($id, Request $request)
     {
         $subject = SubjectModel::getSingle($id);
         $oldGradeLevel = $subject->grade_level;
-        
+
         $subject->name = $request->name;
         $subject->grade_level = $request->grade_level;
         $subject->type = $request->type;
@@ -111,7 +108,7 @@ class SubjectController extends Controller
         // Handle curriculum file update
         if ($request->hasFile('curriculum_file')) {
             Log::info('File upload detected in update');
-            
+
             // Ensure upload directory exists
             $uploadPath = public_path('uploads/curriculum');
             if (!file_exists($uploadPath)) {
@@ -133,7 +130,7 @@ class SubjectController extends Controller
                 $file = $request->file('curriculum_file');
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 Log::info('Attempting to move file to: ' . $uploadPath . '/' . $fileName);
-                
+
                 $file->move($uploadPath, $fileName);
                 $subject->curriculum_file = $fileName;
                 Log::info('File uploaded successfully. Filename: ' . $fileName);
@@ -166,7 +163,7 @@ class SubjectController extends Controller
                 $newClasses = ClassModel::getClassesByGradeLevel($request->grade_level);
                 foreach ($newClasses as $class) {
                     $check = ClassSubjectModel::getAlreadyFirst($class->id, $id);
-                    
+
                     if (empty($check)) {
                         $assign = new ClassSubjectModel;
                         $assign->class_id = $class->id;
@@ -190,16 +187,16 @@ class SubjectController extends Controller
     }
 
     public function downloadCurriculum($id)
-{
-    $subject = SubjectModel::findOrFail($id);
-    if ($subject->curriculum_file) {
-        $path = public_path('uploads/curriculum/' . $subject->curriculum_file);
-        if (file_exists($path)) {
-            return response()->download($path);
+    {
+        $subject = SubjectModel::findOrFail($id);
+        if ($subject->curriculum_file) {
+            $path = public_path('uploads/curriculum/' . $subject->curriculum_file);
+            if (file_exists($path)) {
+                return response()->download($path);
+            }
         }
+        return back()->with('error', __('messages.file_not_found'));
     }
-    return back()->with('error', __('messages.file_not_found'));
-}
     public function delete($id)
     {
         $save = SubjectModel::getSingle($id);
@@ -220,17 +217,22 @@ class SubjectController extends Controller
                 'subject.name as subject_name',
                 'subject.type as subject_type',
                 'subject.curriculum_file',
+                'teacher_subjects.teacher_id',
+
                 'users.id as teacher_id',
                 DB::raw('CONCAT(users.name, " ", COALESCE(users.last_name, "")) as teacher_name')
             )
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
             ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
             ->leftJoin('teacher_subjects', 'subject.id', '=', 'teacher_subjects.subject_id')
             ->leftJoin('users', 'users.id', '=', 'teacher_subjects.teacher_id')
+            ->where('teacher_subjects.class_id', '=', Auth::user()->class_id)
             ->where('class_subject.class_id', '=', Auth::user()->class_id)
             ->where('class_subject.status', '=', 0)
             ->where('class_subject.is_delete', '=', 0)
             ->orderBy('subject.name', 'ASC')
             ->get();
+
 
         $data['header_title'] = "My Subject";
         return view('student.my_subject', $data);
@@ -256,6 +258,7 @@ class SubjectController extends Controller
             ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
             ->leftJoin('teacher_subjects', 'subject.id', '=', 'teacher_subjects.subject_id')
             ->leftJoin('users', 'users.id', '=', 'teacher_subjects.teacher_id')
+            ->where('teacher_subjects.class_id', '=', $user->class_id)
             ->where('class_subject.class_id', '=', $user->class_id)
             ->where('class_subject.status', '=', 0)
             ->where('class_subject.is_delete', '=', 0)

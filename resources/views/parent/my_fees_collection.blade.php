@@ -44,9 +44,9 @@
                      @forelse($getFees as $value)
                       <tr>
                           <td>{{ $value->class_name }}</td>
-                          <td>${{ number_format($value->total_amount, 2) }}</td>
-                          <td>${{ number_format($value->paid_amount, 2) }}</td>
-                          <td>${{ number_format($value->remaning_amount, 2) }}</td>
+                          <td>{{__('messages.in_dinars')}} {{ number_format($value->total_amount, 2) }}</td>
+                          <td>{{__('messages.in_dinars')}} {{ number_format($value->paid_amount, 2) }}</td>
+                          <td>{{__('messages.in_dinars')}} {{ number_format($value->remaning_amount, 2) }}</td>
                           <td>{{ $value->payment_type }}</td>
                           <td>{{ $value->remark }}</td>
                           <td>{{ $value->created_name }}</td>

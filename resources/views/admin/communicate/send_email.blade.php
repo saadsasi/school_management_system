@@ -34,17 +34,11 @@
                 <div class="card-body">
 
                   <div class="form-group">
-                    <label>{{ __('messages.subject') }}</label>
-                    <input type="text" class="form-control" name="subject" required placeholder=" {{ __('messages.subject') }}">
+                    <label>{{ __('messages.mail_subject') }}</label>
+                    <input type="text" class="form-control" name="subject" required placeholder=" {{ __('messages.mail_subject') }}">
                   </div>
 
 
-                  <div class="form-group">
-                    <label>User (Student / Parent / Teacher)</label>
-                    <select name="user_id" class="form-control select2" style="width: 100%;">
-                      <option value="">{{ __('messages.select') }}</option>
-                    </select>
-                  </div>
 
                   <div class="form-group">
                     <label style="display: block;">{{ __('messages.send_to') }} </label>

@@ -29,7 +29,7 @@
           
              @foreach($getRecord as $value)
 
-              <h2 style="font-size: 32px;margin-bottom: 15px;">Class : <span style="color: blue">{{ $value['class_name'] }}</span></h2>
+              <h2 style="font-size: 32px;margin-bottom: 15px;">{{ __('messages.class') }} : <span style="color: blue">{{ $value['class_name'] }}</span></h2>
                  @foreach($value['exam'] as $exam)
                     <div class="card">
                       <div class="card-header">
@@ -55,7 +55,7 @@
                               @foreach($exam['subject'] as $valueS)
                                 <tr>
                                     <td>{{ $valueS['subject_name'] }}</td>
-                                    <td>{{ date('l', strtotime($valueS['exam_date'])) }}</td>
+                                    <td>{{ __('messages.' . strtolower(date('l', strtotime($valueS['exam_date'])))) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($valueS['exam_date'])) }}</td>
                                     <td>{{ date('h:i A', strtotime($valueS['start_time'])) }}</td>
                                     <td>{{ date('h:i A', strtotime($valueS['end_time'])) }}</td>                          

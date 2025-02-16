@@ -85,6 +85,7 @@
                             <th>{{ __('messages.attendance_type') }}</th>
                             <th>{{ __('messages.attendance_date') }}</th>
                             <th>{{ __('messages.created_date') }}</th>
+                            <th>{{ __('messages.notes') }}</th>
                           </tr>
                         </thead>
 
@@ -105,6 +106,7 @@
                                 </td>
                                 <td> {{ date('d-m-Y', strtotime($value->attendance_date)) }} </td>
                                 <td> {{ date('d-m-Y H:i A', strtotime($value->created_at)) }} </td>
+                                <td>{{ $value->notes }}</td>
                               </tr>
                           @empty
                             <tr>

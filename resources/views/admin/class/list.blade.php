@@ -179,7 +179,7 @@
                       @foreach($value->subjects as $subject)
                         <tr>
                           <td>{{ $subject->subject_name }}</td>
-                          <td>{{ $subject->subject_type }}</td>
+                          <td>{{ __('messages.'.strtolower($subject->subject_type)) }}</td>
                           <td>
                             @if($subject->status == 0)
                                 {{ __('messages.active') }}

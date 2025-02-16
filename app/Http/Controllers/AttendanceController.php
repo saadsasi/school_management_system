@@ -17,17 +17,16 @@ class AttendanceController extends Controller
     public function AttendanceStudent(Request $request)
     {
         $data['getClass'] = [];
-        
-        if($request->get('grade_level')) {
+
+        if ($request->get('grade_level')) {
             $data['getClass'] = ClassModel::where('grade_level', $request->get('grade_level'))
-                                        ->where('is_delete', 0)
-                                        ->where('status', 0)
-                                        ->orderBy('name', 'asc')
-                                        ->get();
+                ->where('is_delete', 0)
+                ->where('status', 0)
+                ->orderBy('name', 'asc')
+                ->get();
         }
 
-        if(!empty($request->get('class_id')) && !empty($request->get('attendance_date')))
-        {
+        if (!empty($request->get('class_id')) && !empty($request->get('attendance_date'))) {
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
         }
 
@@ -43,7 +42,7 @@ class AttendanceController extends Controller
         foreach ($attendance_data as $data) {
             $check_attendance = StudentAttendanceModel::CheckAlreadyAttendance($data['student_id'], $request->class_id, $request->attendance_date);
 
-            if(!empty($check_attendance)) {
+            if (!empty($check_attendance)) {
                 $attendance = $check_attendance;
             } else {
                 $attendance = new StudentAttendanceModel;
@@ -56,11 +55,11 @@ class AttendanceController extends Controller
             $attendance->attendance_type = $data['attendance_type'];
             $attendance->notes = $data['notes'] ?? null;
             $attendance->save();
-            
+
             $success_count++;
         }
 
-        $json['message'] = $success_count . " Student Attendance Records Successfully Saved";
+        $json['message'] = $success_count . __('messages.student_attendance_records_successfully_saved');
         return response()->json($json);
     }
 
@@ -74,8 +73,8 @@ class AttendanceController extends Controller
     }
 
     public function AttendanceReportExportExcel(Request $request)
-    {        
-        return Excel::download(new ExportAttendance, 'AttendanceReport_'.date('d-m-Y').'.xls');
+    {
+        return Excel::download(new ExportAttendance, 'AttendanceReport_' . date('d-m-Y') . '.xls');
     }
 
     // teacher side
@@ -83,9 +82,8 @@ class AttendanceController extends Controller
     public function AttendanceStudentTeacher(Request $request)
     {
         $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
-        
-        if(!empty($request->get('class_id')) && !empty($request->get('attendance_date')))
-        {
+
+        if (!empty($request->get('class_id')) && !empty($request->get('attendance_date'))) {
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
         }
 
@@ -99,12 +97,11 @@ class AttendanceController extends Controller
     {
         $getClass = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
         $classarrray = array();
-        foreach($getClass as $value)
-        {
+        foreach ($getClass as $value) {
             $classarrray[] = $value->class_id;
         }
 
-        
+
         $data['getClass'] = $getClass;
         $data['getRecord'] = StudentAttendanceModel::getRecordTeacher($classarrray);
         $data['header_title'] = "Attendance Report";
@@ -136,11 +133,11 @@ class AttendanceController extends Controller
     public function getClassesByGrade($grade_level)
     {
         $classes = ClassModel::where('grade_level', $grade_level)
-                           ->where('is_delete', 0)
-                           ->where('status', 0)
-                           ->orderBy('name', 'asc')
-                           ->get();
-        
+            ->where('is_delete', 0)
+            ->where('status', 0)
+            ->orderBy('name', 'asc')
+            ->get();
+
         return response()->json($classes);
     }
 }

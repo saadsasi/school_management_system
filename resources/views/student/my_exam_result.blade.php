@@ -30,8 +30,6 @@
                     <tr>
                       <th>{{ __('messages.subject') }}</th>
                       <th>{{ __('messages.class_work') }}</th>
-                      <th>{{ __('messages.test_work') }}</th>
-                      <th>{{ __('messages.home_work') }}</th>
                       <th>{{ __('messages.exam') }}</th>
                       <th>{{ __('messages.total_score') }}</th>
                       <th>{{ __('messages.passing_marks') }}</th>
@@ -53,8 +51,6 @@
                     <tr>
                       <td style="width: 300px">{{ $exam['subject_name'] }}</td>
                       <td>{{ $exam['class_work'] }}</td>
-                      <td>{{ $exam['test_work'] }}</td>
-                      <td>{{ $exam['home_work'] }}</td>
                       <td>{{ $exam['exam'] }}</td>
                       <td>{{ $exam['total_score'] }}</td>
                       <td>{{ $exam['passing_mark'] }}</td>
